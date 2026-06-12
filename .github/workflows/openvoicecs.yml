@@ -1,0 +1,73 @@
+name: OpenVoiceCS-Bench
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package
+        run: python -m pip install -e ".[dev]"
+
+      - name: Validate judge protocol
+        run: python scripts/run_openvoicecs.py validate-judge-protocol --protocol data/openvoicecs/judging/judge_protocol_v0.1.json
+
+      - name: Validate judge study
+        run: python scripts/run_openvoicecs.py validate-judge-study --study data/openvoicecs/judging/judge_study_v0.1.json
+
+      - name: Validate judge annotation package
+        run: python scripts/run_openvoicecs.py validate-judge-annotation-package --package data/openvoicecs/judging/judge_annotation_package_v0.1.json
+
+      - name: Validate sealed-test operations
+        run: python scripts/run_openvoicecs.py validate-sealed-ops --sealed-ops data/openvoicecs/sealed_ops_v0.1.json --splits data/openvoicecs/splits_v0.1.json --split-commitments data/openvoicecs/split_commitments_v0.1.json
+
+      - name: Validate sealed evaluator queue
+        run: python scripts/run_openvoicecs.py validate-sealed-queue --queue data/openvoicecs/sealed_evaluator_queue_v0.1.json --sealed-ops data/openvoicecs/sealed_ops_v0.1.json --split-commitments data/openvoicecs/split_commitments_v0.1.json
+
+      - name: Validate external-system registry
+        run: python scripts/run_openvoicecs.py validate-external-systems --registry data/openvoicecs/external_systems_v0.1.json
+
+      - name: Validate external endpoint contract
+        run: python scripts/run_openvoicecs.py validate-external-endpoint-contract --contract data/openvoicecs/external_endpoint_contract_v0.1.json
+
+      - name: Validate leaderboard claims
+        run: python scripts/run_openvoicecs.py validate-claims --claims data/openvoicecs/claims/leaderboard_claims_v0.1.json
+
+      - name: Validate submission intake package
+        run: python scripts/run_openvoicecs.py validate-submission-intake --intake data/openvoicecs/submissions/reference_submission_intake_v0.1.json
+
+      - name: Verify OpenVoiceCS leaderboard release artifacts
+        run: >-
+          python scripts/run_openvoicecs.py verify-release
+          --require-audio-assets
+          --readiness-profile leaderboard_v1
+          --frontier-report data/openvoicecs/releases/frontier_seed/frontier_report.json
+          --run-manifest data/openvoicecs/releases/frontier_seed/run_manifest.json
+          --plot-dir data/openvoicecs/releases/frontier_seed/plots
+          --judge-study data/openvoicecs/judging/judge_study_v0.1.json
+          --judge-annotation-package data/openvoicecs/judging/judge_annotation_package_v0.1.json
+          --external-systems data/openvoicecs/external_systems_v0.1.json
+          --external-endpoint-contract data/openvoicecs/external_endpoint_contract_v0.1.json
+          --sealed-queue data/openvoicecs/sealed_evaluator_queue_v0.1.json
+          --claims data/openvoicecs/claims/leaderboard_claims_v0.1.json
+          --submission-intake data/openvoicecs/submissions/reference_submission_intake_v0.1.json
+          --strict
+
+      - name: Validate release bundle
+        run: python scripts/run_openvoicecs.py validate-release-bundle data/openvoicecs/releases/frontier_seed/release_bundle.json
+
+      - name: Run unit tests
+        run: pytest tests/unit/ -q

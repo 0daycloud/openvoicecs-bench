@@ -1,0 +1,66 @@
+{
+  "name": "OpenVoiceCS Leaderboard Claims",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "claim_policy": {
+    "official_requires_external_system_registry": true,
+    "official_requires_release_bundle": true,
+    "official_requires_pairwise_comparison": true,
+    "official_requires_ci_excluding_zero": true,
+    "official_requires_no_protected_slice_regressions": true,
+    "official_requires_human_or_audited_judging": true,
+    "maximum_mcnemar_p_value": 0.05,
+    "protected_metrics": [
+      "privacy",
+      "auth_integrity",
+      "safety"
+    ],
+    "notes": [
+      "Reference fixture claims are sanity checks for the harness and are not official leaderboard claims.",
+      "Official improvement claims must be backed by pairwise comparison evidence, release bundles, external-system registry entries, pricing evidence, and non-fixture judge evidence."
+    ]
+  },
+  "claims": [
+    {
+      "id": "reference_noop_text_vs_oracle_text_sanity",
+      "claim_type": "reference_sanity",
+      "status": "reference_fixture",
+      "official_claim": false,
+      "statement": "The deterministic oracle reference beats the deterministic no-op text baseline on the v0.1 public benchmark suite.",
+      "baseline_system_id": "noop_text_reference",
+      "candidate_system_id": "oracle_text_reference",
+      "comparison": {
+        "path": "data/openvoicecs/claims/noop_text_vs_oracle_text_comparison.json",
+        "sha256": "ecb0d77ed1b9eb158330c04ae860bc3fd680934b93ca653654579b9037889bfd",
+        "bytes": 19696
+      },
+      "baseline_report": {
+        "path": "data/openvoicecs/baselines/noop_text.json",
+        "sha256": "f0e7a14b04a9f9538792c4c1a54a4195bebdd63e5c7163e430dd5b24cff517c4",
+        "bytes": 3285911
+      },
+      "candidate_report": {
+        "path": "data/openvoicecs/baselines/oracle_text.json",
+        "sha256": "5eb0bf14384006ac3b98cc0bd18d362cffe8d9231b74a3ba3aaf73a84c38372e",
+        "bytes": 2887570
+      },
+      "external_systems_registry": {
+        "path": "data/openvoicecs/external_systems_v0.1.json",
+        "sha256": "0c8fb9052f8522b0b178109021d2e4b77d977ea991b597b809ee016fbab90570",
+        "bytes": 4315
+      },
+      "judging_evidence": {
+        "annotation_mode": "reference_fixture",
+        "official_judging": false
+      },
+      "limitations": [
+        "This is a reference sanity claim, not a third-party system claim.",
+        "It is expected to pass by construction and should not be included in official system rankings."
+      ]
+    }
+  ],
+  "known_gaps": [
+    "No official third-party leaderboard improvement claims are included in v0.1.",
+    "Official claims require external submissions, sealed evaluation, and non-fixture judging evidence."
+  ]
+}

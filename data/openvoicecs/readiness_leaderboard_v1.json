@@ -1,0 +1,57 @@
+{
+  "benchmark": "OpenVoiceCS-Bench",
+  "version": "0.1.0",
+  "profile": "leaderboard_v1",
+  "profile_description": "Scientific leaderboard release with a non-public test set.",
+  "passed": true,
+  "num_issues": 0,
+  "criteria": {
+    "description": "Scientific leaderboard release with a non-public test set.",
+    "min_scenarios": 200,
+    "min_domains": 6,
+    "required_tracks": {
+      "text_to_action": 60,
+      "adversarial_compliance": 40,
+      "audio_to_action": 30,
+      "robustness": 40,
+      "end_to_end_voice": 20
+    },
+    "min_public_dev_scenarios": 80,
+    "min_sealed_test_scenarios": 120,
+    "min_audio_variants": 120,
+    "min_public_dev_audio_variants": 40,
+    "min_sealed_test_audio_variants": 80,
+    "min_pricing_profiles": 5,
+    "require_audio_asset_integrity": true,
+    "require_provenance_integrity": true,
+    "require_open_licenses": true,
+    "require_audio_consent": true,
+    "require_no_real_customer_data": true,
+    "require_low_contamination_risk": true,
+    "required_oracle_coverage": 1.0,
+    "require_contract_valid": true,
+    "require_release_gates": true,
+    "require_frontier_artifact": true,
+    "require_run_manifest": true,
+    "require_plot_artifacts": true,
+    "require_judged_experience": true,
+    "require_judge_manifest_pinning": true,
+    "required_concurrency_levels": [
+      1,
+      10,
+      100
+    ],
+    "require_latency_at_100": true,
+    "require_latency_event_evidence": true,
+    "require_fully_loaded_cost_evidence": true,
+    "require_comparable_pricing_profiles": true,
+    "require_hardware_profile": true,
+    "min_trials_per_scenario": 5
+  },
+  "artifacts": {
+    "frontier_report": true,
+    "run_manifest": true,
+    "plot_dir": true
+  },
+  "issues": []
+}

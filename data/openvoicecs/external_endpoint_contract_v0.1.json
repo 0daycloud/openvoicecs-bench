@@ -1,0 +1,97 @@
+{
+  "name": "OpenVoiceCS External Endpoint Contract",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "transport": "http_json",
+  "description": "Provider-neutral HTTP JSON protocol for evaluating deployed customer-service voice agents without exposing oracle answers or hidden sandbox state.",
+  "request_schema": {
+    "content_type": "application/json",
+    "method": "POST",
+    "required_fields": [
+      "protocol",
+      "benchmark",
+      "benchmark_version",
+      "scenario_id",
+      "trial_index",
+      "input_modality",
+      "track",
+      "domain",
+      "difficulty",
+      "user_utterance",
+      "scenario",
+      "tools",
+      "requested_trace_fields"
+    ],
+    "optional_fields": [
+      "run_id",
+      "base_scenario_id",
+      "audio_variant"
+    ],
+    "forbidden_fields": [
+      "oracle",
+      "initial_state",
+      "expected_state",
+      "reference_trace",
+      "judge_notes",
+      "sealed_metadata"
+    ],
+    "notes": [
+      "The scenario object is a redacted scenario view and must not contain oracle, hidden state, sealed metadata, or reference traces.",
+      "The endpoint may use the tools array as its action schema and must return proposed tool calls rather than directly mutating benchmark state."
+    ]
+  },
+  "response_schema": {
+    "content_type": "application/json",
+    "required_fields": [
+      "messages",
+      "tool_calls",
+      "events"
+    ],
+    "optional_fields": [
+      "claims",
+      "usage",
+      "latency",
+      "latency_ms",
+      "cost_usd"
+    ],
+    "trace_fields": {
+      "messages": "List of role/text message objects visible in the conversation.",
+      "tool_calls": "List of proposed benchmark tool calls with name and arguments.",
+      "events": "List of policy/auth/privacy event labels emitted by the system.",
+      "claims": "Optional grounding claims for factuality checks.",
+      "usage": "Optional ASR, LLM, TTS, transport, and call-duration counters.",
+      "latency": "Optional voice-to-voice and stage latency measurements.",
+      "cost_usd": "Optional metered cost for this trial."
+    }
+  },
+  "timeouts": {
+    "default_request_timeout_seconds": 30,
+    "maximum_official_timeout_seconds": 90,
+    "retry_policy": {
+      "official_retries_per_trial": 0,
+      "local_development_retries_per_trial": 1
+    }
+  },
+  "security": {
+    "forbid_oracle_fields": true,
+    "forbid_initial_state": true,
+    "redact_authoring_metadata": true,
+    "allow_authorization_header": true,
+    "never_log_authorization_header": true,
+    "secret_handling": "Authorization and vendor credential headers may be supplied by the runner but must not be serialized into reports, release audits, or failure messages."
+  },
+  "official_run_requirements": {
+    "requires_live_endpoint_run": true,
+    "requires_tls_for_remote_endpoint": true,
+    "requires_hash_pinned_report": true,
+    "requires_submission_intake": true,
+    "requires_external_system_registry_entry": true,
+    "requires_judged_report_for_leaderboard": true,
+    "minimum_trials_per_scenario": 3
+  },
+  "reference_fixture_status": {
+    "live_endpoints_included": 0,
+    "official_endpoint_runs_included": 0,
+    "reason": "This contract is a public protocol fixture; official leaderboard entries require independently run endpoint submissions."
+  }
+}

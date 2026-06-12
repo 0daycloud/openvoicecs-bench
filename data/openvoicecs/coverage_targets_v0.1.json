@@ -1,0 +1,75 @@
+{
+  "name": "OpenVoiceCS Coverage Targets",
+  "version": "0.1.0",
+  "description": "Planning targets for growing OpenVoiceCS from seed data to public beta and leaderboard releases.",
+  "profiles": {
+    "public_beta": {
+      "min_scenarios": 50,
+      "domains": {
+        "retail": 9,
+        "travel": 9,
+        "telecom": 8,
+        "healthcare_admin": 8,
+        "fintech_sandbox": 8,
+        "saas_support": 8
+      },
+      "tracks": {
+        "text_to_action": 20,
+        "adversarial_compliance": 10,
+        "audio_to_action": 7,
+        "robustness": 7,
+        "end_to_end_voice": 6
+      },
+      "difficulty": {
+        "easy": 10,
+        "medium": 20,
+        "hard": 20
+      },
+      "splits": {
+        "public_dev": 30,
+        "sealed_test": 20
+      },
+      "audio_variants": {
+        "total": 25,
+        "splits": {
+          "public_dev": 15,
+          "sealed_test": 10
+        }
+      }
+    },
+    "leaderboard_v1": {
+      "min_scenarios": 200,
+      "domains": {
+        "retail": 34,
+        "travel": 34,
+        "telecom": 33,
+        "healthcare_admin": 33,
+        "fintech_sandbox": 33,
+        "saas_support": 33
+      },
+      "tracks": {
+        "text_to_action": 60,
+        "adversarial_compliance": 40,
+        "audio_to_action": 35,
+        "robustness": 45,
+        "end_to_end_voice": 20
+      },
+      "difficulty": {
+        "easy": 40,
+        "medium": 80,
+        "hard": 80
+      },
+      "splits": {
+        "public_dev": 80,
+        "sealed_test": 120
+      },
+      "audio_variants": {
+        "total": 120,
+        "splits": {
+          "public_dev": 40,
+          "sealed_test": 80
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4846 @@
+{
+  "name": "OpenVoiceCS-Bench Scenario Reviews",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "review_policy": {
+    "minimum_reviewers_per_scenario": 2,
+    "required_checks": [
+      "realistic_customer_goal",
+      "tool_contract_replayable",
+      "oracle_expected_state_correct",
+      "sop_policy_coverage",
+      "privacy_coverage",
+      "auth_integrity_coverage",
+      "grounding_coverage",
+      "forbidden_action_coverage",
+      "provenance_reviewed",
+      "contamination_reviewed"
+    ]
+  },
+  "reviews": [
+    {
+      "scenario_id": "retail-refund-damaged-item-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms refund workflow, identity gate, and deterministic oracle coverage."
+      ]
+    },
+    {
+      "scenario_id": "travel-rebook-missed-connection-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms travel disruption policy, waiver handling, and grounding probes."
+      ]
+    },
+    {
+      "scenario_id": "telecom-billing-credit-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms billing-credit tool effects and no-upsell constraint."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-schedule-refill-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms healthcare admin scope, PHI handling, and refill limitations."
+      ]
+    },
+    {
+      "scenario_id": "fintech-fraud-card-replacement-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms fraud-card replacement flow and protected account actions."
+      ]
+    },
+    {
+      "scenario_id": "saas-account-access-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms SaaS account-recovery boundaries and tool replay."
+      ]
+    },
+    {
+      "scenario_id": "retail-prompt-injection-refund-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms prompt-injection refusal behavior and forbidden refund action."
+      ]
+    },
+    {
+      "scenario_id": "fintech-social-engineering-transfer-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms social-engineering attack coverage and transfer block."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-phi-extraction-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms PHI extraction defense and privacy-review state transition."
+      ]
+    },
+    {
+      "scenario_id": "saas-ceo-impersonation-mfa-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms executive impersonation defense and MFA-reset denial."
+      ]
+    },
+    {
+      "scenario_id": "utility-outage-audio-report-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms audio outage-report workflow, address gate, and callback handling."
+      ]
+    },
+    {
+      "scenario_id": "telecom-noisy-address-correction-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms noisy self-repair handling and corrected-address technician scheduling."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-voucher-reissue-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Seed review confirms end-to-end voice voucher reissue flow and SMS consent gate."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-voice-flow-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-service-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-audio-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-service-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-policy-attack-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-audio-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-voice-flow-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-policy-attack-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-audio-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-flow-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-robustness-repair-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated public-beta expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-009",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-010",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-011",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-012",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-013",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-014",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-015",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-009",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-016",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-010",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-017",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "fintech-sandbox-audio-action-001",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-009",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-policy-attack-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-audio-action-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-robustness-repair-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "retail-service-action-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-audio-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-service-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-audio-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-service-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-audio-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-service-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-audio-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-service-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-audio-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-service-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-audio-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-voice-flow-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-service-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-policy-attack-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-audio-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-voice-flow-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-service-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-policy-attack-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-audio-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-voice-flow-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-service-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-policy-attack-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-audio-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-voice-flow-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-service-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-policy-attack-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-audio-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-voice-flow-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-service-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "telecom-policy-attack-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-audio-action-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-flow-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-robustness-repair-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-policy-attack-002",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-audio-action-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-flow-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-robustness-repair-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-policy-attack-003",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-audio-action-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-flow-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-robustness-repair-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-policy-attack-004",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-audio-action-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-flow-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-robustness-repair-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-007",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-policy-attack-005",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-audio-action-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-voice-flow-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-robustness-repair-006",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-008",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    },
+    {
+      "scenario_id": "travel-service-action-009",
+      "status": "approved",
+      "reviewed_at": "2026-06-11",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
+      ]
+    }
+  ]
+}

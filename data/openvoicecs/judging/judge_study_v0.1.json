@@ -1,0 +1,101 @@
+{
+  "name": "OpenVoiceCS Judging Study",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "status": "reference_fixture",
+  "official_judging_eligible": false,
+  "purpose": "Reference study manifest for human or audited model-judge governance. It validates the official judging workflow shape but is not official external-system evidence.",
+  "protocol": {
+    "path": "data/openvoicecs/judging/judge_protocol_v0.1.json",
+    "sha256": "f5c1ed5a3be78d78742ad51db1a629c1a6c6db0abf21a1a1b374728f91f99395",
+    "bytes": 1641
+  },
+  "rubric": {
+    "path": "data/openvoicecs/judge_rubric_v0.1.json",
+    "sha256": "075da1f0b6e7915ca4e4c7764ce4575eedf0c62573e480bf3b260851533c0d48",
+    "bytes": 1830
+  },
+  "prompt": {
+    "path": "data/openvoicecs/judging/judge_prompt_v0.1.md",
+    "sha256": "8fa8f280a8d1c62b8ebdf7b70b2a5472bdbdad26527e0e4505b378ff38ad0a37",
+    "bytes": 1412
+  },
+  "annotation_package": {
+    "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
+    "sha256": "7e2dd2f19eb3c8195a538790b2a6bc60aff176b0e8464e18163eda606599aa76",
+    "bytes": 3695
+  },
+  "study_design": {
+    "target_systems": [
+      "oracle_text_realtime_reference",
+      "oracle_audio_manifest_realtime_reference"
+    ],
+    "sampling_unit": "trial",
+    "sampling_policy": "stratified_by_domain_track_difficulty_with_full_reference_fixture_coverage",
+    "minimum_items_per_system": 120,
+    "minimum_raters_per_item": 2,
+    "stratification_fields": [
+      "domain",
+      "track",
+      "difficulty",
+      "input_modality"
+    ],
+    "protected_slice_review": [
+      "privacy",
+      "auth_integrity",
+      "safety",
+      "adversarial_compliance"
+    ]
+  },
+  "rater_pool": {
+    "minimum_raters_per_item": 2,
+    "raters": [
+      {
+        "id": "reference-rater-a",
+        "type": "reference_fixture",
+        "qualified": true,
+        "conflict_attested": true,
+        "domain_policy_trained": true,
+        "calibration_passed": true
+      },
+      {
+        "id": "reference-rater-b",
+        "type": "reference_fixture",
+        "qualified": true,
+        "conflict_attested": true,
+        "domain_policy_trained": true,
+        "calibration_passed": true
+      }
+    ]
+  },
+  "calibration": {
+    "minimum_training_items": 5,
+    "gold_items_fraction": 0.05,
+    "duplicate_items_fraction": 0.05,
+    "calibration_pass_threshold": 0.8,
+    "rater_drift_review": "per_submission_batch"
+  },
+  "blinding": {
+    "hide_system_identity": true,
+    "shuffle_item_order": true,
+    "hide_expected_actions": true,
+    "mask_submission_metadata": true
+  },
+  "adjudication": {
+    "required_for_disagreement": true,
+    "disagreement_threshold": 2,
+    "adjudicator_must_be_independent": true,
+    "output": "dimension_score_plus_rationale"
+  },
+  "audit": {
+    "audit_log_required": true,
+    "conflict_attestation_required": true,
+    "publish_agreement_summary": true,
+    "retain_raw_annotations": true,
+    "retention": "minimum_24_months"
+  },
+  "known_gaps": [
+    "The v0.1 study uses reference-fixture raters and is not official judging evidence.",
+    "Official external submissions must replace this with completed human or audited model-judge study evidence."
+  ]
+}

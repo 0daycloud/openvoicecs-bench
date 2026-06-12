@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-label="utility_support frontier: cost_vs_quality">
+<style>.label{font:13px sans-serif;fill:#0f172a}.title{font:700 20px sans-serif;fill:#0f172a}.muted{font:12px sans-serif;fill:#64748b}</style>
+<rect width="960" height="640" fill="#ffffff"/>
+<text class="title" x="32" y="38">utility_support frontier: cost_vs_quality</text>
+<line x1="96.00" y1="552.00" x2="920.00" y2="552.00" stroke="#334155" stroke-width="1.5"/>
+<line x1="96.00" y1="72.00" x2="96.00" y2="552.00" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="418.00" y="604.00" font-size="13">cost per successful conversation USD</text>
+<text class="label" x="24.00" y="312.00" font-size="13" transform="rotate(-90 24.00 312.00)">task success rate</text>
+<circle cx="508.00" cy="312.00" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
+<text class="muted" x="517.00" y="305.00">oracle_audio_manifest</text>
+<circle cx="508.00" cy="312.00" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
+<text class="muted" x="517.00" y="305.00">oracle_text</text>
+</svg>

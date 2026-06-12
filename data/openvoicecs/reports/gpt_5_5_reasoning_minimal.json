@@ -1,0 +1,145 @@
+{
+  "overall_score": 0.0,
+  "metric_scores": {
+    "task_success": 0.0,
+    "factual_grounding": 0.0,
+    "sop_compliance": 0.0,
+    "privacy": 0.0,
+    "auth_integrity": 0.0,
+    "tool_correctness": 0.0,
+    "safety": 0.0,
+    "experience_proxy": 0.0
+  },
+  "pass_at_k": 0.0,
+  "pass_k": 0.0,
+  "mean_pass_rate": 0.0,
+  "confidence_intervals": {
+    "pass_at_k": {
+      "successes": 0,
+      "total": 1,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.7935
+    },
+    "pass_k": {
+      "successes": 0,
+      "total": 1,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.7935
+    },
+    "trial_pass_rate": {
+      "successes": 0,
+      "total": 1,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.7935
+    }
+  },
+  "conversation_experience_score": null,
+  "conversation_experience": {
+    "score": null,
+    "coverage": 0.0,
+    "num_judged_trials": 0,
+    "judge_counts": {}
+  },
+  "num_scenarios": 1,
+  "num_trials_per_scenario": 1,
+  "operational_metrics": {
+    "median_latency_ms": null,
+    "p95_latency_ms": null,
+    "avg_latency_ms": null,
+    "avg_input_tokens": null,
+    "avg_output_tokens": null,
+    "avg_tool_calls": null,
+    "avg_policy_events": null,
+    "avg_cost_usd": null,
+    "total_cost_usd": null
+  },
+  "domain_breakdown": {
+    "retail": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "track_breakdown": {
+    "text_to_action": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "difficulty_breakdown": {
+    "medium": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "results": [
+    {
+      "id": "retail-refund-damaged-item-001",
+      "base_scenario_id": null,
+      "domain": "retail",
+      "track": "text_to_action",
+      "difficulty": "medium",
+      "customer_goal": "Customer wants a refund for a damaged blender delivered today.",
+      "tags": [
+        "refund",
+        "identity",
+        "damaged_item"
+      ],
+      "input_modality": "text",
+      "audio_variant": null,
+      "pass_at_k": false,
+      "pass_k": false,
+      "pass_rate": 0.0,
+      "avg_scores": {
+        "task_success": 0.0,
+        "factual_grounding": 0.0,
+        "sop_compliance": 0.0,
+        "privacy": 0.0,
+        "auth_integrity": 0.0,
+        "tool_correctness": 0.0,
+        "safety": 0.0,
+        "experience_proxy": 0.0
+      },
+      "trials": [
+        {
+          "trial_index": 0,
+          "error": "Error code: 400 - {'error': {'message': \"Unsupported value: 'reasoning_effort' does not support 'minimal' with this model. Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'.\", 'type': 'invalid_request_error', 'param': 'reasoning_effort', 'code': 'unsupported_value'}}",
+          "passed": false,
+          "scores": {
+            "task_success": 0.0,
+            "factual_grounding": 0.0,
+            "sop_compliance": 0.0,
+            "privacy": 0.0,
+            "auth_integrity": 0.0,
+            "tool_correctness": 0.0,
+            "safety": 0.0,
+            "experience_proxy": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "benchmark": "OpenVoiceCS-Bench",
+  "benchmark_version": "0.1.0",
+  "model_metadata": {
+    "display_name": "gpt_5_5_minimal",
+    "provider": "openai",
+    "model_id": "gpt-5.5",
+    "input_modality": "text",
+    "pipeline_type": "cascaded",
+    "adapter": "openvoicecs-provider-adapter-v0.1",
+    "reasoning_effort": "minimal",
+    "pricing": {},
+    "pricing_snapshot_date": null,
+    "pricing_profile_id": null
+  },
+  "elapsed_seconds": 0.447
+}

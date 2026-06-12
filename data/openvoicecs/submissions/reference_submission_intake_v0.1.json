@@ -1,0 +1,63 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Submission Intake",
+  "intake_version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "submission_id": "oracle_text_realtime_reference_intake",
+  "system_id": "oracle_text_realtime_reference",
+  "status": "reference_fixture",
+  "official_submission": false,
+  "purpose": "Complete reference fixture for official-submission intake validation. This is not an official leaderboard entry.",
+  "artifacts": {
+    "submission_card": {
+      "path": "data/openvoicecs/submission_cards/oracle_text_realtime_reference_card.json",
+      "sha256": "356cb8932acc377b1216555484fdb8f2de0739c538a696ded73dd12dd9031542",
+      "bytes": 1539
+    },
+    "report": {
+      "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
+      "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+      "bytes": 7494153
+    },
+    "run_manifest": {
+      "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
+      "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
+      "bytes": 19640
+    },
+    "release_bundle": {
+      "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
+      "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
+      "bytes": 10793
+    },
+    "external_systems_registry": {
+      "path": "data/openvoicecs/external_systems_v0.1.json",
+      "sha256": "0c8fb9052f8522b0b178109021d2e4b77d977ea991b597b809ee016fbab90570",
+      "bytes": 4315
+    },
+    "judge_annotation_package": {
+      "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
+      "sha256": "7e2dd2f19eb3c8195a538790b2a6bc60aff176b0e8464e18163eda606599aa76",
+      "bytes": 3695
+    },
+    "leaderboard_claims": {
+      "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
+      "sha256": "c73d21ec95e01977acc8b67eb5265251a0734dea9ee0b76d8b157142c83417f1",
+      "bytes": 2730
+    }
+  },
+  "review": {
+    "review_status": "accepted",
+    "reviewed_by": [
+      "openvoicecs-maintainers"
+    ],
+    "reviewed_at": "2026-06-11",
+    "evidence_level": "reference_fixture",
+    "notes": [
+      "Validates the intake envelope format and artifact hash binding.",
+      "Reference fixtures are not eligible for official leaderboard ranking."
+    ]
+  },
+  "known_gaps": [
+    "No real external system was contacted for this reference fixture.",
+    "Judging evidence is fixture-generated and cannot support an official submission."
+  ]
+}

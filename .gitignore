@@ -1,0 +1,58 @@
+# macOS / editor noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyre/
+.tox/
+.nox/
+.hypothesis/
+
+# Test and coverage output
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging and build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and scratch files
+*.log
+*.tmp
+tmp/
+temp/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local benchmark runs and draft submissions
+/data/openvoicecs/frontier/
+/drafts/
+/submissions/

@@ -1,0 +1,50 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Submission Card",
+  "card_version": "0.1.0",
+  "generated_at": "2026-06-11",
+  "submitter": {
+    "name": "OpenVoiceCS",
+    "organization": "OpenVoiceCS",
+    "contact": null
+  },
+  "system": {
+    "name": "oracle_audio_manifest",
+    "provider": "reference",
+    "model_id": "oracle_audio_manifest-realtime-v0.1",
+    "submission_spec": null,
+    "pipeline_type": "cascaded",
+    "input_modality": "audio",
+    "repository_url": null,
+    "license": null
+  },
+  "pricing": {
+    "pricing_profile_id": "reference-zero-v0.1",
+    "pricing_snapshot_date": "2026-06-11",
+    "embedded_pricing_present": false
+  },
+  "evaluation": {
+    "report": {
+      "path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
+      "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
+      "bytes": 8955639
+    },
+    "benchmark_version": "0.1.0",
+    "evaluation_mode": "audio_manifest_realtime",
+    "num_scenarios": 120,
+    "num_audio_variants": 120,
+    "num_trials_per_scenario": 12,
+    "overall_score": 100.0,
+    "pass_at_k": 1.0,
+    "pass_k": 1.0,
+    "mean_pass_rate": 1.0,
+    "conversation_experience_score": 1.0
+  },
+  "disclosures": {
+    "training_data_statement": "Deterministic reference oracle fixture generated from OpenVoiceCS scenario and audio-manifest oracles.",
+    "safety_statement": "Reference oracle used for harness validation; not a deployed voice-agent system.",
+    "limitations": [
+      "Reference fixture, not an external system.",
+      "Not eligible for official leaderboard ranking."
+    ]
+  }
+}

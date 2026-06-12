@@ -1,0 +1,608 @@
+{
+  "benchmark": "Latency-Cost-Quality Frontier",
+  "manifest_version": "0.1.0",
+  "generated_at": "2026-06-11",
+  "release_tuple": {
+    "scenario_suite": {
+      "path": "inputs/manifests/scenarios.json",
+      "sha256": "430a87f3673fd6c1584e8a0a4b5f41fcbce37325e60c5b811c77c0f8c4b5e6c5",
+      "bytes": 1173811
+    },
+    "audio_manifest": {
+      "path": "inputs/manifests/audio_manifest.json",
+      "sha256": "cf20d2f8a1a5e65e8f9cf6e7d57d428749a2e22ae7cd5ac5b9db234779a07c48",
+      "bytes": 111472
+    },
+    "pricing_manifest": {
+      "path": "inputs/manifests/pricing_manifest.json",
+      "sha256": "b6c42d105f7832219d52a669960516cd6a6daf5713e9ffa82962e8b5768c7a6c",
+      "bytes": 7754
+    },
+    "split_manifest": {
+      "path": "inputs/manifests/splits.json",
+      "sha256": "d21af3eaba73b8caa45bfd6dc894f5f8c4d67f49a7c68ecc3eb651ad8c36c3ae",
+      "bytes": 15578
+    },
+    "provenance_manifest": {
+      "path": "inputs/manifests/provenance.json",
+      "sha256": "baba76a9ec1ba92e8be725f52d684dbc56a26f2c3e42d91954f621561e6e73ba",
+      "bytes": 112160
+    },
+    "changelog": {
+      "path": "inputs/manifests/changelog.json",
+      "sha256": "255d47ae3bde764ccc882009652a8e7982641f83cdad211f6f9c410c02a65909",
+      "bytes": 17122
+    },
+    "baseline_manifest": {
+      "path": "inputs/manifests/reference_baselines.json",
+      "sha256": "8bd14e51770892d9b39abe5fd2472238dc84b3d32c767fdff3b30481b0d368bf",
+      "bytes": 3149
+    },
+    "review_manifest": {
+      "path": "inputs/manifests/scenario_reviews.json",
+      "sha256": "e78292aa1ef474e28377685bbc61d77e524268ef9290547d3ed72bc6530dc706",
+      "bytes": 167376
+    },
+    "seed": 0,
+    "judge": {
+      "model": "openvoicecs-reference-judge-v0.1",
+      "prompt": {
+        "path": "inputs/manifests/judge_prompt.txt",
+        "sha256": "8fa8f280a8d1c62b8ebdf7b70b2a5472bdbdad26527e0e4505b378ff38ad0a37",
+        "bytes": 1412
+      }
+    },
+    "environment": {
+      "region": "local",
+      "network": "loopback",
+      "hardware_profile": "local-macos-arm64",
+      "transport": "websocket",
+      "concurrency_levels": [
+        1,
+        10,
+        100
+      ]
+    }
+  },
+  "release_audit": {
+    "version": "0.1.0",
+    "release_stage": "seed",
+    "validation": {
+      "passed": true,
+      "num_issues": 0,
+      "issues": []
+    },
+    "release_gates": {
+      "valid_json_contract": true,
+      "has_text_to_action_track": true,
+      "has_adversarial_compliance_track": true,
+      "has_audio_or_robustness_variants": true,
+      "has_pricing_snapshot": true,
+      "has_pricing_profiles": true,
+      "has_split_manifest": true,
+      "has_provenance_manifest": true,
+      "has_changelog": true,
+      "changelog_has_entries": true,
+      "has_reference_baselines": true,
+      "reference_baselines_complete": true,
+      "has_scenario_reviews": true,
+      "all_scenarios_review_approved": true,
+      "all_scenarios_assigned_to_split": true,
+      "all_audio_variants_assigned_to_split": true,
+      "all_scenarios_have_provenance": true,
+      "all_audio_variants_have_provenance": true,
+      "all_scenarios_have_expected_state": true,
+      "all_scenarios_have_required_events": true,
+      "passed": true
+    },
+    "scenario_stats": {
+      "num_scenarios": 201,
+      "domains": {
+        "fintech_sandbox": 33,
+        "healthcare_admin": 33,
+        "retail": 34,
+        "saas_support": 33,
+        "telecom": 33,
+        "travel": 34,
+        "utility_support": 1
+      },
+      "tracks": {
+        "adversarial_compliance": 40,
+        "audio_to_action": 35,
+        "end_to_end_voice": 20,
+        "robustness": 45,
+        "text_to_action": 61
+      },
+      "difficulty": {
+        "easy": 40,
+        "hard": 80,
+        "medium": 81
+      },
+      "tags": {
+        "SIM_replacement": 4,
+        "SSO_reset": 4,
+        "account_alert": 3,
+        "account_recovery": 1,
+        "address_update": 4,
+        "adversarial": 4,
+        "adversarial_compliance": 36,
+        "appointment_reschedule": 6,
+        "audio": 1,
+        "audio_to_action": 34,
+        "audit_export": 4,
+        "bag_claim": 5,
+        "billing": 1,
+        "billing_credit": 4,
+        "billing_owner_transfer": 4,
+        "billing_question": 3,
+        "callback": 1,
+        "card_dispute": 6,
+        "card_replacement": 1,
+        "clinical_boundary": 2,
+        "credit": 1,
+        "damaged_furniture": 3,
+        "damaged_item": 1,
+        "end_to_end_voice": 20,
+        "escalation": 1,
+        "executive_impersonation": 1,
+        "fraud": 2,
+        "generated_public_beta": 188,
+        "healthcare_admin": 1,
+        "hotel_rebooking": 5,
+        "identity": 154,
+        "insurance_update": 4,
+        "invoice_correction": 4,
+        "itinerary_correction": 4,
+        "lab_callback": 3,
+        "late_package": 6,
+        "loyalty_credit": 1,
+        "merchant_hold": 5,
+        "mfa": 2,
+        "missing_accessory": 3,
+        "no_upsell": 1,
+        "noise": 1,
+        "outage": 1,
+        "phi": 1,
+        "plan_correction": 4,
+        "policy_override": 36,
+        "portal_access": 3,
+        "price_adjustment": 3,
+        "privacy": 2,
+        "prompt_injection": 38,
+        "rebooking": 1,
+        "refill_routing": 5,
+        "refund": 2,
+        "replacement_card": 3,
+        "return_label": 3,
+        "robustness": 45,
+        "seat_accommodation": 4,
+        "seat_downgrade": 4,
+        "security": 1,
+        "self_repair": 1,
+        "service_outage": 5,
+        "sms": 1,
+        "social_engineering": 2,
+        "statement_correction": 3,
+        "subscription_cancellation": 3,
+        "technician_visit": 4,
+        "telecom": 1,
+        "text_to_action": 55,
+        "transfer_limit": 5,
+        "travel": 1,
+        "travel_disruption": 1,
+        "travel_notice": 3,
+        "utility": 1,
+        "voucher": 1,
+        "voucher_extension": 4,
+        "waiver": 1,
+        "warranty_exchange": 3,
+        "weather_waiver": 4,
+        "workspace_access": 4
+      }
+    },
+    "audio_manifest_stats": {
+      "present": true,
+      "num_variants": 120,
+      "tracks": {
+        "adversarial_compliance": 27,
+        "audio_to_action": 52,
+        "end_to_end_voice": 7,
+        "robustness": 34
+      },
+      "scenario_ids": {
+        "fintech-sandbox-audio-action-001": 1,
+        "fintech-sandbox-policy-attack-001": 1,
+        "fintech-sandbox-policy-attack-002": 1,
+        "fintech-sandbox-policy-attack-003": 1,
+        "fintech-sandbox-robustness-repair-001": 1,
+        "fintech-sandbox-robustness-repair-002": 1,
+        "fintech-sandbox-robustness-repair-003": 1,
+        "fintech-sandbox-robustness-repair-004": 1,
+        "fintech-sandbox-robustness-repair-005": 1,
+        "fintech-sandbox-robustness-repair-006": 1,
+        "fintech-sandbox-robustness-repair-007": 1,
+        "fintech-sandbox-robustness-repair-008": 1,
+        "fintech-sandbox-robustness-repair-009": 1,
+        "fintech-sandbox-robustness-repair-010": 1,
+        "fintech-sandbox-service-action-007": 1,
+        "fintech-sandbox-service-action-008": 1,
+        "fintech-sandbox-service-action-009": 1,
+        "fintech-sandbox-service-action-010": 1,
+        "fintech-sandbox-service-action-011": 1,
+        "fintech-sandbox-service-action-012": 1,
+        "fintech-sandbox-service-action-013": 1,
+        "fintech-sandbox-service-action-014": 1,
+        "fintech-sandbox-service-action-015": 1,
+        "fintech-sandbox-service-action-016": 1,
+        "fintech-sandbox-service-action-017": 1,
+        "fintech-social-engineering-transfer-001": 1,
+        "healthcare-admin-audio-action-001": 1,
+        "healthcare-admin-audio-action-002": 1,
+        "healthcare-admin-audio-action-003": 1,
+        "healthcare-admin-audio-action-004": 1,
+        "healthcare-admin-audio-action-005": 1,
+        "healthcare-admin-audio-action-006": 1,
+        "healthcare-admin-audio-action-007": 1,
+        "healthcare-admin-policy-attack-001": 1,
+        "healthcare-admin-policy-attack-002": 1,
+        "healthcare-admin-policy-attack-003": 1,
+        "healthcare-admin-policy-attack-004": 1,
+        "healthcare-admin-policy-attack-005": 1,
+        "healthcare-admin-policy-attack-006": 1,
+        "healthcare-admin-policy-attack-007": 1,
+        "healthcare-admin-robustness-repair-001": 1,
+        "healthcare-admin-robustness-repair-002": 1,
+        "healthcare-admin-robustness-repair-003": 1,
+        "healthcare-admin-robustness-repair-004": 1,
+        "healthcare-admin-robustness-repair-005": 1,
+        "healthcare-admin-robustness-repair-006": 1,
+        "healthcare-admin-robustness-repair-007": 1,
+        "healthcare-admin-robustness-repair-008": 1,
+        "healthcare-admin-service-action-004": 1,
+        "healthcare-admin-service-action-005": 1,
+        "healthcare-admin-service-action-006": 1,
+        "healthcare-admin-service-action-007": 1,
+        "healthcare-admin-service-action-008": 1,
+        "healthcare-admin-service-action-009": 1,
+        "healthcare-phi-extraction-001": 1,
+        "retail-audio-action-001": 1,
+        "retail-audio-action-002": 1,
+        "retail-audio-action-003": 1,
+        "retail-audio-action-004": 1,
+        "retail-audio-action-005": 1,
+        "retail-audio-action-006": 1,
+        "retail-audio-action-007": 1,
+        "retail-audio-action-008": 1,
+        "retail-policy-attack-001": 1,
+        "retail-policy-attack-002": 1,
+        "retail-policy-attack-003": 1,
+        "retail-policy-attack-004": 1,
+        "retail-policy-attack-005": 1,
+        "retail-policy-attack-006": 1,
+        "retail-policy-attack-007": 1,
+        "retail-policy-attack-008": 1,
+        "retail-prompt-injection-refund-001": 1,
+        "retail-refund-damaged-item-001": 2,
+        "retail-robustness-repair-001": 1,
+        "retail-robustness-repair-002": 1,
+        "retail-robustness-repair-003": 1,
+        "retail-robustness-repair-004": 1,
+        "retail-robustness-repair-005": 1,
+        "retail-robustness-repair-006": 1,
+        "retail-robustness-repair-007": 1,
+        "retail-service-action-002": 1,
+        "retail-service-action-003": 1,
+        "retail-service-action-004": 1,
+        "retail-service-action-005": 1,
+        "retail-service-action-006": 1,
+        "retail-service-action-007": 1,
+        "retail-service-action-008": 1,
+        "retail-voice-flow-001": 1,
+        "saas-ceo-impersonation-mfa-001": 1,
+        "saas-support-audio-action-002": 1,
+        "saas-support-audio-action-003": 1,
+        "saas-support-audio-action-004": 1,
+        "saas-support-audio-action-005": 1,
+        "saas-support-audio-action-006": 1,
+        "saas-support-policy-attack-001": 1,
+        "saas-support-policy-attack-002": 1,
+        "saas-support-policy-attack-003": 1,
+        "saas-support-policy-attack-004": 1,
+        "saas-support-policy-attack-005": 1,
+        "saas-support-robustness-repair-001": 1,
+        "saas-support-robustness-repair-002": 1,
+        "saas-support-robustness-repair-003": 1,
+        "saas-support-robustness-repair-004": 1,
+        "saas-support-robustness-repair-006": 1,
+        "saas-support-service-action-002": 1,
+        "saas-support-service-action-003": 1,
+        "saas-support-service-action-004": 1,
+        "saas-support-service-action-005": 1,
+        "saas-support-voice-flow-001": 1,
+        "saas-support-voice-flow-002": 1,
+        "saas-support-voice-flow-003": 1,
+        "saas-support-voice-flow-004": 1,
+        "saas-support-voice-flow-005": 1,
+        "telecom-audio-action-001": 1,
+        "telecom-noisy-address-correction-001": 1,
+        "telecom-robustness-repair-002": 1,
+        "travel-rebook-missed-connection-001": 1,
+        "travel-voice-voucher-reissue-001": 1,
+        "utility-outage-audio-report-001": 1
+      },
+      "perturbation_types": {
+        "background_noise": 33,
+        "emotional_pressure": 2,
+        "interruption": 1,
+        "multi_turn_voice": 6,
+        "prompt_injection": 25,
+        "role_confusion": 1,
+        "self_repair": 33,
+        "social_engineering": 25
+      }
+    },
+    "audio_asset_stats": {
+      "present": true,
+      "num_variants": 120,
+      "num_existing_files": 120,
+      "num_missing_files": 0,
+      "num_with_sha256": 120,
+      "num_sha256_verified": 120,
+      "num_sample_rate_verified": 120,
+      "num_duration_verified": 120,
+      "num_positive_duration_files": 120,
+      "total_duration_seconds": 872.289
+    },
+    "pricing_manifest_stats": {
+      "present": true,
+      "snapshot_date": "2026-06-11",
+      "currency": "USD",
+      "num_entries": 12,
+      "num_profiles": 7,
+      "num_comparable_profiles": 5,
+      "components": [
+        "asr",
+        "llm",
+        "speech_to_speech",
+        "telephony",
+        "transport",
+        "tts"
+      ]
+    },
+    "split_manifest_stats": {
+      "present": true,
+      "version": "0.1.0",
+      "splits": {
+        "public_dev": {
+          "num_scenarios": 80,
+          "num_audio_variants": 40
+        },
+        "sealed_test": {
+          "num_scenarios": 121,
+          "num_audio_variants": 80
+        }
+      },
+      "scenario_coverage": 1.0,
+      "audio_variant_coverage": 1.0,
+      "unassigned_scenario_ids": [],
+      "unassigned_audio_variant_ids": []
+    },
+    "provenance_stats": {
+      "present": true,
+      "version": "0.1.0",
+      "scenario_coverage": 1.0,
+      "audio_variant_coverage": 1.0,
+      "scenario_license_open_rate": 1.0,
+      "audio_license_open_rate": 1.0,
+      "audio_speaker_consent_rate": 1.0,
+      "no_real_customer_data_rate": 1.0,
+      "low_contamination_risk_rate": 1.0,
+      "source_types": {
+        "hand_authored_synthetic": 201,
+        "synthetic": 120
+      }
+    },
+    "changelog_stats": {
+      "present": true,
+      "version": "0.1.0",
+      "benchmark_version": "0.1.0",
+      "num_entries": 4,
+      "entry_types": {
+        "release": 1,
+        "scenario_added": 3
+      },
+      "compatibility": {
+        "backward_compatible": 3,
+        "initial_release": 1
+      },
+      "num_changed_scenarios": 201,
+      "num_changed_audio_variants": 120,
+      "scenario_change_coverage": 1.0,
+      "audio_variant_change_coverage": 1.0,
+      "num_errata": 0,
+      "num_open_errata": 0,
+      "errata_severity": {}
+    },
+    "baseline_stats": {
+      "present": true,
+      "version": "0.1.0",
+      "benchmark_version": "0.1.0",
+      "num_baselines": 4,
+      "baselines": {
+        "oracle_text": {
+          "overall_score": 100.0,
+          "pass_at_k": 1.0,
+          "pass_k": 1.0,
+          "mean_pass_rate": 1.0,
+          "num_scenarios": 201,
+          "num_trials_per_scenario": 3,
+          "task_success": 1.0,
+          "safety": 1.0
+        },
+        "noop_text": {
+          "overall_score": 7.67,
+          "pass_at_k": 0.0,
+          "pass_k": 0.0,
+          "mean_pass_rate": 0.0,
+          "num_scenarios": 201,
+          "num_trials_per_scenario": 3,
+          "task_success": 0.0,
+          "safety": 0.995
+        },
+        "oracle_audio_manifest": {
+          "overall_score": 100.0,
+          "pass_at_k": 1.0,
+          "pass_k": 1.0,
+          "mean_pass_rate": 1.0,
+          "num_scenarios": 120,
+          "num_trials_per_scenario": 3,
+          "task_success": 1.0,
+          "safety": 1.0
+        },
+        "noop_audio_manifest": {
+          "overall_score": 7.88,
+          "pass_at_k": 0.0,
+          "pass_k": 0.0,
+          "mean_pass_rate": 0.0,
+          "num_scenarios": 120,
+          "num_trials_per_scenario": 3,
+          "task_success": 0.0,
+          "safety": 1.0
+        }
+      }
+    },
+    "review_stats": {
+      "present": true,
+      "version": "0.1.0",
+      "benchmark_version": "0.1.0",
+      "minimum_reviewers_per_scenario": 2,
+      "required_checks": [
+        "realistic_customer_goal",
+        "tool_contract_replayable",
+        "oracle_expected_state_correct",
+        "sop_policy_coverage",
+        "privacy_coverage",
+        "auth_integrity_coverage",
+        "grounding_coverage",
+        "forbidden_action_coverage",
+        "provenance_reviewed",
+        "contamination_reviewed"
+      ],
+      "num_reviews": 201,
+      "num_reviewed_scenarios": 201,
+      "num_approved_scenarios": 201,
+      "scenario_review_coverage": 1.0,
+      "scenario_approval_coverage": 1.0,
+      "unreviewed_scenario_ids": [],
+      "unapproved_scenario_ids": [],
+      "check_pass_counts": {
+        "realistic_customer_goal": 201,
+        "tool_contract_replayable": 201,
+        "oracle_expected_state_correct": 201,
+        "sop_policy_coverage": 201,
+        "privacy_coverage": 201,
+        "auth_integrity_coverage": 201,
+        "grounding_coverage": 201,
+        "forbidden_action_coverage": 201,
+        "provenance_reviewed": 201,
+        "contamination_reviewed": 201
+      },
+      "check_pass_rates": {
+        "realistic_customer_goal": 1.0,
+        "tool_contract_replayable": 1.0,
+        "oracle_expected_state_correct": 1.0,
+        "sop_policy_coverage": 1.0,
+        "privacy_coverage": 1.0,
+        "auth_integrity_coverage": 1.0,
+        "grounding_coverage": 1.0,
+        "forbidden_action_coverage": 1.0,
+        "provenance_reviewed": 1.0,
+        "contamination_reviewed": 1.0
+      }
+    }
+  },
+  "reports": [
+    {
+      "path": "inputs/reports/001_oracle_audio_manifest_realtime_judged.json",
+      "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
+      "bytes": 8955639,
+      "benchmark": "OpenVoiceCS-Realtime-Load",
+      "benchmark_version": "0.1.0",
+      "num_scenarios": 120,
+      "num_trials_per_scenario": 12,
+      "validation": {
+        "passed": true,
+        "num_issues": 0,
+        "issues": []
+      }
+    },
+    {
+      "path": "inputs/reports/002_oracle_text_realtime_judged.json",
+      "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+      "bytes": 7494153,
+      "benchmark": "OpenVoiceCS-Realtime-Load",
+      "benchmark_version": "0.1.0",
+      "num_scenarios": 201,
+      "num_trials_per_scenario": 6,
+      "validation": {
+        "passed": true,
+        "num_issues": 0,
+        "issues": []
+      }
+    }
+  ],
+  "systems": [
+    {
+      "name": "oracle_audio_manifest",
+      "provider": "reference",
+      "model_id": "oracle_audio_manifest-realtime-v0.1",
+      "pricing_profile_id": "reference-zero-v0.1",
+      "pricing_snapshot_date": "2026-06-11",
+      "pricing_source": "profile",
+      "pipeline_type": "cascaded",
+      "submission_spec": null,
+      "transport": "websocket",
+      "reference_client": {
+        "region": "local",
+        "network": "loopback",
+        "hardware_profile": "local-macos-arm64",
+        "transport": "websocket",
+        "concurrency_levels": [
+          1,
+          10,
+          100
+        ],
+        "seed": 0,
+        "pricing_snapshot_date": "2026-06-11"
+      },
+      "judge_model": null,
+      "benchmark": "OpenVoiceCS-Realtime-Load"
+    },
+    {
+      "name": "oracle_text",
+      "provider": "reference",
+      "model_id": "oracle_text-realtime-v0.1",
+      "pricing_profile_id": "reference-zero-v0.1",
+      "pricing_snapshot_date": "2026-06-11",
+      "pricing_source": "profile",
+      "pipeline_type": "cascaded",
+      "submission_spec": null,
+      "transport": "websocket",
+      "reference_client": {
+        "region": "local",
+        "network": "loopback",
+        "hardware_profile": "local-macos-arm64",
+        "transport": "websocket",
+        "concurrency_levels": [
+          1,
+          10,
+          100
+        ],
+        "seed": 0,
+        "pricing_snapshot_date": "2026-06-11"
+      },
+      "judge_model": null,
+      "benchmark": "OpenVoiceCS-Realtime-Load"
+    }
+  ]
+}

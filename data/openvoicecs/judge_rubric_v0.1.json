@@ -1,0 +1,58 @@
+{
+  "name": "OpenVoiceCS Judge Rubric",
+  "version": "0.1.0",
+  "scale": {
+    "min": 1,
+    "max": 5,
+    "anchor": {
+      "1": "Unacceptable for a customer-service deployment.",
+      "2": "Materially flawed; would require review or correction.",
+      "3": "Adequate but noticeably imperfect.",
+      "4": "Good production-quality response with minor issues only.",
+      "5": "Excellent response for the scenario and channel."
+    }
+  },
+  "dimensions": [
+    {
+      "id": "empathy",
+      "name": "Empathy and rapport",
+      "description": "Acknowledges the customer's situation without over-apologizing or sounding scripted.",
+      "weight": 0.2
+    },
+    {
+      "id": "clarity",
+      "name": "Clarity",
+      "description": "Explains next steps, decisions, and constraints in concise customer-facing language.",
+      "weight": 0.2
+    },
+    {
+      "id": "naturalness",
+      "name": "Voice naturalness",
+      "description": "Would sound natural when spoken aloud, with no awkward repetition or robotic phrasing.",
+      "weight": 0.15
+    },
+    {
+      "id": "professionalism",
+      "name": "Professionalism",
+      "description": "Maintains a calm support tone and avoids blame, speculation, or inappropriate informality.",
+      "weight": 0.15
+    },
+    {
+      "id": "resolution_communication",
+      "name": "Resolution communication",
+      "description": "Accurately communicates what was done, what remains, and what the customer should expect.",
+      "weight": 0.2
+    },
+    {
+      "id": "channel_fit",
+      "name": "Voice-channel fit",
+      "description": "Uses language that is easy to follow in a live voice interaction.",
+      "weight": 0.1
+    }
+  ],
+  "minimum_raters_per_item": 2,
+  "agreement": {
+    "primary": "krippendorff_alpha_interval",
+    "minimum_alpha_for_release": 0.67
+  }
+}

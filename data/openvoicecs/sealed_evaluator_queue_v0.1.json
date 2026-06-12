@@ -1,0 +1,101 @@
+{
+  "name": "OpenVoiceCS Sealed Evaluator Queue",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "purpose": "Hash-pinned operations queue for hosted sealed-test submissions. The reference entry exercises the workflow but is not an official leaderboard run.",
+  "sealed_ops": {
+    "path": "data/openvoicecs/sealed_ops_v0.1.json",
+    "sha256": "3a28d92e43b0ec665031a0b938e74ed0b8bf4bb59fcce9a71975395f1a6408a3",
+    "bytes": 1977
+  },
+  "split_commitments": {
+    "path": "data/openvoicecs/split_commitments_v0.1.json",
+    "sha256": "f0980bfc4ce2ce7df5ee044b5850b0f4279598ab5735b806f03f6f47a3629f4d",
+    "bytes": 52040
+  },
+  "queue_policy": {
+    "ordering": "first_in_first_out",
+    "max_attempts_per_system": 2,
+    "sealed_ids_revealed": false,
+    "raw_prompts_exported_to_submitter": false,
+    "pre_submission_access_allowed": false,
+    "append_only_audit_log": true,
+    "conflict_attestation_required": true,
+    "fixed_evaluation_environment": true,
+    "result_release_policy": "release_after_same_window_submissions_complete"
+  },
+  "submissions": [
+    {
+      "queue_id": "queue-2026-06-11-reference-001",
+      "submission_id": "oracle_text_realtime_reference_intake",
+      "system_id": "oracle_text_realtime_reference",
+      "status": "reference_fixture",
+      "official_candidate": false,
+      "submitted_at": "2026-06-11",
+      "intake": {
+        "path": "data/openvoicecs/submissions/reference_submission_intake_v0.1.json",
+        "sha256": "90463b99d075250052dd07fbe16de96917a67d59f4f1c67d8eafa4feedaff360",
+        "bytes": 2478
+      },
+      "attempt_limit": 2,
+      "attempts": [
+        {
+          "attempt_id": "attempt-2026-06-11-reference-001",
+          "attempt_index": 1,
+          "status": "completed",
+          "started_at": "2026-06-11",
+          "completed_at": "2026-06-11",
+          "environment": {
+            "region": "local",
+            "network": "loopback",
+            "hardware_profile": "local-macos-arm64",
+            "transport": "in_process"
+          },
+          "sealed_split_exposure": {
+            "served_by": "hosted_evaluator",
+            "sealed_ids_revealed": false,
+            "raw_prompts_exported": false,
+            "expected_state_exported": false
+          },
+          "artifacts": {
+            "report": {
+              "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
+              "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+              "bytes": 7494153
+            },
+            "run_manifest": {
+              "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
+              "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
+              "bytes": 19640
+            },
+            "release_bundle": {
+              "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
+              "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
+              "bytes": 10793
+            },
+            "judge_annotation_package": {
+              "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
+              "sha256": "7e2dd2f19eb3c8195a538790b2a6bc60aff176b0e8464e18163eda606599aa76",
+              "bytes": 3695
+            },
+            "leaderboard_claims": {
+              "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
+              "sha256": "c73d21ec95e01977acc8b67eb5265251a0734dea9ee0b76d8b157142c83417f1",
+              "bytes": 2730
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "audit_log": {
+    "hash_algorithm": "sha256",
+    "append_only": true,
+    "retention": "minimum_24_months",
+    "public_disclosure": "aggregate_only_until_result_release"
+  },
+  "known_gaps": [
+    "The reference queue entry is a fixture and was not served by a production hosted evaluator.",
+    "Official submissions require real external systems and non-fixture judging before status can be official."
+  ]
+}

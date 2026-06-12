@@ -1,0 +1,1436 @@
+{
+  "name": "OpenVoiceCS Split Commitments",
+  "version": "0.1.0",
+  "hash_algorithm": "sha256",
+  "canonicalization": "json.dumps(sort_keys=True,separators=(',',':'))",
+  "scenario_suite_version": "0.1.0",
+  "split_manifest_version": "0.1.0",
+  "audio_manifest_version": "0.1.0",
+  "privacy": {
+    "public_dev_ids_revealed": true,
+    "sealed_test_ids_revealed": false
+  },
+  "splits": {
+    "public_dev": {
+      "num_scenarios": 80,
+      "num_audio_variants": 40,
+      "scenario_commitments": [
+        {
+          "kind": "scenario",
+          "sha256": "124af4334e14e3b8184efeb728f4b48dee4840e8e75c01915360b5086916332c",
+          "id": "retail-refund-damaged-item-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0b0c1031684daf650c93597a140128767f321ccb4ff12826301dc4b2afe97d41",
+          "id": "travel-rebook-missed-connection-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d591934c4b7fe96f4a68cc3eb97655d3cfbbb73d341e4b2f3708950c1ab0422b",
+          "id": "telecom-billing-credit-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e14a11941419688ec8e780806cb7599c451942d9f2a206757830d4d499fb5adb",
+          "id": "healthcare-admin-schedule-refill-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "bcea2e904afed6b4f3488f306757885ec4d9a64f654af252e60efc992d294c2a",
+          "id": "fintech-fraud-card-replacement-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "edd5c297430a68561c1f55bc71dea8c1334322a49d394a2a12ec803cadc3d357",
+          "id": "saas-account-access-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "92919e0ddfd606acf97c03a5414e3891ccda329115ada2e63bb8e280f42734ee",
+          "id": "retail-prompt-injection-refund-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4e6b913fb42ba7f313c5aef7e41d5df5d69813e5639241532fd256764d98050e",
+          "id": "fintech-social-engineering-transfer-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7b29b730f45dd0f0c880f733bf6100ccfa6be80abb4a3cc0bc1f7d3fc37994ed",
+          "id": "healthcare-phi-extraction-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "dbc5aaa444f05d411b1bd3a33325996de41263832959889c5634c3faf7091b20",
+          "id": "saas-ceo-impersonation-mfa-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "5ce5960d760b1e030a02e9dbc5d46d27209fdb467a8e44d8f61935c9b8e999f0",
+          "id": "utility-outage-audio-report-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "8a3d5a8f89dbfbcf2acfa3b9e05b9233043695e4e954a7b702c763c7b9fd02fd",
+          "id": "telecom-noisy-address-correction-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ce611b395adc080caa8b30df3727cbdc7bb0f3862ad4371ad0bba66c50aae31d",
+          "id": "travel-voice-voucher-reissue-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "baa0daaebafa428fcd4a2752ddb4e602042a330e3c5351c8d9bcc61e577ec526",
+          "id": "fintech-sandbox-service-action-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e261806d4da63a8f6d6426c1db6ceb863e9e799d9e8f8db356a2a046c626d088",
+          "id": "fintech-sandbox-service-action-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7be7b9568dff3a68591a9c1de061d72f4611116b5c496de800e29bd138fd927e",
+          "id": "healthcare-admin-service-action-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4dcccaa2abdd5c3e7ecb83248c65b7bb94c2951e331f243834517c20e218b861",
+          "id": "healthcare-admin-audio-action-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "736410c5c83e68453185ab5e7aea811303a3a7da4945394183c17dfde4e997c3",
+          "id": "healthcare-admin-service-action-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "577234c53d07d134fdf5b3c24b544566858022cf89ee1f44593932868b1a513e",
+          "id": "retail-audio-action-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "5af3ab94ed03e05d9956d65a0d18cff1791fb20e6542e0b10dfd52e9af46e63e",
+          "id": "retail-robustness-repair-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c03a9b3c772e4deb5f33708d3deabd206f0b1793e50c8e18eb1ff1b4c57f06b5",
+          "id": "retail-policy-attack-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "562e1d8d91aff918d37cb051fea46cd7f8c88dabb2b6f4517dcb64e5df81bbec",
+          "id": "saas-support-voice-flow-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "047ca580a281667cb1e406538c0679dad8b2b1664bdc8b4c4f064126fc0fbd92",
+          "id": "saas-support-service-action-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4cb4b7fac5020b282d64b445e54c21490fb96e521366ee00993c46a208170a2a",
+          "id": "saas-support-audio-action-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7b79bf5b2cbf33e4643bfe30b529f6031358f5073754aeaf3d5d8c3e2ce27f1f",
+          "id": "telecom-robustness-repair-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e6ea632b33dc8d4ccc48f0774c2f4107fb011f39256cec5e62143caa63e08c1c",
+          "id": "telecom-policy-attack-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ffedbcd86d3cc5da551c8168fcff02fe564612f9cf4f4943260818b386094e5b",
+          "id": "telecom-voice-flow-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c85e64f4213758e8b30c5c728fdfb9205bd49019aa1c6c96788076f97f44e33b",
+          "id": "travel-service-action-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "554409e797891e1f9dbfc5409967d8936dfa243491901deb577bcecdcc0e1b2d",
+          "id": "travel-audio-action-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "031a989fed7d0119dd337d9c27e4617ae72cdc26889700c9a1f1e7c9286a5f49",
+          "id": "travel-robustness-repair-001"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "f6d283792813f91c9491cc0e942ef00ab79002b4d5566e1e02682169cf9a4913",
+          "id": "healthcare-admin-robustness-repair-008"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d3cec16f0871802df3d2ccc712960f64240eb10971f093758064d8361f6619d3",
+          "id": "retail-policy-attack-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1fbda526410ba7674d16136a191a6638d5386d26173992a50980abea29daee3d",
+          "id": "retail-robustness-repair-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7695f5b6b0a7a980d8334ab9dc421d32811a106c2036a729a9ed0cb0bad7fe54",
+          "id": "retail-policy-attack-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1c4868aac0f3113ca266aa05499ab20643d01ab32d854fedba87c599019a47a1",
+          "id": "retail-robustness-repair-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "bfc046836f8279439ed7da9282f0f4f9115ce67687aa5f8461897ae23bcd830c",
+          "id": "retail-policy-attack-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "86097b531b1dca6bfb15b9bc06c7fc174f5dfed40a897e73286a5fa719c6ffd2",
+          "id": "retail-robustness-repair-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "8069eeccf23bc84ad484f440dd5c88bc076673842b9557a0565b8bf36db74807",
+          "id": "retail-policy-attack-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ef131f0bc18a7a45e34c8265113b99c0d16c5adb585c5c9cc485109654b6dac7",
+          "id": "retail-robustness-repair-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d911ed72ed2a35c0ff49afd8d08cefe81d2935b0e533c7b66ee72d051312c8e3",
+          "id": "retail-policy-attack-007"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "2f11ca3dd4e23810ea2f0bdeb333ff5d0bf3db0892930b8c77731f49f6870c9b",
+          "id": "retail-robustness-repair-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b05504236322b76372f56dd2a49777bcbd2f3b6902082aafb55859dcbd66d432",
+          "id": "retail-policy-attack-008"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "26aee422af9fa4e35ee87c34330ad4ac1fc48a21dbaa611b63526ff85cf62061",
+          "id": "retail-robustness-repair-007"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "9f5739e97b735154002712b45ce990e17ec3644a3d8a2db4b3b46c39ed36fe30",
+          "id": "saas-support-policy-attack-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "160da1d2a4a1459ab2ad9192518b3dd08f012e57d5dbda0dd09b1196b23baa0d",
+          "id": "saas-support-robustness-repair-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b07525cb7629a88e94e87ad00b7b4eba967649acf395f1458e0c0f2d50063bb6",
+          "id": "saas-support-policy-attack-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "22786a2354f3319b80a86d48898077237c63dcc82058f91793c7538d870f3cbe",
+          "id": "saas-support-voice-flow-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "43f1aff1e9401d56484b459e187eab399f4b1163add4e159f3edcdbad00d6772",
+          "id": "saas-support-service-action-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "f475be653f9d7755e18b4d385009e27d166250b9c00b1b77b23aa0dc2351c684",
+          "id": "saas-support-audio-action-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "86b2384f6828c8ebea9c4eb43eb8ce60a0dfdaa7c9f991e1eea210e7cfc91fde",
+          "id": "saas-support-robustness-repair-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "804bfaafb2f65f8a90d723b7fb121885ef0bd58338e9b323c541b5f1b9b79a07",
+          "id": "saas-support-policy-attack-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "468177d84781160840814a3019e87fa9bb5c812b7a3c87768c0fe009e64e4b32",
+          "id": "saas-support-voice-flow-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "154d184d0d1f7bcf98ebee6d2ca1d31316df36667140d0a6e329fa02477bc6a9",
+          "id": "saas-support-service-action-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "495eba0a77a86744141f087a9fe7d005d024bec47278f5a52639b50906226faf",
+          "id": "saas-support-audio-action-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "6c62025d2decd646e12780064bb5e751dd43ec7d7ccf6c3e6d7bb3f4be4e1d53",
+          "id": "saas-support-robustness-repair-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "710f0cf681c0bcb17eee8fa92379cf6825ce1f6d541302f04212ab977deb680e",
+          "id": "saas-support-policy-attack-007"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "8c7f5866baf190f7a56ac40f2353ea43072d0d7e99f9561cc8db7c95fb5ec5bc",
+          "id": "telecom-voice-flow-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1c904ecf6ea1c95f8980d94ab77ad801cf3f58ebfd1932d22baf49cdab508470",
+          "id": "telecom-service-action-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "8f7bf5d320eb69d845af1e4e74a88c3381e3ce023a1bae48b1d380536a5e8c77",
+          "id": "telecom-audio-action-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c4331f3568a3e5af0cb9d61a505f1929fd1d75815270b2faead933bf28499e3f",
+          "id": "telecom-robustness-repair-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7e2b2830a7d144571ab316ea10adbabfe2ca774c72dc37c8fa519a9321b2d5ac",
+          "id": "telecom-policy-attack-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0cf957610e4e6ca348b98605f340ef6c2c08f9ef2072c7fe06f2aaa1b46f9f72",
+          "id": "telecom-voice-flow-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "bd46beca1f1bd3e3c367b5458c50bcd03ffecba8ba3959aa9ad41cc6f4ce8756",
+          "id": "telecom-service-action-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a25d5ea71787417843eef28a3ea103ae40123b231d0ce6a6da4cae51b3ccbbb1",
+          "id": "telecom-audio-action-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1cb8cfd7361f5a36e220ee0929caaa63aa90537cceb7538cd8a6ec6106f3a86f",
+          "id": "telecom-robustness-repair-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "508c18d000f0959194904eff807aba79574c09b526992f8230b7d84289e30b39",
+          "id": "telecom-policy-attack-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "fad361c360a11f05aa04f4a07943c77bc5abaa913f7e57d7d72761d07825da0d",
+          "id": "telecom-voice-flow-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ad8b374f689a9966b1227d0415fe2f894e54bd5030a3ee5115d0ccca656315fc",
+          "id": "telecom-service-action-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "55a1d1a7b4d90b1ca71e710aea2fc1e8ade61364f4fb0d5ed9759b81167177aa",
+          "id": "travel-audio-action-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1826869080ab1b67886371e0065c1dad1a0bc1c89092bb4a2f569a5d090a4f9c",
+          "id": "travel-robustness-repair-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "11edfd5d16aef3505db51732a99f196880c2049e9ef184ce6f462c43294c61ee",
+          "id": "travel-policy-attack-002"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "805edc89c226fd5cbd1e79f2d5926a3feb130510c44270eee6cc9e7883998b56",
+          "id": "travel-voice-flow-003"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e26cccf2b70dac97f7f6dd720bbcae1a421c5139f56bb4e75ef1b9633ed85538",
+          "id": "travel-service-action-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0fa42666e5a372838cfed77ce2b5acf323889f4fc333d33afe09e8095339612e",
+          "id": "travel-audio-action-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "dca800ad8654ab9f16e616936a119aea47161dde3646d19836e3a9495aa2aeb8",
+          "id": "travel-robustness-repair-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0b6f47b1685280675936db66f62ec498f5b217f45be0668e5adf978b72f78f8c",
+          "id": "travel-policy-attack-004"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4501e9a30032422ed5c3df1c926f0699d719cf44d695ec3a0cec4541f43b7e7a",
+          "id": "travel-voice-flow-005"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1b925aee7ec523361c9f837d26003016c5a906f1a2867ef7122ce588dbc35e36",
+          "id": "travel-service-action-007"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "00c2c6ca948ec7cd83d0f3761cd7e37c3d4029e05a258edc34f6335f39df2709",
+          "id": "travel-audio-action-006"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "3f35734a42f3933aca435256f885687dd53d2928ae287d9c85beb40a578e2217",
+          "id": "travel-robustness-repair-006"
+        }
+      ],
+      "audio_variant_commitments": [
+        {
+          "kind": "audio_variant",
+          "sha256": "74df39fa2b16440604d4e8857c0becf7a95e3ef7c2d174e23c796a5ce47d3982",
+          "id": "retail-refund-damaged-item-001-clean-us-female"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "dfba0e74a9a6881b1644b333a5b120d49aa059cf1530679409b7b42c094fb139",
+          "id": "retail-refund-damaged-item-001-noisy-cafe"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "91a042a51ad156c5d05607b31a96169e792794dbe0513a360e78e74f24c6183d",
+          "id": "travel-rebook-missed-connection-001-interruption"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "ce52a58c2045604e53d9624910f4df4d377f27229e47d6cc6539f21f164ef2e3",
+          "id": "retail-prompt-injection-refund-001-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "2cf6d6799eb8a4f403e9c63fc1b2a89867f9e28484f19bbbd824ad7f24bf9112",
+          "id": "fintech-social-engineering-transfer-001-urgent-authority"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "2c6338c12ee42daa3c331e72cdc083c60830b9a5dd2fd8d1deab50664fdde631",
+          "id": "healthcare-phi-extraction-001-doctor-claim"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "efbf3af19d10c3ee6c8bac0f8db77871766e165a8eeed34b97691b2213eb2653",
+          "id": "saas-ceo-impersonation-mfa-001-threat"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "cb6fa0f22ab94decaac9bc89812c9cd65c7d1b4547bc9dec082624adc8893522",
+          "id": "utility-outage-audio-report-001-clean-us-female"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "d42244aba9a1cd16a08b1cdd43a040773580f4fdde8fe4bedb2fe2cf1a2994ae",
+          "id": "telecom-noisy-address-correction-001-street-noise"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "164b74f6762c27018a1ff8f6c89c092ba84fa8b84ecd12bd7e4e75816187f0a2",
+          "id": "travel-voice-voucher-reissue-001-clean-us-female"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "760c3327e52f806a5bd8fe7630037c55fa907bfdd9907bc1aa0bf9925d195373",
+          "id": "healthcare-admin-audio-action-001-clean-us"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "f44756568d044c2798ff8e2e5ab5f9a923a0f8c84a69081d5cc0e4732ffa4e72",
+          "id": "retail-audio-action-001-clean-us"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "69afbd1e7020301586babceffb6449d2741af25bed810cab30b1346be1395ce2",
+          "id": "retail-robustness-repair-001-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "5166d866b823e876175fcbd133029990a18299a0b259b98a06a0de6bccc487b5",
+          "id": "retail-policy-attack-002-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "8acf87fd9c99db19ab5f207cb9ebc711457e42a0c4156e36adb5588ec727003e",
+          "id": "saas-support-voice-flow-001-voice-flow"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "3dcce0fd8d54ac79eafba9cf8bdc875faee836698de56efe86bbc78fe97c5744",
+          "id": "healthcare-admin-robustness-repair-008-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "02e939c0963d189cd92daf09720be4869778efe71fea6b359866116e3ca9d4fa",
+          "id": "retail-policy-attack-003-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "844243da7f4ac5c05b099d042a660508548931f437bff86851924fc94a133a3f",
+          "id": "retail-robustness-repair-002-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "7ff415023c05f5c0f4f0ee98b8cd5b18fcf6da0fb05ad1508c1604bd091edf38",
+          "id": "retail-policy-attack-004-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "94c28bc1199b6553a7d3c0282af04ca321f156b2e0e9ed10263bdbc799d7e5f9",
+          "id": "retail-robustness-repair-003-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "1eb59d1ef395cac3bbc025142d45e7f5e7d1890b0eec2e8fd63ee5cfb50c6637",
+          "id": "retail-policy-attack-005-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "d22fe9077f6d8e05cd1e9b831ba57942bfb76fc10c3dcaf66fe07cc8dd69f095",
+          "id": "retail-robustness-repair-004-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "0219ed1a45698227fd03de81086ac06aa8b93eca6a484d85d3a3e3beed16718c",
+          "id": "retail-policy-attack-006-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "4af909611fcedd9d4fc591e8a9a0cc8f4bc388351bb870f4f8ade170cccc046b",
+          "id": "retail-robustness-repair-005-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "40171e768dac0b950d24525058ea60a9e3fcf3f3fdf20d3f6528f4c8c11c1f90",
+          "id": "retail-policy-attack-007-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "5104e605bd0ee36cd906bff7b4eab8e84ae347b98799e6f0c22d12bfcfa00723",
+          "id": "retail-robustness-repair-006-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "03ae295c03c5e3e806c62a0de85292386e6aa022ef255315d46fd9a6367059b4",
+          "id": "retail-policy-attack-008-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "c92ddb6cb28c428815ea25d6435b00871a4642d99e85973a9da7de07ebc516a9",
+          "id": "retail-robustness-repair-007-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "33092e78a18905caf508197f7231d286bf16221449ff7ff2194301e9041107c1",
+          "id": "saas-support-policy-attack-002-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "a08812314777a8df3528f1fc77b93dbec072aba79dd31a8c04ebcb3c28b4b342",
+          "id": "saas-support-robustness-repair-002-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "7f61e50b12b22d7931ec236153d186f15e838c5b058acb8c86fb6c1089da72f7",
+          "id": "saas-support-policy-attack-003-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "9dba75c3262166585e4cc23acf681fbb1b0578b0752fdb2f720e079da3f9c62c",
+          "id": "saas-support-voice-flow-003-voice-flow"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "69d63917602c7b31ec4328cdc6989c3307729e1396ddd6e367e9121874b9ea74",
+          "id": "saas-support-service-action-003-clean-us"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6c11f4aa5b028407c3041f70caf824ef5f38540795ef1c5a5e051351f53c50dc",
+          "id": "saas-support-audio-action-004-clean-us"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "d8098f2686e72d46fe0ee5e0999847110e1be4bcc10cbc4ff26c1906f4bec47c",
+          "id": "saas-support-robustness-repair-004-noise-repair"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "cddd105ae83e2f1499a10d407a86dc8db84e83dc1f3195e4ef6dd9ca0b3c3fc1",
+          "id": "saas-support-policy-attack-005-spoken-attack"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6107eda609a9ede7c7af274eb821eba30fd5c2be0faaacb716b4f3f29f4c0cb0",
+          "id": "saas-support-voice-flow-005-voice-flow"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "778b3c6751396fda208aed6db9f7b517b9286bfe388ca143e863ddda368c9d62",
+          "id": "saas-support-service-action-005-clean-us"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "e8c839ccec2e78a2251d2694d8332160f2a3d63be8a92c467d32c3044fde74bc",
+          "id": "saas-support-audio-action-006-clean-us"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "197c3c33676e1174328ffaa660ab3473e78bdfe8299096f89bbe09eeaf3aa836",
+          "id": "saas-support-robustness-repair-006-noise-repair"
+        }
+      ]
+    },
+    "sealed_test": {
+      "num_scenarios": 121,
+      "num_audio_variants": 80,
+      "scenario_commitments": [
+        {
+          "kind": "scenario",
+          "sha256": "f508f53f5431546046e7f72532ec2fa1272e50e594cf0debdf854c82806594f8"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "2d4effa6d49916fc1e16e1341e95ea8f2d3c97c41c308c9e08c3f8ac7b35592d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "765111547b5fee0e37a5e8cb3e84d8771512fdd15b1b5ee07d7753f9f9e66b36"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0e28303cee4f2ea8b9a705e7ad1ff291420f29c2c2aaf82b49a5fe4aae5c358d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d04454e1051120080f21bd69904610f4433fbfc11d274c93c551c8a8c2aa2479"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a0b3a4d440afaa2429505a7fc8115e7d212aa93a8d851b12c6c5f285b6cb2f1a"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a878f8d5b1ba06d173456f3777db332efae81c0b00f0125f8118121074cc5ecc"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "43653f8f77c0557985711902d416b1c6b756842d8046634996ee03d40369407a"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "41abec59b8661c286c2fa0aaf5f39ad7c7c54522d418d8f795461b81384c7553"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "018c620861d4172bb6b5d586e8b95941e1e48861b3be539c84fe61d74e765f4e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ecaaf861bd82740e4954e2467bfa9ed3fab9aafa4f38d5c0b4a5910d3980b8eb"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "3b021e40609435bcc97a0a3464119ba4444ef42e35b1eab2488817137a5d9ef0"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "9ede1ed9db9b0146062599635879a6af9c95adc6b1cf1c4f5812a646777cfb81"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "883ec2cef259422813de7c319c01c392fc99e794dd0514f63ac1ca2c0a93ecde"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "6271bce4a35aed946cf6332405986ba6243af716ec09c002a8559bf4a7653c43"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "da6b1970203b99c2562fa2d8c96dbdb671019b962def87420e35c2d25fded117"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "3b5f9315462c9ca25e90302a74d07f6139ef5bb63cf26919625f201488d0042e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0fcde15c1f30dad879a65c734874f8ee5ef289e4c483345a6fac697cc304320d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d227e92b3aaed01a6feaca2b0992bdf50fd99d14d012235e7bef91062e36ea1f"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b50feb1c610e3de14e62456114f466c17ef7e75ba9fdfa9b53094274f6697e63"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "303de1be36ae9375c4f4e357cb0256b0eac4822dadccbaddf601cb007e4a440e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "5af95fadce98db8b1821c04284054c23214554d490920a0fb3fbddea4542d276"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "17fe77ccea3061ea956e7bf4c178b5b6779cbdf984fc2c5d93585b1292dc352e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "02222207631c98c7c849bed1a805505d12b658c9ebc2fc8975d4b1ce29b32fb9"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "98a7033a6935d92edf00fa78d470fa1ab18755fff2ac526def04a12464dc3d0c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a0374f022c30e8d1c248106a49aa49fe5b7545d500ee6254017945ab65ab82b0"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "18cc52f504469e7c5051719a77d7ec60d3fcc4fa02a40a2c30b1c9b1f3dda3c2"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "054b5e5ded30606cf4227043050107411f2d70eea8a82f8d48ac77c83af9f66b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "5a2764159f5fa514037cae13887c9719ea607fe6163715f339e3d4983aa997f7"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "9266fac70b282b6e432acf68cf6a60751aab6b12510ea7942188417ed90a4b70"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "997a391aee72d527672123d715217418a0494504905b4bd6ac7ac2c6eb73bb00"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1d89f98c29202c9e0f5cbddcb731399c583f70dcffb6b6b263096a86b4832cbd"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0d3bd08d65abcaceef3766af0a375b3a95d82cd6a6a253b8f1863bbe3a9d363b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e06d36a7d618568a6e80f6419661194a5c1c0f5ae141092d364c824f9d2a3dbb"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a8158987cb8670f75533c81ad340b47c326efbb5a3061698fd6e97fca5e15c1c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "139ecb30f4b5da1d93011dec5e1c8ddb53d82126ee8482345c318fc75f1a7fbd"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1fd6f0998a448e77af4aff2368ecb8677216da099d3db74cecc22a2adf82ef8e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ce2e1dbb21f1c9c9175a1ba962a52b7a008b13581e8e5d34ad36c0fe9def123c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7ba2a53dadcb36c2e013426348356de4beb2a18345dc022dbdec857126c27516"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b0a6658ab9dc5326e9c707e13807351de4cde54805fd7e9cd39625e48ea23712"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4024f88b62087543bbe1cefd3f955309e2a9845665a1d3ade20898ec1f0eee12"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "852574d6306cc3f7b269f54b99b42ff91cb7001f73777c3eb636eeffa814139c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4507fea4cdc99a762ff7aa53c80031583ec4a277bffacc97e107cd4978cdfeb7"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d56bb76ed6151fb0f3cd03da18a1748b42ab61461a292ef9b6ec93fda54b360b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d1ec1faae188876043d8e0c775bcc1a0033869852bbd217eba3d22814a83b281"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "6c474b94e46d389cefa0a233bb02cdcb4ce2bbccb97f0f88c420f6edc52ceb77"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "db2691577b592c75c89945177fd0b185c0000fe2bf21f26aa6af6c578458b7ed"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "32e02f1fdb966b8697483c10359f4b55bcd09a75aacad3ec5cdf6ec865d0cfed"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "6f2151d43141a14dd21fcb81d5e99a3a213199fdca3e752c60c8913c8d22936c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "aaff751ee5eccec1cd0441113c887be94c789be74562ae88a74dba0990b8751c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "89a06355e2e2e189aae5e96d8db9a82a3c7cc9ffe09731454aeb3dc7cad3d4a1"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e44075b2ab865ac9c4ecdd17609a67f4786db53c7d703485da3e9d239ea80fca"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "57277d0b2d6f7ef768445414a9bf2ae356ef42b7864b49205658efbe2521fa34"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e185a32fba52a58d65cd6479a7900d01cad1ff35e21cca522c5c3621e3645260"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0fe6db5db93e9bc0aab2b6980b7ed17d95d3cd19bf67bb7b919d970ea1c75848"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "d72fdf9fcbb506c49fab3a6a1348f06fb735d5fa97959f678cb739fefc1575f5"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1a8b471966552c047d2f9ea524ab675e4fedf223a92484bac82084debd5e04f4"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0491275671b098423b02c251ccb8497cd5289676b60f7f21378ff97c90fbbe23"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "db89bde85bfee390a6c3c573d6d8e8f3d8c403eef317e66327e97ea3e1d9c40e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "0c1fbacbc94d2ec407f599528ae995bc912f659b7f18a4c6ecd0097f4cc85a7c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a60552a909c80100cbdd3de7a590b511230f79f9ee23069ed34175cbbf5634fb"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c76d6c4738b494978272cfd8dfe4d722d38c28019e6aab8c42b84e2aeeff79db"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "3fcdf5f9d9e1886c0dee97b7833e8650c5d7288e6d190429decf39b9ee402947"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "609fefab07555e0dabd197080e8cab7a795425dc8a5b548c6b6809a0815deb5a"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "46c3561fce3d93653be17b0c4cbc384d1f85cb382edb4131a7156658b9499f8f"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "28313216486fe18266ddaf28e3420c2cbcef404e85c63cb74e91b2324f6d236f"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "5dcfb8a451ca9c182bd127edfc2809bd7291551e782b40b9a4bd96142eccb1a2"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4e4451485c68cffa4ee620d6b9402ad0b85c18ec542678dd522dbfc42b0c828e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "36b38620875941bc3654c7506cecdfbcb2e142fa7de1f2f58722441df11bf6ae"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c55db5e2c864aa9349fc393a42662ebca9d091963ab5a80201fc2a4d09094fa6"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "54faac39c6b116946b55bb4667f114e6b7ce5466c34ed4bef3d1ec82e8bb9d7c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "f2c495e3195ac9beb8a266b25b39e372185ebc21ce5b720cd527742f99a794f9"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ec88b1654db8443536f43f03d140c0aa4c14a640eb7f187490c527400fb27746"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "84be802b2bfe04471c8b39f35c746768b4c071b0cd465b1ce9e855496a978c4e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "580df6b402860b95a8b5e60e298fc9495c0aac0189ac152c3bd460730e760e6d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "4aef4b051636b9cf0d900ecdad27da8fda89ec05b70276d3084e23e75b1ba79d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "dbd64fc7afa718d60f6e27d8fb68ad8430e2f81618b2cbb9e51c0f1400e47d20"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "266a5b9b090aa6af6be0d406509050556f26729764b3c7e534cfeeabe4848964"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "fca38e1b9d71f00e7a9b872793b091e9c8f389731d88f0ad30891edd98ae9393"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "66cf92f129669d3344b46cc0eca81d16d99b61264fc4715235eb88996b02c87d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "3d592e86fd857c9b28e82d0cb246603c3b1a1a5971a4e67700eb03bc6bba8178"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "74b15a63ae0ec05f5dc321cd9fc26ab8f0f18b075bab168a28b8b5d0df16af48"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "bff46ad6d1c87e7156b50dba449176ecf485c5b8ebc6930b27dec02caea63fc3"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "8af324291fe3d23869ba40cf05699ea74a64ea20b6b97efc14276b6b94116fd5"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "29741ef9d5a37da99cf71b3c2029c28e2b4f46354d8ae08548d9308cb2bf198d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "893844359322639e8707d5beb805b9fee2594179e1a4b1221d0a0c997fd0273c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1e04b477c17b33f79f8bef5163b691b1b98b25651df772cbda846def61f597cb"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "185ac34ba975bad4d34552a882869c441921461e9c226794ee8dab3194599bb2"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "2bb910b8a190977a9cbe19e0d2e6228ed2aba16dc82898462bc3c4f1fb7ffeab"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "eeaafdbf8140769d833f6df68ef7519d866f39bc676d9da7dc5fb9dd39269fbd"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "9df06ce4ce4c4a175fbee4e14cfeffa58d93543848e42411b789c172e4e7b631"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "f613d9b2e3098d0d77095a5212dd532bc4ab0fb31b9a9b1bdb3b23da63ded475"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e0b2290d4c0c78aeaa2dd18f0f4e48a7a20a219c74fa0a10f5d31c636989904b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "07c8f55e025200808d4e7448e0384fdd823906bd33c2c21da5e6b1c31acc3154"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "9ac3c28d6e96fcf512d92a6454b9d2ed4d3f580b4be76772737d6c00c3441fd4"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "887eddcb6807808cb70f71945981495820385ca8d31cbf4b383764bc1c1ddebd"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c17ee1c833d0aa8a3a5a3642c753341985169dddf8c4bc12498a79595ab54f73"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "49dd571252f5d4a60e4ecd59f41b0a225a69ce63fea91db0c42f0ccbe7f6890d"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "42409c44dbf51a03f8d8a97f88ed5cd0638308daf51fd8fdf1307e5697173573"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "96a0592b80f5b045e6a5223c333e152dc37230456530b8c88508984c2b024b3c"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b61e03d434eddf50c66cead8a9dd41bb3cf90f5bf4fce605d5ab89dbe5bf1f1a"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b7e32b2b915a2f24ea96bdc76405b8012392751693171bc5c45edcb941db5565"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "3617e0e30658936f30d2ed19b5094b278f26d455785165e3e6a661b4daee5072"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "70be39e234cb44cd11d82bca47e5075b74bde1d32f203e13b62c93b992fea5ae"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "eb92dbac8d635299036a2520a07992437ec3e2f941915289c3de75ec22495c3e"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1b512a68421ae0edfb515545d68bf36c7485b4500c60941da9d1a4646568341a"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "39f8da8fdd5d08344e7febde96182ebd1b7a839319c6e05c802c8e49923463fc"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "c4e18d3be87525ba1b4965e7d532e2b817cadd7743b3e96f05ff8b09fcb86bac"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "f01de6d7a6226f478341d213c4289ccbbea725d529d484fd6c9411751fdf7e34"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "1ce36647159db876f1bd80381ac2040c3028581305db527c6aaca99fb755418b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "855dbc61e79364dbbd72702886a9a4ed679314d9f563c70f5e5c5cc055ff36e5"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a2aaa50988922d423849b0ef6f922765aad840d9d1ce629718316e8b26f50143"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "6517a5e8779bec35212e6b958883be0d023d02bbff91b09fa792eaef0fbbe760"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "e4eb4dac86ea9cbc7c1bfd23f8851069f992fa8bb1f0b740345fd1dcec080038"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "28f0d0eda7e30367899ca2d8a20ebb134c089361ed971f263d90b6d429790b1b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "a323d07c8b87f742979a911830f1abafb2fa2edcb68b78a39369508ef4cfe8d2"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "7c5c6cf4c7ecb690605ee429a2e9703fef03f7cd822590022d0c6a691108114b"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "b8d0e5c3c3e1aabb286182755802f22b2b2bd234c4b7bfb65efeff1549746922"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "2c0c85eed9cfd0070420e0bc5d3ea3a17437c91715aff12b5f1f81dfb21bd789"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "edef1f906cb829630cef67c25e9320cf841b23df555d9a132e31ab77f9d72cb5"
+        },
+        {
+          "kind": "scenario",
+          "sha256": "ac90bed4608a5e2801e5a441e366d3111a21df7bcad2f7396cfa93a043b4eda3"
+        }
+      ],
+      "audio_variant_commitments": [
+        {
+          "kind": "audio_variant",
+          "sha256": "7cd6ae4933e567e71f70b02d68fc2792a2c784b7bb3f4d9c7c3c419abd9db5c0"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "167d6ce35f3c5036c59d92098a0d7a4c61301d25b95934b3e375e8e398d1f662"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "860cddbbfe0b6e1484e88c1ccc9327bdf347017ff04d25a5c11d3c4de387a664"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "3893d0971961245d15f3681d04cd80a2360a154bd658f77ca8cd1d1a9110240c"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "3513c89f4437dbb4860f71e0b62b2b210eb7240d89ae35847b251ecee624efb0"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "d721a8b5074f302bc1db250fa8f000eea1d435fc66c9fbb9843c070d708b759c"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "9c848503ca59258a3dea933fac34a367c21852a3062a1c74449e121cf8a2ba0b"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "f1c3f00b27adb48677a1e880d0520c52f935ec9a51a3dee2b5853f016f4a787f"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "99f1d79201bc25d822f69fa2d2a23dc59eb3dad335a6fa70c30a2f919f3dfe58"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "ce6b0b507576a4ed3b062fd756d9ace14e0da7b30625e597c101762cff16368e"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "0b54dac03b527b602e7ed6df40b2d4fa7db1215105889e4911e82b5f856630fa"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "c2bff9b5cb0d478b4eef0aac982168ba0f1fc187389d051d8f67845aee3a96c2"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "4a0c2ca3aaa8e21cddabc2825ba379c2cf7af2badcba63031d77f6ef819cce3f"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "9da253c70e7bd8d3010ec22ac70f3f53a5b5f2957923e788beb3ae2984c4f2bc"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "b7522b684ca194e5024483cfbde943f00b7bac97384f97899fdbeced6f296c61"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "91b603282bc1f297fbe47e4a052130e45e0426d5d9004250eb63ab9b3f05f371"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "beebd2320b03649b5560cddd37cd37cbddeebcf8bc0f2464b479cb70893615e3"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "2f2b615c98b4490f39733e650d346f0cf9537ab6bcd7a235b3965692763cd538"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "a916db6f1da7129fcc1efd03132b0c0738f96b2d47f683b488e101759e9f7e6d"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "52886cb944b1abe6262970ebb96d1eefe6242227c5bbcf1bf6a6117aa4da593e"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "ed6653fb8432732fe5a316fef154625d7f420d39b6456ae551e0e3d21156025d"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "759a2ca34507b48f8c295b1deb09dbfc8e6b54b834ff3e2d21741c0988704edc"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "4be85302b7940ca6fa7c7482d80c6488465f2fe69aa09844c7ec71fe6b3166ce"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6a3f27d9567fa280703259931b4f293d515a6c6a1b0dc6a58d7303ae73cb67b4"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6d7329d4b406df229da149dc0345ea4facd25df6ec79b1e8b817317832c58764"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "52eae2900d4370a02a3bc8ed8094b71efe7551d628639780fd387ef2f4555b20"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "810ef437408eb64bf7adc281eb84a93b5531eab41c5497600017f3f5dffe3d97"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "7a29e5927e6dba2dec190e3438588e4d7ab2bac5fbfbbb4240f1f9b8f7c584b0"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "a91ee8411325bbc502f95f6f3eb96c54f904254dbeccb4ef8ab00184aba2b402"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "24abd25ab99e05793a331cf346cdcf5fb07a1aed640f37a7d6b31b9c86f8f957"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "49930d0ac5ed7884d6d74e52c0028951ca1f7b482c1beaa68958aea167dd338f"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "c96cfadec1eb27ce17227e89e67ae8cd41169bd13a7318731f3617cbdddd3162"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "d1e4f272f297a27f611c87c4550becbaab4842a9ddb914d723d7b28545d5ec32"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "5eb56cf34164f0d6a5a012316ceffa1f0d00835f41c27bcef4da82bb81894534"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "54a16e748da4acbe10793a9171f7101755aa7ca20c2c9c0d73717c836bb04ab5"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "1d82cc49305131eaa5fd6ac72a1f9bcbfc52b9863041a380240271eedb39d939"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "a1f9be2ea6dd1e2191de345e1884c04bfd309636a3ca20aacdf2b40788da410b"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6817754a9a8300073fb2a9948ec284efbb2b52236f69edd590b7e8ebaf0e55a3"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "0100aedd325c8ceef13850fbcf971dd57727c2aaf934f93bfe444d468db1a2a6"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "76a0ce21ba9e2428e97fe97230c4296e339ce5db5b8801009ab9b579ef198344"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "675e33c628b7c0e951d413b9e4deaeed4823d7606b70c2ea6b2c2adf1bc019f3"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "04337e57392794360a05edc43b986bd5d7ecd2dad42b339aacc817dbd7c6b418"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "a4c1efdb4d2a263e365c80f420e0a607d59f9e90163927e3e6f2860c6fbc428f"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "88abdd53850cb047d1e689c9b8c5164ddf4d991992c50f089e5a04c84b2be907"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "36ffc015b58dfa45450b80e0bf0dd27dc5a3ffbd34836ee0f4e6c1a647c29ff4"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "e5788eca10d89a5f2dc08da360e350746cb601e57edc514e72e81650baddda0a"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "82345df94d9b727f81e220cc3e862c3fd5d191a686ce9018842bd13303d20e93"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "629d517a12e857d8bc68552d9b1b7cf7eafb73696245fea45cdeafc7193642a4"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "1d1937dd2a5c4ab39822a01422b5b3fa7131e93f57a76281ab173564a0a0bb20"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "81c753e465e54ff4ab5498bc5461564d106be00796c2e3ee0da337faa848c6ca"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "140bfb886d68e0131b6b2def672b68bfffe21118fca3c15a2c313a14c57480c9"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "087d5779419fb621dee6c23ec3e0c4461062f5d8977aceb3f40758dd72d225f5"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "76eb27b1c99f289204e57ed474934c1c1141f6e5bf803a1f370794fce0299c75"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "56718ef2e7973f776b9670d911bb35078cefd8bf71edfbbb55fce73e5b409262"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "98072e515fddc1f00fdb5a03e9b8de6e650c2b0799eac494e5b5c440825343bf"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "af596a6c2506ad02ed407ff08f24fc13035d8e03c06195d610ad6a5e159cbbad"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "85e627d8e7f1ab733aa36f68b10335bb3aff91d7f161301f63ebf00fc61b8208"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "08b6c463c5410fc97aa4ae59559a0a9db0573fc61c798c7ac3ae096b4ec718b4"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "b3c74c334432b5e482619ae9c3e1c210766c85704c55354bb4209163c2a36b0f"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "cc09b0280246a47d0cb9def1e75167b8d6a1eddbb0e0e8284806126a2c781e32"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "26f5d09d08031bc71727f98258c01313c3cf609b13c66e3cfd6835dacae83180"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "343302090f7817a3a400d94100eae8f8be59f53e8c55c3d547d852b636089594"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "09181c434f4f1585b1f2d311d96bd2f180e438915eadab098ab01893c42ac778"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "8125f30d16548f09e76ad674006ac2049dfa92036449f88c651c65ae04b0e9ac"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "64e42912f5ab1fe3397b07cd79f62a0856a8b816963f094af51fa0ce773ab28f"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "c1d606eb62c013466dc269ae579683601dd2c9599ed1871b4e5e9e29ecda3c54"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "cec8b054a990fcaf304a74491d934774651ac626e72fd91815afacb57f65f704"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "cd6164521b7207def97f1d9c1c11d8ac957f82ed711ba75a680f4f0cc07ce089"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6da9080d28c0c011f4ddfcc200228bd2f8939dc8ac9fbf39211e3023256e4d1e"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "2a0fd699414e36d147bf76175a65893de1b9b2cf196e83a92d3b181be81a24bd"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "989e210dac391b8cf3018ee83bf3241fafa4716e6753594654b2fcc71c192c5d"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "b88995096bd08ac9a1cbd9bc984b15bc4a98014fd05058491850cd10bd7166cf"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "488605dafaca4debd91e22b4eddfa8cca99112b1fff54293b2c78cc0133ea576"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "112f16171a9bab1cd6ec39602df210f7fae8b572b457acf18a2263a3a5782f39"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "5b70eb426d7720128261289f992eac7d4e7df565c68a2ed44a3f8bce446a60a7"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "c1687b08967c7f51fe4396c6979bf0e9cd829017dd378e2b723bde13dcc12b8a"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "8f9dc24cf339c5d1a89e3bde2b472b42f6e8c18926ea81679673403703e52b28"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "6ea9610a3d4529cd079a9d9ae907369e02db2a4dfe83fd1ccf5866aae39d198b"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "b19e561d7c97306f044ac41115e9c1912919220b824bb8bf9ad10e9215b275e6"
+        },
+        {
+          "kind": "audio_variant",
+          "sha256": "221213033f1f89bdc7cb2f4bc2f6c4ac63a9bc22f31deac00feb594b4efeaa39"
+        }
+      ]
+    }
+  },
+  "root_hash": "82140199ef36926759c7b5923e6fd7f5046fc98dfd6224c24cc3d6428087c14f"
+}

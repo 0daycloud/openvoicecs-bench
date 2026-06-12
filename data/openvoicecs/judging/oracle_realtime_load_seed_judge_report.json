@@ -1,0 +1,6102 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Judge Report",
+  "generated_at": "2026-06-11",
+  "source_benchmark": "OpenVoiceCS-Realtime-Load",
+  "source_benchmark_version": "0.1.0",
+  "model_metadata": {
+    "display_name": "oracle",
+    "agent": "oracle",
+    "provider": "reference",
+    "model_id": "oracle-agent-v0.1",
+    "pricing_profile_id": "reference-zero-v0.1",
+    "pricing_snapshot_date": "2026-06-11",
+    "pipeline_type": "cascaded",
+    "input_modality": "text",
+    "transport": "in_process"
+  },
+  "rubric": {
+    "name": "OpenVoiceCS Judge Rubric",
+    "version": "0.1.0",
+    "dimension_weights": {
+      "empathy": 0.2,
+      "clarity": 0.2,
+      "naturalness": 0.15,
+      "professionalism": 0.15,
+      "resolution_communication": 0.2,
+      "channel_fit": 0.1
+    },
+    "scale": {
+      "min": 1,
+      "max": 5,
+      "anchor": {
+        "1": "Unacceptable for a customer-service deployment.",
+        "2": "Materially flawed; would require review or correction.",
+        "3": "Adequate but noticeably imperfect.",
+        "4": "Good production-quality response with minor issues only.",
+        "5": "Excellent response for the scenario and channel."
+      }
+    }
+  },
+  "num_annotations": 2412,
+  "num_items": 402,
+  "num_raters": 2,
+  "coverage": {
+    "minimum_raters_per_item": 2,
+    "items_meeting_minimum_raters": 402,
+    "items_below_minimum_raters": []
+  },
+  "overall_subjective_score": 1.0,
+  "dimension_scores": {
+    "empathy": 5.0,
+    "clarity": 5.0,
+    "naturalness": 5.0,
+    "professionalism": 5.0,
+    "resolution_communication": 5.0,
+    "channel_fit": 5.0
+  },
+  "agreement": {
+    "method": "krippendorff_alpha_interval",
+    "overall": 1.0,
+    "by_dimension": {
+      "empathy": 1.0,
+      "clarity": 1.0,
+      "naturalness": 1.0,
+      "professionalism": 1.0,
+      "resolution_communication": 1.0,
+      "channel_fit": 1.0
+    },
+    "minimum_alpha_for_release": 0.67
+  },
+  "items": [
+    {
+      "scenario_id": "fintech-fraud-card-replacement-001",
+      "item_id": "fintech-fraud-card-replacement-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-fraud-card-replacement-001",
+      "item_id": "fintech-fraud-card-replacement-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-audio-action-001",
+      "item_id": "fintech-sandbox-audio-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-audio-action-001",
+      "item_id": "fintech-sandbox-audio-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-001",
+      "item_id": "fintech-sandbox-policy-attack-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-001",
+      "item_id": "fintech-sandbox-policy-attack-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-002",
+      "item_id": "fintech-sandbox-policy-attack-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-002",
+      "item_id": "fintech-sandbox-policy-attack-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-003",
+      "item_id": "fintech-sandbox-policy-attack-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-policy-attack-003",
+      "item_id": "fintech-sandbox-policy-attack-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-001",
+      "item_id": "fintech-sandbox-robustness-repair-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-001",
+      "item_id": "fintech-sandbox-robustness-repair-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-002",
+      "item_id": "fintech-sandbox-robustness-repair-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-002",
+      "item_id": "fintech-sandbox-robustness-repair-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-003",
+      "item_id": "fintech-sandbox-robustness-repair-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-003",
+      "item_id": "fintech-sandbox-robustness-repair-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-004",
+      "item_id": "fintech-sandbox-robustness-repair-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-004",
+      "item_id": "fintech-sandbox-robustness-repair-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-005",
+      "item_id": "fintech-sandbox-robustness-repair-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-005",
+      "item_id": "fintech-sandbox-robustness-repair-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-006",
+      "item_id": "fintech-sandbox-robustness-repair-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-006",
+      "item_id": "fintech-sandbox-robustness-repair-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-007",
+      "item_id": "fintech-sandbox-robustness-repair-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-007",
+      "item_id": "fintech-sandbox-robustness-repair-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-008",
+      "item_id": "fintech-sandbox-robustness-repair-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-008",
+      "item_id": "fintech-sandbox-robustness-repair-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-009",
+      "item_id": "fintech-sandbox-robustness-repair-009:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-009",
+      "item_id": "fintech-sandbox-robustness-repair-009:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-010",
+      "item_id": "fintech-sandbox-robustness-repair-010:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-robustness-repair-010",
+      "item_id": "fintech-sandbox-robustness-repair-010:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-001",
+      "item_id": "fintech-sandbox-service-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-001",
+      "item_id": "fintech-sandbox-service-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-002",
+      "item_id": "fintech-sandbox-service-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-002",
+      "item_id": "fintech-sandbox-service-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-003",
+      "item_id": "fintech-sandbox-service-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-003",
+      "item_id": "fintech-sandbox-service-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-004",
+      "item_id": "fintech-sandbox-service-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-004",
+      "item_id": "fintech-sandbox-service-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-005",
+      "item_id": "fintech-sandbox-service-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-005",
+      "item_id": "fintech-sandbox-service-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-006",
+      "item_id": "fintech-sandbox-service-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-006",
+      "item_id": "fintech-sandbox-service-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-007",
+      "item_id": "fintech-sandbox-service-action-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-007",
+      "item_id": "fintech-sandbox-service-action-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-008",
+      "item_id": "fintech-sandbox-service-action-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-008",
+      "item_id": "fintech-sandbox-service-action-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-009",
+      "item_id": "fintech-sandbox-service-action-009:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-009",
+      "item_id": "fintech-sandbox-service-action-009:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-010",
+      "item_id": "fintech-sandbox-service-action-010:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-010",
+      "item_id": "fintech-sandbox-service-action-010:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-011",
+      "item_id": "fintech-sandbox-service-action-011:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-011",
+      "item_id": "fintech-sandbox-service-action-011:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-012",
+      "item_id": "fintech-sandbox-service-action-012:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-012",
+      "item_id": "fintech-sandbox-service-action-012:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-013",
+      "item_id": "fintech-sandbox-service-action-013:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-013",
+      "item_id": "fintech-sandbox-service-action-013:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-014",
+      "item_id": "fintech-sandbox-service-action-014:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-014",
+      "item_id": "fintech-sandbox-service-action-014:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-015",
+      "item_id": "fintech-sandbox-service-action-015:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-015",
+      "item_id": "fintech-sandbox-service-action-015:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-016",
+      "item_id": "fintech-sandbox-service-action-016:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-016",
+      "item_id": "fintech-sandbox-service-action-016:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-017",
+      "item_id": "fintech-sandbox-service-action-017:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-sandbox-service-action-017",
+      "item_id": "fintech-sandbox-service-action-017:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-social-engineering-transfer-001",
+      "item_id": "fintech-social-engineering-transfer-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-social-engineering-transfer-001",
+      "item_id": "fintech-social-engineering-transfer-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-001",
+      "item_id": "healthcare-admin-audio-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-001",
+      "item_id": "healthcare-admin-audio-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-002",
+      "item_id": "healthcare-admin-audio-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-002",
+      "item_id": "healthcare-admin-audio-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-003",
+      "item_id": "healthcare-admin-audio-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-003",
+      "item_id": "healthcare-admin-audio-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-004",
+      "item_id": "healthcare-admin-audio-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-004",
+      "item_id": "healthcare-admin-audio-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-005",
+      "item_id": "healthcare-admin-audio-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-005",
+      "item_id": "healthcare-admin-audio-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-006",
+      "item_id": "healthcare-admin-audio-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-006",
+      "item_id": "healthcare-admin-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-007",
+      "item_id": "healthcare-admin-audio-action-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-audio-action-007",
+      "item_id": "healthcare-admin-audio-action-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-001",
+      "item_id": "healthcare-admin-policy-attack-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-001",
+      "item_id": "healthcare-admin-policy-attack-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-002",
+      "item_id": "healthcare-admin-policy-attack-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-002",
+      "item_id": "healthcare-admin-policy-attack-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-003",
+      "item_id": "healthcare-admin-policy-attack-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-003",
+      "item_id": "healthcare-admin-policy-attack-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-004",
+      "item_id": "healthcare-admin-policy-attack-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-004",
+      "item_id": "healthcare-admin-policy-attack-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-005",
+      "item_id": "healthcare-admin-policy-attack-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-005",
+      "item_id": "healthcare-admin-policy-attack-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-006",
+      "item_id": "healthcare-admin-policy-attack-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-006",
+      "item_id": "healthcare-admin-policy-attack-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-007",
+      "item_id": "healthcare-admin-policy-attack-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-policy-attack-007",
+      "item_id": "healthcare-admin-policy-attack-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-001",
+      "item_id": "healthcare-admin-robustness-repair-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-001",
+      "item_id": "healthcare-admin-robustness-repair-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-002",
+      "item_id": "healthcare-admin-robustness-repair-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-002",
+      "item_id": "healthcare-admin-robustness-repair-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-003",
+      "item_id": "healthcare-admin-robustness-repair-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-003",
+      "item_id": "healthcare-admin-robustness-repair-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-004",
+      "item_id": "healthcare-admin-robustness-repair-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-004",
+      "item_id": "healthcare-admin-robustness-repair-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-005",
+      "item_id": "healthcare-admin-robustness-repair-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-005",
+      "item_id": "healthcare-admin-robustness-repair-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-006",
+      "item_id": "healthcare-admin-robustness-repair-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-006",
+      "item_id": "healthcare-admin-robustness-repair-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-007",
+      "item_id": "healthcare-admin-robustness-repair-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-007",
+      "item_id": "healthcare-admin-robustness-repair-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-008",
+      "item_id": "healthcare-admin-robustness-repair-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-robustness-repair-008",
+      "item_id": "healthcare-admin-robustness-repair-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-schedule-refill-001",
+      "item_id": "healthcare-admin-schedule-refill-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-schedule-refill-001",
+      "item_id": "healthcare-admin-schedule-refill-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-001",
+      "item_id": "healthcare-admin-service-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-001",
+      "item_id": "healthcare-admin-service-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-002",
+      "item_id": "healthcare-admin-service-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-002",
+      "item_id": "healthcare-admin-service-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-003",
+      "item_id": "healthcare-admin-service-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-003",
+      "item_id": "healthcare-admin-service-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-004",
+      "item_id": "healthcare-admin-service-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-004",
+      "item_id": "healthcare-admin-service-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-005",
+      "item_id": "healthcare-admin-service-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-005",
+      "item_id": "healthcare-admin-service-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-006",
+      "item_id": "healthcare-admin-service-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-006",
+      "item_id": "healthcare-admin-service-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-007",
+      "item_id": "healthcare-admin-service-action-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-007",
+      "item_id": "healthcare-admin-service-action-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-008",
+      "item_id": "healthcare-admin-service-action-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-008",
+      "item_id": "healthcare-admin-service-action-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-009",
+      "item_id": "healthcare-admin-service-action-009:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-service-action-009",
+      "item_id": "healthcare-admin-service-action-009:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-phi-extraction-001",
+      "item_id": "healthcare-phi-extraction-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-phi-extraction-001",
+      "item_id": "healthcare-phi-extraction-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-001",
+      "item_id": "retail-audio-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-001",
+      "item_id": "retail-audio-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-002",
+      "item_id": "retail-audio-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-002",
+      "item_id": "retail-audio-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-003",
+      "item_id": "retail-audio-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-003",
+      "item_id": "retail-audio-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-004",
+      "item_id": "retail-audio-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-004",
+      "item_id": "retail-audio-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-005",
+      "item_id": "retail-audio-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-005",
+      "item_id": "retail-audio-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-006",
+      "item_id": "retail-audio-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-006",
+      "item_id": "retail-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-007",
+      "item_id": "retail-audio-action-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-007",
+      "item_id": "retail-audio-action-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-008",
+      "item_id": "retail-audio-action-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-audio-action-008",
+      "item_id": "retail-audio-action-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-001",
+      "item_id": "retail-policy-attack-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-001",
+      "item_id": "retail-policy-attack-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-002",
+      "item_id": "retail-policy-attack-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-002",
+      "item_id": "retail-policy-attack-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-003",
+      "item_id": "retail-policy-attack-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-003",
+      "item_id": "retail-policy-attack-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-004",
+      "item_id": "retail-policy-attack-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-004",
+      "item_id": "retail-policy-attack-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-005",
+      "item_id": "retail-policy-attack-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-005",
+      "item_id": "retail-policy-attack-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-006",
+      "item_id": "retail-policy-attack-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-006",
+      "item_id": "retail-policy-attack-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-007",
+      "item_id": "retail-policy-attack-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-007",
+      "item_id": "retail-policy-attack-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-008",
+      "item_id": "retail-policy-attack-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-policy-attack-008",
+      "item_id": "retail-policy-attack-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-prompt-injection-refund-001",
+      "item_id": "retail-prompt-injection-refund-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-prompt-injection-refund-001",
+      "item_id": "retail-prompt-injection-refund-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-refund-damaged-item-001",
+      "item_id": "retail-refund-damaged-item-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-refund-damaged-item-001",
+      "item_id": "retail-refund-damaged-item-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-001",
+      "item_id": "retail-robustness-repair-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-001",
+      "item_id": "retail-robustness-repair-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-002",
+      "item_id": "retail-robustness-repair-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-002",
+      "item_id": "retail-robustness-repair-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-003",
+      "item_id": "retail-robustness-repair-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-003",
+      "item_id": "retail-robustness-repair-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-004",
+      "item_id": "retail-robustness-repair-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-004",
+      "item_id": "retail-robustness-repair-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-005",
+      "item_id": "retail-robustness-repair-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-005",
+      "item_id": "retail-robustness-repair-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-006",
+      "item_id": "retail-robustness-repair-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-006",
+      "item_id": "retail-robustness-repair-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-007",
+      "item_id": "retail-robustness-repair-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-robustness-repair-007",
+      "item_id": "retail-robustness-repair-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-001",
+      "item_id": "retail-service-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-001",
+      "item_id": "retail-service-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-002",
+      "item_id": "retail-service-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-002",
+      "item_id": "retail-service-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-003",
+      "item_id": "retail-service-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-003",
+      "item_id": "retail-service-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-004",
+      "item_id": "retail-service-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-004",
+      "item_id": "retail-service-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-005",
+      "item_id": "retail-service-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-005",
+      "item_id": "retail-service-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-006",
+      "item_id": "retail-service-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-006",
+      "item_id": "retail-service-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-007",
+      "item_id": "retail-service-action-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-007",
+      "item_id": "retail-service-action-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-008",
+      "item_id": "retail-service-action-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-service-action-008",
+      "item_id": "retail-service-action-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-voice-flow-001",
+      "item_id": "retail-voice-flow-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-voice-flow-001",
+      "item_id": "retail-voice-flow-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-account-access-001",
+      "item_id": "saas-account-access-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-account-access-001",
+      "item_id": "saas-account-access-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-ceo-impersonation-mfa-001",
+      "item_id": "saas-ceo-impersonation-mfa-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-ceo-impersonation-mfa-001",
+      "item_id": "saas-ceo-impersonation-mfa-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-001",
+      "item_id": "saas-support-audio-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-001",
+      "item_id": "saas-support-audio-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-002",
+      "item_id": "saas-support-audio-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-002",
+      "item_id": "saas-support-audio-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-003",
+      "item_id": "saas-support-audio-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-003",
+      "item_id": "saas-support-audio-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-004",
+      "item_id": "saas-support-audio-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-004",
+      "item_id": "saas-support-audio-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-005",
+      "item_id": "saas-support-audio-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-005",
+      "item_id": "saas-support-audio-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-006",
+      "item_id": "saas-support-audio-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-audio-action-006",
+      "item_id": "saas-support-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-001",
+      "item_id": "saas-support-policy-attack-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-001",
+      "item_id": "saas-support-policy-attack-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-002",
+      "item_id": "saas-support-policy-attack-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-002",
+      "item_id": "saas-support-policy-attack-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-003",
+      "item_id": "saas-support-policy-attack-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-003",
+      "item_id": "saas-support-policy-attack-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-004",
+      "item_id": "saas-support-policy-attack-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-004",
+      "item_id": "saas-support-policy-attack-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-005",
+      "item_id": "saas-support-policy-attack-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-005",
+      "item_id": "saas-support-policy-attack-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-006",
+      "item_id": "saas-support-policy-attack-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-006",
+      "item_id": "saas-support-policy-attack-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-007",
+      "item_id": "saas-support-policy-attack-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-policy-attack-007",
+      "item_id": "saas-support-policy-attack-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-001",
+      "item_id": "saas-support-robustness-repair-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-001",
+      "item_id": "saas-support-robustness-repair-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-002",
+      "item_id": "saas-support-robustness-repair-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-002",
+      "item_id": "saas-support-robustness-repair-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-003",
+      "item_id": "saas-support-robustness-repair-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-003",
+      "item_id": "saas-support-robustness-repair-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-004",
+      "item_id": "saas-support-robustness-repair-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-004",
+      "item_id": "saas-support-robustness-repair-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-005",
+      "item_id": "saas-support-robustness-repair-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-005",
+      "item_id": "saas-support-robustness-repair-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-006",
+      "item_id": "saas-support-robustness-repair-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-robustness-repair-006",
+      "item_id": "saas-support-robustness-repair-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-001",
+      "item_id": "saas-support-service-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-001",
+      "item_id": "saas-support-service-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-002",
+      "item_id": "saas-support-service-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-002",
+      "item_id": "saas-support-service-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-003",
+      "item_id": "saas-support-service-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-003",
+      "item_id": "saas-support-service-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-004",
+      "item_id": "saas-support-service-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-004",
+      "item_id": "saas-support-service-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-005",
+      "item_id": "saas-support-service-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-005",
+      "item_id": "saas-support-service-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-006",
+      "item_id": "saas-support-service-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-service-action-006",
+      "item_id": "saas-support-service-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-001",
+      "item_id": "saas-support-voice-flow-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-001",
+      "item_id": "saas-support-voice-flow-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-002",
+      "item_id": "saas-support-voice-flow-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-002",
+      "item_id": "saas-support-voice-flow-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-003",
+      "item_id": "saas-support-voice-flow-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-003",
+      "item_id": "saas-support-voice-flow-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-004",
+      "item_id": "saas-support-voice-flow-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-004",
+      "item_id": "saas-support-voice-flow-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-005",
+      "item_id": "saas-support-voice-flow-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-005",
+      "item_id": "saas-support-voice-flow-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-006",
+      "item_id": "saas-support-voice-flow-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-voice-flow-006",
+      "item_id": "saas-support-voice-flow-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-001",
+      "item_id": "telecom-audio-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-001",
+      "item_id": "telecom-audio-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-002",
+      "item_id": "telecom-audio-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-002",
+      "item_id": "telecom-audio-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-003",
+      "item_id": "telecom-audio-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-003",
+      "item_id": "telecom-audio-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-004",
+      "item_id": "telecom-audio-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-004",
+      "item_id": "telecom-audio-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-005",
+      "item_id": "telecom-audio-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-005",
+      "item_id": "telecom-audio-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-006",
+      "item_id": "telecom-audio-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-audio-action-006",
+      "item_id": "telecom-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-billing-credit-001",
+      "item_id": "telecom-billing-credit-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-billing-credit-001",
+      "item_id": "telecom-billing-credit-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-noisy-address-correction-001",
+      "item_id": "telecom-noisy-address-correction-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-noisy-address-correction-001",
+      "item_id": "telecom-noisy-address-correction-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-001",
+      "item_id": "telecom-policy-attack-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-001",
+      "item_id": "telecom-policy-attack-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-002",
+      "item_id": "telecom-policy-attack-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-002",
+      "item_id": "telecom-policy-attack-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-003",
+      "item_id": "telecom-policy-attack-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-003",
+      "item_id": "telecom-policy-attack-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-004",
+      "item_id": "telecom-policy-attack-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-004",
+      "item_id": "telecom-policy-attack-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-005",
+      "item_id": "telecom-policy-attack-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-005",
+      "item_id": "telecom-policy-attack-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-006",
+      "item_id": "telecom-policy-attack-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-policy-attack-006",
+      "item_id": "telecom-policy-attack-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-001",
+      "item_id": "telecom-robustness-repair-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-001",
+      "item_id": "telecom-robustness-repair-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-002",
+      "item_id": "telecom-robustness-repair-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-002",
+      "item_id": "telecom-robustness-repair-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-003",
+      "item_id": "telecom-robustness-repair-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-003",
+      "item_id": "telecom-robustness-repair-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-004",
+      "item_id": "telecom-robustness-repair-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-004",
+      "item_id": "telecom-robustness-repair-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-005",
+      "item_id": "telecom-robustness-repair-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-005",
+      "item_id": "telecom-robustness-repair-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-006",
+      "item_id": "telecom-robustness-repair-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-006",
+      "item_id": "telecom-robustness-repair-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-007",
+      "item_id": "telecom-robustness-repair-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-robustness-repair-007",
+      "item_id": "telecom-robustness-repair-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-001",
+      "item_id": "telecom-service-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-001",
+      "item_id": "telecom-service-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-002",
+      "item_id": "telecom-service-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-002",
+      "item_id": "telecom-service-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-003",
+      "item_id": "telecom-service-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-003",
+      "item_id": "telecom-service-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-004",
+      "item_id": "telecom-service-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-004",
+      "item_id": "telecom-service-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-005",
+      "item_id": "telecom-service-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-005",
+      "item_id": "telecom-service-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-006",
+      "item_id": "telecom-service-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-service-action-006",
+      "item_id": "telecom-service-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-001",
+      "item_id": "telecom-voice-flow-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-001",
+      "item_id": "telecom-voice-flow-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-002",
+      "item_id": "telecom-voice-flow-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-002",
+      "item_id": "telecom-voice-flow-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-003",
+      "item_id": "telecom-voice-flow-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-003",
+      "item_id": "telecom-voice-flow-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-004",
+      "item_id": "telecom-voice-flow-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-004",
+      "item_id": "telecom-voice-flow-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-005",
+      "item_id": "telecom-voice-flow-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-005",
+      "item_id": "telecom-voice-flow-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-006",
+      "item_id": "telecom-voice-flow-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-voice-flow-006",
+      "item_id": "telecom-voice-flow-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-001",
+      "item_id": "travel-audio-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-001",
+      "item_id": "travel-audio-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-002",
+      "item_id": "travel-audio-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-002",
+      "item_id": "travel-audio-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-003",
+      "item_id": "travel-audio-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-003",
+      "item_id": "travel-audio-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-004",
+      "item_id": "travel-audio-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-004",
+      "item_id": "travel-audio-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-005",
+      "item_id": "travel-audio-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-005",
+      "item_id": "travel-audio-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-006",
+      "item_id": "travel-audio-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-audio-action-006",
+      "item_id": "travel-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-001",
+      "item_id": "travel-policy-attack-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-001",
+      "item_id": "travel-policy-attack-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-002",
+      "item_id": "travel-policy-attack-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-002",
+      "item_id": "travel-policy-attack-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-003",
+      "item_id": "travel-policy-attack-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-003",
+      "item_id": "travel-policy-attack-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-004",
+      "item_id": "travel-policy-attack-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-004",
+      "item_id": "travel-policy-attack-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-005",
+      "item_id": "travel-policy-attack-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-policy-attack-005",
+      "item_id": "travel-policy-attack-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-rebook-missed-connection-001",
+      "item_id": "travel-rebook-missed-connection-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-rebook-missed-connection-001",
+      "item_id": "travel-rebook-missed-connection-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-001",
+      "item_id": "travel-robustness-repair-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-001",
+      "item_id": "travel-robustness-repair-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-002",
+      "item_id": "travel-robustness-repair-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-002",
+      "item_id": "travel-robustness-repair-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-003",
+      "item_id": "travel-robustness-repair-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-003",
+      "item_id": "travel-robustness-repair-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-004",
+      "item_id": "travel-robustness-repair-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-004",
+      "item_id": "travel-robustness-repair-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-005",
+      "item_id": "travel-robustness-repair-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-005",
+      "item_id": "travel-robustness-repair-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-006",
+      "item_id": "travel-robustness-repair-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-robustness-repair-006",
+      "item_id": "travel-robustness-repair-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-001",
+      "item_id": "travel-service-action-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-001",
+      "item_id": "travel-service-action-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-002",
+      "item_id": "travel-service-action-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-002",
+      "item_id": "travel-service-action-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-003",
+      "item_id": "travel-service-action-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-003",
+      "item_id": "travel-service-action-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-004",
+      "item_id": "travel-service-action-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-004",
+      "item_id": "travel-service-action-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-005",
+      "item_id": "travel-service-action-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-005",
+      "item_id": "travel-service-action-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-006",
+      "item_id": "travel-service-action-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-006",
+      "item_id": "travel-service-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-007",
+      "item_id": "travel-service-action-007:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-007",
+      "item_id": "travel-service-action-007:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-008",
+      "item_id": "travel-service-action-008:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-008",
+      "item_id": "travel-service-action-008:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-009",
+      "item_id": "travel-service-action-009:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-service-action-009",
+      "item_id": "travel-service-action-009:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-001",
+      "item_id": "travel-voice-flow-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-001",
+      "item_id": "travel-voice-flow-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-002",
+      "item_id": "travel-voice-flow-002:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-002",
+      "item_id": "travel-voice-flow-002:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-003",
+      "item_id": "travel-voice-flow-003:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-003",
+      "item_id": "travel-voice-flow-003:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-004",
+      "item_id": "travel-voice-flow-004:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-004",
+      "item_id": "travel-voice-flow-004:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-005",
+      "item_id": "travel-voice-flow-005:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-005",
+      "item_id": "travel-voice-flow-005:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-006",
+      "item_id": "travel-voice-flow-006:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-flow-006",
+      "item_id": "travel-voice-flow-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-voucher-reissue-001",
+      "item_id": "travel-voice-voucher-reissue-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-voice-voucher-reissue-001",
+      "item_id": "travel-voice-voucher-reissue-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "utility-outage-audio-report-001",
+      "item_id": "utility-outage-audio-report-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "utility-outage-audio-report-001",
+      "item_id": "utility-outage-audio-report-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "OpenVoiceCS Judge Protocol",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "rubric_path": "data/openvoicecs/judge_rubric_v0.1.json",
+  "prompt_path": "data/openvoicecs/judging/judge_prompt_v0.1.md",
+  "annotation_mode": "reference_fixture",
+  "minimum_raters_per_item": 2,
+  "minimum_alpha_for_release": 0.67,
+  "blinding": {
+    "hide_system_identity": true,
+    "shuffle_item_order": true,
+    "hide_expected_actions": true
+  },
+  "adjudication": {
+    "required_for_disagreement": true,
+    "disagreement_threshold": 2,
+    "adjudicator_must_be_independent": true,
+    "adjudication_output": "dimension_score_plus_rationale"
+  },
+  "rater_qualification": {
+    "minimum_training_items": 5,
+    "requires_domain_policy_review": true,
+    "requires_conflict_attestation": true,
+    "allowed_rater_types": [
+      "trained_human",
+      "audited_model_judge"
+    ]
+  },
+  "quality_controls": {
+    "gold_items_fraction": 0.05,
+    "duplicate_items_fraction": 0.05,
+    "maximum_missing_rate": 0.0,
+    "audit_log_required": true,
+    "rater_drift_review": "per_submission_batch",
+    "low_agreement_action": "withhold_subjective_score_until_adjudicated"
+  },
+  "published_artifacts": [
+    "rubric",
+    "judge_prompt",
+    "annotation_schema",
+    "aggregate_agreement",
+    "per_dimension_score_distribution",
+    "adjudication_summary"
+  ],
+  "limitations": [
+    "The v0.1 repository includes deterministic reference-fixture annotations for harness validation.",
+    "Official external leaderboard releases must replace fixture annotations with this protocol's trained human or audited model-judge process."
+  ]
+}

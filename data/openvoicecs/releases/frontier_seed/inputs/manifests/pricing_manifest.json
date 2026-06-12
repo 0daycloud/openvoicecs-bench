@@ -1,0 +1,227 @@
+{
+  "name": "OpenVoiceCS Pricing Snapshot",
+  "version": "0.1.0",
+  "snapshot_date": "2026-06-11",
+  "currency": "USD",
+  "notes": "Reference zero-cost profile plus illustrative component entries for reproducible local benchmark dry runs. Replace or extend with provider-pinned rates for official submissions.",
+  "entries": [
+    {
+      "id": "reference:asr:zero",
+      "provider": "reference",
+      "model_id": "asr-zero",
+      "component": "asr",
+      "pricing": {
+        "asr_per_minute": 0.0
+      },
+      "source": "local reference baseline"
+    },
+    {
+      "id": "reference:llm:zero",
+      "provider": "reference",
+      "model_id": "llm-zero",
+      "component": "llm",
+      "pricing": {
+        "input_per_mtok": 0.0,
+        "output_per_mtok": 0.0,
+        "cached_input_per_mtok": 0.0
+      },
+      "source": "local reference baseline"
+    },
+    {
+      "id": "reference:tts:zero",
+      "provider": "reference",
+      "model_id": "tts-zero",
+      "component": "tts",
+      "pricing": {
+        "tts_per_1k_characters": 0.0
+      },
+      "source": "local reference baseline"
+    },
+    {
+      "id": "reference:speech_to_speech:zero",
+      "provider": "reference",
+      "model_id": "speech-to-speech-zero",
+      "component": "speech_to_speech",
+      "pricing": {
+        "speech_to_speech_per_minute": 0.0,
+        "input_audio_per_minute": 0.0,
+        "output_audio_per_minute": 0.0,
+        "input_audio_per_mtok": 0.0,
+        "output_audio_per_mtok": 0.0
+      },
+      "source": "local reference baseline"
+    },
+    {
+      "id": "reference:telephony:zero",
+      "provider": "reference",
+      "model_id": "telephony-zero",
+      "component": "telephony",
+      "pricing": {
+        "telephony_per_minute": 0.0
+      },
+      "source": "local reference baseline"
+    },
+    {
+      "id": "reference:transport:zero",
+      "provider": "reference",
+      "model_id": "transport-zero",
+      "component": "transport",
+      "pricing": {
+        "transport_per_minute": 0.0
+      },
+      "source": "local reference baseline"
+    },
+    {
+      "id": "illustrative:asr:standard-2026-06-11",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-asr-2026-06-11",
+      "component": "asr",
+      "pricing": {
+        "asr_per_minute": 0.006
+      },
+      "source": "illustrative benchmark planning rate; replace with provider-pinned source for official submissions"
+    },
+    {
+      "id": "illustrative:llm:standard-2026-06-11",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-llm-2026-06-11",
+      "component": "llm",
+      "pricing": {
+        "input_per_mtok": 2.0,
+        "output_per_mtok": 8.0,
+        "cached_input_per_mtok": 0.5
+      },
+      "source": "illustrative benchmark planning rate; replace with provider-pinned source for official submissions"
+    },
+    {
+      "id": "illustrative:tts:standard-2026-06-11",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-tts-2026-06-11",
+      "component": "tts",
+      "pricing": {
+        "tts_per_1k_characters": 0.015
+      },
+      "source": "illustrative benchmark planning rate; replace with provider-pinned source for official submissions"
+    },
+    {
+      "id": "illustrative:s2s:standard-2026-06-11",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-s2s-2026-06-11",
+      "component": "speech_to_speech",
+      "pricing": {
+        "speech_to_speech_per_minute": 0.08,
+        "input_audio_per_minute": 0.01,
+        "output_audio_per_minute": 0.03
+      },
+      "source": "illustrative benchmark planning rate; replace with provider-pinned source for official submissions"
+    },
+    {
+      "id": "illustrative:telephony:standard-2026-06-11",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-telephony-2026-06-11",
+      "component": "telephony",
+      "pricing": {
+        "telephony_per_minute": 0.012
+      },
+      "source": "illustrative benchmark planning rate; replace with provider-pinned source for official submissions"
+    },
+    {
+      "id": "illustrative:transport:standard-2026-06-11",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-transport-2026-06-11",
+      "component": "transport",
+      "pricing": {
+        "transport_per_minute": 0.002
+      },
+      "source": "illustrative benchmark planning rate; replace with provider-pinned source for official submissions"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "reference-zero-v0.1",
+      "provider": "reference",
+      "model_id": "zero-cost-local",
+      "components": {
+        "asr": "reference:asr:zero",
+        "llm": "reference:llm:zero",
+        "tts": "reference:tts:zero",
+        "telephony": "reference:telephony:zero",
+        "transport": "reference:transport:zero"
+      }
+    },
+    {
+      "id": "reference-native-s2s-zero-v0.1",
+      "provider": "reference",
+      "model_id": "speech-to-speech-zero-cost-local",
+      "pipeline_type": "native_speech_to_speech",
+      "components": {
+        "speech_to_speech": "reference:speech_to_speech:zero",
+        "telephony": "reference:telephony:zero",
+        "transport": "reference:transport:zero"
+      }
+    },
+    {
+      "id": "illustrative-cascaded-standard-v0.1",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-cascaded-voice-agent-2026-06-11",
+      "pipeline_type": "cascaded",
+      "components": {
+        "asr": "illustrative:asr:standard-2026-06-11",
+        "llm": "illustrative:llm:standard-2026-06-11",
+        "tts": "illustrative:tts:standard-2026-06-11",
+        "telephony": "illustrative:telephony:standard-2026-06-11",
+        "transport": "illustrative:transport:standard-2026-06-11"
+      }
+    },
+    {
+      "id": "illustrative-native-s2s-standard-v0.1",
+      "provider": "illustrative_vendor",
+      "model_id": "standard-native-s2s-agent-2026-06-11",
+      "pipeline_type": "native_speech_to_speech",
+      "components": {
+        "speech_to_speech": "illustrative:s2s:standard-2026-06-11",
+        "telephony": "illustrative:telephony:standard-2026-06-11",
+        "transport": "illustrative:transport:standard-2026-06-11"
+      }
+    },
+    {
+      "id": "illustrative-cascaded-low-cost-v0.1",
+      "provider": "illustrative_vendor",
+      "model_id": "low-cost-cascaded-voice-agent-2026-06-11",
+      "pipeline_type": "cascaded",
+      "components": {
+        "asr": "illustrative:asr:standard-2026-06-11",
+        "llm": "illustrative:llm:standard-2026-06-11",
+        "tts": "illustrative:tts:standard-2026-06-11",
+        "telephony": "illustrative:telephony:standard-2026-06-11",
+        "transport": "illustrative:transport:standard-2026-06-11"
+      }
+    },
+    {
+      "id": "illustrative-cascaded-low-latency-v0.1",
+      "provider": "illustrative_vendor",
+      "model_id": "low-latency-cascaded-voice-agent-2026-06-11",
+      "pipeline_type": "cascaded",
+      "components": {
+        "asr": "illustrative:asr:standard-2026-06-11",
+        "llm": "illustrative:llm:standard-2026-06-11",
+        "tts": "illustrative:tts:standard-2026-06-11",
+        "telephony": "illustrative:telephony:standard-2026-06-11",
+        "transport": "illustrative:transport:standard-2026-06-11"
+      }
+    },
+    {
+      "id": "illustrative-cascaded-quality-v0.1",
+      "provider": "illustrative_vendor",
+      "model_id": "quality-cascaded-voice-agent-2026-06-11",
+      "pipeline_type": "cascaded",
+      "components": {
+        "asr": "illustrative:asr:standard-2026-06-11",
+        "llm": "illustrative:llm:standard-2026-06-11",
+        "tts": "illustrative:tts:standard-2026-06-11",
+        "telephony": "illustrative:telephony:standard-2026-06-11",
+        "transport": "illustrative:transport:standard-2026-06-11"
+      }
+    }
+  ]
+}

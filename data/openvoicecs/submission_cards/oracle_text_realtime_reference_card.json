@@ -1,0 +1,50 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Submission Card",
+  "card_version": "0.1.0",
+  "generated_at": "2026-06-11",
+  "submitter": {
+    "name": "OpenVoiceCS",
+    "organization": "OpenVoiceCS",
+    "contact": null
+  },
+  "system": {
+    "name": "oracle_text",
+    "provider": "reference",
+    "model_id": "oracle_text-realtime-v0.1",
+    "submission_spec": null,
+    "pipeline_type": "cascaded",
+    "input_modality": "text",
+    "repository_url": null,
+    "license": null
+  },
+  "pricing": {
+    "pricing_profile_id": "reference-zero-v0.1",
+    "pricing_snapshot_date": "2026-06-11",
+    "embedded_pricing_present": false
+  },
+  "evaluation": {
+    "report": {
+      "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
+      "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+      "bytes": 7494153
+    },
+    "benchmark_version": "0.1.0",
+    "evaluation_mode": "text",
+    "num_scenarios": 201,
+    "num_audio_variants": null,
+    "num_trials_per_scenario": 6,
+    "overall_score": 100.0,
+    "pass_at_k": 1.0,
+    "pass_k": 1.0,
+    "mean_pass_rate": 1.0,
+    "conversation_experience_score": 1.0
+  },
+  "disclosures": {
+    "training_data_statement": "Deterministic reference oracle fixture generated from OpenVoiceCS scenario oracles.",
+    "safety_statement": "Reference oracle used for harness validation; not a deployed customer-service system.",
+    "limitations": [
+      "Reference fixture, not an external system.",
+      "Not eligible for official leaderboard ranking."
+    ]
+  }
+}

@@ -1,0 +1,725 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Pairwise Comparison",
+  "baseline": "noop_text",
+  "candidate": "oracle_text",
+  "method": {
+    "paired_unit": "scenario_id",
+    "bootstrap_iterations": 1000,
+    "bootstrap_seed": 17,
+    "confidence": 0.95,
+    "mcnemar": "two-sided exact binomial test over discordant pass^k pairs"
+  },
+  "matched_scenarios": {
+    "count": 201,
+    "ids": [
+      "fintech-fraud-card-replacement-001",
+      "fintech-sandbox-audio-action-001",
+      "fintech-sandbox-policy-attack-001",
+      "fintech-sandbox-policy-attack-002",
+      "fintech-sandbox-policy-attack-003",
+      "fintech-sandbox-robustness-repair-001",
+      "fintech-sandbox-robustness-repair-002",
+      "fintech-sandbox-robustness-repair-003",
+      "fintech-sandbox-robustness-repair-004",
+      "fintech-sandbox-robustness-repair-005",
+      "fintech-sandbox-robustness-repair-006",
+      "fintech-sandbox-robustness-repair-007",
+      "fintech-sandbox-robustness-repair-008",
+      "fintech-sandbox-robustness-repair-009",
+      "fintech-sandbox-robustness-repair-010",
+      "fintech-sandbox-service-action-001",
+      "fintech-sandbox-service-action-002",
+      "fintech-sandbox-service-action-003",
+      "fintech-sandbox-service-action-004",
+      "fintech-sandbox-service-action-005",
+      "fintech-sandbox-service-action-006",
+      "fintech-sandbox-service-action-007",
+      "fintech-sandbox-service-action-008",
+      "fintech-sandbox-service-action-009",
+      "fintech-sandbox-service-action-010",
+      "fintech-sandbox-service-action-011",
+      "fintech-sandbox-service-action-012",
+      "fintech-sandbox-service-action-013",
+      "fintech-sandbox-service-action-014",
+      "fintech-sandbox-service-action-015",
+      "fintech-sandbox-service-action-016",
+      "fintech-sandbox-service-action-017",
+      "fintech-social-engineering-transfer-001",
+      "healthcare-admin-audio-action-001",
+      "healthcare-admin-audio-action-002",
+      "healthcare-admin-audio-action-003",
+      "healthcare-admin-audio-action-004",
+      "healthcare-admin-audio-action-005",
+      "healthcare-admin-audio-action-006",
+      "healthcare-admin-audio-action-007",
+      "healthcare-admin-policy-attack-001",
+      "healthcare-admin-policy-attack-002",
+      "healthcare-admin-policy-attack-003",
+      "healthcare-admin-policy-attack-004",
+      "healthcare-admin-policy-attack-005",
+      "healthcare-admin-policy-attack-006",
+      "healthcare-admin-policy-attack-007",
+      "healthcare-admin-robustness-repair-001",
+      "healthcare-admin-robustness-repair-002",
+      "healthcare-admin-robustness-repair-003",
+      "healthcare-admin-robustness-repair-004",
+      "healthcare-admin-robustness-repair-005",
+      "healthcare-admin-robustness-repair-006",
+      "healthcare-admin-robustness-repair-007",
+      "healthcare-admin-robustness-repair-008",
+      "healthcare-admin-schedule-refill-001",
+      "healthcare-admin-service-action-001",
+      "healthcare-admin-service-action-002",
+      "healthcare-admin-service-action-003",
+      "healthcare-admin-service-action-004",
+      "healthcare-admin-service-action-005",
+      "healthcare-admin-service-action-006",
+      "healthcare-admin-service-action-007",
+      "healthcare-admin-service-action-008",
+      "healthcare-admin-service-action-009",
+      "healthcare-phi-extraction-001",
+      "retail-audio-action-001",
+      "retail-audio-action-002",
+      "retail-audio-action-003",
+      "retail-audio-action-004",
+      "retail-audio-action-005",
+      "retail-audio-action-006",
+      "retail-audio-action-007",
+      "retail-audio-action-008",
+      "retail-policy-attack-001",
+      "retail-policy-attack-002",
+      "retail-policy-attack-003",
+      "retail-policy-attack-004",
+      "retail-policy-attack-005",
+      "retail-policy-attack-006",
+      "retail-policy-attack-007",
+      "retail-policy-attack-008",
+      "retail-prompt-injection-refund-001",
+      "retail-refund-damaged-item-001",
+      "retail-robustness-repair-001",
+      "retail-robustness-repair-002",
+      "retail-robustness-repair-003",
+      "retail-robustness-repair-004",
+      "retail-robustness-repair-005",
+      "retail-robustness-repair-006",
+      "retail-robustness-repair-007",
+      "retail-service-action-001",
+      "retail-service-action-002",
+      "retail-service-action-003",
+      "retail-service-action-004",
+      "retail-service-action-005",
+      "retail-service-action-006",
+      "retail-service-action-007",
+      "retail-service-action-008",
+      "retail-voice-flow-001",
+      "saas-account-access-001",
+      "saas-ceo-impersonation-mfa-001",
+      "saas-support-audio-action-001",
+      "saas-support-audio-action-002",
+      "saas-support-audio-action-003",
+      "saas-support-audio-action-004",
+      "saas-support-audio-action-005",
+      "saas-support-audio-action-006",
+      "saas-support-policy-attack-001",
+      "saas-support-policy-attack-002",
+      "saas-support-policy-attack-003",
+      "saas-support-policy-attack-004",
+      "saas-support-policy-attack-005",
+      "saas-support-policy-attack-006",
+      "saas-support-policy-attack-007",
+      "saas-support-robustness-repair-001",
+      "saas-support-robustness-repair-002",
+      "saas-support-robustness-repair-003",
+      "saas-support-robustness-repair-004",
+      "saas-support-robustness-repair-005",
+      "saas-support-robustness-repair-006",
+      "saas-support-service-action-001",
+      "saas-support-service-action-002",
+      "saas-support-service-action-003",
+      "saas-support-service-action-004",
+      "saas-support-service-action-005",
+      "saas-support-service-action-006",
+      "saas-support-voice-flow-001",
+      "saas-support-voice-flow-002",
+      "saas-support-voice-flow-003",
+      "saas-support-voice-flow-004",
+      "saas-support-voice-flow-005",
+      "saas-support-voice-flow-006",
+      "telecom-audio-action-001",
+      "telecom-audio-action-002",
+      "telecom-audio-action-003",
+      "telecom-audio-action-004",
+      "telecom-audio-action-005",
+      "telecom-audio-action-006",
+      "telecom-billing-credit-001",
+      "telecom-noisy-address-correction-001",
+      "telecom-policy-attack-001",
+      "telecom-policy-attack-002",
+      "telecom-policy-attack-003",
+      "telecom-policy-attack-004",
+      "telecom-policy-attack-005",
+      "telecom-policy-attack-006",
+      "telecom-robustness-repair-001",
+      "telecom-robustness-repair-002",
+      "telecom-robustness-repair-003",
+      "telecom-robustness-repair-004",
+      "telecom-robustness-repair-005",
+      "telecom-robustness-repair-006",
+      "telecom-robustness-repair-007",
+      "telecom-service-action-001",
+      "telecom-service-action-002",
+      "telecom-service-action-003",
+      "telecom-service-action-004",
+      "telecom-service-action-005",
+      "telecom-service-action-006",
+      "telecom-voice-flow-001",
+      "telecom-voice-flow-002",
+      "telecom-voice-flow-003",
+      "telecom-voice-flow-004",
+      "telecom-voice-flow-005",
+      "telecom-voice-flow-006",
+      "travel-audio-action-001",
+      "travel-audio-action-002",
+      "travel-audio-action-003",
+      "travel-audio-action-004",
+      "travel-audio-action-005",
+      "travel-audio-action-006",
+      "travel-policy-attack-001",
+      "travel-policy-attack-002",
+      "travel-policy-attack-003",
+      "travel-policy-attack-004",
+      "travel-policy-attack-005",
+      "travel-rebook-missed-connection-001",
+      "travel-robustness-repair-001",
+      "travel-robustness-repair-002",
+      "travel-robustness-repair-003",
+      "travel-robustness-repair-004",
+      "travel-robustness-repair-005",
+      "travel-robustness-repair-006",
+      "travel-service-action-001",
+      "travel-service-action-002",
+      "travel-service-action-003",
+      "travel-service-action-004",
+      "travel-service-action-005",
+      "travel-service-action-006",
+      "travel-service-action-007",
+      "travel-service-action-008",
+      "travel-service-action-009",
+      "travel-voice-flow-001",
+      "travel-voice-flow-002",
+      "travel-voice-flow-003",
+      "travel-voice-flow-004",
+      "travel-voice-flow-005",
+      "travel-voice-flow-006",
+      "travel-voice-voucher-reissue-001",
+      "utility-outage-audio-report-001"
+    ],
+    "baseline_only": [],
+    "candidate_only": [],
+    "metadata_mismatches": []
+  },
+  "summary": {
+    "overall_score_delta": 92.33,
+    "mean_paired_scenario_score_delta": {
+      "mean": 92.328358,
+      "ci_low": 91.522388,
+      "ci_high": 93.074627,
+      "n": 201
+    },
+    "mean_paired_pass_rate_delta": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "n": 201
+    },
+    "pass_k_delta": 1.0,
+    "mcnemar_exact": {
+      "candidate_wins": 201,
+      "baseline_wins": 0,
+      "ties": 0,
+      "discordant_pairs": 201,
+      "p_value": 0.0
+    },
+    "interpretation": "candidate_higher_with_ci_excluding_zero"
+  },
+  "metric_deltas": {
+    "task_success": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "n": 201
+    },
+    "factual_grounding": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "n": 201
+    },
+    "sop_compliance": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "n": 201
+    },
+    "privacy": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "n": 201
+    },
+    "auth_integrity": {
+      "mean": 0.820896,
+      "ci_low": 0.766169,
+      "ci_high": 0.875622,
+      "n": 201
+    },
+    "tool_correctness": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "n": 201
+    },
+    "safety": {
+      "mean": 0.004975,
+      "ci_low": 0.0,
+      "ci_high": 0.014925,
+      "n": 201
+    },
+    "experience_proxy": {
+      "mean": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n": 201
+    }
+  },
+  "stratified_deltas": {
+    "domain": {
+      "scenario_score_delta": {
+        "mean": 92.328358,
+        "ci_low": 91.492537,
+        "ci_high": 93.030597,
+        "n": 201,
+        "num_strata": 7,
+        "strata": {
+          "fintech_sandbox": 33,
+          "healthcare_admin": 33,
+          "retail": 34,
+          "saas_support": 33,
+          "telecom": 33,
+          "travel": 34,
+          "utility_support": 1
+        }
+      },
+      "pass_rate_delta": {
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n": 201,
+        "num_strata": 7,
+        "strata": {
+          "fintech_sandbox": 33,
+          "healthcare_admin": 33,
+          "retail": 34,
+          "saas_support": 33,
+          "telecom": 33,
+          "travel": 34,
+          "utility_support": 1
+        }
+      }
+    },
+    "track": {
+      "scenario_score_delta": {
+        "mean": 92.328358,
+        "ci_low": 92.089552,
+        "ci_high": 92.61194,
+        "n": 201,
+        "num_strata": 5,
+        "strata": {
+          "adversarial_compliance": 40,
+          "audio_to_action": 35,
+          "end_to_end_voice": 20,
+          "robustness": 45,
+          "text_to_action": 61
+        }
+      },
+      "pass_rate_delta": {
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n": 201,
+        "num_strata": 5,
+        "strata": {
+          "adversarial_compliance": 40,
+          "audio_to_action": 35,
+          "end_to_end_voice": 20,
+          "robustness": 45,
+          "text_to_action": 61
+        }
+      }
+    },
+    "difficulty": {
+      "scenario_score_delta": {
+        "mean": 92.328358,
+        "ci_low": 91.522388,
+        "ci_high": 93.074627,
+        "n": 201,
+        "num_strata": 3,
+        "strata": {
+          "easy": 40,
+          "hard": 80,
+          "medium": 81
+        }
+      },
+      "pass_rate_delta": {
+        "mean": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n": 201,
+        "num_strata": 3,
+        "strata": {
+          "easy": 40,
+          "hard": 80,
+          "medium": 81
+        }
+      }
+    }
+  },
+  "slice_deltas": {
+    "domain": {
+      "fintech_sandbox": {
+        "count": 33,
+        "scenario_score_delta": {
+          "mean": 93.636364,
+          "ci_low": 91.818182,
+          "ci_high": 95.0,
+          "n": 33
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 33
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 33,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 33,
+          "p_value": 0.0
+        }
+      },
+      "healthcare_admin": {
+        "count": 33,
+        "scenario_score_delta": {
+          "mean": 91.818182,
+          "ci_low": 89.545455,
+          "ci_high": 93.636364,
+          "n": 33
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 33
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 33,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 33,
+          "p_value": 0.0
+        }
+      },
+      "retail": {
+        "count": 34,
+        "scenario_score_delta": {
+          "mean": 91.470588,
+          "ci_low": 89.264706,
+          "ci_high": 93.676471,
+          "n": 34
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 34
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 34,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 34,
+          "p_value": 0.0
+        }
+      },
+      "saas_support": {
+        "count": 33,
+        "scenario_score_delta": {
+          "mean": 91.909091,
+          "ci_low": 89.636364,
+          "ci_high": 93.909091,
+          "n": 33
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 33
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 33,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 33,
+          "p_value": 0.0
+        }
+      },
+      "telecom": {
+        "count": 33,
+        "scenario_score_delta": {
+          "mean": 92.272727,
+          "ci_low": 90.0,
+          "ci_high": 94.090909,
+          "n": 33
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 33
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 33,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 33,
+          "p_value": 0.0
+        }
+      },
+      "travel": {
+        "count": 34,
+        "scenario_score_delta": {
+          "mean": 92.794118,
+          "ci_low": 91.029412,
+          "ci_high": 94.558824,
+          "n": 34
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 34
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 34,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 34,
+          "p_value": 0.0
+        }
+      },
+      "utility_support": {
+        "count": 1,
+        "scenario_score_delta": {
+          "mean": 95.0,
+          "ci_low": 95.0,
+          "ci_high": 95.0,
+          "n": 1
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 1
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 1,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 1,
+          "p_value": 1.0
+        }
+      }
+    },
+    "track": {
+      "adversarial_compliance": {
+        "count": 40,
+        "scenario_score_delta": {
+          "mean": 81.5,
+          "ci_low": 80.375,
+          "ci_high": 83.0,
+          "n": 40
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 40
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 40,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 40,
+          "p_value": 0.0
+        }
+      },
+      "audio_to_action": {
+        "count": 35,
+        "scenario_score_delta": {
+          "mean": 95.0,
+          "ci_low": 95.0,
+          "ci_high": 95.0,
+          "n": 35
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 35
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 35,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 35,
+          "p_value": 0.0
+        }
+      },
+      "end_to_end_voice": {
+        "count": 20,
+        "scenario_score_delta": {
+          "mean": 95.0,
+          "ci_low": 95.0,
+          "ci_high": 95.0,
+          "n": 20
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 20
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 20,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 20,
+          "p_value": 1.91e-06
+        }
+      },
+      "robustness": {
+        "count": 45,
+        "scenario_score_delta": {
+          "mean": 95.0,
+          "ci_low": 95.0,
+          "ci_high": 95.0,
+          "n": 45
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 45
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 45,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 45,
+          "p_value": 0.0
+        }
+      },
+      "text_to_action": {
+        "count": 61,
+        "scenario_score_delta": {
+          "mean": 95.04918,
+          "ci_low": 95.0,
+          "ci_high": 95.147541,
+          "n": 61
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 61
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 61,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 61,
+          "p_value": 0.0
+        }
+      }
+    },
+    "difficulty": {
+      "easy": {
+        "count": 40,
+        "scenario_score_delta": {
+          "mean": 92.45,
+          "ci_low": 90.573125,
+          "ci_high": 94.025,
+          "n": 40
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 40
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 40,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 40,
+          "p_value": 0.0
+        }
+      },
+      "hard": {
+        "count": 80,
+        "scenario_score_delta": {
+          "mean": 91.25,
+          "ci_low": 89.75,
+          "ci_high": 92.5625,
+          "n": 80
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 80
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 80,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 80,
+          "p_value": 0.0
+        }
+      },
+      "medium": {
+        "count": 81,
+        "scenario_score_delta": {
+          "mean": 93.333333,
+          "ci_low": 92.222222,
+          "ci_high": 94.259259,
+          "n": 81
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 81
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 81,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 81,
+          "p_value": 0.0
+        }
+      }
+    }
+  }
+}

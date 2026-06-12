@@ -1,0 +1,308 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Datasheet",
+  "datasheet_version": "0.1.0",
+  "generated_at": "2026-06-11",
+  "release": {
+    "benchmark_version": "0.1.0",
+    "release_stage": "seed",
+    "scenario_file": {
+      "path": "data/openvoicecs/scenarios_v0.1.json",
+      "sha256": "430a87f3673fd6c1584e8a0a4b5f41fcbce37325e60c5b811c77c0f8c4b5e6c5",
+      "bytes": 1173811
+    },
+    "audio_manifest_file": {
+      "path": "data/openvoicecs/audio_manifest_v0.1.json",
+      "sha256": "cf20d2f8a1a5e65e8f9cf6e7d57d428749a2e22ae7cd5ac5b9db234779a07c48",
+      "bytes": 111472
+    },
+    "pricing_manifest_file": {
+      "path": "data/openvoicecs/pricing_snapshot_v0.1.json",
+      "sha256": "b6c42d105f7832219d52a669960516cd6a6daf5713e9ffa82962e8b5768c7a6c",
+      "bytes": 7754
+    },
+    "split_manifest_file": {
+      "path": "data/openvoicecs/splits_v0.1.json",
+      "sha256": "d21af3eaba73b8caa45bfd6dc894f5f8c4d67f49a7c68ecc3eb651ad8c36c3ae",
+      "bytes": 15578
+    },
+    "provenance_manifest_file": {
+      "path": "data/openvoicecs/provenance_v0.1.json",
+      "sha256": "baba76a9ec1ba92e8be725f52d684dbc56a26f2c3e42d91954f621561e6e73ba",
+      "bytes": 112160
+    },
+    "changelog_file": {
+      "path": "data/openvoicecs/changelog_v0.1.json",
+      "sha256": "255d47ae3bde764ccc882009652a8e7982641f83cdad211f6f9c410c02a65909",
+      "bytes": 17122
+    },
+    "baseline_manifest_file": {
+      "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
+      "sha256": "8bd14e51770892d9b39abe5fd2472238dc84b3d32c767fdff3b30481b0d368bf",
+      "bytes": 3149
+    },
+    "review_manifest_file": {
+      "path": "data/openvoicecs/scenario_reviews_v0.1.json",
+      "sha256": "e78292aa1ef474e28377685bbc61d77e524268ef9290547d3ed72bc6530dc706",
+      "bytes": 167376
+    },
+    "split_commitment_file": {
+      "path": "data/openvoicecs/split_commitments_v0.1.json",
+      "sha256": "f0980bfc4ce2ce7df5ee044b5850b0f4279598ab5735b806f03f6f47a3629f4d",
+      "bytes": 52040
+    },
+    "split_commitment_root_hash": "82140199ef36926759c7b5923e6fd7f5046fc98dfd6224c24cc3d6428087c14f"
+  },
+  "intended_use": [
+    "Evaluate voice AI and customer-service agents on task completion, policy compliance, tool use, safety, privacy, authentication, latency, and cost.",
+    "Support reproducible local development, scientific comparison, and audited frontier reporting."
+  ],
+  "out_of_scope_uses": [
+    "Ranking general conversational intelligence outside customer-service workflows.",
+    "Using deterministic benchmark success as a substitute for production safety review.",
+    "Training on sealed-test scenarios, transcripts, tool oracles, expected states, or audio assets."
+  ],
+  "data_summary": {
+    "num_scenarios": 201,
+    "domains": {
+      "fintech_sandbox": 33,
+      "healthcare_admin": 33,
+      "retail": 34,
+      "saas_support": 33,
+      "telecom": 33,
+      "travel": 34,
+      "utility_support": 1
+    },
+    "tracks": {
+      "adversarial_compliance": 40,
+      "audio_to_action": 35,
+      "end_to_end_voice": 20,
+      "robustness": 45,
+      "text_to_action": 61
+    },
+    "difficulty": {
+      "easy": 40,
+      "hard": 80,
+      "medium": 81
+    },
+    "num_audio_variants": 120,
+    "audio_perturbations": {
+      "background_noise": 33,
+      "emotional_pressure": 2,
+      "interruption": 1,
+      "multi_turn_voice": 6,
+      "prompt_injection": 25,
+      "role_confusion": 1,
+      "self_repair": 33,
+      "social_engineering": 25
+    }
+  },
+  "split_policy": {
+    "manifest_version": "0.1.0",
+    "scenario_coverage": 1.0,
+    "audio_variant_coverage": 1.0,
+    "splits": {
+      "public_dev": {
+        "num_scenarios": 80,
+        "num_audio_variants": 40
+      },
+      "sealed_test": {
+        "num_scenarios": 121,
+        "num_audio_variants": 80
+      }
+    },
+    "sealed_test_policy": "Sealed items must not be published with full transcripts, tool oracles, expected states, or audio assets before evaluation.",
+    "commitment_root_hash": "82140199ef36926759c7b5923e6fd7f5046fc98dfd6224c24cc3d6428087c14f",
+    "sealed_ids_revealed": false
+  },
+  "provenance": {
+    "present": true,
+    "version": "0.1.0",
+    "scenario_coverage": 1.0,
+    "audio_variant_coverage": 1.0,
+    "scenario_license_open_rate": 1.0,
+    "audio_license_open_rate": 1.0,
+    "audio_speaker_consent_rate": 1.0,
+    "no_real_customer_data_rate": 1.0,
+    "low_contamination_risk_rate": 1.0,
+    "source_types": {
+      "hand_authored_synthetic": 201,
+      "synthetic": 120
+    }
+  },
+  "changelog": {
+    "present": true,
+    "version": "0.1.0",
+    "benchmark_version": "0.1.0",
+    "num_entries": 4,
+    "entry_types": {
+      "release": 1,
+      "scenario_added": 3
+    },
+    "compatibility": {
+      "backward_compatible": 3,
+      "initial_release": 1
+    },
+    "num_changed_scenarios": 201,
+    "num_changed_audio_variants": 120,
+    "scenario_change_coverage": 1.0,
+    "audio_variant_change_coverage": 1.0,
+    "num_errata": 0,
+    "num_open_errata": 0,
+    "errata_severity": {}
+  },
+  "baselines": {
+    "present": true,
+    "version": "0.1.0",
+    "benchmark_version": "0.1.0",
+    "num_baselines": 4,
+    "baselines": {
+      "oracle_text": {
+        "overall_score": 100.0,
+        "pass_at_k": 1.0,
+        "pass_k": 1.0,
+        "mean_pass_rate": 1.0,
+        "num_scenarios": 201,
+        "num_trials_per_scenario": 3,
+        "task_success": 1.0,
+        "safety": 1.0
+      },
+      "noop_text": {
+        "overall_score": 7.67,
+        "pass_at_k": 0.0,
+        "pass_k": 0.0,
+        "mean_pass_rate": 0.0,
+        "num_scenarios": 201,
+        "num_trials_per_scenario": 3,
+        "task_success": 0.0,
+        "safety": 0.995
+      },
+      "oracle_audio_manifest": {
+        "overall_score": 100.0,
+        "pass_at_k": 1.0,
+        "pass_k": 1.0,
+        "mean_pass_rate": 1.0,
+        "num_scenarios": 120,
+        "num_trials_per_scenario": 3,
+        "task_success": 1.0,
+        "safety": 1.0
+      },
+      "noop_audio_manifest": {
+        "overall_score": 7.88,
+        "pass_at_k": 0.0,
+        "pass_k": 0.0,
+        "mean_pass_rate": 0.0,
+        "num_scenarios": 120,
+        "num_trials_per_scenario": 3,
+        "task_success": 0.0,
+        "safety": 1.0
+      }
+    }
+  },
+  "scenario_reviews": {
+    "present": true,
+    "version": "0.1.0",
+    "benchmark_version": "0.1.0",
+    "minimum_reviewers_per_scenario": 2,
+    "required_checks": [
+      "realistic_customer_goal",
+      "tool_contract_replayable",
+      "oracle_expected_state_correct",
+      "sop_policy_coverage",
+      "privacy_coverage",
+      "auth_integrity_coverage",
+      "grounding_coverage",
+      "forbidden_action_coverage",
+      "provenance_reviewed",
+      "contamination_reviewed"
+    ],
+    "num_reviews": 201,
+    "num_reviewed_scenarios": 201,
+    "num_approved_scenarios": 201,
+    "scenario_review_coverage": 1.0,
+    "scenario_approval_coverage": 1.0,
+    "unreviewed_scenario_ids": [],
+    "unapproved_scenario_ids": [],
+    "check_pass_counts": {
+      "realistic_customer_goal": 201,
+      "tool_contract_replayable": 201,
+      "oracle_expected_state_correct": 201,
+      "sop_policy_coverage": 201,
+      "privacy_coverage": 201,
+      "auth_integrity_coverage": 201,
+      "grounding_coverage": 201,
+      "forbidden_action_coverage": 201,
+      "provenance_reviewed": 201,
+      "contamination_reviewed": 201
+    },
+    "check_pass_rates": {
+      "realistic_customer_goal": 1.0,
+      "tool_contract_replayable": 1.0,
+      "oracle_expected_state_correct": 1.0,
+      "sop_policy_coverage": 1.0,
+      "privacy_coverage": 1.0,
+      "auth_integrity_coverage": 1.0,
+      "grounding_coverage": 1.0,
+      "forbidden_action_coverage": 1.0,
+      "provenance_reviewed": 1.0,
+      "contamination_reviewed": 1.0
+    }
+  },
+  "metrics": {
+    "primary_quality": "overall_score with deterministic state, tool, policy, grounding, privacy, auth, safety, and experience components",
+    "reliability": [
+      "pass@k",
+      "pass^k",
+      "mean_pass_rate",
+      "confidence_intervals"
+    ],
+    "operations": [
+      "v2v_ttfb_ms",
+      "v2v_last_byte_ms",
+      "cost_usd_per_successful_conversation"
+    ],
+    "subjective": "Optional judged conversation_experience_score, kept separate from deterministic task score."
+  },
+  "known_limitations": [
+    "The seed release is small and intended for method review, not final industry ranking.",
+    "The v0.1 audio assets are synthetic TTS fixtures; public beta should add broader consented speaker coverage.",
+    "The seed release has an empty sealed_test split; public_beta and leaderboard_v1 require sealed scenarios."
+  ],
+  "governance": {
+    "scenario_ids_stable_after_publication": true,
+    "requires_provenance_manifest": true,
+    "requires_split_manifest": true,
+    "requires_changelog": true,
+    "requires_reference_baselines": true,
+    "requires_scenario_reviews": true,
+    "requires_split_commitments_for_public_releases": true,
+    "requires_report_validation_before_leaderboard": true,
+    "requires_submission_cards_for_official_leaderboards": true
+  },
+  "release_validation": {
+    "audit_passed": true,
+    "release_gates_passed": true,
+    "release_gates": {
+      "valid_json_contract": true,
+      "has_text_to_action_track": true,
+      "has_adversarial_compliance_track": true,
+      "has_audio_or_robustness_variants": true,
+      "has_pricing_snapshot": true,
+      "has_pricing_profiles": true,
+      "has_split_manifest": true,
+      "has_provenance_manifest": true,
+      "has_changelog": true,
+      "changelog_has_entries": true,
+      "has_reference_baselines": true,
+      "reference_baselines_complete": true,
+      "has_scenario_reviews": true,
+      "all_scenarios_review_approved": true,
+      "all_scenarios_assigned_to_split": true,
+      "all_audio_variants_assigned_to_split": true,
+      "all_scenarios_have_provenance": true,
+      "all_audio_variants_have_provenance": true,
+      "all_scenarios_have_expected_state": true,
+      "all_scenarios_have_required_events": true,
+      "passed": true
+    }
+  }
+}

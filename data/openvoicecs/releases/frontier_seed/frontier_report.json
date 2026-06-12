@@ -1,0 +1,1459 @@
+{
+  "benchmark": "Latency-Cost-Quality Frontier",
+  "generated_at": "2026-06-11",
+  "axes": {
+    "latency": {
+      "primary": "p95_v2v_ttfb_ms",
+      "direction": "lower_is_better",
+      "definition": "User end-of-speech/VAD endpoint to first audio byte out."
+    },
+    "cost": {
+      "primary": "cost_usd_per_successful_conversation",
+      "direction": "lower_is_better",
+      "definition": "Fully loaded cost divided by task success rate."
+    },
+    "quality": {
+      "primary": "task_success_rate",
+      "direction": "higher_is_better",
+      "definition": "Task completion/resolution rate on the fixed scenario set."
+    }
+  },
+  "experience_gate": 0.6,
+  "pricing_snapshot": {
+    "name": "OpenVoiceCS Pricing Snapshot",
+    "version": "0.1.0",
+    "snapshot_date": "2026-06-11",
+    "currency": "USD",
+    "num_entries": 12,
+    "num_profiles": 7
+  },
+  "environment": {
+    "region": "local",
+    "network": "loopback",
+    "hardware_profile": "local-macos-arm64",
+    "transport": "websocket",
+    "concurrency_levels": [
+      1,
+      10,
+      100
+    ]
+  },
+  "frontier": [
+    "oracle_audio_manifest",
+    "oracle_text"
+  ],
+  "projection_frontiers": {
+    "latency_vs_quality": [
+      "oracle_audio_manifest",
+      "oracle_text"
+    ],
+    "cost_vs_quality": [
+      "oracle_audio_manifest",
+      "oracle_text"
+    ]
+  },
+  "constrained_frontiers": {
+    "latency_targets_ms": [],
+    "cost_targets_usd": [],
+    "entries": []
+  },
+  "domain_frontiers": {
+    "fintech_sandbox": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    },
+    "healthcare_admin": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    },
+    "retail": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    },
+    "saas_support": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    },
+    "telecom": {
+      "frontier": [
+        "oracle_text"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    },
+    "travel": {
+      "frontier": [
+        "oracle_audio_manifest"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    },
+    "utility_support": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "projection_frontiers": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      },
+      "eligible_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "represented_systems": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "num_eligible_systems": 2
+    }
+  },
+  "systems": {
+    "oracle_audio_manifest": {
+      "name": "oracle_audio_manifest",
+      "benchmark": "OpenVoiceCS-Realtime-Load",
+      "benchmark_version": "0.1.0",
+      "model_metadata": {
+        "display_name": "oracle_audio_manifest",
+        "agent": "oracle",
+        "provider": "reference",
+        "model_id": "oracle_audio_manifest-realtime-v0.1",
+        "pricing_profile_id": "reference-zero-v0.1",
+        "pricing_snapshot_date": "2026-06-11",
+        "pipeline_type": "cascaded",
+        "input_modality": "audio",
+        "transport": "websocket",
+        "endpoint": "ws://127.0.0.1:63156",
+        "baseline_id": "oracle_audio_manifest"
+      },
+      "axes": {
+        "p95_v2v_ttfb_ms": 860.0,
+        "cost_usd_per_successful_conversation": 0.0,
+        "task_success_rate": 1.0
+      },
+      "latency": {
+        "p50_v2v_ttfb_ms": 790.0,
+        "p90_v2v_ttfb_ms": 860.0,
+        "p95_v2v_ttfb_ms": 860.0,
+        "p99_v2v_ttfb_ms": 860.0,
+        "p50_v2v_last_byte_ms": 1140.0,
+        "p95_v2v_last_byte_ms": 1210.0,
+        "barge_in_stop_p95_ms": 120.0,
+        "interruption_recovery_p95_ms": 240.0,
+        "latency_at_100_concurrency_p95_ms": 860.0,
+        "stage_latency_ms": {
+          "asr_finalization_ms": {
+            "p50": 50.0,
+            "p95": 50.0
+          },
+          "llm_ttft_ms": {
+            "p50": 670.0,
+            "p95": 740.0
+          },
+          "tts_first_chunk_ms": {
+            "p50": 70.0,
+            "p95": 70.0
+          }
+        },
+        "latency_measurement": {
+          "sample_count": 1440,
+          "source_counts": {
+            "event_stream": 1440,
+            "reported_latency": 0,
+            "runtime_fallback": 0,
+            "unknown": 0
+          },
+          "event_stream_samples": 1440,
+          "reported_latency_samples": 0,
+          "runtime_fallback_samples": 0,
+          "unknown_samples": 0,
+          "vad_origin_samples": 1440,
+          "first_audio_event_samples": 1440,
+          "last_audio_event_samples": 1440,
+          "barge_in_stop_event_samples": 1440,
+          "interruption_recovery_event_samples": 1440
+        },
+        "latency_load": {
+          "levels": {
+            "1": {
+              "target_concurrency": 1,
+              "sample_count": 480,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 480,
+              "completed_calls": 480,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 1,
+              "wall_seconds": 0.485
+            },
+            "10": {
+              "target_concurrency": 10,
+              "sample_count": 480,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 480,
+              "completed_calls": 480,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 10,
+              "wall_seconds": 0.289
+            },
+            "100": {
+              "target_concurrency": 100,
+              "sample_count": 480,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 480,
+              "completed_calls": 480,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 100,
+              "wall_seconds": 0.27
+            }
+          }
+        },
+        "sample_count": 1440
+      },
+      "cost": {
+        "cost_usd_per_conversation": 0.0,
+        "cost_usd_per_successful_conversation": 0.0,
+        "avg_component_cost_usd": {
+          "asr": 0.0,
+          "llm": 0.0,
+          "tts": 0.0,
+          "speech_to_speech": null,
+          "telephony": 0.0,
+          "transport": 0.0
+        },
+        "cost_provenance": {
+          "sample_count": 1440,
+          "direct_cost_samples": 1440,
+          "derived_cost_samples": 1440,
+          "fully_loaded_samples": 1440,
+          "missing_cost_samples": 0,
+          "required_components": [
+            "asr",
+            "llm",
+            "tts",
+            "telephony",
+            "transport"
+          ],
+          "component_sample_counts": {
+            "asr": 1440,
+            "llm": 1440,
+            "tts": 1440,
+            "speech_to_speech": 0,
+            "telephony": 1440,
+            "transport": 1440
+          },
+          "pricing_source": "profile",
+          "pipeline_type": "cascaded"
+        },
+        "sample_count": 1440
+      },
+      "quality": {
+        "task_success_rate": 1.0,
+        "experience_score": 1.0,
+        "experience_score_source": "judged",
+        "overall_quality_score": 1.0
+      },
+      "resolved_pricing": {
+        "snapshot_date": "2026-06-11",
+        "currency": "USD",
+        "profile_id": "reference-zero-v0.1",
+        "pipeline_type": "cascaded",
+        "component_entry_ids": {
+          "asr": "reference:asr:zero",
+          "llm": "reference:llm:zero",
+          "tts": "reference:tts:zero",
+          "telephony": "reference:telephony:zero",
+          "transport": "reference:transport:zero"
+        }
+      },
+      "domain_axes": {
+        "retail": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "travel": {
+          "p95_v2v_ttfb_ms": 850.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "fintech_sandbox": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "healthcare_admin": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "saas_support": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "utility_support": {
+          "p95_v2v_ttfb_ms": 760.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "telecom": {
+          "p95_v2v_ttfb_ms": 920.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        }
+      },
+      "scorecard": {
+        "p50_v2v_ttfb_ms": 790.0,
+        "p90_v2v_ttfb_ms": 860.0,
+        "p95_v2v_ttfb_ms": 860.0,
+        "p99_v2v_ttfb_ms": 860.0,
+        "p50_v2v_last_byte_ms": 1140.0,
+        "p95_v2v_last_byte_ms": 1210.0,
+        "barge_in_stop_p95_ms": 120.0,
+        "interruption_recovery_p95_ms": 240.0,
+        "latency_at_100_concurrency_p95_ms": 860.0,
+        "stage_latency_ms": {
+          "asr_finalization_ms": {
+            "p50": 50.0,
+            "p95": 50.0
+          },
+          "llm_ttft_ms": {
+            "p50": 670.0,
+            "p95": 740.0
+          },
+          "tts_first_chunk_ms": {
+            "p50": 70.0,
+            "p95": 70.0
+          }
+        },
+        "latency_measurement": {
+          "sample_count": 1440,
+          "source_counts": {
+            "event_stream": 1440,
+            "reported_latency": 0,
+            "runtime_fallback": 0,
+            "unknown": 0
+          },
+          "event_stream_samples": 1440,
+          "reported_latency_samples": 0,
+          "runtime_fallback_samples": 0,
+          "unknown_samples": 0,
+          "vad_origin_samples": 1440,
+          "first_audio_event_samples": 1440,
+          "last_audio_event_samples": 1440,
+          "barge_in_stop_event_samples": 1440,
+          "interruption_recovery_event_samples": 1440
+        },
+        "latency_load": {
+          "levels": {
+            "1": {
+              "target_concurrency": 1,
+              "sample_count": 480,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 480,
+              "completed_calls": 480,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 1,
+              "wall_seconds": 0.485
+            },
+            "10": {
+              "target_concurrency": 10,
+              "sample_count": 480,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 480,
+              "completed_calls": 480,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 10,
+              "wall_seconds": 0.289
+            },
+            "100": {
+              "target_concurrency": 100,
+              "sample_count": 480,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 480,
+              "completed_calls": 480,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 100,
+              "wall_seconds": 0.27
+            }
+          }
+        },
+        "cost_usd_per_conversation": 0.0,
+        "cost_usd_per_successful_conversation": 0.0,
+        "avg_component_cost_usd": {
+          "asr": 0.0,
+          "llm": 0.0,
+          "tts": 0.0,
+          "speech_to_speech": null,
+          "telephony": 0.0,
+          "transport": 0.0
+        },
+        "cost_provenance": {
+          "sample_count": 1440,
+          "direct_cost_samples": 1440,
+          "derived_cost_samples": 1440,
+          "fully_loaded_samples": 1440,
+          "missing_cost_samples": 0,
+          "required_components": [
+            "asr",
+            "llm",
+            "tts",
+            "telephony",
+            "transport"
+          ],
+          "component_sample_counts": {
+            "asr": 1440,
+            "llm": 1440,
+            "tts": 1440,
+            "speech_to_speech": 0,
+            "telephony": 1440,
+            "transport": 1440
+          },
+          "pricing_source": "profile",
+          "pipeline_type": "cascaded"
+        },
+        "task_success_rate": 1.0,
+        "experience_score": 1.0,
+        "experience_score_source": "judged",
+        "experience_evidence": {
+          "coverage": 1.0,
+          "num_judged_trials": 1440,
+          "num_trials": 1440,
+          "judge_counts": {
+            "OpenVoiceCS Judge Rubric@0.1.0": 1440
+          }
+        },
+        "overall_quality_score": 1.0,
+        "pricing_snapshot_date": "2026-06-11",
+        "num_scenarios": 120,
+        "axis_confidence_intervals": {
+          "p95_v2v_ttfb_ms": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 860.0,
+            "low": 860.0,
+            "high": 860.0,
+            "n": 1440,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1440,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_successful_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1440,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "task_success_rate": {
+            "method": "source_report",
+            "confidence": 0.95,
+            "estimate": 1.0,
+            "low": 0.9973,
+            "high": 1.0,
+            "n": 1440
+          }
+        }
+      },
+      "frontier_eligible": true,
+      "exclusion_reasons": [],
+      "confidence_intervals": {
+        "pass_at_k": {
+          "successes": 120,
+          "total": 120,
+          "estimate": 1.0,
+          "low": 0.969,
+          "high": 1.0
+        },
+        "pass_k": {
+          "successes": 120,
+          "total": 120,
+          "estimate": 1.0,
+          "low": 0.969,
+          "high": 1.0
+        },
+        "trial_pass_rate": {
+          "successes": 1440,
+          "total": 1440,
+          "estimate": 1.0,
+          "low": 0.9973,
+          "high": 1.0
+        },
+        "frontier_axes": {
+          "p95_v2v_ttfb_ms": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 860.0,
+            "low": 860.0,
+            "high": 860.0,
+            "n": 1440,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1440,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_successful_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1440,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "task_success_rate": {
+            "method": "source_report",
+            "confidence": 0.95,
+            "estimate": 1.0,
+            "low": 0.9973,
+            "high": 1.0,
+            "n": 1440
+          }
+        }
+      }
+    },
+    "oracle_text": {
+      "name": "oracle_text",
+      "benchmark": "OpenVoiceCS-Realtime-Load",
+      "benchmark_version": "0.1.0",
+      "model_metadata": {
+        "display_name": "oracle_text",
+        "agent": "oracle",
+        "provider": "reference",
+        "model_id": "oracle_text-realtime-v0.1",
+        "pricing_profile_id": "reference-zero-v0.1",
+        "pricing_snapshot_date": "2026-06-11",
+        "pipeline_type": "cascaded",
+        "input_modality": "text",
+        "transport": "websocket",
+        "endpoint": "ws://127.0.0.1:63156",
+        "baseline_id": "oracle_text"
+      },
+      "axes": {
+        "p95_v2v_ttfb_ms": 860.0,
+        "cost_usd_per_successful_conversation": 0.0,
+        "task_success_rate": 1.0
+      },
+      "latency": {
+        "p50_v2v_ttfb_ms": 770.0,
+        "p90_v2v_ttfb_ms": 860.0,
+        "p95_v2v_ttfb_ms": 860.0,
+        "p99_v2v_ttfb_ms": 860.0,
+        "p50_v2v_last_byte_ms": 1120.0,
+        "p95_v2v_last_byte_ms": 1210.0,
+        "barge_in_stop_p95_ms": 120.0,
+        "interruption_recovery_p95_ms": 240.0,
+        "latency_at_100_concurrency_p95_ms": 860.0,
+        "stage_latency_ms": {
+          "asr_finalization_ms": {
+            "p50": 50.0,
+            "p95": 50.0
+          },
+          "llm_ttft_ms": {
+            "p50": 650.0,
+            "p95": 740.0
+          },
+          "tts_first_chunk_ms": {
+            "p50": 70.0,
+            "p95": 70.0
+          }
+        },
+        "latency_measurement": {
+          "sample_count": 1206,
+          "source_counts": {
+            "event_stream": 1206,
+            "reported_latency": 0,
+            "runtime_fallback": 0,
+            "unknown": 0
+          },
+          "event_stream_samples": 1206,
+          "reported_latency_samples": 0,
+          "runtime_fallback_samples": 0,
+          "unknown_samples": 0,
+          "vad_origin_samples": 1206,
+          "first_audio_event_samples": 1206,
+          "last_audio_event_samples": 1206,
+          "barge_in_stop_event_samples": 1206,
+          "interruption_recovery_event_samples": 1206
+        },
+        "latency_load": {
+          "levels": {
+            "1": {
+              "target_concurrency": 1,
+              "sample_count": 402,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 402,
+              "completed_calls": 402,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 1,
+              "wall_seconds": 0.42
+            },
+            "10": {
+              "target_concurrency": 10,
+              "sample_count": 402,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 402,
+              "completed_calls": 402,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 10,
+              "wall_seconds": 0.213
+            },
+            "100": {
+              "target_concurrency": 100,
+              "sample_count": 402,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 402,
+              "completed_calls": 402,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 100,
+              "wall_seconds": 0.195
+            }
+          }
+        },
+        "sample_count": 1206
+      },
+      "cost": {
+        "cost_usd_per_conversation": 0.0,
+        "cost_usd_per_successful_conversation": 0.0,
+        "avg_component_cost_usd": {
+          "asr": 0.0,
+          "llm": 0.0,
+          "tts": 0.0,
+          "speech_to_speech": null,
+          "telephony": 0.0,
+          "transport": 0.0
+        },
+        "cost_provenance": {
+          "sample_count": 1206,
+          "direct_cost_samples": 1206,
+          "derived_cost_samples": 1206,
+          "fully_loaded_samples": 1206,
+          "missing_cost_samples": 0,
+          "required_components": [
+            "asr",
+            "llm",
+            "tts",
+            "telephony",
+            "transport"
+          ],
+          "component_sample_counts": {
+            "asr": 1206,
+            "llm": 1206,
+            "tts": 1206,
+            "speech_to_speech": 0,
+            "telephony": 1206,
+            "transport": 1206
+          },
+          "pricing_source": "profile",
+          "pipeline_type": "cascaded"
+        },
+        "sample_count": 1206
+      },
+      "quality": {
+        "task_success_rate": 1.0,
+        "experience_score": 1.0,
+        "experience_score_source": "judged",
+        "overall_quality_score": 1.0
+      },
+      "resolved_pricing": {
+        "snapshot_date": "2026-06-11",
+        "currency": "USD",
+        "profile_id": "reference-zero-v0.1",
+        "pipeline_type": "cascaded",
+        "component_entry_ids": {
+          "asr": "reference:asr:zero",
+          "llm": "reference:llm:zero",
+          "tts": "reference:tts:zero",
+          "telephony": "reference:telephony:zero",
+          "transport": "reference:transport:zero"
+        }
+      },
+      "domain_axes": {
+        "retail": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "travel": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "telecom": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "healthcare_admin": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "fintech_sandbox": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "saas_support": {
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        },
+        "utility_support": {
+          "p95_v2v_ttfb_ms": 760.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0
+        }
+      },
+      "scorecard": {
+        "p50_v2v_ttfb_ms": 770.0,
+        "p90_v2v_ttfb_ms": 860.0,
+        "p95_v2v_ttfb_ms": 860.0,
+        "p99_v2v_ttfb_ms": 860.0,
+        "p50_v2v_last_byte_ms": 1120.0,
+        "p95_v2v_last_byte_ms": 1210.0,
+        "barge_in_stop_p95_ms": 120.0,
+        "interruption_recovery_p95_ms": 240.0,
+        "latency_at_100_concurrency_p95_ms": 860.0,
+        "stage_latency_ms": {
+          "asr_finalization_ms": {
+            "p50": 50.0,
+            "p95": 50.0
+          },
+          "llm_ttft_ms": {
+            "p50": 650.0,
+            "p95": 740.0
+          },
+          "tts_first_chunk_ms": {
+            "p50": 70.0,
+            "p95": 70.0
+          }
+        },
+        "latency_measurement": {
+          "sample_count": 1206,
+          "source_counts": {
+            "event_stream": 1206,
+            "reported_latency": 0,
+            "runtime_fallback": 0,
+            "unknown": 0
+          },
+          "event_stream_samples": 1206,
+          "reported_latency_samples": 0,
+          "runtime_fallback_samples": 0,
+          "unknown_samples": 0,
+          "vad_origin_samples": 1206,
+          "first_audio_event_samples": 1206,
+          "last_audio_event_samples": 1206,
+          "barge_in_stop_event_samples": 1206,
+          "interruption_recovery_event_samples": 1206
+        },
+        "latency_load": {
+          "levels": {
+            "1": {
+              "target_concurrency": 1,
+              "sample_count": 402,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 402,
+              "completed_calls": 402,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 1,
+              "wall_seconds": 0.42
+            },
+            "10": {
+              "target_concurrency": 10,
+              "sample_count": 402,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 402,
+              "completed_calls": 402,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 10,
+              "wall_seconds": 0.213
+            },
+            "100": {
+              "target_concurrency": 100,
+              "sample_count": 402,
+              "saturated": true,
+              "p95_v2v_ttfb_ms": 860.0,
+              "requested_calls": 402,
+              "completed_calls": 402,
+              "error_calls": 0,
+              "error_rate": 0.0,
+              "peak_active_calls": 100,
+              "wall_seconds": 0.195
+            }
+          }
+        },
+        "cost_usd_per_conversation": 0.0,
+        "cost_usd_per_successful_conversation": 0.0,
+        "avg_component_cost_usd": {
+          "asr": 0.0,
+          "llm": 0.0,
+          "tts": 0.0,
+          "speech_to_speech": null,
+          "telephony": 0.0,
+          "transport": 0.0
+        },
+        "cost_provenance": {
+          "sample_count": 1206,
+          "direct_cost_samples": 1206,
+          "derived_cost_samples": 1206,
+          "fully_loaded_samples": 1206,
+          "missing_cost_samples": 0,
+          "required_components": [
+            "asr",
+            "llm",
+            "tts",
+            "telephony",
+            "transport"
+          ],
+          "component_sample_counts": {
+            "asr": 1206,
+            "llm": 1206,
+            "tts": 1206,
+            "speech_to_speech": 0,
+            "telephony": 1206,
+            "transport": 1206
+          },
+          "pricing_source": "profile",
+          "pipeline_type": "cascaded"
+        },
+        "task_success_rate": 1.0,
+        "experience_score": 1.0,
+        "experience_score_source": "judged",
+        "experience_evidence": {
+          "coverage": 1.0,
+          "num_judged_trials": 1206,
+          "num_trials": 1206,
+          "judge_counts": {
+            "OpenVoiceCS Judge Rubric@0.1.0": 1206
+          }
+        },
+        "overall_quality_score": 1.0,
+        "pricing_snapshot_date": "2026-06-11",
+        "num_scenarios": 201,
+        "axis_confidence_intervals": {
+          "p95_v2v_ttfb_ms": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 860.0,
+            "low": 860.0,
+            "high": 860.0,
+            "n": 1206,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1206,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_successful_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1206,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "task_success_rate": {
+            "method": "source_report",
+            "confidence": 0.95,
+            "estimate": 1.0,
+            "low": 0.9968,
+            "high": 1.0,
+            "n": 1206
+          }
+        }
+      },
+      "frontier_eligible": true,
+      "exclusion_reasons": [],
+      "confidence_intervals": {
+        "pass_at_k": {
+          "successes": 201,
+          "total": 201,
+          "estimate": 1.0,
+          "low": 0.9812,
+          "high": 1.0
+        },
+        "pass_k": {
+          "successes": 201,
+          "total": 201,
+          "estimate": 1.0,
+          "low": 0.9812,
+          "high": 1.0
+        },
+        "trial_pass_rate": {
+          "successes": 1206,
+          "total": 1206,
+          "estimate": 1.0,
+          "low": 0.9968,
+          "high": 1.0
+        },
+        "frontier_axes": {
+          "p95_v2v_ttfb_ms": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 860.0,
+            "low": 860.0,
+            "high": 860.0,
+            "n": 1206,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1206,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "cost_usd_per_successful_conversation": {
+            "method": "bootstrap_percentile",
+            "confidence": 0.95,
+            "estimate": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 1206,
+            "iterations": 1000,
+            "seed": 0
+          },
+          "task_success_rate": {
+            "method": "source_report",
+            "confidence": 0.95,
+            "estimate": 1.0,
+            "low": 0.9968,
+            "high": 1.0,
+            "n": 1206
+          }
+        }
+      }
+    }
+  },
+  "scorecards": {
+    "oracle_audio_manifest": {
+      "p50_v2v_ttfb_ms": 790.0,
+      "p90_v2v_ttfb_ms": 860.0,
+      "p95_v2v_ttfb_ms": 860.0,
+      "p99_v2v_ttfb_ms": 860.0,
+      "p50_v2v_last_byte_ms": 1140.0,
+      "p95_v2v_last_byte_ms": 1210.0,
+      "barge_in_stop_p95_ms": 120.0,
+      "interruption_recovery_p95_ms": 240.0,
+      "latency_at_100_concurrency_p95_ms": 860.0,
+      "stage_latency_ms": {
+        "asr_finalization_ms": {
+          "p50": 50.0,
+          "p95": 50.0
+        },
+        "llm_ttft_ms": {
+          "p50": 670.0,
+          "p95": 740.0
+        },
+        "tts_first_chunk_ms": {
+          "p50": 70.0,
+          "p95": 70.0
+        }
+      },
+      "latency_measurement": {
+        "sample_count": 1440,
+        "source_counts": {
+          "event_stream": 1440,
+          "reported_latency": 0,
+          "runtime_fallback": 0,
+          "unknown": 0
+        },
+        "event_stream_samples": 1440,
+        "reported_latency_samples": 0,
+        "runtime_fallback_samples": 0,
+        "unknown_samples": 0,
+        "vad_origin_samples": 1440,
+        "first_audio_event_samples": 1440,
+        "last_audio_event_samples": 1440,
+        "barge_in_stop_event_samples": 1440,
+        "interruption_recovery_event_samples": 1440
+      },
+      "latency_load": {
+        "levels": {
+          "1": {
+            "target_concurrency": 1,
+            "sample_count": 480,
+            "saturated": true,
+            "p95_v2v_ttfb_ms": 860.0,
+            "requested_calls": 480,
+            "completed_calls": 480,
+            "error_calls": 0,
+            "error_rate": 0.0,
+            "peak_active_calls": 1,
+            "wall_seconds": 0.485
+          },
+          "10": {
+            "target_concurrency": 10,
+            "sample_count": 480,
+            "saturated": true,
+            "p95_v2v_ttfb_ms": 860.0,
+            "requested_calls": 480,
+            "completed_calls": 480,
+            "error_calls": 0,
+            "error_rate": 0.0,
+            "peak_active_calls": 10,
+            "wall_seconds": 0.289
+          },
+          "100": {
+            "target_concurrency": 100,
+            "sample_count": 480,
+            "saturated": true,
+            "p95_v2v_ttfb_ms": 860.0,
+            "requested_calls": 480,
+            "completed_calls": 480,
+            "error_calls": 0,
+            "error_rate": 0.0,
+            "peak_active_calls": 100,
+            "wall_seconds": 0.27
+          }
+        }
+      },
+      "cost_usd_per_conversation": 0.0,
+      "cost_usd_per_successful_conversation": 0.0,
+      "avg_component_cost_usd": {
+        "asr": 0.0,
+        "llm": 0.0,
+        "tts": 0.0,
+        "speech_to_speech": null,
+        "telephony": 0.0,
+        "transport": 0.0
+      },
+      "cost_provenance": {
+        "sample_count": 1440,
+        "direct_cost_samples": 1440,
+        "derived_cost_samples": 1440,
+        "fully_loaded_samples": 1440,
+        "missing_cost_samples": 0,
+        "required_components": [
+          "asr",
+          "llm",
+          "tts",
+          "telephony",
+          "transport"
+        ],
+        "component_sample_counts": {
+          "asr": 1440,
+          "llm": 1440,
+          "tts": 1440,
+          "speech_to_speech": 0,
+          "telephony": 1440,
+          "transport": 1440
+        },
+        "pricing_source": "profile",
+        "pipeline_type": "cascaded"
+      },
+      "task_success_rate": 1.0,
+      "experience_score": 1.0,
+      "experience_score_source": "judged",
+      "experience_evidence": {
+        "coverage": 1.0,
+        "num_judged_trials": 1440,
+        "num_trials": 1440,
+        "judge_counts": {
+          "OpenVoiceCS Judge Rubric@0.1.0": 1440
+        }
+      },
+      "overall_quality_score": 1.0,
+      "pricing_snapshot_date": "2026-06-11",
+      "num_scenarios": 120,
+      "axis_confidence_intervals": {
+        "p95_v2v_ttfb_ms": {
+          "method": "bootstrap_percentile",
+          "confidence": 0.95,
+          "estimate": 860.0,
+          "low": 860.0,
+          "high": 860.0,
+          "n": 1440,
+          "iterations": 1000,
+          "seed": 0
+        },
+        "cost_usd_per_conversation": {
+          "method": "bootstrap_percentile",
+          "confidence": 0.95,
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "n": 1440,
+          "iterations": 1000,
+          "seed": 0
+        },
+        "cost_usd_per_successful_conversation": {
+          "method": "bootstrap_percentile",
+          "confidence": 0.95,
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "n": 1440,
+          "iterations": 1000,
+          "seed": 0
+        },
+        "task_success_rate": {
+          "method": "source_report",
+          "confidence": 0.95,
+          "estimate": 1.0,
+          "low": 0.9973,
+          "high": 1.0,
+          "n": 1440
+        }
+      }
+    },
+    "oracle_text": {
+      "p50_v2v_ttfb_ms": 770.0,
+      "p90_v2v_ttfb_ms": 860.0,
+      "p95_v2v_ttfb_ms": 860.0,
+      "p99_v2v_ttfb_ms": 860.0,
+      "p50_v2v_last_byte_ms": 1120.0,
+      "p95_v2v_last_byte_ms": 1210.0,
+      "barge_in_stop_p95_ms": 120.0,
+      "interruption_recovery_p95_ms": 240.0,
+      "latency_at_100_concurrency_p95_ms": 860.0,
+      "stage_latency_ms": {
+        "asr_finalization_ms": {
+          "p50": 50.0,
+          "p95": 50.0
+        },
+        "llm_ttft_ms": {
+          "p50": 650.0,
+          "p95": 740.0
+        },
+        "tts_first_chunk_ms": {
+          "p50": 70.0,
+          "p95": 70.0
+        }
+      },
+      "latency_measurement": {
+        "sample_count": 1206,
+        "source_counts": {
+          "event_stream": 1206,
+          "reported_latency": 0,
+          "runtime_fallback": 0,
+          "unknown": 0
+        },
+        "event_stream_samples": 1206,
+        "reported_latency_samples": 0,
+        "runtime_fallback_samples": 0,
+        "unknown_samples": 0,
+        "vad_origin_samples": 1206,
+        "first_audio_event_samples": 1206,
+        "last_audio_event_samples": 1206,
+        "barge_in_stop_event_samples": 1206,
+        "interruption_recovery_event_samples": 1206
+      },
+      "latency_load": {
+        "levels": {
+          "1": {
+            "target_concurrency": 1,
+            "sample_count": 402,
+            "saturated": true,
+            "p95_v2v_ttfb_ms": 860.0,
+            "requested_calls": 402,
+            "completed_calls": 402,
+            "error_calls": 0,
+            "error_rate": 0.0,
+            "peak_active_calls": 1,
+            "wall_seconds": 0.42
+          },
+          "10": {
+            "target_concurrency": 10,
+            "sample_count": 402,
+            "saturated": true,
+            "p95_v2v_ttfb_ms": 860.0,
+            "requested_calls": 402,
+            "completed_calls": 402,
+            "error_calls": 0,
+            "error_rate": 0.0,
+            "peak_active_calls": 10,
+            "wall_seconds": 0.213
+          },
+          "100": {
+            "target_concurrency": 100,
+            "sample_count": 402,
+            "saturated": true,
+            "p95_v2v_ttfb_ms": 860.0,
+            "requested_calls": 402,
+            "completed_calls": 402,
+            "error_calls": 0,
+            "error_rate": 0.0,
+            "peak_active_calls": 100,
+            "wall_seconds": 0.195
+          }
+        }
+      },
+      "cost_usd_per_conversation": 0.0,
+      "cost_usd_per_successful_conversation": 0.0,
+      "avg_component_cost_usd": {
+        "asr": 0.0,
+        "llm": 0.0,
+        "tts": 0.0,
+        "speech_to_speech": null,
+        "telephony": 0.0,
+        "transport": 0.0
+      },
+      "cost_provenance": {
+        "sample_count": 1206,
+        "direct_cost_samples": 1206,
+        "derived_cost_samples": 1206,
+        "fully_loaded_samples": 1206,
+        "missing_cost_samples": 0,
+        "required_components": [
+          "asr",
+          "llm",
+          "tts",
+          "telephony",
+          "transport"
+        ],
+        "component_sample_counts": {
+          "asr": 1206,
+          "llm": 1206,
+          "tts": 1206,
+          "speech_to_speech": 0,
+          "telephony": 1206,
+          "transport": 1206
+        },
+        "pricing_source": "profile",
+        "pipeline_type": "cascaded"
+      },
+      "task_success_rate": 1.0,
+      "experience_score": 1.0,
+      "experience_score_source": "judged",
+      "experience_evidence": {
+        "coverage": 1.0,
+        "num_judged_trials": 1206,
+        "num_trials": 1206,
+        "judge_counts": {
+          "OpenVoiceCS Judge Rubric@0.1.0": 1206
+        }
+      },
+      "overall_quality_score": 1.0,
+      "pricing_snapshot_date": "2026-06-11",
+      "num_scenarios": 201,
+      "axis_confidence_intervals": {
+        "p95_v2v_ttfb_ms": {
+          "method": "bootstrap_percentile",
+          "confidence": 0.95,
+          "estimate": 860.0,
+          "low": 860.0,
+          "high": 860.0,
+          "n": 1206,
+          "iterations": 1000,
+          "seed": 0
+        },
+        "cost_usd_per_conversation": {
+          "method": "bootstrap_percentile",
+          "confidence": 0.95,
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "n": 1206,
+          "iterations": 1000,
+          "seed": 0
+        },
+        "cost_usd_per_successful_conversation": {
+          "method": "bootstrap_percentile",
+          "confidence": 0.95,
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "n": 1206,
+          "iterations": 1000,
+          "seed": 0
+        },
+        "task_success_rate": {
+          "method": "source_report",
+          "confidence": 0.95,
+          "estimate": 1.0,
+          "low": 0.9968,
+          "high": 1.0,
+          "n": 1206
+        }
+      }
+    }
+  },
+  "utility_view": null,
+  "methodology_notes": [
+    "Pareto dominance uses p95 voice-to-voice TTFB, cost per successful conversation, and task success.",
+    "Reports missing any primary axis are not frontier-eligible.",
+    "Conversation experience is a gate, not an optimization axis.",
+    "Provider pricing should be pinned with a snapshot date for reproducible cost comparisons.",
+    "Constrained frontiers, when requested, filter systems by latency/cost budgets before Pareto evaluation."
+  ]
+}

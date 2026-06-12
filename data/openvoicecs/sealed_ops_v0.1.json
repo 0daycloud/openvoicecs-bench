@@ -1,0 +1,54 @@
+{
+  "name": "OpenVoiceCS Sealed Evaluation Operations",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "split_manifest": "data/openvoicecs/splits_v0.1.json",
+  "split_commitments": "data/openvoicecs/split_commitments_v0.1.json",
+  "custody": {
+    "sealed_ids_revealed": false,
+    "commitment_hash_published": true,
+    "storage": "private-hosted-evaluator",
+    "access_log_required": true,
+    "access_log_retention": "minimum_24_months"
+  },
+  "access_policy": {
+    "allowed_roles": [
+      "release_manager",
+      "sealed_eval_operator",
+      "independent_auditor"
+    ],
+    "pre_submission_access": false,
+    "conflict_attestation_required": true,
+    "reviewer_conflict_policy": "No evaluator with a financial, employment, or implementation conflict may access sealed prompts, expected states, transcripts, or audio assets before the submission window closes."
+  },
+  "evaluation_protocol": {
+    "submission_queue": "first_in_first_out_with_versioned_submission_cards",
+    "max_attempts_per_system": 2,
+    "audit_log_required": true,
+    "fixed_evaluation_environment": true,
+    "result_release_delay": "after_all_same_window_submissions_complete",
+    "environment_controls": [
+      "pinned_benchmark_version",
+      "pinned_audio_assets",
+      "pinned_pricing_snapshot",
+      "recorded_region_network_hardware_transport",
+      "stored_run_manifest"
+    ]
+  },
+  "disclosure_policy": {
+    "publish_prompts_before_evaluation": false,
+    "publish_aggregate_counts": true,
+    "publish_post_eval_errata": true,
+    "publish_per_system_artifacts": [
+      "submission_card",
+      "run_manifest",
+      "aggregate_report",
+      "frontier_report",
+      "judge_agreement_summary"
+    ]
+  },
+  "limitations": [
+    "The v0.1 repository contains open local fixtures for development and verifier testing.",
+    "Official leaderboard claims require the sealed split to be served through the private hosted evaluator under this operations policy."
+  ]
+}

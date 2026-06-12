@@ -1,0 +1,2697 @@
+{
+  "name": "OpenVoiceCS-Bench Provenance Manifest",
+  "version": "0.1.0",
+  "description": "Source, license, consent, and contamination metadata for OpenVoiceCS seed data.",
+  "scenarios": {
+    "retail-refund-damaged-item-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed from synthetic customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-rebook-missed-connection-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed from synthetic customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "telecom-billing-credit-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed from synthetic customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "healthcare-admin-schedule-refill-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed from synthetic customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-fraud-card-replacement-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed from synthetic customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "saas-account-access-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed from synthetic customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "retail-prompt-injection-refund-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed adversarial compliance scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-social-engineering-transfer-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed adversarial compliance scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "healthcare-phi-extraction-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed adversarial compliance scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "saas-ceo-impersonation-mfa-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed adversarial compliance scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "utility-outage-audio-report-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed audio-to-action customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "telecom-noisy-address-correction-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed robustness workflow with noisy self-repair",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-voice-voucher-reissue-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed end-to-end voice customer-service workflow",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-sandbox-service-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "fintech-sandbox-service-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "fintech-sandbox-service-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "fintech-sandbox-service-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "fintech-sandbox-service-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "fintech-sandbox-service-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "healthcare-admin-service-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "healthcare-admin-service-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "healthcare-admin-audio-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "healthcare-admin-service-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-policy-attack-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-audio-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-voice-flow-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-robustness-repair-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-service-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-policy-attack-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "retail-audio-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "saas-support-voice-flow-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "saas-support-robustness-repair-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "saas-support-service-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "saas-support-policy-attack-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "saas-support-audio-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "saas-support-voice-flow-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "telecom-robustness-repair-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "telecom-service-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "telecom-policy-attack-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "telecom-audio-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "telecom-voice-flow-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "telecom-robustness-repair-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-service-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-policy-attack-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-audio-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-voice-flow-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-robustness-repair-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-service-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "travel-service-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic public-beta scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_template_reviewed"
+    },
+    "fintech-sandbox-service-action-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-009": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-010": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-011": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-012": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-013": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-014": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-015": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-policy-attack-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-009": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-016": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-policy-attack-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-robustness-repair-010": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-service-action-017": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-policy-attack-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "fintech-sandbox-audio-action-001": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-service-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-audio-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-service-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-audio-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-service-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-audio-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-service-action-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-audio-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-service-action-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-audio-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-service-action-009": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-policy-attack-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-audio-action-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "healthcare-admin-robustness-repair-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-policy-attack-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-audio-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-robustness-repair-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-policy-attack-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-audio-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-robustness-repair-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-policy-attack-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-audio-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-robustness-repair-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-policy-attack-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-audio-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-robustness-repair-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-policy-attack-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-audio-action-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-robustness-repair-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-policy-attack-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-audio-action-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-robustness-repair-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-service-action-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-policy-attack-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-audio-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-robustness-repair-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-service-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-policy-attack-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-audio-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-voice-flow-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-robustness-repair-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-service-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-policy-attack-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-audio-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-voice-flow-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-robustness-repair-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-service-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-policy-attack-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-audio-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-voice-flow-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-robustness-repair-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-service-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-policy-attack-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-audio-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-voice-flow-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-robustness-repair-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-service-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "saas-support-policy-attack-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-audio-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-voice-flow-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-robustness-repair-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-service-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-policy-attack-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-audio-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-voice-flow-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-robustness-repair-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-service-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-policy-attack-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-audio-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-voice-flow-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-robustness-repair-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-service-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-policy-attack-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-audio-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-voice-flow-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-robustness-repair-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-service-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-policy-attack-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-audio-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-voice-flow-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-robustness-repair-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-service-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "telecom-policy-attack-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-audio-action-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-voice-flow-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-robustness-repair-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-service-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-policy-attack-002": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-audio-action-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-voice-flow-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-robustness-repair-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-service-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-policy-attack-003": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-audio-action-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-voice-flow-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-robustness-repair-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-service-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-policy-attack-004": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-audio-action-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-voice-flow-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-robustness-repair-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-service-action-007": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-policy-attack-005": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic adversarial-compliance template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-audio-action-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-voice-flow-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-robustness-repair-006": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-service-action-008": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "travel-service-action-009": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "generated from deterministic leaderboard_v1 scenario template",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_template_reviewed"
+    }
+  },
+  "audio_variants": {
+    "retail-refund-damaged-item-001-clean-us-female": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "retail-refund-damaged-item-001-noisy-cafe": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "travel-rebook-missed-connection-001-interruption": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "retail-prompt-injection-refund-001-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "fintech-social-engineering-transfer-001-urgent-authority": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "healthcare-phi-extraction-001-doctor-claim": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "saas-ceo-impersonation-mfa-001-threat": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "utility-outage-audio-report-001-clean-us-female": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "telecom-noisy-address-correction-001-street-noise": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "travel-voice-voucher-reissue-001-clean-us-female": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "pinned_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-001-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-001-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-001-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "retail-policy-attack-001-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "retail-audio-action-001-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "retail-voice-flow-001-voice-flow": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-001-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "retail-policy-attack-002-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "retail-audio-action-002-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "saas-support-voice-flow-001-voice-flow": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "saas-support-robustness-repair-001-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "saas-support-policy-attack-001-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "saas-support-voice-flow-002-voice-flow": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "telecom-audio-action-001-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "telecom-robustness-repair-002-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "public_beta_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-007-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-001-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-008-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-002-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-009-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-003-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-010-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-004-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-011-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-005-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-012-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-006-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-013-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-007-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-014-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-008-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-015-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-policy-attack-001-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-009-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-016-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-policy-attack-002-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-robustness-repair-010-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-service-action-017-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-policy-attack-003-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "fintech-sandbox-audio-action-001-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-002-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-service-action-004-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-002-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-002-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-003-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-service-action-005-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-003-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-003-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-004-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-service-action-006-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-004-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-004-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-005-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-service-action-007-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-005-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-005-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-006-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-service-action-008-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-006-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-006-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-007-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-service-action-009-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-policy-attack-007-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-audio-action-007-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "healthcare-admin-robustness-repair-008-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-002-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-policy-attack-003-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-audio-action-003-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-002-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-003-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-policy-attack-004-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-audio-action-004-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-003-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-004-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-policy-attack-005-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-audio-action-005-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-004-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-005-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-policy-attack-006-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-audio-action-006-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-005-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-006-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-policy-attack-007-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-audio-action-007-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-006-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-007-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-policy-attack-008-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-audio-action-008-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-robustness-repair-007-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "retail-service-action-008-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-policy-attack-002-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-audio-action-002-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-robustness-repair-002-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-service-action-002-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-policy-attack-003-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-audio-action-003-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-voice-flow-003-voice-flow": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-robustness-repair-003-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-service-action-003-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-policy-attack-004-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-audio-action-004-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-voice-flow-004-voice-flow": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-robustness-repair-004-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-service-action-004-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-policy-attack-005-spoken-attack": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-audio-action-005-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-voice-flow-005-voice-flow": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-service-action-005-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-audio-action-006-clean-us": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    },
+    "saas-support-robustness-repair-006-noise-repair": {
+      "source_type": "synthetic",
+      "license": "CC-BY-4.0",
+      "speaker_consent": "synthetic",
+      "voice_rights": "synthetic_voice_profile",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "leaderboard_v1_synthetic_tts_asset"
+    }
+  }
+}

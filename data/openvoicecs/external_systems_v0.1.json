@@ -1,0 +1,103 @@
+{
+  "name": "OpenVoiceCS External Systems Registry",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "purpose": "Tracks reference fixtures, pending external submissions, and official leaderboard systems with hash-pinned evidence.",
+  "admission_policy": {
+    "official_requires_submission_card": true,
+    "official_requires_run_manifest": true,
+    "official_requires_judged_report": true,
+    "official_requires_judge_annotation_package": true,
+    "official_requires_pricing_profile": true,
+    "official_requires_release_bundle": true,
+    "minimum_trials_per_scenario": 5,
+    "notes": [
+      "Reference fixtures are useful for harness validation but are not official external leaderboard entries.",
+      "Official external systems must publish submission cards, frozen reports, run manifests, release bundles, pricing evidence, and non-fixture judge evidence."
+    ]
+  },
+  "systems": [
+    {
+      "id": "oracle_text_realtime_reference",
+      "name": "Oracle Text Realtime Reference",
+      "status": "reference_fixture",
+      "system_type": "reference",
+      "official_leaderboard_eligible": false,
+      "provider": "reference",
+      "model_id": "oracle_text-realtime-v0.1",
+      "input_modality": "text",
+      "pipeline_type": "cascaded",
+      "pricing_profile_id": "reference-zero-v0.1",
+      "pricing_snapshot_date": "2026-06-11",
+      "report": {
+        "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
+        "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+        "bytes": 7494153
+      },
+      "submission_card": {
+        "path": "data/openvoicecs/submission_cards/oracle_text_realtime_reference_card.json",
+        "sha256": "356cb8932acc377b1216555484fdb8f2de0739c538a696ded73dd12dd9031542",
+        "bytes": 1539
+      },
+      "run_manifest": {
+        "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
+        "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
+        "bytes": 19640
+      },
+      "release_bundle": {
+        "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
+        "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
+        "bytes": 10793
+      },
+      "judge_evidence": {
+        "annotation_mode": "reference_fixture",
+        "minimum_raters_per_item": 2,
+        "agreement_method": "krippendorff_alpha_interval",
+        "official_judging": false
+      }
+    },
+    {
+      "id": "oracle_audio_manifest_realtime_reference",
+      "name": "Oracle Audio Manifest Realtime Reference",
+      "status": "reference_fixture",
+      "system_type": "reference",
+      "official_leaderboard_eligible": false,
+      "provider": "reference",
+      "model_id": "oracle_audio_manifest-realtime-v0.1",
+      "input_modality": "audio",
+      "pipeline_type": "cascaded",
+      "pricing_profile_id": "reference-zero-v0.1",
+      "pricing_snapshot_date": "2026-06-11",
+      "report": {
+        "path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
+        "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
+        "bytes": 8955639
+      },
+      "submission_card": {
+        "path": "data/openvoicecs/submission_cards/oracle_audio_manifest_realtime_reference_card.json",
+        "sha256": "0a88aa342cd7beb6b538bed84fd29c5ff063620a32e94a15e259a403d3a4e480",
+        "bytes": 1603
+      },
+      "run_manifest": {
+        "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
+        "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
+        "bytes": 19640
+      },
+      "release_bundle": {
+        "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
+        "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
+        "bytes": 10793
+      },
+      "judge_evidence": {
+        "annotation_mode": "reference_fixture",
+        "minimum_raters_per_item": 2,
+        "agreement_method": "krippendorff_alpha_interval",
+        "official_judging": false
+      }
+    }
+  ],
+  "known_gaps": [
+    "No official third-party external voice-agent submissions are included in v0.1.",
+    "Current registered systems are reference fixtures for verifier and release-bundle validation."
+  ]
+}

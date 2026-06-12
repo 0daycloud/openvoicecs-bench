@@ -1,0 +1,282 @@
+{
+  "benchmark": "Latency-Cost-Quality Frontier",
+  "bundle_version": "0.1.0",
+  "generated_at": "2026-06-11",
+  "output_dir": "data/openvoicecs/releases/frontier_seed",
+  "inputs": {
+    "reports": [
+      "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
+      "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_text_realtime_judged.json"
+    ],
+    "scenario_path": "data/openvoicecs/scenarios_v0.1.json",
+    "audio_manifest_path": "data/openvoicecs/audio_manifest_v0.1.json",
+    "pricing_manifest_path": "data/openvoicecs/pricing_snapshot_v0.1.json",
+    "split_manifest_path": "data/openvoicecs/splits_v0.1.json",
+    "provenance_manifest_path": "data/openvoicecs/provenance_v0.1.json",
+    "changelog_path": "data/openvoicecs/changelog_v0.1.json",
+    "baseline_manifest_path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
+    "review_manifest_path": "data/openvoicecs/scenario_reviews_v0.1.json"
+  },
+  "input_files": {
+    "reports": [
+      {
+        "path": "inputs/reports/001_oracle_audio_manifest_realtime_judged.json",
+        "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
+        "bytes": 8955639,
+        "source_path": "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json"
+      },
+      {
+        "path": "inputs/reports/002_oracle_text_realtime_judged.json",
+        "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+        "bytes": 7494153,
+        "source_path": "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_text_realtime_judged.json"
+      }
+    ],
+    "scenario": {
+      "path": "inputs/manifests/scenarios.json",
+      "sha256": "430a87f3673fd6c1584e8a0a4b5f41fcbce37325e60c5b811c77c0f8c4b5e6c5",
+      "bytes": 1173811,
+      "source_path": "data/openvoicecs/scenarios_v0.1.json"
+    },
+    "audio_manifest": {
+      "path": "inputs/manifests/audio_manifest.json",
+      "sha256": "cf20d2f8a1a5e65e8f9cf6e7d57d428749a2e22ae7cd5ac5b9db234779a07c48",
+      "bytes": 111472,
+      "source_path": "data/openvoicecs/audio_manifest_v0.1.json"
+    },
+    "pricing_manifest": {
+      "path": "inputs/manifests/pricing_manifest.json",
+      "sha256": "b6c42d105f7832219d52a669960516cd6a6daf5713e9ffa82962e8b5768c7a6c",
+      "bytes": 7754,
+      "source_path": "data/openvoicecs/pricing_snapshot_v0.1.json"
+    },
+    "split_manifest": {
+      "path": "inputs/manifests/splits.json",
+      "sha256": "d21af3eaba73b8caa45bfd6dc894f5f8c4d67f49a7c68ecc3eb651ad8c36c3ae",
+      "bytes": 15578,
+      "source_path": "data/openvoicecs/splits_v0.1.json"
+    },
+    "provenance_manifest": {
+      "path": "inputs/manifests/provenance.json",
+      "sha256": "baba76a9ec1ba92e8be725f52d684dbc56a26f2c3e42d91954f621561e6e73ba",
+      "bytes": 112160,
+      "source_path": "data/openvoicecs/provenance_v0.1.json"
+    },
+    "changelog": {
+      "path": "inputs/manifests/changelog.json",
+      "sha256": "255d47ae3bde764ccc882009652a8e7982641f83cdad211f6f9c410c02a65909",
+      "bytes": 17122,
+      "source_path": "data/openvoicecs/changelog_v0.1.json"
+    },
+    "baseline_manifest": {
+      "path": "inputs/manifests/reference_baselines.json",
+      "sha256": "8bd14e51770892d9b39abe5fd2472238dc84b3d32c767fdff3b30481b0d368bf",
+      "bytes": 3149,
+      "source_path": "data/openvoicecs/baselines/reference_baselines_v0.1.json"
+    },
+    "review_manifest": {
+      "path": "inputs/manifests/scenario_reviews.json",
+      "sha256": "e78292aa1ef474e28377685bbc61d77e524268ef9290547d3ed72bc6530dc706",
+      "bytes": 167376,
+      "source_path": "data/openvoicecs/scenario_reviews_v0.1.json"
+    },
+    "judge_prompt": {
+      "path": "inputs/manifests/judge_prompt.txt",
+      "sha256": "8fa8f280a8d1c62b8ebdf7b70b2a5472bdbdad26527e0e4505b378ff38ad0a37",
+      "bytes": 1412,
+      "source_path": "data/openvoicecs/judging/judge_prompt_v0.1.md"
+    }
+  },
+  "release_tuple": {
+    "seed": 0,
+    "judge_model": "openvoicecs-reference-judge-v0.1",
+    "judge_prompt_path": "data/openvoicecs/judging/judge_prompt_v0.1.md",
+    "environment": {
+      "region": "local",
+      "network": "loopback",
+      "hardware_profile": "local-macos-arm64",
+      "transport": "websocket",
+      "concurrency_levels": [
+        1,
+        10,
+        100
+      ]
+    },
+    "readiness_profile": "leaderboard_v1"
+  },
+  "artifacts": {
+    "frontier_report": {
+      "path": "frontier_report.json",
+      "sha256": "0c206a7a71d4f89a65c29128ba32eeb4adbc83d147de298a2130190794125b7f",
+      "bytes": 41844
+    },
+    "plot:all:3d": {
+      "path": "plots/all_3d.svg",
+      "sha256": "8c619e65ec778386d3790b37588acc460d2532e59bb2df6627607e69851b9c0e",
+      "bytes": 1183
+    },
+    "plot:all:cost_vs_quality": {
+      "path": "plots/all_cost_vs_quality.svg",
+      "sha256": "cec8c0bfb49c0e4fc1da7e1e0598b7f8826f5259bb32612b80ed6a4d92362707",
+      "bytes": 1119
+    },
+    "plot:all:latency_vs_quality": {
+      "path": "plots/all_latency_vs_quality.svg",
+      "sha256": "8c626e3687501fe6976edbd3c57838f27b42bcf13e8e92540db920bc433aca0b",
+      "bytes": 1115
+    },
+    "plot:fintech_sandbox:3d": {
+      "path": "plots/fintech-sandbox_3d.svg",
+      "sha256": "8a0298995cb98c1857e3bb532a8586746c57f9101e01708ed696bc127804c0f1",
+      "bytes": 1207
+    },
+    "plot:fintech_sandbox:cost_vs_quality": {
+      "path": "plots/fintech-sandbox_cost_vs_quality.svg",
+      "sha256": "70f545ad194a577d8d84e0845b0592fa5a207cbbd745c07c7ab6d37c81d88e12",
+      "bytes": 1143
+    },
+    "plot:fintech_sandbox:latency_vs_quality": {
+      "path": "plots/fintech-sandbox_latency_vs_quality.svg",
+      "sha256": "929d709826adff1445475b2fd9e12fd94ac1537eee617ff97bbe68c5fb41f4d0",
+      "bytes": 1139
+    },
+    "plot:healthcare_admin:3d": {
+      "path": "plots/healthcare-admin_3d.svg",
+      "sha256": "973db61106d8829da969067b1ca19dcf0a4b4ef4f27e480f32fd4674b1bf6cbf",
+      "bytes": 1209
+    },
+    "plot:healthcare_admin:cost_vs_quality": {
+      "path": "plots/healthcare-admin_cost_vs_quality.svg",
+      "sha256": "3ab6bb67762b0c2c0ef99db479004b83df2fd132e87f2a51e4f4ee921d3aafdf",
+      "bytes": 1145
+    },
+    "plot:healthcare_admin:latency_vs_quality": {
+      "path": "plots/healthcare-admin_latency_vs_quality.svg",
+      "sha256": "2ccd0ae2c12a6e50da4a473c42e46a1100adbafcb130f3781b7e614d3463ca14",
+      "bytes": 1141
+    },
+    "plot:plot_data": {
+      "path": "plots/frontier_plot_data.json",
+      "sha256": "d1abc862115e2c83f96b90c80e650c7504e2f9eaffafdcc086030672ec7af9f8",
+      "bytes": 8676
+    },
+    "plot:retail:3d": {
+      "path": "plots/retail_3d.svg",
+      "sha256": "1ebc0fe652691c36783468653e02cf8b344117e18cb37e555efc0fb341fa2ee4",
+      "bytes": 1189
+    },
+    "plot:retail:cost_vs_quality": {
+      "path": "plots/retail_cost_vs_quality.svg",
+      "sha256": "0d83ad0427a3326bf0ef7588b9f9206e4b6ee085e8920519c5cd72e2bae838aa",
+      "bytes": 1125
+    },
+    "plot:retail:latency_vs_quality": {
+      "path": "plots/retail_latency_vs_quality.svg",
+      "sha256": "ccd34646c017e4129fe7ca7278ef544f26dd0d9c8b2c867c623e96f9c4c78520",
+      "bytes": 1121
+    },
+    "plot:saas_support:3d": {
+      "path": "plots/saas-support_3d.svg",
+      "sha256": "cd44fcb71d56b701be3395bc7ab6dd89e1a1be160f3ca3890fd04f96916c153c",
+      "bytes": 1201
+    },
+    "plot:saas_support:cost_vs_quality": {
+      "path": "plots/saas-support_cost_vs_quality.svg",
+      "sha256": "07a2a9e7c9a96f2d290a7077ad3ac0266f3ea7247a29d1a15aba08f4d49955fc",
+      "bytes": 1137
+    },
+    "plot:saas_support:latency_vs_quality": {
+      "path": "plots/saas-support_latency_vs_quality.svg",
+      "sha256": "5cef0413fcfdcece743ace5bfe09953756ef8f943ffef9bb4a676bf76700536a",
+      "bytes": 1133
+    },
+    "plot:telecom:3d": {
+      "path": "plots/telecom_3d.svg",
+      "sha256": "df542dafaf4923a9e14524073c4bcbddf0d58080e6652a5ef18dfbb568bbcec8",
+      "bytes": 1191
+    },
+    "plot:telecom:cost_vs_quality": {
+      "path": "plots/telecom_cost_vs_quality.svg",
+      "sha256": "960ec0a4a6fcfb61970e359b451fc6a52cdae58074c34af281a4e91ba2d690f9",
+      "bytes": 1127
+    },
+    "plot:telecom:latency_vs_quality": {
+      "path": "plots/telecom_latency_vs_quality.svg",
+      "sha256": "28f64af2ee4ad3ff60c2f47b6ecb618e2ac52c8a21bb975eacec2ba0d565c0b1",
+      "bytes": 1123
+    },
+    "plot:travel:3d": {
+      "path": "plots/travel_3d.svg",
+      "sha256": "2853c6e85040c16a87c72382999da49a6b6c52c4c5e7af28d22d8286e7b33194",
+      "bytes": 1189
+    },
+    "plot:travel:cost_vs_quality": {
+      "path": "plots/travel_cost_vs_quality.svg",
+      "sha256": "b380b2004805cc3a99e4436f7971d5b836ee2d20205b8f3dc5e333b8bd042af6",
+      "bytes": 1125
+    },
+    "plot:travel:latency_vs_quality": {
+      "path": "plots/travel_latency_vs_quality.svg",
+      "sha256": "15801cc7b7a457ca9a68adb8f7a58090e702981808f05919c29b2d6851b44b06",
+      "bytes": 1121
+    },
+    "plot:utility_support:3d": {
+      "path": "plots/utility-support_3d.svg",
+      "sha256": "5ac2fb477eba046c71eeebc3d6ec9af472201ccafcb8f498e942763f05b65a0c",
+      "bytes": 1207
+    },
+    "plot:utility_support:cost_vs_quality": {
+      "path": "plots/utility-support_cost_vs_quality.svg",
+      "sha256": "7c3759e8f8861dd050fd62a4b69f4147151d64539e0d8113fb8193246d62e770",
+      "bytes": 1143
+    },
+    "plot:utility_support:latency_vs_quality": {
+      "path": "plots/utility-support_latency_vs_quality.svg",
+      "sha256": "18e68873b68e44a54028ef2820041e3ac0dc2365eb3f3b9a236b66a3e1b48703",
+      "bytes": 1139
+    },
+    "readiness": {
+      "path": "readiness.json",
+      "sha256": "9aaa19a4d2282830e9c50f6648fd0bbe1e538497dc318f8ae196403ba9a38d7c",
+      "bytes": 1739
+    },
+    "run_manifest": {
+      "path": "run_manifest.json",
+      "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
+      "bytes": 19640
+    },
+    "scorecard:csv": {
+      "path": "scorecards/scorecards.csv",
+      "sha256": "7630479f78c835c18a4bf6c61812121dd27780855002ed462c96c1665bf98988",
+      "bytes": 1188
+    },
+    "scorecard:json": {
+      "path": "scorecards/scorecards.json",
+      "sha256": "d550e7d5b3deb45592f122d7e2e84124c475164b20d2230d0f586f6eb1bc8f59",
+      "bytes": 2520
+    },
+    "scorecard:markdown": {
+      "path": "scorecards/scorecards.md",
+      "sha256": "0cc28bf853104db817fe0403c2d12485e9ad1f3d0640307d2321540379b80c91",
+      "bytes": 366
+    }
+  },
+  "validation": {
+    "passed": true,
+    "frontier_report": {
+      "passed": true,
+      "num_issues": 0,
+      "issues": []
+    },
+    "run_manifest": {
+      "passed": true,
+      "num_issues": 0,
+      "issues": []
+    },
+    "readiness": {
+      "passed": true,
+      "num_issues": 0,
+      "issues": []
+    }
+  }
+}

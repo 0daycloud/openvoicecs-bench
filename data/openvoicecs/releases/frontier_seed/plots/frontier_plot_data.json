@@ -1,0 +1,323 @@
+{
+  "benchmark": "Latency-Cost-Quality Frontier",
+  "generated_at": "2026-06-11",
+  "axes": {
+    "latency": {
+      "primary": "p95_v2v_ttfb_ms",
+      "direction": "lower_is_better",
+      "definition": "User end-of-speech/VAD endpoint to first audio byte out."
+    },
+    "cost": {
+      "primary": "cost_usd_per_successful_conversation",
+      "direction": "lower_is_better",
+      "definition": "Fully loaded cost divided by task success rate."
+    },
+    "quality": {
+      "primary": "task_success_rate",
+      "direction": "higher_is_better",
+      "definition": "Task completion/resolution rate on the fixed scenario set."
+    }
+  },
+  "domains": {
+    "all": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "all",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "all",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "fintech_sandbox": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "fintech_sandbox",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "fintech_sandbox",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "healthcare_admin": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "healthcare_admin",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "healthcare_admin",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "retail": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "retail",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "retail",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "saas_support": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "saas_support",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "saas_support",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "telecom": {
+      "frontier": [
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "telecom",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 920.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": false
+        },
+        {
+          "system": "oracle_text",
+          "domain": "telecom",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "travel": {
+      "frontier": [
+        "oracle_audio_manifest"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "travel",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 850.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "travel",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 860.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": false
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    },
+    "utility_support": {
+      "frontier": [
+        "oracle_audio_manifest",
+        "oracle_text"
+      ],
+      "points": [
+        {
+          "system": "oracle_audio_manifest",
+          "domain": "utility_support",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 760.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        },
+        {
+          "system": "oracle_text",
+          "domain": "utility_support",
+          "frontier_eligible": true,
+          "exclusion_reasons": [],
+          "p95_v2v_ttfb_ms": 760.0,
+          "cost_usd_per_successful_conversation": 0.0,
+          "task_success_rate": 1.0,
+          "on_frontier": true
+        }
+      ],
+      "projections": {
+        "latency_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ],
+        "cost_vs_quality": [
+          "oracle_audio_manifest",
+          "oracle_text"
+        ]
+      }
+    }
+  }
+}

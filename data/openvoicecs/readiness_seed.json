@@ -1,0 +1,50 @@
+{
+  "benchmark": "OpenVoiceCS-Bench",
+  "version": "0.1.0",
+  "profile": "seed",
+  "profile_description": "Valid seed package for local development and method review.",
+  "passed": true,
+  "num_issues": 0,
+  "criteria": {
+    "description": "Valid seed package for local development and method review.",
+    "min_scenarios": 10,
+    "min_domains": 5,
+    "required_tracks": {
+      "text_to_action": 1,
+      "adversarial_compliance": 1
+    },
+    "min_public_dev_scenarios": 10,
+    "min_sealed_test_scenarios": 0,
+    "min_audio_variants": 1,
+    "min_public_dev_audio_variants": 1,
+    "min_sealed_test_audio_variants": 0,
+    "min_pricing_profiles": 2,
+    "require_audio_asset_integrity": false,
+    "require_provenance_integrity": true,
+    "require_open_licenses": false,
+    "require_audio_consent": false,
+    "require_no_real_customer_data": true,
+    "require_low_contamination_risk": true,
+    "required_oracle_coverage": 1.0,
+    "require_contract_valid": true,
+    "require_release_gates": true,
+    "require_frontier_artifact": false,
+    "require_run_manifest": false,
+    "require_plot_artifacts": false,
+    "require_judged_experience": false,
+    "require_judge_manifest_pinning": false,
+    "required_concurrency_levels": [],
+    "require_latency_at_100": false,
+    "require_latency_event_evidence": false,
+    "require_fully_loaded_cost_evidence": false,
+    "require_comparable_pricing_profiles": false,
+    "require_hardware_profile": false,
+    "min_trials_per_scenario": 1
+  },
+  "artifacts": {
+    "frontier_report": true,
+    "run_manifest": true,
+    "plot_dir": true
+  },
+  "issues": []
+}

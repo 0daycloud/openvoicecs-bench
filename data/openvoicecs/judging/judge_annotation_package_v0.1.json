@@ -1,0 +1,107 @@
+{
+  "name": "OpenVoiceCS Judge Annotation Package",
+  "version": "0.1.0",
+  "benchmark_version": "0.1.0",
+  "annotation_mode": "reference_fixture",
+  "official_judging": false,
+  "protocol": {
+    "path": "data/openvoicecs/judging/judge_protocol_v0.1.json",
+    "sha256": "f5c1ed5a3be78d78742ad51db1a629c1a6c6db0abf21a1a1b374728f91f99395",
+    "bytes": 1641
+  },
+  "rubric": {
+    "path": "data/openvoicecs/judge_rubric_v0.1.json",
+    "sha256": "075da1f0b6e7915ca4e4c7764ce4575eedf0c62573e480bf3b260851533c0d48",
+    "bytes": 1830
+  },
+  "prompt": {
+    "path": "data/openvoicecs/judging/judge_prompt_v0.1.md",
+    "sha256": "8fa8f280a8d1c62b8ebdf7b70b2a5472bdbdad26527e0e4505b378ff38ad0a37",
+    "bytes": 1412
+  },
+  "rater_manifest": {
+    "minimum_raters_per_item": 2,
+    "raters": [
+      {
+        "id": "reference-rater-a",
+        "type": "reference_fixture",
+        "qualified": true,
+        "conflict_attested": true
+      },
+      {
+        "id": "reference-rater-b",
+        "type": "reference_fixture",
+        "qualified": true,
+        "conflict_attested": true
+      }
+    ]
+  },
+  "packages": [
+    {
+      "id": "oracle_text_realtime_reference_judging",
+      "system_id": "oracle_text_realtime_reference",
+      "source_report": {
+        "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
+        "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
+        "bytes": 7494153
+      },
+      "annotations": {
+        "path": "data/openvoicecs/judging/oracle_text_realtime_annotations.jsonl",
+        "sha256": "15a087099aa2b48c9f8fe0e055d5d8fcff8acce0244b72ed1f1240ae31eda6ab",
+        "bytes": 620940
+      },
+      "judge_report": {
+        "path": "data/openvoicecs/judging/oracle_text_realtime_judge_report.json",
+        "sha256": "e47a3544a1b7af7eacfd175f75efc7f42c10658d0262a221411929411f201638",
+        "bytes": 166619
+      },
+      "num_annotations": 2412,
+      "num_items": 402,
+      "num_raters": 2,
+      "blinding": {
+        "hide_system_identity": true,
+        "shuffle_item_order": true,
+        "hide_expected_actions": true
+      },
+      "adjudication": {
+        "required_for_disagreement": true,
+        "num_items_adjudicated": 0
+      }
+    },
+    {
+      "id": "oracle_audio_manifest_realtime_reference_judging",
+      "system_id": "oracle_audio_manifest_realtime_reference",
+      "source_report": {
+        "path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
+        "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
+        "bytes": 8955639
+      },
+      "annotations": {
+        "path": "data/openvoicecs/judging/oracle_audio_manifest_realtime_annotations.jsonl",
+        "sha256": "851e40dac4e03c7364c9a7c5cc2d2ff8ec19fe2326e78dd6d8dd610cb456b325",
+        "bytes": 818208
+      },
+      "judge_report": {
+        "path": "data/openvoicecs/judging/oracle_audio_manifest_realtime_judge_report.json",
+        "sha256": "d36986d2e59713943b837c51ab7192ec3950c9847cb2b3b08362eb9ec82c3d20",
+        "bytes": 211384
+      },
+      "num_annotations": 2880,
+      "num_items": 480,
+      "num_raters": 2,
+      "blinding": {
+        "hide_system_identity": true,
+        "shuffle_item_order": true,
+        "hide_expected_actions": true
+      },
+      "adjudication": {
+        "required_for_disagreement": true,
+        "num_items_adjudicated": 0
+      }
+    }
+  ],
+  "known_gaps": [
+    "The v0.1 packages are deterministic reference fixtures, not independent human judging evidence.",
+    "Official external submissions must replace reference_fixture raters with trained human or audited model-judge raters under judge_protocol_v0.1.json."
+  ]
+}
