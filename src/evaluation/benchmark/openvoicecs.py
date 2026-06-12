@@ -381,6 +381,7 @@ class OpenVoiceCSBench:
             "experience_check": experience_check,
             "experience_judgment": experience_judgment,
             "final_state": replay["final_state"],
+            "tool_results": replay["tool_results"],
             "tool_calls": trace["tool_calls"],
             "events": trace["events"],
             "messages": trace["messages"],
@@ -437,6 +438,7 @@ class OpenVoiceCSBench:
 
         operational = _aggregate_operational_metrics(results)
         experience_judgment = _aggregate_experience_judgments(results)
+        failure_analysis = _aggregate_failure_analysis(results)
         domain_breakdown = _breakdown(results, "domain")
         track_breakdown = _breakdown(results, "track")
         difficulty_breakdown = _breakdown(results, "difficulty")
@@ -449,12 +451,14 @@ class OpenVoiceCSBench:
             "pass_at_k": round(_mean([1.0 if r["pass_at_k"] else 0.0 for r in results]) or 0.0, 4),
             "pass_k": round(_mean([1.0 if r["pass_k"] else 0.0 for r in results]) or 0.0, 4),
             "mean_pass_rate": round(_mean([r["pass_rate"] for r in results]) or 0.0, 4),
+            "reliability_gates": _reliability_gates(results),
             "confidence_intervals": _aggregate_confidence_intervals(results),
             "conversation_experience_score": experience_judgment["score"],
             "conversation_experience": experience_judgment,
             "num_scenarios": len(results),
             "num_trials_per_scenario": trials,
             "operational_metrics": operational,
+            "failure_analysis": failure_analysis,
             "domain_breakdown": domain_breakdown,
             "track_breakdown": track_breakdown,
             "difficulty_breakdown": difficulty_breakdown,
@@ -1118,10 +1122,16 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
                 issues.append(
                     ValidationIssue(scenario_id, f"tools[{tool_index}].required_arguments", "must be an object")
                 )
+            if "preconditions" in tool and not isinstance(tool.get("preconditions"), list):
+                issues.append(
+                    ValidationIssue(scenario_id, f"tools[{tool_index}].preconditions", "must be a list")
+                )
             if not isinstance(tool.get("state_updates"), list):
                 issues.append(
                     ValidationIssue(scenario_id, f"tools[{tool_index}].state_updates", "must be a list")
                 )
+            if "failure" in tool:
+                _validate_tool_failure(issues, scenario_id, tool_index, tool.get("failure"))
 
         oracle = scenario.get("oracle", {})
         if not isinstance(oracle, dict):
@@ -1151,6 +1161,28 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
                     ValidationIssue(scenario_id, "oracle.expected_state", "not reached by expected tool calls")
                 )
     return issues
+
+
+def _validate_tool_failure(
+    issues: list[ValidationIssue],
+    scenario_id: str,
+    tool_index: int,
+    failure: Any,
+) -> None:
+    path = f"tools[{tool_index}].failure"
+    if not isinstance(failure, dict):
+        issues.append(ValidationIssue(scenario_id, path, "must be an object"))
+        return
+    if not isinstance(failure.get("type"), str) or not failure["type"].strip():
+        issues.append(ValidationIssue(scenario_id, f"{path}.type", "must be a non-empty string"))
+    if "code" in failure and not isinstance(failure.get("code"), str):
+        issues.append(ValidationIssue(scenario_id, f"{path}.code", "must be a string"))
+    if "message" in failure and not isinstance(failure.get("message"), str):
+        issues.append(ValidationIssue(scenario_id, f"{path}.message", "must be a string"))
+    if "retryable" in failure and not isinstance(failure.get("retryable"), bool):
+        issues.append(ValidationIssue(scenario_id, f"{path}.retryable", "must be boolean"))
+    if "state_updates" in failure and not isinstance(failure.get("state_updates"), list):
+        issues.append(ValidationIssue(scenario_id, f"{path}.state_updates", "must be a list"))
 
 
 def _validate_result_entry(
@@ -1723,6 +1755,7 @@ def replay_tool_calls(
     state = deepcopy(scenario.get("initial_state", {}))
     tool_defs = {tool["name"]: tool for tool in scenario.get("tools", [])}
     errors = []
+    tool_results = []
 
     for index, call in enumerate(tool_calls):
         name = call.get("name")
@@ -1730,21 +1763,72 @@ def replay_tool_calls(
         tool_def = tool_defs.get(name)
         if not tool_def:
             errors.append({"index": index, "name": name, "error": "unknown_tool"})
+            tool_results.append({
+                "index": index,
+                "name": name,
+                "ok": False,
+                "error": "unknown_tool",
+            })
             continue
         required_args = tool_def.get("required_arguments", {})
         if not _dict_contains(args, required_args):
-            errors.append({
+            error = {
                 "index": index,
                 "name": name,
                 "error": "argument_mismatch",
                 "expected": required_args,
                 "actual": args,
+            }
+            errors.append(error)
+            tool_results.append({"index": index, "name": name, "ok": False, **error})
+            continue
+        failed_preconditions = _failed_tool_preconditions(state, tool_def.get("preconditions", []))
+        if failed_preconditions:
+            error = {
+                "index": index,
+                "name": name,
+                "error": "precondition_failed",
+                "failed_preconditions": failed_preconditions,
+            }
+            errors.append(error)
+            tool_results.append({"index": index, "name": name, "ok": False, **error})
+            continue
+        failure = tool_def.get("failure")
+        if isinstance(failure, dict):
+            for update in failure.get("state_updates", []):
+                _set_path(state, update["path"], deepcopy(update.get("value")))
+            tool_results.append({
+                "index": index,
+                "name": name,
+                "ok": False,
+                "error": failure.get("type", "tool_failure"),
+                "code": failure.get("code"),
+                "message": failure.get("message"),
+                "retryable": failure.get("retryable"),
             })
             continue
         for update in tool_def.get("state_updates", []):
             _set_path(state, update["path"], deepcopy(update.get("value")))
+        tool_results.append({"index": index, "name": name, "ok": True})
 
-    return {"final_state": state, "errors": errors}
+    return {"final_state": state, "errors": errors, "tool_results": tool_results}
+
+
+def _failed_tool_preconditions(
+    state: dict[str, Any],
+    preconditions: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    failed = []
+    for precondition in preconditions:
+        if not isinstance(precondition, dict):
+            failed.append({"path": None, "expected": None, "actual": None})
+            continue
+        path = precondition.get("path")
+        expected = precondition.get("value")
+        actual = _get_path(state, path) if isinstance(path, str) else None
+        if actual != expected:
+            failed.append({"path": path, "expected": expected, "actual": actual})
+    return failed
 
 
 def check_expected_state(final_state: dict[str, Any], expected_state: dict[str, Any]) -> dict[str, Any]:
@@ -2672,6 +2756,89 @@ def _aggregate_experience_judgments(results: list[dict[str, Any]]) -> dict[str, 
         "num_judged_trials": len(judgments),
         "judge_counts": dict(sorted(judges.items())),
     }
+
+
+def _reliability_gates(results: list[dict[str, Any]]) -> dict[str, Any]:
+    pass_k = round(_mean([1.0 if result["pass_k"] else 0.0 for result in results]) or 0.0, 4)
+    mean_pass_rate = round(_mean([result["pass_rate"] for result in results]) or 0.0, 4)
+    return {
+        "pass_k": {
+            "value": pass_k,
+            "minimum_for_leaderboard": 0.95,
+            "passed": pass_k >= 0.95,
+        },
+        "mean_pass_rate": {
+            "value": mean_pass_rate,
+            "minimum_for_leaderboard": 0.98,
+            "passed": mean_pass_rate >= 0.98,
+        },
+    }
+
+
+def _aggregate_failure_analysis(results: list[dict[str, Any]]) -> dict[str, Any]:
+    categories: dict[str, int] = {}
+    scenarios: dict[str, dict[str, Any]] = {}
+    num_failed_trials = 0
+    for result in results:
+        scenario_categories: set[str] = set()
+        for trial in result.get("trials", []):
+            if trial.get("passed"):
+                continue
+            num_failed_trials += 1
+            trial_categories = _failure_categories_for_trial(trial)
+            for category in trial_categories:
+                categories[category] = categories.get(category, 0) + 1
+                scenario_categories.add(category)
+        if scenario_categories:
+            scenarios[result["id"]] = {
+                "domain": result.get("domain"),
+                "track": result.get("track"),
+                "difficulty": result.get("difficulty"),
+                "categories": sorted(scenario_categories),
+            }
+    return {
+        "num_failed_trials": num_failed_trials,
+        "categories": dict(sorted(categories.items())),
+        "scenarios": dict(sorted(scenarios.items())),
+    }
+
+
+def _failure_categories_for_trial(trial: dict[str, Any]) -> list[str]:
+    categories: list[str] = []
+    if trial.get("error"):
+        categories.append("adapter_or_api_error")
+    if trial.get("state_check", {}).get("missing_or_wrong"):
+        categories.append("state_mismatch")
+    tool_check = trial.get("tool_check", {})
+    if tool_check.get("missing_expected"):
+        categories.append("missing_tool")
+    if tool_check.get("forbidden_matches"):
+        categories.append("forbidden_tool")
+    policy_check = trial.get("policy_check", {})
+    if policy_check.get("missing_required"):
+        categories.append("missing_policy_event")
+    if policy_check.get("forbidden_matches"):
+        categories.append("forbidden_policy_event")
+    grounding_check = trial.get("grounding_check", {})
+    if grounding_check.get("missing_required_claims"):
+        categories.append("missing_required_claim")
+    if grounding_check.get("unsupported_claims_detected"):
+        categories.append("unsupported_claim")
+    privacy_check = trial.get("privacy_check", {})
+    if privacy_check.get("leaks"):
+        categories.append("privacy_leak")
+    if privacy_check.get("missing_required"):
+        categories.append("missing_privacy_event")
+    auth_check = trial.get("auth_check", {})
+    if auth_check.get("violations"):
+        categories.append("auth_violation")
+    if auth_check.get("missing_required"):
+        categories.append("missing_auth_event")
+    for violation in trial.get("safety_check", {}).get("violations", []):
+        violation_type = violation.get("type")
+        if violation_type:
+            categories.append(f"safety:{violation_type}")
+    return sorted(set(categories)) or ["unknown"]
 
 
 def _aggregate_confidence_intervals(results: list[dict[str, Any]]) -> dict[str, Any]:

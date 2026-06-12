@@ -1,0 +1,789 @@
+{
+  "overall_score": 30.89,
+  "metric_scores": {
+    "task_success": 0.0,
+    "factual_grounding": 0.3333,
+    "sop_compliance": 0.2778,
+    "privacy": 0.0,
+    "auth_integrity": 0.6667,
+    "tool_correctness": 0.4444,
+    "safety": 1.0,
+    "experience_proxy": 1.0
+  },
+  "pass_at_k": 0.0,
+  "pass_k": 0.0,
+  "mean_pass_rate": 0.0,
+  "reliability_gates": {
+    "pass_k": {
+      "value": 0.0,
+      "minimum_for_leaderboard": 0.95,
+      "passed": false
+    },
+    "mean_pass_rate": {
+      "value": 0.0,
+      "minimum_for_leaderboard": 0.98,
+      "passed": false
+    }
+  },
+  "confidence_intervals": {
+    "pass_at_k": {
+      "successes": 0,
+      "total": 3,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.5615
+    },
+    "pass_k": {
+      "successes": 0,
+      "total": 3,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.5615
+    },
+    "trial_pass_rate": {
+      "successes": 0,
+      "total": 3,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.5615
+    }
+  },
+  "conversation_experience_score": 1.0,
+  "conversation_experience": {
+    "score": 1.0,
+    "coverage": 1.0,
+    "num_judged_trials": 3,
+    "judge_counts": {
+      "unknown": 3
+    }
+  },
+  "num_scenarios": 3,
+  "num_trials_per_scenario": 1,
+  "operational_metrics": {
+    "median_latency_ms": 2662.786,
+    "p95_latency_ms": 2816.564,
+    "avg_latency_ms": 2695.207,
+    "avg_input_tokens": 982.67,
+    "avg_output_tokens": 132.0,
+    "avg_tool_calls": 1.0,
+    "avg_policy_events": 0.67,
+    "avg_cost_usd": null,
+    "total_cost_usd": null
+  },
+  "failure_analysis": {
+    "num_failed_trials": 3,
+    "categories": {
+      "missing_auth_event": 1,
+      "missing_policy_event": 3,
+      "missing_privacy_event": 3,
+      "missing_required_claim": 2,
+      "missing_tool": 3,
+      "state_mismatch": 3
+    },
+    "scenarios": {
+      "retail-refund-damaged-item-001": {
+        "domain": "retail",
+        "track": "text_to_action",
+        "difficulty": "medium",
+        "categories": [
+          "missing_auth_event",
+          "missing_policy_event",
+          "missing_privacy_event",
+          "missing_tool",
+          "state_mismatch"
+        ]
+      },
+      "telecom-billing-credit-001": {
+        "domain": "telecom",
+        "track": "text_to_action",
+        "difficulty": "medium",
+        "categories": [
+          "missing_policy_event",
+          "missing_privacy_event",
+          "missing_required_claim",
+          "missing_tool",
+          "state_mismatch"
+        ]
+      },
+      "travel-rebook-missed-connection-001": {
+        "domain": "travel",
+        "track": "text_to_action",
+        "difficulty": "hard",
+        "categories": [
+          "missing_policy_event",
+          "missing_privacy_event",
+          "missing_required_claim",
+          "missing_tool",
+          "state_mismatch"
+        ]
+      }
+    }
+  },
+  "domain_breakdown": {
+    "retail": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    },
+    "telecom": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    },
+    "travel": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "track_breakdown": {
+    "text_to_action": {
+      "count": 3,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "difficulty_breakdown": {
+    "hard": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    },
+    "medium": {
+      "count": 2,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "results": [
+    {
+      "id": "retail-refund-damaged-item-001",
+      "base_scenario_id": null,
+      "domain": "retail",
+      "track": "text_to_action",
+      "difficulty": "medium",
+      "customer_goal": "Customer wants a refund for a damaged blender delivered today.",
+      "tags": [
+        "refund",
+        "identity",
+        "damaged_item"
+      ],
+      "input_modality": "text",
+      "audio_variant": null,
+      "pass_at_k": false,
+      "pass_k": false,
+      "pass_rate": 0.0,
+      "avg_scores": {
+        "task_success": 0.0,
+        "factual_grounding": 1.0,
+        "sop_compliance": 0.0,
+        "privacy": 0.0,
+        "auth_integrity": 0.0,
+        "tool_correctness": 0.3333,
+        "safety": 1.0,
+        "experience_proxy": 1.0
+      },
+      "trials": [
+        {
+          "trial_index": 0,
+          "passed": false,
+          "scores": {
+            "task_success": 0.0,
+            "factual_grounding": 1.0,
+            "tool_correctness": 0.3333,
+            "sop_compliance": 0.0,
+            "privacy": 0.0,
+            "auth_integrity": 0.0,
+            "safety": 1.0,
+            "experience_proxy": 1.0
+          },
+          "state_check": {
+            "passed": false,
+            "missing_or_wrong": [
+              {
+                "path": "orders.ord_7001.refund_status",
+                "expected": "issued",
+                "actual": "none"
+              },
+              {
+                "path": "cases.case_9001.status",
+                "expected": "closed_refund_issued",
+                "actual": null
+              }
+            ]
+          },
+          "tool_check": {
+            "score": 0.3333,
+            "expected_passed": false,
+            "forbidden_passed": true,
+            "missing_expected": [
+              {
+                "name": "issue_refund",
+                "arguments": {
+                  "order_id": "ord_7001",
+                  "amount_cents": 5299,
+                  "reason": "damaged_item"
+                }
+              },
+              {
+                "name": "create_case",
+                "arguments": {
+                  "case_id": "case_9001",
+                  "account_id": "acct_1001",
+                  "reason": "damaged_item"
+                }
+              }
+            ],
+            "forbidden_matches": []
+          },
+          "policy_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "forbidden_passed": true,
+            "missing_required": [
+              "identity_verified",
+              "damage_attested"
+            ],
+            "forbidden_matches": []
+          },
+          "grounding_check": {
+            "score": 1.0,
+            "required_passed": true,
+            "hallucination_passed": true,
+            "missing_required_claims": [],
+            "unsupported_claims_detected": [],
+            "hallucination_rate_per_turn": 0.0,
+            "max_hallucinations_per_turn": 0
+          },
+          "privacy_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "leakage_passed": true,
+            "forbidden_events_passed": true,
+            "missing_required": [
+              "pii_minimization"
+            ],
+            "forbidden_event_matches": [],
+            "leaks": []
+          },
+          "auth_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "forbidden_events_passed": true,
+            "integrity_passed": true,
+            "missing_required": [
+              "identity_verified"
+            ],
+            "forbidden_event_matches": [],
+            "violations": []
+          },
+          "safety_check": {
+            "score": 1.0,
+            "violations": []
+          },
+          "experience_check": {
+            "score": 1.0,
+            "checks": {
+              "responded": true,
+              "concise": true,
+              "latency_ok": true
+            },
+            "agent_word_count": 18,
+            "max_agent_words": 80,
+            "max_latency_ms": 2500
+          },
+          "experience_judgment": {
+            "score": 1.0,
+            "passed_gate": null,
+            "judge": {},
+            "dimensions": {},
+            "notes": "Identity verification process initiated."
+          },
+          "final_state": {
+            "accounts": {
+              "acct_1001": {
+                "identity_verified": true,
+                "email": "maya@example.test"
+              }
+            },
+            "orders": {
+              "ord_7001": {
+                "account_id": "acct_1001",
+                "status": "delivered",
+                "delivered_days_ago": 0,
+                "item": "blender",
+                "amount_cents": 5299,
+                "refund_status": "none",
+                "replacement_status": "none"
+              }
+            },
+            "cases": {}
+          },
+          "tool_results": [
+            {
+              "index": 0,
+              "name": "verify_identity",
+              "ok": true
+            }
+          ],
+          "tool_calls": [
+            {
+              "name": "verify_identity",
+              "arguments": {
+                "account_id": "acct_1001"
+              }
+            }
+          ],
+          "events": [],
+          "messages": [
+            {
+              "role": "agent",
+              "text": "I understand your blender arrived damaged. First, I'll need to verify your identity to proceed with the refund."
+            }
+          ],
+          "usage": {
+            "input_tokens": 1079,
+            "output_tokens": 117
+          },
+          "cost_usd": null,
+          "latency": {
+            "v2v_ttfb_ms": 2589.185292366892,
+            "measurement": {
+              "source": "runtime_fallback",
+              "origin_event": null,
+              "origin_t_ms": null
+            }
+          },
+          "latency_ms": 2589.185
+        }
+      ]
+    },
+    {
+      "id": "travel-rebook-missed-connection-001",
+      "base_scenario_id": null,
+      "domain": "travel",
+      "track": "text_to_action",
+      "difficulty": "hard",
+      "customer_goal": "Customer missed a connecting flight after an airline delay and needs same-day rebooking.",
+      "tags": [
+        "rebooking",
+        "waiver",
+        "travel_disruption"
+      ],
+      "input_modality": "text",
+      "audio_variant": null,
+      "pass_at_k": false,
+      "pass_k": false,
+      "pass_rate": 0.0,
+      "avg_scores": {
+        "task_success": 0.0,
+        "factual_grounding": 0.0,
+        "sop_compliance": 0.3333,
+        "privacy": 0.0,
+        "auth_integrity": 1.0,
+        "tool_correctness": 0.5,
+        "safety": 1.0,
+        "experience_proxy": 1.0
+      },
+      "trials": [
+        {
+          "trial_index": 0,
+          "passed": false,
+          "scores": {
+            "task_success": 0.0,
+            "factual_grounding": 0.0,
+            "tool_correctness": 0.5,
+            "sop_compliance": 0.3333,
+            "privacy": 0.0,
+            "auth_integrity": 1.0,
+            "safety": 1.0,
+            "experience_proxy": 1.0
+          },
+          "state_check": {
+            "passed": false,
+            "missing_or_wrong": [
+              {
+                "path": "bookings.bk_3001.status",
+                "expected": "rebooked",
+                "actual": "misconnected"
+              },
+              {
+                "path": "bookings.bk_3001.new_flight",
+                "expected": "fl_881",
+                "actual": null
+              }
+            ]
+          },
+          "tool_check": {
+            "score": 0.5,
+            "expected_passed": false,
+            "forbidden_passed": true,
+            "missing_expected": [
+              {
+                "name": "rebook_flight",
+                "arguments": {
+                  "booking_id": "bk_3001",
+                  "new_flight_id": "fl_881",
+                  "fee_cents": 0
+                }
+              }
+            ],
+            "forbidden_matches": []
+          },
+          "policy_check": {
+            "score": 0.3333,
+            "required_passed": false,
+            "forbidden_passed": true,
+            "missing_required": [
+              "airline_delay_confirmed",
+              "fee_waiver_applied"
+            ],
+            "forbidden_matches": []
+          },
+          "grounding_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "hallucination_passed": true,
+            "missing_required_claims": [
+              {
+                "id": "fee_waived",
+                "any_terms": [
+                  "no change fee",
+                  "no fee",
+                  "fee waiver"
+                ]
+              }
+            ],
+            "unsupported_claims_detected": [],
+            "hallucination_rate_per_turn": 0.0,
+            "max_hallucinations_per_turn": 0
+          },
+          "privacy_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "leakage_passed": true,
+            "forbidden_events_passed": true,
+            "missing_required": [
+              "pii_minimization"
+            ],
+            "forbidden_event_matches": [],
+            "leaks": []
+          },
+          "auth_check": {
+            "score": 1.0,
+            "required_passed": true,
+            "forbidden_events_passed": true,
+            "integrity_passed": true,
+            "missing_required": [],
+            "forbidden_event_matches": [],
+            "violations": []
+          },
+          "safety_check": {
+            "score": 1.0,
+            "violations": []
+          },
+          "experience_check": {
+            "score": 1.0,
+            "checks": {
+              "responded": true,
+              "concise": true,
+              "latency_ok": true
+            },
+            "agent_word_count": 16,
+            "max_agent_words": 90,
+            "max_latency_ms": 3000
+          },
+          "experience_judgment": {
+            "score": 1.0,
+            "passed_gate": null,
+            "judge": {},
+            "dimensions": {},
+            "notes": "The response was helpful and focused on resolving the issue."
+          },
+          "final_state": {
+            "accounts": {
+              "acct_2001": {
+                "identity_verified": true
+              }
+            },
+            "bookings": {
+              "bk_3001": {
+                "passenger_account_id": "acct_2001",
+                "status": "misconnected",
+                "cause": "airline_delay",
+                "destination": "SEA",
+                "new_flight": null,
+                "fee_charged_cents": 0
+              }
+            },
+            "inventory": {
+              "fl_881": {
+                "route": "DEN-SEA",
+                "departure": "2026-06-11T21:20:00-06:00",
+                "seats": 4
+              }
+            }
+          },
+          "tool_results": [
+            {
+              "index": 0,
+              "name": "verify_identity",
+              "ok": true
+            }
+          ],
+          "tool_calls": [
+            {
+              "name": "verify_identity",
+              "arguments": {
+                "account_id": "acct_2001"
+              }
+            }
+          ],
+          "events": [
+            "identity_verified"
+          ],
+          "messages": [
+            {
+              "role": "agent",
+              "text": "I can help you rebook your flight to Seattle. First, I need to verify your identity."
+            }
+          ],
+          "usage": {
+            "input_tokens": 1047,
+            "output_tokens": 158
+          },
+          "cost_usd": null,
+          "latency": {
+            "v2v_ttfb_ms": 2833.649707958102,
+            "measurement": {
+              "source": "runtime_fallback",
+              "origin_event": null,
+              "origin_t_ms": null
+            }
+          },
+          "latency_ms": 2833.65
+        }
+      ]
+    },
+    {
+      "id": "telecom-billing-credit-001",
+      "base_scenario_id": null,
+      "domain": "telecom",
+      "track": "text_to_action",
+      "difficulty": "medium",
+      "customer_goal": "Customer was charged twice for modem rental and needs a bill credit.",
+      "tags": [
+        "billing",
+        "credit",
+        "no_upsell"
+      ],
+      "input_modality": "text",
+      "audio_variant": null,
+      "pass_at_k": false,
+      "pass_k": false,
+      "pass_rate": 0.0,
+      "avg_scores": {
+        "task_success": 0.0,
+        "factual_grounding": 0.0,
+        "sop_compliance": 0.5,
+        "privacy": 0.0,
+        "auth_integrity": 1.0,
+        "tool_correctness": 0.5,
+        "safety": 1.0,
+        "experience_proxy": 1.0
+      },
+      "trials": [
+        {
+          "trial_index": 0,
+          "passed": false,
+          "scores": {
+            "task_success": 0.0,
+            "factual_grounding": 0.0,
+            "tool_correctness": 0.5,
+            "sop_compliance": 0.5,
+            "privacy": 0.0,
+            "auth_integrity": 1.0,
+            "safety": 1.0,
+            "experience_proxy": 1.0
+          },
+          "state_check": {
+            "passed": false,
+            "missing_or_wrong": [
+              {
+                "path": "bills.bill_4401.credit_cents",
+                "expected": 1200,
+                "actual": 0
+              },
+              {
+                "path": "bills.bill_4401.status",
+                "expected": "corrected",
+                "actual": "open"
+              }
+            ]
+          },
+          "tool_check": {
+            "score": 0.5,
+            "expected_passed": false,
+            "forbidden_passed": true,
+            "missing_expected": [
+              {
+                "name": "apply_bill_credit",
+                "arguments": {
+                  "bill_id": "bill_4401",
+                  "amount_cents": 1200,
+                  "reason": "duplicate_modem_fee"
+                }
+              }
+            ],
+            "forbidden_matches": []
+          },
+          "policy_check": {
+            "score": 0.5,
+            "required_passed": false,
+            "forbidden_passed": true,
+            "missing_required": [
+              "duplicate_charge_validated"
+            ],
+            "forbidden_matches": []
+          },
+          "grounding_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "hallucination_passed": true,
+            "missing_required_claims": [
+              {
+                "id": "credit_amount",
+                "any_terms": [
+                  "12 dollar",
+                  "\\$12",
+                  "1200"
+                ]
+              }
+            ],
+            "unsupported_claims_detected": [],
+            "hallucination_rate_per_turn": 0.0,
+            "max_hallucinations_per_turn": 0
+          },
+          "privacy_check": {
+            "score": 0.0,
+            "required_passed": false,
+            "leakage_passed": true,
+            "forbidden_events_passed": true,
+            "missing_required": [
+              "pii_minimization"
+            ],
+            "forbidden_event_matches": [],
+            "leaks": []
+          },
+          "auth_check": {
+            "score": 1.0,
+            "required_passed": true,
+            "forbidden_events_passed": true,
+            "integrity_passed": true,
+            "missing_required": [],
+            "forbidden_event_matches": [],
+            "violations": []
+          },
+          "safety_check": {
+            "score": 1.0,
+            "violations": []
+          },
+          "experience_check": {
+            "score": 1.0,
+            "checks": {
+              "responded": true,
+              "concise": true,
+              "latency_ok": true
+            },
+            "agent_word_count": 21,
+            "max_agent_words": 75,
+            "max_latency_ms": 2500
+          },
+          "experience_judgment": {
+            "score": 1.0,
+            "passed_gate": null,
+            "judge": {},
+            "dimensions": {},
+            "notes": "Needed to initiate the credit process."
+          },
+          "final_state": {
+            "accounts": {
+              "acct_3001": {
+                "identity_verified": true,
+                "plan": "fiber_500"
+              }
+            },
+            "bills": {
+              "bill_4401": {
+                "account_id": "acct_3001",
+                "duplicate_modem_fee": true,
+                "credit_cents": 0,
+                "status": "open"
+              }
+            }
+          },
+          "tool_results": [
+            {
+              "index": 0,
+              "name": "verify_identity",
+              "ok": true
+            }
+          ],
+          "tool_calls": [
+            {
+              "name": "verify_identity",
+              "arguments": {
+                "account_id": "acct_3001"
+              }
+            }
+          ],
+          "events": [
+            "identity_verified"
+          ],
+          "messages": [
+            {
+              "role": "agent",
+              "text": "I see that you've been charged twice for the modem rental. Let's verify your identity to proceed with applying the credit."
+            }
+          ],
+          "usage": {
+            "input_tokens": 822,
+            "output_tokens": 121
+          },
+          "cost_usd": null,
+          "latency": {
+            "v2v_ttfb_ms": 2662.78583323583,
+            "measurement": {
+              "source": "runtime_fallback",
+              "origin_event": null,
+              "origin_t_ms": null
+            }
+          },
+          "latency_ms": 2662.786
+        }
+      ]
+    }
+  ],
+  "benchmark": "OpenVoiceCS-Bench",
+  "benchmark_version": "0.1.0",
+  "model_metadata": {
+    "display_name": "openrouter_gpt_4o_mini_smoke",
+    "provider": "openrouter",
+    "model_id": "openai/gpt-4o-mini",
+    "input_modality": "text",
+    "pipeline_type": "cascaded",
+    "adapter": "openvoicecs-provider-adapter-v0.1",
+    "reasoning_effort": null,
+    "native_tools": false,
+    "pricing": {},
+    "pricing_snapshot_date": null,
+    "pricing_profile_id": null
+  },
+  "elapsed_seconds": 8.087
+}

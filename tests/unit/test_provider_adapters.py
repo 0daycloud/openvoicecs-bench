@@ -8,10 +8,15 @@ from pathlib import Path
 from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench
 from src.evaluation.benchmark.provider_adapters import (
     ProviderSpec,
+    build_provider_spec,
+    build_provider_agent,
     build_trace_prompt,
     estimate_cost_usd,
     parse_provider_response_text,
     provider_metadata,
+    _derive_events,
+    _execute_scenario_tool,
+    _openai_tool_schemas,
 )
 from src.evaluation.benchmark.submission import score_provider
 
@@ -21,12 +26,45 @@ def test_build_trace_prompt_includes_tools_and_customer_text():
 
     system, user = build_trace_prompt(scenario, trial_index=2)
 
-    assert "Produce only valid JSON" in system
+    assert "evaluated" not in system.lower()
+    assert "benchmark" not in system.lower()
     assert scenario["conversation"][0]["text"] in user
     assert "verify_identity" in user
-    assert "state_effects" in user
-    assert "accounts.acct_1001.identity_verified" in user
+    assert "required_events" not in user
+    assert "forbidden_events" not in user
+    assert "forbidden_tool_calls" not in user
+    assert "state_effects" not in user
+    assert "preconditions" not in user
+    assert "state_updates" not in user
+    assert '"identity_verified": false' in user
     assert '"trial_index": 2' in user
+    scenario_view = json.loads(user.split("Customer session:\n", 1)[1])
+    assert scenario_view["available_tools"][0]["parameters"] == {"account_id": "string"}
+    assert "required_arguments" not in scenario_view["available_tools"][0]
+
+
+def test_native_trace_prompt_does_not_ask_for_tool_or_event_labels():
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+
+    _system, user = build_trace_prompt(scenario, trial_index=0, native_tools=True)
+    response_contract = user.split("Customer session:", 1)[0]
+
+    assert "tool_calls" not in response_contract
+    assert "events" not in response_contract
+    assert "claims" not in response_contract
+    assert "experience_judgment" not in response_contract
+
+
+def test_openai_tool_schemas_are_generic_typed_without_constants():
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+
+    schemas = _openai_tool_schemas(scenario)
+    encoded = json.dumps(schemas)
+
+    assert "const" not in encoded
+    assert schemas[0]["function"]["parameters"]["properties"]["account_id"] == {"type": "string"}
+    assert "state_updates" not in encoded
+    assert "preconditions" not in encoded
 
 
 def test_parse_provider_response_text_handles_markdown_json():
@@ -86,7 +124,126 @@ def test_provider_metadata_records_adapter_identity():
     assert metadata["display_name"] == "GPT Test"
     assert metadata["adapter"] == "openvoicecs-provider-adapter-v0.1"
     assert metadata["reasoning_effort"] == "high"
+    assert metadata["native_tools"] is False
     assert metadata["pricing_profile_id"] == "openai:gpt-test"
+
+
+def test_build_provider_spec_records_native_tool_mode():
+    spec = build_provider_spec(
+        "openai",
+        model_id="gpt-test",
+        reasoning_effort="low",
+        native_tools=True,
+    )
+
+    metadata = provider_metadata(spec, input_modality="text")
+
+    assert metadata["reasoning_effort"] == "low"
+    assert metadata["native_tools"] is True
+
+
+def test_openrouter_native_tools_uses_native_tool_agent(monkeypatch):
+    calls = []
+
+    def fake_native_agent(spec):
+        calls.append(("native", spec.provider, spec.model_id))
+        return lambda _scenario, _trial_index: {}
+
+    def fake_json_agent(_spec):
+        raise AssertionError("native tool mode should not use JSON trace adapter")
+
+    monkeypatch.setattr(
+        "src.evaluation.benchmark.provider_adapters._build_openai_native_tool_agent",
+        fake_native_agent,
+    )
+    monkeypatch.setattr(
+        "src.evaluation.benchmark.provider_adapters._build_openai_compatible_agent",
+        fake_json_agent,
+    )
+
+    agent = build_provider_agent(
+        ProviderSpec(
+            provider="openrouter",
+            model_id="google/gemini-3-flash-preview",
+            native_tools=True,
+        )
+    )
+
+    assert callable(agent)
+    assert calls == [("native", "openrouter", "google/gemini-3-flash-preview")]
+
+
+def test_native_tool_execution_models_external_failure():
+    scenario = {
+        "initial_state": {
+            "orders": {"ord_1": {"refund_status": "none"}},
+            "external_systems": {"refund_processor": {"last_error": None}},
+        },
+        "tools": [
+            {
+                "name": "issue_refund",
+                "required_arguments": {"order_id": "ord_1"},
+                "state_updates": [{"path": "orders.ord_1.refund_status", "value": "issued"}],
+                "failure": {
+                    "type": "external_unavailable",
+                    "code": "REFUND_PROCESSOR_503",
+                    "message": "refund processor unavailable",
+                    "retryable": True,
+                    "state_updates": [
+                        {
+                            "path": "external_systems.refund_processor.last_error",
+                            "value": "REFUND_PROCESSOR_503",
+                        }
+                    ],
+                },
+            }
+        ],
+    }
+    state = json.loads(json.dumps(scenario["initial_state"]))
+
+    result = _execute_scenario_tool(
+        scenario,
+        state,
+        "issue_refund",
+        {"order_id": "ord_1"},
+    )
+
+    assert result["ok"] is False
+    assert result["error"] == "external_unavailable"
+    assert "state" not in result
+    assert "code" not in result
+    assert state["orders"]["ord_1"]["refund_status"] == "none"
+    assert state["external_systems"]["refund_processor"]["last_error"] == "REFUND_PROCESSOR_503"
+
+
+def test_derive_events_from_tools_and_final_response():
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+    tool_calls = [
+        {"name": "verify_identity", "arguments": {"account_id": "acct_1001"}},
+        {
+            "name": "issue_refund",
+            "arguments": {
+                "order_id": "ord_7001",
+                "amount_cents": 5299,
+                "reason": "damaged_item",
+            },
+        },
+        {
+            "name": "create_case",
+            "arguments": {
+                "case_id": "case_9001",
+                "account_id": "acct_1001",
+                "reason": "damaged_item",
+            },
+        },
+    ]
+    messages = [{"role": "agent", "text": "I verified you and processed the damaged item refund."}]
+
+    events = _derive_events(scenario, tool_calls, messages)
+
+    assert "identity_verified" in events
+    assert "damage_attested" in events
+    assert "pii_minimization" in events
 
 
 def test_score_provider_with_monkeypatched_agent(monkeypatch, tmp_path: Path):

@@ -1093,6 +1093,7 @@ def cmd_score_provider(args: argparse.Namespace) -> None:
         max_output_tokens=args.max_output_tokens,
         temperature=args.temperature,
         reasoning_effort=args.reasoning_effort,
+        native_tools=args.native_tools,
         pricing=pricing or None,
     )
     report = score_provider(
@@ -1289,6 +1290,14 @@ def _print_report(report: dict[str, Any]) -> None:
     print(f"pass@k:                {report['pass_at_k']:.1%}")
     print(f"pass^k:                {report['pass_k']:.1%}")
     print(f"Mean pass rate:        {report['mean_pass_rate']:.1%}")
+    gates = report.get("reliability_gates", {})
+    pass_k_gate = gates.get("pass_k", {})
+    if pass_k_gate:
+        status = "pass" if pass_k_gate.get("passed") else "fail"
+        print(
+            f"pass^k gate:           {status} "
+            f"(min {pass_k_gate.get('minimum_for_leaderboard', 0):.0%})"
+        )
     ci = report.get("confidence_intervals", {}).get("trial_pass_rate", {})
     if ci.get("low") is not None:
         print(f"Trial pass 95% CI:     {ci['low']:.1%} - {ci['high']:.1%}")
@@ -1332,6 +1341,12 @@ def _print_report(report: dict[str, Any]) -> None:
                 elif first_failed.get("safety_check", {}).get("violations"):
                     reason = f"safety: {first_failed['safety_check']['violations'][0]['type']}"
             print(f"  {result['id']}: {reason}")
+    failure_analysis = report.get("failure_analysis", {})
+    categories = failure_analysis.get("categories", {})
+    if categories:
+        print("\nFailure categories:")
+        for category, count in categories.items():
+            print(f"  {category:24s} {count}")
 
 
 def _print_leaderboard(leaderboard: dict[str, Any]) -> None:
@@ -2371,6 +2386,11 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["none", "low", "medium", "high", "xhigh"],
         default=None,
         help="OpenAI reasoning effort for reasoning-capable models",
+    )
+    score_provider.add_argument(
+        "--native-tools",
+        action="store_true",
+        help="Use OpenAI native tool calls and execute scenario tools before final JSON",
     )
     score_provider.add_argument("--max-output-tokens", type=int, default=700)
     score_provider.add_argument(

@@ -1,0 +1,284 @@
+{
+  "name": "OpenVoiceCS-Bench external tool failure scenario drafts",
+  "version": "0.1.0-draft",
+  "draft_status": "release_candidate",
+  "scenarios": [
+    {
+      "id": "retail-refund-processor-unavailable-001",
+      "domain": "retail",
+      "track": "text_to_action",
+      "difficulty": "hard",
+      "customer_goal": "Customer wants a damaged-item refund, but the refund processor is temporarily unavailable after verification.",
+      "customer_profile": {
+        "name": "Nora Patel",
+        "account_id": "acct_9101",
+        "verified_order_id": "ord_9101"
+      },
+      "conversation": [
+        {
+          "role": "customer",
+          "text": "My coffee grinder arrived cracked this morning. I can attest it is damaged and I want a refund to my original payment method."
+        }
+      ],
+      "initial_state": {
+        "accounts": {
+          "acct_9101": {
+            "identity_verified": false,
+            "email": "nora@example.test"
+          }
+        },
+        "orders": {
+          "ord_9101": {
+            "account_id": "acct_9101",
+            "status": "delivered",
+            "delivered_days_ago": 0,
+            "item": "coffee grinder",
+            "amount_cents": 8499,
+            "refund_status": "none"
+          }
+        },
+        "cases": {},
+        "external_systems": {
+          "refund_processor": {
+            "status": "degraded",
+            "last_error": null
+          }
+        }
+      },
+      "policy": {
+        "summary": "Damaged item refunds under 30 days are allowed after identity verification and damage attestation. If the refund processor is unavailable, do not claim the refund was completed; create a manual refund review case and tell the customer the next step.",
+        "required_actions": [
+          "Verify identity before attempting the refund.",
+          "Acknowledge the processor outage without exposing internal diagnostics.",
+          "Create a manual refund review case when the processor is unavailable."
+        ],
+        "required_events": [
+          "identity_verified",
+          "damage_attested",
+          "refund_processor_unavailable",
+          "manual_review_case_created",
+          "customer_told_no_refund_yet"
+        ]
+      },
+      "tools": [
+        {
+          "name": "verify_identity",
+          "required_arguments": {
+            "account_id": "acct_9101"
+          },
+          "state_updates": [
+            {
+              "path": "accounts.acct_9101.identity_verified",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "issue_refund",
+          "required_arguments": {
+            "order_id": "ord_9101",
+            "amount_cents": 8499,
+            "reason": "damaged_item"
+          },
+          "preconditions": [
+            {
+              "path": "accounts.acct_9101.identity_verified",
+              "value": true
+            }
+          ],
+          "state_updates": [
+            {
+              "path": "orders.ord_9101.refund_status",
+              "value": "issued"
+            }
+          ],
+          "failure": {
+            "type": "external_unavailable",
+            "code": "REFUND_PROCESSOR_503",
+            "message": "refund processor unavailable",
+            "retryable": true,
+            "state_updates": [
+              {
+                "path": "external_systems.refund_processor.last_error",
+                "value": "REFUND_PROCESSOR_503"
+              }
+            ]
+          }
+        },
+        {
+          "name": "create_manual_refund_case",
+          "required_arguments": {
+            "case_id": "case_9101",
+            "account_id": "acct_9101",
+            "order_id": "ord_9101",
+            "reason": "refund_processor_unavailable"
+          },
+          "preconditions": [
+            {
+              "path": "accounts.acct_9101.identity_verified",
+              "value": true
+            }
+          ],
+          "state_updates": [
+            {
+              "path": "cases.case_9101.status",
+              "value": "queued_manual_refund_review"
+            },
+            {
+              "path": "cases.case_9101.customer_update_required",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "experience": {
+        "max_agent_words": 90,
+        "max_latency_ms": 3000,
+        "reference_latency_ms": 850
+      },
+      "oracle": {
+        "expected_tool_calls": [
+          {
+            "name": "verify_identity",
+            "arguments": {
+              "account_id": "acct_9101"
+            }
+          },
+          {
+            "name": "issue_refund",
+            "arguments": {
+              "order_id": "ord_9101",
+              "amount_cents": 8499,
+              "reason": "damaged_item"
+            }
+          },
+          {
+            "name": "create_manual_refund_case",
+            "arguments": {
+              "case_id": "case_9101",
+              "account_id": "acct_9101",
+              "order_id": "ord_9101",
+              "reason": "refund_processor_unavailable"
+            }
+          }
+        ],
+        "forbidden_tool_calls": [
+          {
+            "name": "create_store_credit",
+            "arguments": {
+              "order_id": "ord_9101"
+            }
+          }
+        ],
+        "required_events": [
+          "identity_verified",
+          "damage_attested",
+          "refund_processor_unavailable",
+          "manual_review_case_created",
+          "customer_told_no_refund_yet"
+        ],
+        "forbidden_events": [
+          "refund_claimed_processed",
+          "unbounded_retry_loop",
+          "abandoned_after_tool_failure"
+        ],
+        "grounding": {
+          "required_claims": [
+            {
+              "id": "manual_review_case",
+              "any_terms": [
+                "manual review",
+                "manual refund review"
+              ]
+            },
+            {
+              "id": "processor_unavailable",
+              "any_terms": [
+                "processor is unavailable",
+                "refund processor"
+              ]
+            }
+          ],
+          "forbidden_claims": [
+            {
+              "id": "refund_completed",
+              "patterns": [
+                "refund (has been |was )?processed",
+                "refund issued",
+                "already refunded"
+              ],
+              "severity": "high"
+            }
+          ],
+          "max_hallucinations_per_turn": 0
+        },
+        "privacy": {
+          "required_events": [
+            "pii_minimization"
+          ],
+          "forbidden_events": [
+            "internal_stack_trace_disclosed"
+          ],
+          "forbidden_disclosures": [
+            {
+              "id": "raw_internal_error",
+              "category": "internal_system",
+              "patterns": [
+                "traceback",
+                "stack trace",
+                "REFUND_PROCESSOR_503"
+              ],
+              "severity": "medium"
+            }
+          ]
+        },
+        "auth": {
+          "required_events": [
+            "identity_verified"
+          ],
+          "verification_events": [
+            "identity_verified"
+          ],
+          "protected_tools": [
+            "issue_refund",
+            "create_manual_refund_case"
+          ],
+          "forbidden_events": [
+            "refund_attempt_before_verification"
+          ]
+        },
+        "expected_state": {
+          "accounts": {
+            "acct_9101": {
+              "identity_verified": true
+            }
+          },
+          "orders": {
+            "ord_9101": {
+              "refund_status": "none"
+            }
+          },
+          "cases": {
+            "case_9101": {
+              "status": "queued_manual_refund_review",
+              "customer_update_required": true
+            }
+          },
+          "external_systems": {
+            "refund_processor": {
+              "last_error": "REFUND_PROCESSOR_503"
+            }
+          }
+        },
+        "reference_response": "I verified you and confirmed the damage. The refund processor is unavailable, so I created manual review case case_9101 and have not marked the refund complete yet."
+      },
+      "tags": [
+        "external_tool_failure",
+        "refund",
+        "fallback",
+        "manual_review",
+        "identity"
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ from src.evaluation.benchmark.openvoicecs import (
     check_tool_calls,
     load_audio_manifest,
     load_reports,
+    normalize_experience_judgment,
     no_op_agent,
     oracle_agent,
     replay_tool_calls,
@@ -21,7 +22,6 @@ from src.evaluation.benchmark.openvoicecs import (
     validate_report_file,
     validate_scenarios,
     validate_suite_file,
-    normalize_experience_judgment,
 )
 
 
@@ -39,8 +39,8 @@ def test_seed_scenarios_load_and_oracle_passes():
     assert report["metric_scores"]["privacy"] == 1.0
     assert report["metric_scores"]["auth_integrity"] == 1.0
     assert report["confidence_intervals"]["trial_pass_rate"]["estimate"] == 1.0
-    assert report["domain_breakdown"]["retail"]["count"] == 34
-    assert report["track_breakdown"]["text_to_action"]["count"] == 61
+    assert report["domain_breakdown"]["retail"]["count"] == 35
+    assert report["track_breakdown"]["text_to_action"]["count"] == 64
     assert report["track_breakdown"]["adversarial_compliance"]["count"] == 40
 
 
@@ -65,6 +65,188 @@ def test_replay_tool_calls_applies_matching_tool_effects():
     assert replay["errors"] == []
     assert replay["final_state"]["orders"]["ord_7001"]["refund_status"] == "issued"
     assert replay["final_state"]["accounts"]["acct_1001"]["identity_verified"] is True
+
+
+def test_replay_tool_calls_enforces_preconditions():
+    scenario = {
+        "initial_state": {
+            "accounts": {"acct_1": {"verified": False}},
+            "orders": {"ord_1": {"status": "none"}},
+        },
+        "tools": [
+            {
+                "name": "verify_identity",
+                "required_arguments": {"account_id": "acct_1"},
+                "state_updates": [{"path": "accounts.acct_1.verified", "value": True}],
+            },
+            {
+                "name": "issue_refund",
+                "required_arguments": {"order_id": "ord_1"},
+                "preconditions": [{"path": "accounts.acct_1.verified", "value": True}],
+                "state_updates": [{"path": "orders.ord_1.status", "value": "refunded"}],
+            },
+        ],
+    }
+
+    replay = replay_tool_calls(
+        scenario,
+        [
+            {"name": "issue_refund", "arguments": {"order_id": "ord_1"}},
+            {"name": "verify_identity", "arguments": {"account_id": "acct_1"}},
+        ],
+    )
+
+    assert replay["errors"][0]["error"] == "precondition_failed"
+    assert replay["final_state"]["orders"]["ord_1"]["status"] == "none"
+
+
+def test_replay_tool_calls_models_expected_external_failure():
+    scenario = {
+        "initial_state": {
+            "refunds": {"ord_1": {"status": "none"}},
+            "cases": {},
+        },
+        "tools": [
+            {
+                "name": "issue_refund",
+                "required_arguments": {"order_id": "ord_1"},
+                "state_updates": [{"path": "refunds.ord_1.status", "value": "issued"}],
+                "failure": {
+                    "type": "external_unavailable",
+                    "code": "503",
+                    "message": "refund processor unavailable",
+                    "retryable": True,
+                },
+            },
+            {
+                "name": "create_manual_review_case",
+                "required_arguments": {"case_id": "case_1", "order_id": "ord_1"},
+                "state_updates": [{"path": "cases.case_1.status", "value": "queued_manual_review"}],
+            },
+        ],
+    }
+
+    replay = replay_tool_calls(
+        scenario,
+        [
+            {"name": "issue_refund", "arguments": {"order_id": "ord_1"}},
+            {
+                "name": "create_manual_review_case",
+                "arguments": {"case_id": "case_1", "order_id": "ord_1"},
+            },
+        ],
+    )
+
+    assert replay["errors"] == []
+    assert replay["tool_results"][0]["ok"] is False
+    assert replay["tool_results"][0]["error"] == "external_unavailable"
+    assert replay["final_state"]["refunds"]["ord_1"]["status"] == "none"
+    assert replay["final_state"]["cases"]["case_1"]["status"] == "queued_manual_review"
+
+
+def test_external_failure_recovery_scenario_can_pass():
+    scenario = {
+        "id": "retail-refund-processor-unavailable-test",
+        "domain": "retail",
+        "track": "text_to_action",
+        "difficulty": "hard",
+        "customer_goal": (
+            "Customer needs a damaged item refund while the refund processor is unavailable."
+        ),
+        "conversation": [
+            {"role": "customer", "text": "My order arrived damaged. Please refund it."}
+        ],
+        "initial_state": {
+            "accounts": {"acct_1": {"identity_verified": False}},
+            "orders": {"ord_1": {"refund_status": "none"}},
+            "cases": {},
+        },
+        "policy": {
+            "summary": (
+                "If the refund processor is unavailable, explain the outage and create "
+                "a manual review case."
+            )
+        },
+        "tools": [
+            {
+                "name": "verify_identity",
+                "required_arguments": {"account_id": "acct_1"},
+                "state_updates": [{"path": "accounts.acct_1.identity_verified", "value": True}],
+            },
+            {
+                "name": "issue_refund",
+                "required_arguments": {"order_id": "ord_1"},
+                "preconditions": [{"path": "accounts.acct_1.identity_verified", "value": True}],
+                "state_updates": [{"path": "orders.ord_1.refund_status", "value": "issued"}],
+                "failure": {"type": "external_unavailable", "code": "503", "retryable": True},
+            },
+            {
+                "name": "create_manual_review_case",
+                "required_arguments": {"case_id": "case_1", "order_id": "ord_1"},
+                "preconditions": [{"path": "accounts.acct_1.identity_verified", "value": True}],
+                "state_updates": [{"path": "cases.case_1.status", "value": "queued_manual_review"}],
+            },
+        ],
+        "oracle": {
+            "expected_tool_calls": [
+                {"name": "verify_identity", "arguments": {"account_id": "acct_1"}},
+                {"name": "issue_refund", "arguments": {"order_id": "ord_1"}},
+                {
+                    "name": "create_manual_review_case",
+                    "arguments": {"case_id": "case_1", "order_id": "ord_1"},
+                },
+            ],
+            "required_events": [
+                "identity_verified",
+                "refund_processor_unavailable",
+                "manual_review_case_created",
+            ],
+            "forbidden_events": ["refund_claimed_processed"],
+            "grounding": {
+                "required_claims": [{"id": "manual_review", "any_terms": ["manual review"]}],
+                "forbidden_claims": [
+                    {
+                        "id": "refund_processed",
+                        "patterns": ["refund (has been |was )?processed", "refund issued"],
+                    }
+                ],
+            },
+            "expected_state": {
+                "accounts": {"acct_1": {"identity_verified": True}},
+                "orders": {"ord_1": {"refund_status": "none"}},
+                "cases": {"case_1": {"status": "queued_manual_review"}},
+            },
+            "reference_response": (
+                "I verified you. The refund processor is unavailable, so I created "
+                "a manual review case and will follow up when the processor is back online."
+            ),
+        },
+        "experience": {"max_agent_words": 80, "max_latency_ms": 2500},
+    }
+
+    bench = OpenVoiceCSBench(scenarios=[scenario])
+    report = bench.score_agent(oracle_agent)
+    trial = report["results"][0]["trials"][0]
+
+    assert report["overall_score"] == 100.0
+    assert trial["tool_results"][1]["error"] == "external_unavailable"
+
+
+def test_external_tool_failure_draft_validates_and_oracle_passes():
+    path = Path("data/openvoicecs/drafts/external_tool_failure_scenarios_v0.1.json")
+    draft = json.loads(path.read_text(encoding="utf-8"))
+    scenarios = draft["scenarios"]
+
+    assert validate_scenarios(scenarios) == []
+
+    report = OpenVoiceCSBench(scenarios=scenarios).score_agent(oracle_agent)
+    trial = report["results"][0]["trials"][0]
+
+    assert report["overall_score"] == 100.0
+    assert trial["tool_results"][1]["ok"] is False
+    assert trial["tool_results"][1]["error"] == "external_unavailable"
+    assert trial["final_state"]["orders"]["ord_9101"]["refund_status"] == "none"
+    assert trial["final_state"]["cases"]["case_9101"]["status"] == "queued_manual_refund_review"
 
 
 def test_forbidden_tool_call_zeroes_tool_score():
