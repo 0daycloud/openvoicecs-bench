@@ -1307,6 +1307,12 @@ def _print_report(report: dict[str, Any]) -> None:
         print(f"Median latency:        {_fmt(ops.get('median_latency_ms'), ' ms')}")
         print(f"P95 latency:           {_fmt(ops.get('p95_latency_ms'), ' ms')}")
         print(f"Avg tool calls:        {_fmt(ops.get('avg_tool_calls'))}")
+        print(f"Avg wasted tools:      {_fmt(ops.get('avg_wasted_tool_calls'))}")
+    stability = report.get("stability_metrics", {})
+    if stability:
+        print(f"Scenario flake rate:   {_fmt_pct(stability.get('scenario_flake_rate'))}")
+        print(f"Unstable scenarios:    {stability.get('unstable_scenario_count', 0)}")
+        print(f"Tool failure recovery: {_fmt_pct(stability.get('tool_failure_recovery_rate'))}")
 
     print("\nMetric scores:")
     for metric, score in report["metric_scores"].items():
@@ -2389,8 +2395,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     score_provider.add_argument(
         "--native-tools",
+        dest="native_tools",
         action="store_true",
-        help="Use OpenAI native tool calls and execute scenario tools before final JSON",
+        default=None,
+        help="Use native tool calls and execute scenario tools before final JSON",
+    )
+    score_provider.add_argument(
+        "--json-trace",
+        dest="native_tools",
+        action="store_false",
+        help="Use the legacy JSON trace adapter instead of native tools",
     )
     score_provider.add_argument("--max-output-tokens", type=int, default=700)
     score_provider.add_argument(

@@ -9,6 +9,10 @@
       "track": "text_to_action",
       "difficulty": "hard",
       "customer_goal": "Customer wants a damaged-item refund, but the refund processor is temporarily unavailable after verification.",
+      "scenario_family": {
+        "id": "retail-damaged-refund-recovery",
+        "variant": "tool_failure"
+      },
       "customer_profile": {
         "name": "Nora Patel",
         "account_id": "acct_9101",
@@ -71,7 +75,12 @@
               "path": "accounts.acct_9101.identity_verified",
               "value": true
             }
-          ]
+          ],
+          "result": {
+            "account_id": "acct_9101",
+            "verified": true,
+            "verification_method": "account_profile_match"
+          }
         },
         {
           "name": "issue_refund",
@@ -102,7 +111,11 @@
                 "path": "external_systems.refund_processor.last_error",
                 "value": "REFUND_PROCESSOR_503"
               }
-            ]
+            ],
+            "result": {
+              "user_safe_status": "temporarily_unavailable",
+              "next_step": "create_manual_refund_review"
+            }
           }
         },
         {
@@ -112,6 +125,9 @@
             "account_id": "acct_9101",
             "order_id": "ord_9101",
             "reason": "refund_processor_unavailable"
+          },
+          "generated_arguments": {
+            "case_id": "case_9101"
           },
           "preconditions": [
             {
@@ -128,7 +144,54 @@
               "path": "cases.case_9101.customer_update_required",
               "value": true
             }
-          ]
+          ],
+          "result": {
+            "case_id": "case_9101",
+            "status": "queued_manual_refund_review",
+            "customer_update_required": true
+          }
+        },
+        {
+          "name": "escalate_to_human",
+          "required_arguments": {
+            "escalation_id": "esc_9101",
+            "account_id": "acct_9101",
+            "case_id": "case_9101",
+            "reason": "refund_processor_unavailable"
+          },
+          "generated_arguments": {
+            "escalation_id": "esc_9101"
+          },
+          "argument_bindings": {
+            "case_id": {
+              "tool": "create_manual_refund_case",
+              "path": "result.case_id"
+            }
+          },
+          "preconditions": [
+            {
+              "path": "accounts.acct_9101.identity_verified",
+              "value": true
+            },
+            {
+              "path": "cases.case_9101.status",
+              "value": "queued_manual_refund_review"
+            }
+          ],
+          "state_updates": [
+            {
+              "path": "escalations.esc_9101.status",
+              "value": "assigned_to_human"
+            },
+            {
+              "path": "escalations.esc_9101.reason",
+              "value": "refund_processor_unavailable"
+            }
+          ],
+          "result": {
+            "escalation_id": "esc_9101",
+            "status": "assigned_to_human"
+          }
         }
       ],
       "experience": {
@@ -160,6 +223,15 @@
               "order_id": "ord_9101",
               "reason": "refund_processor_unavailable"
             }
+          },
+          {
+            "name": "escalate_to_human",
+            "arguments": {
+              "escalation_id": "esc_9101",
+              "account_id": "acct_9101",
+              "case_id": "case_9101",
+              "reason": "refund_processor_unavailable"
+            }
           }
         ],
         "forbidden_tool_calls": [
@@ -175,6 +247,7 @@
           "damage_attested",
           "refund_processor_unavailable",
           "manual_review_case_created",
+          "escalation_created",
           "customer_told_no_refund_yet"
         ],
         "forbidden_events": [
@@ -241,7 +314,8 @@
           ],
           "protected_tools": [
             "issue_refund",
-            "create_manual_refund_case"
+            "create_manual_refund_case",
+            "escalate_to_human"
           ],
           "forbidden_events": [
             "refund_attempt_before_verification"
@@ -268,9 +342,15 @@
             "refund_processor": {
               "last_error": "REFUND_PROCESSOR_503"
             }
+          },
+          "escalations": {
+            "esc_9101": {
+              "status": "assigned_to_human",
+              "reason": "refund_processor_unavailable"
+            }
           }
         },
-        "reference_response": "I verified you and confirmed the damage. The refund processor is unavailable, so I created manual review case case_9101 and have not marked the refund complete yet."
+        "reference_response": "I verified you and confirmed the damage. The refund processor is unavailable, so I created manual review case case_9101, escalated it to a human specialist, and have not marked the refund complete yet."
       },
       "tags": [
         "external_tool_failure",

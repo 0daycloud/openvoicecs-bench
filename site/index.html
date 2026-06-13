@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenVoiceCS-Bench - Voice Customer-Service Agent Benchmark</title>
+    <meta name="description" content="OpenVoiceCS-Bench is an open benchmark for voice AI customer-service agents, measuring task resolution, SOP compliance, privacy, authentication, tool use, latency, and cost.">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #f6faf8;
+            --fg: #1a2e22;
+            --muted: #5d7768;
+            --muted-light: #8ba194;
+            --surface: #eef6f1;
+            --surface-2: #fdfcf8;
+            --border: #c8dcd0;
+            --border-light: #dde9e2;
+            --primary: #2d8a5e;
+            --accent: #c4913e;
+            --blue: #356b7d;
+            --ink: #0b1b11;
+            --white: #fbfdfb;
+        }
+
+        body {
+            font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--fg);
+            background: var(--bg);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--primary); color: #fff; }
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { color: var(--fg); }
+
+        .hero-shell {
+            background:
+                linear-gradient(90deg, rgba(7, 23, 13, 0.97) 0%, rgba(10, 32, 18, 0.9) 46%, rgba(15, 43, 50, 0.72) 100%),
+                url("../data/openvoicecs/releases/frontier_seed/plots/all_3d.svg") right center / min(780px, 66vw) auto no-repeat,
+                #07170d;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .site-header {
+            padding: 18px 48px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: inherit;
+            white-space: nowrap;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 28px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header-nav a { color: rgba(255,255,255,0.68); }
+        .header-nav a:hover, .header-nav a.active { color: #fff; }
+
+        .hero {
+            padding: 88px 48px 66px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 420px;
+            gap: 60px;
+            align-items: end;
+        }
+
+        .kicker,
+        .section-label {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: clamp(42px, 6vw, 82px);
+            line-height: 1.02;
+            letter-spacing: 0;
+            color: #fff;
+            margin-bottom: 22px;
+            max-width: 900px;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.72);
+            font-size: 19px;
+            line-height: 1.65;
+            max-width: 760px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 11px 24px;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .btn.primary { background: var(--primary); border-color: var(--primary); }
+        .btn:hover { background: #fff; color: var(--ink); border-color: #fff; }
+
+        .hero-panel {
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
+            padding: 22px;
+        }
+
+        .hero-panel-title {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.86);
+            margin-bottom: 18px;
+        }
+
+        .mini-metric {
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            gap: 18px;
+            padding: 14px 0;
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .mini-metric strong {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 30px;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .mini-metric span {
+            color: rgba(255,255,255,0.62);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .section {
+            padding: 78px 48px;
+        }
+
+        .section.tight { padding-top: 46px; }
+
+        .section h2 {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 34px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            color: var(--fg);
+        }
+
+        .section .desc {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 780px;
+            margin-bottom: 36px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border-light);
+            border: 1px solid var(--border-light);
+        }
+
+        .stat {
+            background: var(--white);
+            padding: 26px 24px;
+            min-height: 128px;
+        }
+
+        .stat-value {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--fg);
+        }
+
+        .stat-label {
+            margin-top: 8px;
+            color: var(--muted-light);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border-light);
+            border: 1px solid var(--border-light);
+        }
+
+        .feature {
+            background: var(--white);
+            padding: 28px;
+        }
+
+        .feature h3 {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 23px;
+            line-height: 1.2;
+            margin-bottom: 9px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.58;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.78fr);
+            gap: 32px;
+            align-items: start;
+        }
+
+        .plot-card,
+        .table-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .plot-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: var(--surface-2);
+        }
+
+        .card-head {
+            padding: 16px 22px;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--surface);
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: baseline;
+        }
+
+        .card-head strong {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .card-head span {
+            color: var(--muted-light);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .leaderboard {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .leaderboard th {
+            text-align: left;
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted-light);
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--surface-2);
+            white-space: nowrap;
+        }
+
+        .leaderboard td {
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .leaderboard tr:last-child td { border-bottom: none; }
+        .leaderboard td.model { color: var(--fg); font-weight: 600; white-space: normal; min-width: 180px; }
+        .leaderboard .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .leaderboard .best { color: var(--primary); font-weight: 700; }
+
+        .note {
+            padding: 16px 22px;
+            color: var(--muted-light);
+            font-size: 13px;
+            line-height: 1.55;
+            border-top: 1px solid var(--border-light);
+            background: var(--surface-2);
+        }
+
+        .track-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: var(--border-light);
+            border: 1px solid var(--border-light);
+        }
+
+        .track {
+            background: var(--white);
+            padding: 22px 18px;
+        }
+
+        .track strong {
+            display: block;
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 28px;
+            line-height: 1;
+            margin-bottom: 8px;
+            color: var(--fg);
+        }
+
+        .track span {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cta {
+            padding: 66px 48px;
+            background: var(--surface-2);
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 31px;
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            color: var(--muted);
+            max-width: 640px;
+            margin: 0 auto 24px;
+        }
+
+        .cta .btn { color: var(--fg); border-color: var(--border); }
+        .cta .btn.primary { color: #fff; }
+        .cta .btn:hover { background: var(--fg); color: #fff; border-color: var(--fg); }
+
+        .site-footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.48);
+            padding: 34px 48px;
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            font-size: 13px;
+        }
+
+        .site-footer a { color: rgba(255,255,255,0.68); text-decoration: underline; text-underline-offset: 3px; }
+        .site-footer a:hover { color: #fff; }
+
+        @media (max-width: 1060px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-panel { max-width: 680px; }
+            .split { grid-template-columns: 1fr; }
+            .track-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 760px) {
+            .site-header, .hero, .section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
+            .site-header { align-items: flex-start; flex-direction: column; gap: 12px; }
+            .header-nav { gap: 18px; flex-wrap: wrap; font-size: 13px; }
+            .hero { padding-top: 58px; }
+            .hero h1 { font-size: 42px; }
+            .hero p { font-size: 17px; }
+            .stats, .grid-3 { grid-template-columns: 1fr; }
+            .track-grid { grid-template-columns: repeat(2, 1fr); }
+            .table-card { overflow-x: auto; }
+            .site-footer { flex-direction: column; }
+        }
+
+        @media (max-width: 460px) {
+            .hero-actions .btn { width: 100%; }
+            .track-grid { grid-template-columns: 1fr; }
+            .mini-metric { grid-template-columns: 1fr; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-shell">
+        <header class="site-header">
+            <a href="index.html" class="logo">OpenVoiceCS-Bench</a>
+            <nav class="header-nav" aria-label="Primary">
+                <a class="active" href="index.html">Overview</a>
+                <a href="results.html">Results &amp; Methodology</a>
+                <a href="../README.md">Repository</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div>
+                <div class="kicker">Voice agent evaluation</div>
+                <h1>Does the agent actually solve the customer-service call?</h1>
+                <p>OpenVoiceCS-Bench evaluates voice AI customer-service agents on stateful task completion, policy adherence, tool correctness, privacy, authentication boundaries, cost, and voice-to-voice latency.</p>
+                <div class="hero-actions">
+                    <a class="btn primary" href="results.html">View Detailed Results</a>
+                    <a class="btn" href="#quick-overview">Quick Overview</a>
+                </div>
+            </div>
+
+            <aside class="hero-panel" aria-label="Release snapshot">
+                <div class="hero-panel-title">v0.1 Leaderboard Release</div>
+                <div class="mini-metric">
+                    <strong>201</strong>
+                    <span>audited scenarios assigned to public and sealed splits</span>
+                </div>
+                <div class="mini-metric">
+                    <strong>120</strong>
+                    <span>hash-pinned WAV variants with verified duration and sample rate</span>
+                </div>
+                <div class="mini-metric">
+                    <strong>100</strong>
+                    <span>concurrency target included in the latency frontier report</span>
+                </div>
+            </aside>
+        </section>
+    </div>
+
+    <section class="section tight" id="quick-overview">
+        <div class="section-label">Quick Overview</div>
+        <h2>What This Benchmark Measures</h2>
+        <p class="desc">The benchmark is built around reproducible scenario sandboxes. Each scenario defines the customer goal, starting database state, available tools, standard operating procedure requirements, forbidden actions, and expected final state.</p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Evaluation Tracks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">7</div>
+                <div class="stat-label">Service Domains</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">80 / 121</div>
+                <div class="stat-label">Public / Sealed Scenarios</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">0</div>
+                <div class="stat-label">Release Issues</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-label">Benchmark Surface</div>
+        <h2>Designed for Operational Voice Agents</h2>
+        <p class="desc">A strong score requires more than a fluent answer. The agent must call the right tools, avoid unsafe actions, respect identity gates, preserve privacy, and recover from noisy or adversarial calls.</p>
+
+        <div class="grid-3">
+            <div class="feature">
+                <h3>Stateful resolution</h3>
+                <p>Scenarios replay tool calls against deterministic database state, then compare the resulting state and required events against an oracle.</p>
+            </div>
+            <div class="feature">
+                <h3>Voice operations</h3>
+                <p>The release captures p50, p95, last-byte, barge-in, interruption recovery, and load evidence across 1, 10, and 100 concurrency targets.</p>
+            </div>
+            <div class="feature">
+                <h3>Governed release</h3>
+                <p>Release artifacts pin scenarios, audio, provenance, splits, pricing, reviews, claims, sealed operations, and judge packages with hashes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-label">Tracks</div>
+        <h2>Five Ways to Fail a Customer-Service Call</h2>
+        <p class="desc">The scenario suite covers text-to-action, audio-to-action, end-to-end voice, robustness, and adversarial compliance. Counts below are from the audited release stats.</p>
+
+        <div class="track-grid">
+            <div class="track"><strong>61</strong><span>Text to action</span></div>
+            <div class="track"><strong>35</strong><span>Audio to action</span></div>
+            <div class="track"><strong>20</strong><span>End-to-end voice</span></div>
+            <div class="track"><strong>45</strong><span>Robustness</span></div>
+            <div class="track"><strong>40</strong><span>Adversarial compliance</span></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-label">Results Snapshot</div>
+        <h2>Reference Frontier and Exploratory Batch</h2>
+        <p class="desc">The official seed frontier currently contains reference oracle systems. The repository also includes a 2026-06-13 OpenRouter native-tools smoke batch over 10 scenarios; it is useful as a quick model comparison but is not the official sealed leaderboard.</p>
+
+        <div class="split">
+            <div class="plot-card">
+                <div class="card-head">
+                    <strong>Latency vs Quality</strong>
+                    <span>frontier_seed plot</span>
+                </div>
+                <img src="../data/openvoicecs/releases/frontier_seed/plots/all_latency_vs_quality.svg" alt="Latency versus quality frontier plot for OpenVoiceCS-Bench">
+                <div class="note">The official reference systems both reach 100% task success in the seed frontier, with p95 voice-to-voice TTFB at 860 ms.</div>
+            </div>
+
+            <div class="table-card">
+                <div class="card-head">
+                    <strong>Top Exploratory Batch Scores</strong>
+                    <span>10 scenarios</span>
+                </div>
+                <table class="leaderboard">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Model</th>
+                            <th class="num">Score</th>
+                            <th class="num">Pass</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td class="model">OpenRouter Qwen3.7 Plus</td><td class="num best">64.14</td><td class="num">0.10</td></tr>
+                        <tr><td>2</td><td class="model">OpenRouter Qwen3.7 Max</td><td class="num">63.37</td><td class="num">0.10</td></tr>
+                        <tr><td>3</td><td class="model">OpenRouter DeepSeek V3.2</td><td class="num">62.37</td><td class="num">0.10</td></tr>
+                        <tr><td>4</td><td class="model">OpenRouter Claude Haiku 4.5</td><td class="num">61.14</td><td class="num">0.10</td></tr>
+                        <tr><td>5</td><td class="model">OpenRouter GPT-4.1 Mini</td><td class="num">61.14</td><td class="num">0.10</td></tr>
+                    </tbody>
+                </table>
+                <div class="note">Pass columns are pass@k, pass^k, and mean pass rate in the underlying batch summary; all top rows here report 0.10 on the 10-scenario smoke subset.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Read the detailed release report</h2>
+        <p>The results page includes the official frontier scorecards, exploratory batch table, scoring weights, scenario composition, audio perturbations, release gates, and reproduction commands.</p>
+        <a class="btn primary" href="results.html">Open Results &amp; Methodology</a>
+    </section>
+
+    <footer class="site-footer">
+        <div>OpenVoiceCS-Bench v0.1.0 - generated from local release artifacts.</div>
+        <div><a href="../docs/openvoicecs_bench.md">Docs</a> / <a href="../data/openvoicecs/releases/frontier_seed/frontier_report.json">Frontier JSON</a> / <a href="../data/openvoicecs/release_audit.json">Release audit</a></div>
+    </footer>
+</body>
+</html>

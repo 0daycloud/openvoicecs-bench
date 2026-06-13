@@ -80,6 +80,9 @@
             "amount_cents": 5299,
             "reason": "damaged_item"
           },
+          "generated_arguments": {
+            "reason": "damaged_item"
+          },
           "state_updates": [
             {
               "path": "orders.ord_7001.refund_status",
@@ -100,6 +103,10 @@
             "account_id": "acct_1001",
             "reason": "damaged_item"
           },
+          "generated_arguments": {
+            "case_id": "case_9001",
+            "reason": "damaged_item"
+          },
           "state_updates": [
             {
               "path": "cases.case_9001.status",
@@ -111,7 +118,11 @@
               "path": "accounts.acct_1001.identity_verified",
               "value": true
             }
-          ]
+          ],
+          "result": {
+            "case_id": "case_9001",
+            "status": "closed_refund_issued"
+          }
         }
       ],
       "experience": {

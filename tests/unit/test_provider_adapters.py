@@ -65,6 +65,11 @@ def test_openai_tool_schemas_are_generic_typed_without_constants():
     assert schemas[0]["function"]["parameters"]["properties"]["account_id"] == {"type": "string"}
     assert "state_updates" not in encoded
     assert "preconditions" not in encoded
+    create_case_schema = next(item for item in schemas if item["function"]["name"] == "create_case")
+    assert create_case_schema["function"]["parameters"]["properties"] == {
+        "account_id": {"type": "string"}
+    }
+    assert create_case_schema["function"]["parameters"]["required"] == ["account_id"]
 
 
 def test_parse_provider_response_text_handles_markdown_json():
@@ -133,13 +138,32 @@ def test_build_provider_spec_records_native_tool_mode():
         "openai",
         model_id="gpt-test",
         reasoning_effort="low",
-        native_tools=True,
     )
 
     metadata = provider_metadata(spec, input_modality="text")
 
     assert metadata["reasoning_effort"] == "low"
     assert metadata["native_tools"] is True
+
+
+def test_build_provider_spec_keeps_json_trace_fallback():
+    spec = build_provider_spec(
+        "openrouter",
+        model_id="openai/gpt-test",
+        native_tools=False,
+    )
+
+    metadata = provider_metadata(spec, input_modality="text")
+
+    assert metadata["native_tools"] is False
+
+
+def test_build_provider_spec_does_not_default_native_for_non_openai_compatible_provider():
+    spec = build_provider_spec("google", model_id="gemini-test")
+
+    metadata = provider_metadata(spec, input_modality="text")
+
+    assert metadata["native_tools"] is False
 
 
 def test_openrouter_native_tools_uses_native_tool_agent(monkeypatch):
@@ -214,6 +238,86 @@ def test_native_tool_execution_models_external_failure():
     assert "code" not in result
     assert state["orders"]["ord_1"]["refund_status"] == "none"
     assert state["external_systems"]["refund_processor"]["last_error"] == "REFUND_PROCESSOR_503"
+
+
+def test_native_tool_execution_accepts_server_generated_arguments():
+    scenario = {
+        "initial_state": {"cases": {}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {
+                    "case_id": "case_1",
+                    "account_id": "acct_1",
+                    "reason": "damaged_item",
+                },
+                "generated_arguments": {
+                    "case_id": "case_1",
+                    "reason": "damaged_item",
+                },
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+                "result": {"case_id": "case_1", "status": "created"},
+            }
+        ],
+    }
+    state = json.loads(json.dumps(scenario["initial_state"]))
+
+    result = _execute_scenario_tool(scenario, state, "create_case", {"account_id": "acct_1"})
+
+    assert result["ok"] is True
+    assert result["generated_arguments"] == {"case_id": "case_1", "reason": "damaged_item"}
+    assert state["cases"]["case_1"]["status"] == "created"
+
+
+def test_native_tool_execution_requires_bound_id_from_prior_result():
+    scenario = {
+        "initial_state": {"cases": {}, "escalations": {}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "account_id": "acct_1"},
+                "generated_arguments": {"case_id": "case_1"},
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+                "result": {"case_id": "case_1", "status": "created"},
+            },
+            {
+                "name": "escalate_to_human",
+                "required_arguments": {
+                    "escalation_id": "esc_1",
+                    "account_id": "acct_1",
+                    "case_id": "case_1",
+                },
+                "generated_arguments": {"escalation_id": "esc_1"},
+                "argument_bindings": {
+                    "case_id": {"tool": "create_case", "path": "result.case_id"}
+                },
+                "state_updates": [{"path": "escalations.esc_1.status", "value": "assigned"}],
+                "result": {"escalation_id": "esc_1", "status": "assigned"},
+            },
+        ],
+    }
+    state = json.loads(json.dumps(scenario["initial_state"]))
+
+    first = _execute_scenario_tool(scenario, state, "create_case", {"account_id": "acct_1"})
+    second = _execute_scenario_tool(
+        scenario,
+        state,
+        "escalate_to_human",
+        {"account_id": "acct_1", "case_id": "case_1"},
+        tool_results=[first],
+    )
+    missing_bound = _execute_scenario_tool(
+        scenario,
+        state,
+        "escalate_to_human",
+        {"account_id": "acct_1"},
+        tool_results=[first],
+    )
+
+    assert second["ok"] is True
+    assert state["escalations"]["esc_1"]["status"] == "assigned"
+    assert missing_bound["error"] == "argument_binding_mismatch"
+    assert missing_bound["binding_errors"][0]["argument"] == "case_id"
 
 
 def test_derive_events_from_tools_and_final_response():

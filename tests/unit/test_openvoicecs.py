@@ -55,6 +55,9 @@ def test_no_op_agent_fails_task_success_but_has_experience_response():
     assert trial["scores"]["task_success"] == 0.0
     assert trial["scores"]["experience_proxy"] > 0.0
     assert trial["tool_check"]["missing_expected"]
+    assert trial["scenario_diagnostics"]["required_tool_count"] > 0
+    assert trial["tool_quality"]["missing_expected_tool_calls"]
+    assert "stability_metrics" in report
 
 
 def test_replay_tool_calls_applies_matching_tool_effects():
@@ -142,6 +145,119 @@ def test_replay_tool_calls_models_expected_external_failure():
     assert replay["tool_results"][0]["error"] == "external_unavailable"
     assert replay["final_state"]["refunds"]["ord_1"]["status"] == "none"
     assert replay["final_state"]["cases"]["case_1"]["status"] == "queued_manual_review"
+
+
+def test_replay_tool_calls_returns_structured_business_result():
+    scenario = {
+        "initial_state": {"accounts": {"acct_1": {"status": "active"}}},
+        "tools": [
+            {
+                "name": "lookup_account",
+                "required_arguments": {"account_id": "acct_1"},
+                "state_updates": [],
+                "result": {
+                    "account_id": "acct_1",
+                    "status": "active",
+                    "eligible_for_refund": True,
+                },
+            }
+        ],
+    }
+
+    replay = replay_tool_calls(
+        scenario,
+        [{"name": "lookup_account", "arguments": {"account_id": "acct_1"}}],
+    )
+
+    assert replay["errors"] == []
+    assert replay["tool_results"][0]["ok"] is True
+    assert replay["tool_results"][0]["result"]["eligible_for_refund"] is True
+
+
+def test_replay_tool_calls_accepts_server_generated_arguments():
+    scenario = {
+        "initial_state": {"cases": {}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {
+                    "case_id": "case_1",
+                    "account_id": "acct_1",
+                    "reason": "damaged_item",
+                },
+                "generated_arguments": {
+                    "case_id": "case_1",
+                    "reason": "damaged_item",
+                },
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+                "result": {"case_id": "case_1", "status": "created"},
+            }
+        ],
+    }
+
+    replay = replay_tool_calls(
+        scenario,
+        [{"name": "create_case", "arguments": {"account_id": "acct_1"}}],
+    )
+
+    assert replay["errors"] == []
+    assert replay["final_state"]["cases"]["case_1"]["status"] == "created"
+    assert replay["tool_results"][0]["generated_arguments"] == {
+        "case_id": "case_1",
+        "reason": "damaged_item",
+    }
+
+
+def test_replay_tool_calls_requires_bound_id_from_prior_tool_result():
+    scenario = {
+        "initial_state": {"cases": {}, "escalations": {}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "account_id": "acct_1"},
+                "generated_arguments": {"case_id": "case_1"},
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+                "result": {"case_id": "case_1", "status": "created"},
+            },
+            {
+                "name": "escalate_to_human",
+                "required_arguments": {
+                    "escalation_id": "esc_1",
+                    "account_id": "acct_1",
+                    "case_id": "case_1",
+                },
+                "generated_arguments": {"escalation_id": "esc_1"},
+                "argument_bindings": {
+                    "case_id": {"tool": "create_case", "path": "result.case_id"}
+                },
+                "state_updates": [{"path": "escalations.esc_1.status", "value": "assigned"}],
+                "result": {"escalation_id": "esc_1", "status": "assigned"},
+            },
+        ],
+    }
+
+    passed = replay_tool_calls(
+        scenario,
+        [
+            {"name": "create_case", "arguments": {"account_id": "acct_1"}},
+            {
+                "name": "escalate_to_human",
+                "arguments": {"account_id": "acct_1", "case_id": "case_1"},
+            },
+        ],
+    )
+    failed = replay_tool_calls(
+        scenario,
+        [
+            {"name": "create_case", "arguments": {"account_id": "acct_1"}},
+            {"name": "escalate_to_human", "arguments": {"account_id": "acct_1"}},
+        ],
+    )
+
+    assert passed["errors"] == []
+    assert passed["final_state"]["escalations"]["esc_1"]["status"] == "assigned"
+    assert failed["errors"][0]["error"] == "argument_binding_mismatch"
+    assert failed["errors"][0]["binding_errors"][0]["argument"] == "case_id"
 
 
 def test_external_failure_recovery_scenario_can_pass():
@@ -249,6 +365,79 @@ def test_external_tool_failure_draft_validates_and_oracle_passes():
     assert trial["final_state"]["cases"]["case_9101"]["status"] == "queued_manual_refund_review"
 
 
+def test_scenario_family_draft_validates_and_reports_variants():
+    path = Path("data/openvoicecs/drafts/scenario_families_v0.1.json")
+    draft = json.loads(path.read_text(encoding="utf-8"))
+    scenarios = draft["scenarios"]
+
+    assert validate_scenarios(scenarios) == []
+
+    report = OpenVoiceCSBench(scenarios=scenarios).score_agent(oracle_agent, trials=2)
+    family = report["scenario_family_breakdown"]["telecom-outage-callback"]
+
+    assert report["overall_score"] == 100.0
+    assert family["count"] == 5
+    assert family["variants"] == [
+        "adversarial",
+        "clean",
+        "missing_detail",
+        "noisy",
+        "tool_failure",
+    ]
+    assert report["stability_metrics"]["tool_failure_recovery_rate"] == 1.0
+
+
+def test_adversarial_recovery_draft_validates_and_covers_edge_cases():
+    path = Path("data/openvoicecs/drafts/adversarial_recovery_scenarios_v0.1.json")
+    draft = json.loads(path.read_text(encoding="utf-8"))
+    scenarios = draft["scenarios"]
+
+    assert validate_scenarios(scenarios) == []
+
+    report = OpenVoiceCSBench(scenarios=scenarios).score_agent(oracle_agent)
+    tags = {tag for scenario in scenarios for tag in scenario.get("tags", [])}
+
+    assert report["overall_score"] == 100.0
+    assert {
+        "changed_mind",
+        "conflicting_record",
+        "surprising_tool_result",
+        "partial_auth",
+        "social_engineering",
+        "private_info_request",
+    }.issubset(tags)
+
+
+def test_event_derivation_uses_structured_partial_auth_result():
+    path = Path("data/openvoicecs/drafts/adversarial_recovery_scenarios_v0.1.json")
+    scenarios = json.loads(path.read_text(encoding="utf-8"))["scenarios"]
+    scenario = next(item for item in scenarios if item["id"] == "bank-transfer-partial-auth-001")
+
+    def partial_auth_agent(_scenario, _trial_index):
+        return {
+            "messages": [
+                {
+                    "role": "agent",
+                    "text": "I cannot create the transfer because full verification is required.",
+                }
+            ],
+            "tool_calls": [
+                {
+                    "name": "verify_identity",
+                    "arguments": {"account_id": "acct_6301", "method": "otp"},
+                }
+            ],
+            "events": [],
+        }
+
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(partial_auth_agent)
+    events = report["results"][0]["trials"][0]["events"]
+
+    assert "identity_not_verified" in events
+    assert "identity_verified" not in events
+    assert "unsafe_request_refused" in events
+
+
 def test_forbidden_tool_call_zeroes_tool_score():
     result = check_tool_calls(
         actual_calls=[{"name": "refund", "arguments": {"amount": 100}}],
@@ -274,6 +463,44 @@ def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent():
     assert report["pass_at_k"] == 1.0
     assert report["pass_k"] == 0.0
     assert report["mean_pass_rate"] == 0.5
+    assert report["stability_metrics"]["scenario_flake_rate"] == 1.0
+    assert report["stability_metrics"]["unstable_scenario_count"] == 1
+    assert report["results"][0]["stability"]["flaky"] is True
+
+
+def test_tool_quality_diagnostics_classify_wrong_args_and_extra_calls():
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+
+    def messy_agent(_scenario, _trial_index):
+        return {
+            "messages": [{"role": "agent", "text": "I tried to help."}],
+            "tool_calls": [
+                {"name": "issue_refund", "arguments": {"order_id": "wrong"}},
+                {"name": "verify_identity", "arguments": {"account_id": "acct_1001"}},
+                {"name": "verify_identity", "arguments": {"account_id": "acct_1001"}},
+            ],
+            "events": [],
+        }
+
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(messy_agent)
+    quality = report["results"][0]["trials"][0]["tool_quality"]
+
+    assert quality["wrong_argument_calls"]
+    assert quality["unnecessary_tool_calls"]
+    assert quality["wasted_tool_call_count"] >= 2
+    assert "wrong_tool_arguments" in report["failure_analysis"]["categories"]
+
+
+def test_scenario_solvability_marks_hidden_generated_ids():
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(oracle_agent)
+    diagnostics = report["results"][0]["scenario_diagnostics"]
+
+    assert diagnostics["required_tool_count"] == len(scenario["oracle"]["expected_tool_calls"])
+    assert diagnostics["required_auth_gate_count"] >= 1
+    assert diagnostics["all_needed_facts_available"] is True
+    assert diagnostics["missing_prompt_or_state_facts"] == []
 
 
 def test_benchmark_save_and_load_round_trip(tmp_path: Path):
