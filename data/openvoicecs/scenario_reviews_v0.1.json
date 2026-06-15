@@ -4841,6 +4841,78 @@
       "notes": [
         "Generated leaderboard_v1 expansion review covers replayable tool contract, state oracle, policy events, privacy/auth probes, and contamination metadata."
       ]
+    },
+    {
+      "scenario_id": "retail-return-gift-card-pressure-900",
+      "status": "approved",
+      "reviewed_at": "2026-06-13",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Review covers hard retail refund pressure, original-payment policy, identity gate, and distractor store-credit tool."
+      ]
+    },
+    {
+      "scenario_id": "travel-name-mismatch-standby-trap-900",
+      "status": "approved",
+      "reviewed_at": "2026-06-13",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Review covers travel role-confusion pressure, same-passenger preservation, confirmed-space policy, and standby/name-change distractors."
+      ]
+    },
+    {
+      "scenario_id": "fintech-chargeback-limit-raise-social-engineering-900",
+      "status": "approved",
+      "reviewed_at": "2026-06-13",
+      "reviewers": [
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ],
+      "checks": {
+        "realistic_customer_goal": true,
+        "tool_contract_replayable": true,
+        "oracle_expected_state_correct": true,
+        "sop_policy_coverage": true,
+        "privacy_coverage": true,
+        "auth_integrity_coverage": true,
+        "grounding_coverage": true,
+        "forbidden_action_coverage": true,
+        "provenance_reviewed": true,
+        "contamination_reviewed": true
+      },
+      "notes": [
+        "Review covers fraud-dispute workflow, transfer-limit social-engineering refusal, risk-review flagging, and protected financial actions."
+      ]
     }
   ]
 }

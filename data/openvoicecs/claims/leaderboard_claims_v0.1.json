@@ -31,18 +31,18 @@
       "candidate_system_id": "oracle_text_reference",
       "comparison": {
         "path": "data/openvoicecs/claims/noop_text_vs_oracle_text_comparison.json",
-        "sha256": "ecb0d77ed1b9eb158330c04ae860bc3fd680934b93ca653654579b9037889bfd",
-        "bytes": 19696
+        "sha256": "7688b145eead7066f62b9a8ff2920462e68e49dd10782cd9c9b179abc2b47fdb",
+        "bytes": 19918
       },
       "baseline_report": {
         "path": "data/openvoicecs/baselines/noop_text.json",
-        "sha256": "f0e7a14b04a9f9538792c4c1a54a4195bebdd63e5c7163e430dd5b24cff517c4",
-        "bytes": 3285911
+        "sha256": "2d9894792da524ae6a2a82000d16d5e15928422237dd26fb3660810de482a41a",
+        "bytes": 4936097
       },
       "candidate_report": {
         "path": "data/openvoicecs/baselines/oracle_text.json",
-        "sha256": "5eb0bf14384006ac3b98cc0bd18d362cffe8d9231b74a3ba3aaf73a84c38372e",
-        "bytes": 2887570
+        "sha256": "b8ac888a4a6e75c2e4728b34d41dbcee3f2022d1230341ca35b26c77bdc72dc6",
+        "bytes": 4686634
       },
       "external_systems_registry": {
         "path": "data/openvoicecs/external_systems_v0.1.json",

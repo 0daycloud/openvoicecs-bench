@@ -17,6 +17,7 @@ from src.evaluation.benchmark.provider_adapters import (
     _derive_events,
     _execute_scenario_tool,
     _openai_tool_schemas,
+    _parse_native_final_trace,
 )
 from src.evaluation.benchmark.submission import score_provider
 
@@ -98,6 +99,14 @@ def test_parse_provider_response_text_accepts_legacy_experience_overall():
 
     assert trace["messages"][0]["text"] == "Done."
     assert trace["experience_judgment"]["score"] == 1
+
+
+def test_native_final_trace_accepts_empty_or_plain_text():
+    empty = _parse_native_final_trace("")
+    plain = _parse_native_final_trace("I completed the request.")
+
+    assert empty == {"messages": [], "tool_calls": [], "events": []}
+    assert plain["messages"] == [{"role": "agent", "text": "I completed the request."}]
 
 
 def test_estimate_cost_usd_from_usage_and_pricing():
@@ -348,6 +357,62 @@ def test_derive_events_from_tools_and_final_response():
     assert "identity_verified" in events
     assert "damage_attested" in events
     assert "pii_minimization" in events
+
+
+def test_derive_events_covers_travel_fee_waiver_language():
+    scenario = next(
+        item
+        for item in OpenVoiceCSBench.load().scenarios
+        if item["id"] == "travel-rebook-missed-connection-001"
+    )
+    tool_calls = [
+        {"name": "verify_identity", "arguments": {"account_id": "acct_2001"}},
+        {
+            "name": "rebook_flight",
+            "arguments": {
+                "booking_id": "bk_3001",
+                "new_flight_id": "fl_881",
+                "fee_cents": 0,
+            },
+        },
+    ]
+    messages = [
+        {
+            "role": "agent",
+            "text": "Since this was caused by the airline delay, there is no fee for the rebooking.",
+        }
+    ]
+
+    events = _derive_events(scenario, tool_calls, messages)
+
+    assert "airline_delay_confirmed" in events
+    assert "fee_waiver_applied" in events
+
+
+def test_derive_events_covers_saas_admin_and_security_hold_language():
+    scenario = next(
+        item
+        for item in OpenVoiceCSBench.load().scenarios
+        if item["id"] == "saas-account-access-001"
+    )
+    tool_calls = [
+        {"name": "verify_identity", "arguments": {"account_id": "acct_7001"}},
+        {
+            "name": "start_mfa_reset",
+            "arguments": {"account_id": "acct_7001", "workspace_id": "ws_8101"},
+        },
+    ]
+    messages = [
+        {
+            "role": "agent",
+            "text": "I verified your workspace admin role and started the MFA reset. A security hold is active.",
+        }
+    ]
+
+    events = _derive_events(scenario, tool_calls, messages)
+
+    assert "admin_role_confirmed" in events
+    assert "security_hold_explained" in events
 
 
 def test_score_provider_with_monkeypatched_agent(monkeypatch, tmp_path: Path):

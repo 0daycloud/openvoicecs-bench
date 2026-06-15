@@ -738,6 +738,19 @@ Build a leaderboard from saved reports:
 python scripts/run_openvoicecs.py leaderboard 'data/openvoicecs/reports/*.json' --output data/openvoicecs/leaderboard.json
 ```
 
+Treat small provider batches as smoke tests unless they meet the release
+evidence bar. A `--max 10` batch with one trial per scenario is useful for
+debugging adapters, native tool loops, event derivation, and scenario
+solvability, but it is not a publishable leaderboard. In that setting
+`pass@k`, `pass^k`, and `mean_pass_rate` collapse to the same single-trial
+estimate, confidence intervals are wide, and a first-N scenario slice can
+overweight particular domains, tracks, or hard/adversarial cases. Public claims
+should use a stratified or full scenario set, repeated trials, validated
+provider reports with adapter/API failures separated from model behavior,
+pinned pricing metadata, and the comparison/claims workflow above. If nearly
+all systems pass only the same scenario, interpret the result as a harness or
+scenario-diagnostics signal before interpreting it as a model ranking.
+
 Build a colocated frontier release bundle:
 
 ```bash

@@ -1610,6 +1610,30 @@
       "contains_real_customer_data": false,
       "contamination_risk": "low",
       "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-return-gift-card-pressure-900": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed hard retail policy-pressure scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-name-mismatch-standby-trap-900": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed hard travel role-confusion scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-chargeback-limit-raise-social-engineering-900": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed hard fintech fraud and social-engineering scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
     }
   },
   "audio_variants": {

@@ -89,7 +89,10 @@
         "travel-voice-flow-005",
         "travel-service-action-007",
         "travel-audio-action-006",
-        "travel-robustness-repair-006"
+        "travel-robustness-repair-006",
+        "retail-return-gift-card-pressure-900",
+        "travel-name-mismatch-standby-trap-900",
+        "fintech-chargeback-limit-raise-social-engineering-900"
       ],
       "audio_variant_ids": [
         "retail-refund-damaged-item-001-clean-us-female",

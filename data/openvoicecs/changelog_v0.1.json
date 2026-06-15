@@ -388,6 +388,24 @@
         "domain_reviewer_seed",
         "safety_reviewer_seed"
       ]
+    },
+    {
+      "id": "openvoicecs-v0.1.0-batch-critique-corpus-repair",
+      "type": "scenario_added",
+      "date": "2026-06-13",
+      "summary": "Admitted reviewed text-to-action edge cases surfaced during provider-batch benchmark critique and assigned them to public development coverage.",
+      "compatibility": "backward_compatible",
+      "scenario_ids": [
+        "retail-return-gift-card-pressure-900",
+        "travel-name-mismatch-standby-trap-900",
+        "fintech-chargeback-limit-raise-social-engineering-900"
+      ],
+      "audio_variant_ids": [],
+      "reviewed_by": [
+        "openvoicecs-maintainers",
+        "domain_reviewer_seed",
+        "safety_reviewer_seed"
+      ]
     }
   ],
   "errata": []
