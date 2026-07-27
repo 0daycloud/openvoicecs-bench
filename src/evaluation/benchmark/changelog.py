@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
 
 DEFAULT_CHANGELOG_PATH = Path("data/openvoicecs/changelog_v0.1.json")
 CHANGE_TYPES = {

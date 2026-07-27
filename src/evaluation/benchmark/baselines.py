@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import hashlib
 import json
-from pathlib import Path
 import time
-from typing import Any, Callable
+from collections.abc import Callable
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
 
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,
@@ -17,7 +18,6 @@ from src.evaluation.benchmark.openvoicecs import (
     oracle_agent,
     validate_report,
 )
-
 
 DEFAULT_BASELINE_DIR = Path("data/openvoicecs/baselines")
 DEFAULT_BASELINE_MANIFEST_PATH = DEFAULT_BASELINE_DIR / "reference_baselines_v0.1.json"

@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import hashlib
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -12,7 +12,6 @@ from src.evaluation.benchmark.splits import (
     DEFAULT_SPLIT_COMMITMENT_PATH,
     DEFAULT_SPLIT_MANIFEST_PATH,
 )
-
 
 DEFAULT_SEALED_OPS_PATH = Path("data/openvoicecs/sealed_ops_v0.1.json")
 DEFAULT_SEALED_QUEUE_PATH = Path("data/openvoicecs/sealed_evaluator_queue_v0.1.json")

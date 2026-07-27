@@ -7,14 +7,15 @@ shape used by built-in agents.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import hashlib
-import json
 import importlib.util
-from pathlib import Path
+import json
 import textwrap
 import time
-from typing import Any, Callable
+from collections.abc import Callable
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
 
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,

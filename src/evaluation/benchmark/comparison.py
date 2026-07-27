@@ -8,8 +8,8 @@ scenario-level pass/fail changes.
 
 from __future__ import annotations
 
-from math import comb
 import random
+from math import comb
 from typing import Any
 
 from src.evaluation.benchmark.openvoicecs import METRIC_NAMES, METRIC_WEIGHTS

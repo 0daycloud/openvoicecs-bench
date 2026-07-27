@@ -1,6 +1,6 @@
 import json
 
-with open("data/openvoicecs/scenarios_v0.1.json", "r") as f:
+with open("data/openvoicecs/scenarios_v0.1.json") as f:
     data = json.load(f)
 
 for s in data["scenarios"]:

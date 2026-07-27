@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
-from dataclasses import dataclass
 import json
 import re
+from copy import deepcopy
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.coverage import (
+    DEFAULT_COVERAGE_TARGET_PATH,
+    build_coverage_plan,
+)
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_SCENARIO_PATH,
     validate_audio_manifest_file,
@@ -16,10 +20,6 @@ from src.evaluation.benchmark.openvoicecs import (
 )
 from src.evaluation.benchmark.provenance import validate_provenance_manifest
 from src.evaluation.benchmark.splits import validate_split_manifest
-from src.evaluation.benchmark.coverage import (
-    DEFAULT_COVERAGE_TARGET_PATH,
-    build_coverage_plan,
-)
 
 
 @dataclass(frozen=True)

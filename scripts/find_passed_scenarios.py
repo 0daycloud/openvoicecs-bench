@@ -1,6 +1,6 @@
-import os
-import json
 import glob
+import json
+import os
 
 report_dir = "data/openvoicecs/reports/openrouter_batch_20260613"
 json_files = glob.glob(os.path.join(report_dir, "*.json"))
@@ -9,17 +9,17 @@ model_passes = {}
 for file_path in json_files:
     if "batch_summary_max10_native.json" in file_path or "smoke" in file_path:
         continue
-    with open(file_path, "r") as f:
+    with open(file_path) as f:
         data = json.load(f)
-    
+
     model_id = os.path.basename(file_path).replace("_max10_native.json", "")
     passed_scenarios = []
-    
+
     # Try to find trials that passed
     for result in data.get("results", []):
         if result.get("pass_at_k"):
             passed_scenarios.append(result["id"])
-            
+
     # Or if structured differently, look at results key in the root:
     # Actually let's look at the "results" array or "trials" or "failure_analysis"
     # Let's inspect the keys of data:
@@ -34,7 +34,7 @@ for file_path in json_files:
         for name, info in scenarios.items():
             if not info.get("categories"): # empty categories means no failures
                 passed_scenarios.append(name)
-                
+
     model_passes[model_id] = passed_scenarios
 
 for m, passes in sorted(model_passes.items(), key=lambda x: x[0]):

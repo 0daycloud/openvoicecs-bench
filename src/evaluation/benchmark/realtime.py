@@ -9,13 +9,14 @@ tests or a WebSocket endpoint for deployed systems.
 from __future__ import annotations
 
 import asyncio
-from copy import deepcopy
-from dataclasses import dataclass
 import inspect
 import json
 import statistics
 import time
-from typing import Any, Callable
+from collections.abc import Callable
+from copy import deepcopy
+from dataclasses import dataclass
+from typing import Any
 from urllib import request as urllib_request
 
 from src.evaluation.benchmark.openvoicecs import (
@@ -172,8 +173,7 @@ class WebRTCRealtimeClient:
         seed: int,
     ) -> dict[str, Any]:
         try:
-            from aiortc import RTCSessionDescription
-            from aiortc import RTCPeerConnection
+            from aiortc import RTCPeerConnection, RTCSessionDescription
         except ImportError as exc:  # pragma: no cover - depends on optional env package
             raise RuntimeError("aiortc is required for WebRTC realtime runs") from exc
 

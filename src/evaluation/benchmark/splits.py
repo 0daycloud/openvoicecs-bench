@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import hashlib
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
 
 DEFAULT_SPLIT_MANIFEST_PATH = Path("data/openvoicecs/splits_v0.1.json")
 DEFAULT_SPLIT_COMMITMENT_PATH = Path("data/openvoicecs/split_commitments_v0.1.json")

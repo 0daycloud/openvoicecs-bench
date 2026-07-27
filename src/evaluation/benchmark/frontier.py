@@ -7,19 +7,18 @@ without replacing the primary benchmark score with a single leaderboard rank.
 
 from __future__ import annotations
 
-from collections.abc import Iterable
 import csv
-from dataclasses import dataclass
 import html
 import json
-from math import isfinite
-from pathlib import Path
 import random
 import time
+from collections.abc import Iterable
+from dataclasses import dataclass
+from math import isfinite
+from pathlib import Path
 from typing import Any
 
 from src.evaluation.benchmark.pricing import PIPELINE_REQUIRED_COMPONENTS, resolve_report_pricing
-
 
 DEFAULT_EXPERIENCE_GATE = 0.6
 DEFAULT_LATENCY_AXIS = "p95_v2v_ttfb_ms"

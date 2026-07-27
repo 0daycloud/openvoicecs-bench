@@ -7,8 +7,7 @@ import json
 import pytest
 
 from src.evaluation.benchmark.frontier import build_frontier_report, write_frontier_artifacts
-from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, oracle_agent
-from src.evaluation.benchmark.openvoicecs import build_release_audit
+from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, build_release_audit, oracle_agent
 from src.evaluation.benchmark.readiness import evaluate_release_readiness
 from src.evaluation.benchmark.run_manifest import build_run_manifest
 

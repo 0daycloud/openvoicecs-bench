@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import hashlib
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
 
 DEFAULT_CLAIMS_MANIFEST_PATH = Path("data/openvoicecs/claims/leaderboard_claims_v0.1.json")
 CLAIM_TYPES = {"reference_sanity", "candidate_beats_baseline", "frontier_membership", "slice_regression"}

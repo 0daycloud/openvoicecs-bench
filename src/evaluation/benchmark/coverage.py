@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from collections import Counter
 import json
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -12,7 +12,6 @@ from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_SCENARIO_PATH,
 )
 from src.evaluation.benchmark.splits import DEFAULT_SPLIT_MANIFEST_PATH
-
 
 DEFAULT_COVERAGE_TARGET_PATH = Path("data/openvoicecs/coverage_targets_v0.1.json")
 

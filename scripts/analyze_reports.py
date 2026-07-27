@@ -1,6 +1,6 @@
-import os
-import json
 import glob
+import json
+import os
 
 report_dir = "data/openvoicecs/reports/openrouter_batch_20260613"
 json_files = glob.glob(os.path.join(report_dir, "*.json"))
@@ -9,24 +9,24 @@ rows = []
 for file_path in json_files:
     if "batch_summary_max10_native.json" in file_path or "smoke" in file_path:
         continue
-    with open(file_path, "r") as f:
+    with open(file_path) as f:
         try:
             data = json.load(f)
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
             continue
-    
+
     model_id = os.path.basename(file_path).replace("_max10_native", "")
     metrics = data.get("metric_scores", {}) or {}
     stability = data.get("stability_metrics", {}) or {}
     ops = data.get("operational_metrics", {}) or {}
-    
+
     successes = data.get("confidence_intervals", {}).get("pass_at_k", {}).get("successes", 0)
-    
+
     failures = data.get("failure_analysis", {}).get("categories", {}) or {}
     api_errors = failures.get("adapter_or_api_error", 0)
     tool_failures = failures.get("ignored_tool_failure", 0)
-    
+
     row = {
         "model": model_id,
         "overall_score": data.get("overall_score", 0.0),

@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
 
 DEFAULT_PRICING_MANIFEST_PATH = Path("data/openvoicecs/pricing_snapshot_v0.1.json")
 SUPPORTED_COMPONENTS = {

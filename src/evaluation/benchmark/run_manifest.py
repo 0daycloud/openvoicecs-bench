@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import hashlib
 import json
-from pathlib import Path
 import time
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from src.evaluation.benchmark.changelog import DEFAULT_CHANGELOG_PATH
@@ -18,11 +18,9 @@ from src.evaluation.benchmark.openvoicecs import (
     build_release_audit,
     validate_report,
 )
-from src.evaluation.benchmark.pricing import DEFAULT_PRICING_MANIFEST_PATH
-from src.evaluation.benchmark.pricing import resolve_report_pricing
+from src.evaluation.benchmark.pricing import DEFAULT_PRICING_MANIFEST_PATH, resolve_report_pricing
 from src.evaluation.benchmark.provenance import DEFAULT_PROVENANCE_MANIFEST_PATH
 from src.evaluation.benchmark.splits import DEFAULT_SPLIT_MANIFEST_PATH
-
 
 RUN_MANIFEST_VERSION = "0.1.0"
 

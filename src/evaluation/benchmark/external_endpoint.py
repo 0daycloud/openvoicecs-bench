@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
-from dataclasses import dataclass
 import json
 import time
+from copy import deepcopy
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 from urllib import error as urllib_error

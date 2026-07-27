@@ -4,17 +4,15 @@
 from __future__ import annotations
 
 import argparse
-from copy import deepcopy
 import json
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.evaluation.benchmark.coverage import build_coverage_plan
-
 
 TODAY = "2026-06-11"
 SCENARIO_PATH = Path("data/openvoicecs/scenarios_v0.1.json")

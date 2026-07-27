@@ -9,17 +9,18 @@ oracles.
 
 from __future__ import annotations
 
-from copy import deepcopy
-from dataclasses import dataclass
-from glob import glob
 import hashlib
 import json
 import re
 import statistics
 import time
 import wave
+from collections.abc import Callable
+from copy import deepcopy
+from dataclasses import dataclass
+from glob import glob
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from src.core.logging import get_logger
 from src.evaluation.benchmark.changelog import (
@@ -32,15 +33,15 @@ from src.evaluation.benchmark.claims import (
     claims_stats,
     validate_claims_manifest_file,
 )
-from src.evaluation.benchmark.external_systems import (
-    DEFAULT_EXTERNAL_SYSTEMS_PATH,
-    external_systems_stats,
-    validate_external_systems_registry_file,
-)
 from src.evaluation.benchmark.external_endpoint import (
     DEFAULT_EXTERNAL_ENDPOINT_CONTRACT_PATH,
     external_endpoint_contract_stats,
     validate_external_endpoint_contract_file,
+)
+from src.evaluation.benchmark.external_systems import (
+    DEFAULT_EXTERNAL_SYSTEMS_PATH,
+    external_systems_stats,
+    validate_external_systems_registry_file,
 )
 from src.evaluation.benchmark.judging import (
     DEFAULT_JUDGE_ANNOTATION_PACKAGE_PATH,
@@ -139,7 +140,7 @@ class OpenVoiceCSBench:
         self.validate()
 
     @classmethod
-    def load(cls, path: str | Path = DEFAULT_SCENARIO_PATH) -> "OpenVoiceCSBench":
+    def load(cls, path: str | Path = DEFAULT_SCENARIO_PATH) -> OpenVoiceCSBench:
         """Load benchmark scenarios from JSON."""
         path = Path(path)
         with open(path, encoding="utf-8") as f:

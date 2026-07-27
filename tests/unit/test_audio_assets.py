@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
 import wave
+from pathlib import Path
 
 from src.evaluation.benchmark.openvoicecs import (
     audio_asset_stats,

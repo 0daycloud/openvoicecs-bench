@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -15,7 +15,6 @@ from src.evaluation.benchmark.frontier import (
     validate_frontier_report,
 )
 from src.evaluation.benchmark.run_manifest import validate_run_manifest
-
 
 RELEASE_PROFILES: dict[str, dict[str, Any]] = {
     "seed": {

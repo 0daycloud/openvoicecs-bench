@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
+from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from src.evaluation.benchmark.baselines import (
     DEFAULT_BASELINE_MANIFEST_PATH,
@@ -23,13 +24,13 @@ from src.evaluation.benchmark.datasheet import (
     DEFAULT_DATASHEET_PATH,
     validate_benchmark_datasheet_file,
 )
-from src.evaluation.benchmark.external_systems import (
-    DEFAULT_EXTERNAL_SYSTEMS_PATH,
-    validate_external_systems_registry_file,
-)
 from src.evaluation.benchmark.external_endpoint import (
     DEFAULT_EXTERNAL_ENDPOINT_CONTRACT_PATH,
     validate_external_endpoint_contract_file,
+)
+from src.evaluation.benchmark.external_systems import (
+    DEFAULT_EXTERNAL_SYSTEMS_PATH,
+    validate_external_systems_registry_file,
 )
 from src.evaluation.benchmark.judging import (
     DEFAULT_JUDGE_ANNOTATION_PACKAGE_PATH,

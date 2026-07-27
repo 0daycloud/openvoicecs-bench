@@ -8,7 +8,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_SCORES = {
     "empathy": 5,
     "clarity": 5,

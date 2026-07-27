@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from glob import glob
 import hashlib
 import json
-from pathlib import Path
 import shutil
 import time
+from dataclasses import dataclass
+from glob import glob
+from pathlib import Path
 from typing import Any
 
 from src.evaluation.benchmark.changelog import DEFAULT_CHANGELOG_PATH

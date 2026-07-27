@@ -1,6 +1,6 @@
-import os
-import json
 import glob
+import json
+import os
 from collections import Counter, defaultdict
 
 report_dir = "data/openvoicecs/reports/openrouter_batch_20260613"
@@ -10,9 +10,9 @@ scenario_failures = defaultdict(list)
 for file_path in json_files:
     if "batch_summary_max10_native.json" in file_path or "smoke" in file_path:
         continue
-    with open(file_path, "r") as f:
+    with open(file_path) as f:
         data = json.load(f)
-    
+
     model_id = os.path.basename(file_path).replace("_max10_native.json", "")
     scenarios = data.get("failure_analysis", {}).get("scenarios", {})
     for sc_id, sc_info in scenarios.items():
