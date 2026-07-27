@@ -16,7 +16,6 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src.evaluation.benchmark.comparison import compare_reports
 from src.core.logging import setup_logging
 from src.evaluation.benchmark.baselines import (
     DEFAULT_BASELINE_DIR,
@@ -32,6 +31,7 @@ from src.evaluation.benchmark.claims import (
     DEFAULT_CLAIMS_MANIFEST_PATH,
     validate_claims_manifest_file,
 )
+from src.evaluation.benchmark.comparison import compare_reports
 from src.evaluation.benchmark.coverage import (
     DEFAULT_COVERAGE_TARGET_PATH,
     build_coverage_plan,
@@ -41,14 +41,14 @@ from src.evaluation.benchmark.datasheet import (
     build_benchmark_datasheet_file,
     validate_benchmark_datasheet_file,
 )
-from src.evaluation.benchmark.external_systems import (
-    DEFAULT_EXTERNAL_SYSTEMS_PATH,
-    validate_external_systems_registry_file,
-)
 from src.evaluation.benchmark.external_endpoint import (
     DEFAULT_EXTERNAL_ENDPOINT_CONTRACT_PATH,
     score_external_endpoint,
     validate_external_endpoint_contract_file,
+)
+from src.evaluation.benchmark.external_systems import (
+    DEFAULT_EXTERNAL_SYSTEMS_PATH,
+    validate_external_systems_registry_file,
 )
 from src.evaluation.benchmark.frontier import (
     build_frontier_report,
@@ -61,13 +61,19 @@ from src.evaluation.benchmark.judging import (
     DEFAULT_JUDGE_PROTOCOL_PATH,
     DEFAULT_JUDGE_RUBRIC_PATH,
     DEFAULT_JUDGE_STUDY_PATH,
+    apply_judge_report,
     apply_judge_report_from_files,
+    build_judge_report,
     build_judge_report_from_files,
+    generate_model_judge_annotations,
+    load_judge_protocol,
+    parse_model_judge_spec,
     validate_judge_annotation_package_file,
     validate_judge_protocol_file,
     validate_judge_report_file,
     validate_judge_rubric_file,
     validate_judge_study_manifest_file,
+    write_judge_annotations_jsonl,
 )
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,
@@ -91,9 +97,22 @@ from src.evaluation.benchmark.provenance import (
     DEFAULT_PROVENANCE_MANIFEST_PATH,
     validate_provenance_manifest_file,
 )
+from src.evaluation.benchmark.provider_adapters import (
+    DEFAULT_MODEL_IDS,
+    PIPELINE_PROVIDERS,
+    build_provider_spec,
+    load_workspace_env,
+)
 from src.evaluation.benchmark.readiness import (
     RELEASE_PROFILES,
     evaluate_release_readiness,
+)
+from src.evaluation.benchmark.realtime import (
+    ReferenceRealtimeClient,
+    WebRTCRealtimeClient,
+    WebSocketRealtimeClient,
+    builtin_realtime_agent,
+    run_openvoicecs_realtime_load,
 )
 from src.evaluation.benchmark.release_bundle import (
     build_frontier_release_bundle,
@@ -107,25 +126,6 @@ from src.evaluation.benchmark.reviews import (
     DEFAULT_REVIEW_MANIFEST_PATH,
     validate_review_manifest_file,
 )
-from src.evaluation.benchmark.realtime import (
-    ReferenceRealtimeClient,
-    WebRTCRealtimeClient,
-    WebSocketRealtimeClient,
-    builtin_realtime_agent,
-    run_openvoicecs_realtime_load,
-)
-from src.evaluation.benchmark.provider_adapters import (
-    DEFAULT_MODEL_IDS,
-    PIPELINE_PROVIDERS,
-    build_provider_spec,
-    load_workspace_env,
-)
-from src.evaluation.benchmark.sealed import (
-    DEFAULT_SEALED_OPS_PATH,
-    DEFAULT_SEALED_QUEUE_PATH,
-    validate_sealed_ops_manifest_file,
-    validate_sealed_queue_manifest_file,
-)
 from src.evaluation.benchmark.run_manifest import (
     build_run_manifest,
     validate_run_manifest_file,
@@ -133,6 +133,12 @@ from src.evaluation.benchmark.run_manifest import (
 from src.evaluation.benchmark.scenario_authoring import (
     add_scenarios_to_release_files,
     scaffold_scenario_drafts,
+)
+from src.evaluation.benchmark.sealed import (
+    DEFAULT_SEALED_OPS_PATH,
+    DEFAULT_SEALED_QUEUE_PATH,
+    validate_sealed_ops_manifest_file,
+    validate_sealed_queue_manifest_file,
 )
 from src.evaluation.benchmark.splits import (
     DEFAULT_SPLIT_COMMITMENT_PATH,
@@ -144,8 +150,8 @@ from src.evaluation.benchmark.splits import (
 from src.evaluation.benchmark.submission import (
     build_submission_card_from_file,
     score_provider,
-    submission_intake_stats,
     score_submission,
+    submission_intake_stats,
     validate_submission_card_file,
     validate_submission_intake_file,
     write_submission_template,
@@ -780,6 +786,69 @@ def cmd_apply_judge_report(args: argparse.Namespace) -> None:
         with open(output, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
         print(f"\nSaved judged benchmark report to {output}")
+
+
+def cmd_model_judge(args: argparse.Namespace) -> None:
+    load_workspace_env(args.env)
+    with open(args.report, encoding="utf-8") as f:
+        source_report = json.load(f)
+    with open(args.rubric, encoding="utf-8") as f:
+        rubric = json.load(f)
+    prompt = Path(args.prompt).read_text(encoding="utf-8")
+    judge_specs = [parse_model_judge_spec(value) for value in args.judge]
+    if len(judge_specs) < 2:
+        print("model-judge requires at least two --judge specs for audited model judging")
+        raise SystemExit(2)
+    adjudicator = parse_model_judge_spec(args.adjudicator) if args.adjudicator else None
+    disagreement_threshold = args.disagreement_threshold
+    if disagreement_threshold is None and args.judge_protocol:
+        protocol = load_judge_protocol(args.judge_protocol)
+        threshold = protocol.get("adjudication", {}).get("disagreement_threshold")
+        if isinstance(threshold, (int, float)) and not isinstance(threshold, bool):
+            disagreement_threshold = float(threshold)
+
+    annotations = generate_model_judge_annotations(
+        source_report,
+        judge_specs=judge_specs,
+        rubric=rubric,
+        prompt=prompt,
+        adjudicator=adjudicator,
+        disagreement_threshold=disagreement_threshold,
+        max_output_tokens=args.max_output_tokens,
+        temperature=args.temperature,
+        timeout_seconds=args.timeout_seconds,
+    )
+    annotations_output = Path(args.annotations_output)
+    write_judge_annotations_jsonl(annotations, annotations_output)
+
+    judge_report = build_judge_report(source_report, annotations, rubric)
+    judge_report_output = Path(args.judge_report_output)
+    judge_report_output.parent.mkdir(parents=True, exist_ok=True)
+    with open(judge_report_output, "w", encoding="utf-8") as f:
+        json.dump(judge_report, f, indent=2)
+
+    judged_report = None
+    judged_report_output = Path(args.judged_report_output) if args.judged_report_output else None
+    if judged_report_output:
+        judged_report = apply_judge_report(source_report, judge_report)
+        issues = validate_report(judged_report)
+        if issues:
+            print("Judged report validation failed:")
+            for issue in issues:
+                print(f"  {issue.scenario_id}::{issue.path}: {issue.message}")
+            raise SystemExit(1)
+        judged_report_output.parent.mkdir(parents=True, exist_ok=True)
+        with open(judged_report_output, "w", encoding="utf-8") as f:
+            json.dump(judged_report, f, indent=2)
+
+    _print_model_judge_result(
+        annotations=annotations,
+        annotations_output=annotations_output,
+        judge_report=judge_report,
+        judge_report_output=judge_report_output,
+        judged_report=judged_report,
+        judged_report_output=judged_report_output,
+    )
 
 
 def cmd_compare(args: argparse.Namespace) -> None:
@@ -1778,6 +1847,35 @@ def _print_judged_benchmark_report(report: dict[str, Any]) -> None:
         print(f"Judge sources:         {', '.join(judges)}")
 
 
+def _print_model_judge_result(
+    *,
+    annotations: list[dict[str, Any]],
+    annotations_output: Path,
+    judge_report: dict[str, Any],
+    judge_report_output: Path,
+    judged_report: dict[str, Any] | None,
+    judged_report_output: Path | None,
+) -> None:
+    print("\nOPENVOICECS-BENCH MODEL JUDGE")
+    print("=" * 88)
+    print(f"Annotations:           {len(annotations)}")
+    print(f"Items:                 {judge_report.get('num_items', 0)}")
+    print(f"Raters:                {judge_report.get('num_raters', 0)}")
+    print(f"Subjective score:      {judge_report.get('overall_subjective_score', 0):.1%}")
+    coverage = judge_report.get("coverage", {})
+    print(
+        "Coverage:              "
+        f"{coverage.get('items_meeting_minimum_raters', 0)}/"
+        f"{judge_report.get('num_items', 0)} items meet min raters"
+    )
+    print(f"Annotations output:    {annotations_output}")
+    print(f"Judge report output:   {judge_report_output}")
+    if judged_report is not None and judged_report_output is not None:
+        judged_score = _fmt_pct(judged_report.get("conversation_experience_score"))
+        print(f"Judged exp score:      {judged_score}")
+        print(f"Judged report output:  {judged_report_output}")
+
+
 def _print_submission_card(card: dict[str, Any]) -> None:
     print("\nOPENVOICECS-BENCH SUBMISSION CARD")
     print("=" * 88)
@@ -2302,6 +2400,42 @@ def build_parser() -> argparse.ArgumentParser:
     judge_report.add_argument("--output", default=None)
     judge_report.set_defaults(func=cmd_judge_report)
 
+    model_judge = subparsers.add_parser(
+        "model-judge",
+        help="Call audited model judges, write annotations, and aggregate judged reports",
+    )
+    model_judge.add_argument("report", help="Source OpenVoiceCS report JSON")
+    model_judge.add_argument(
+        "--judge",
+        action="append",
+        required=True,
+        help="Judge spec as provider:model_id, repeat for two or more judges",
+    )
+    model_judge.add_argument(
+        "--adjudicator",
+        default=None,
+        help="Optional tie-breaker judge spec as provider:model_id",
+    )
+    model_judge.add_argument("--rubric", default=str(DEFAULT_JUDGE_RUBRIC_PATH))
+    model_judge.add_argument(
+        "--prompt",
+        default="data/openvoicecs/judging/judge_prompt_v0.1.md",
+    )
+    model_judge.add_argument("--judge-protocol", default=str(DEFAULT_JUDGE_PROTOCOL_PATH))
+    model_judge.add_argument("--annotations-output", required=True)
+    model_judge.add_argument("--judge-report-output", required=True)
+    model_judge.add_argument("--judged-report-output", default=None)
+    model_judge.add_argument("--disagreement-threshold", type=float, default=None)
+    model_judge.add_argument("--max-output-tokens", type=int, default=700)
+    model_judge.add_argument("--temperature", type=float, default=0.0)
+    model_judge.add_argument("--timeout-seconds", type=float, default=60.0)
+    model_judge.add_argument(
+        "--env",
+        default=".env",
+        help="Environment file with provider API keys",
+    )
+    model_judge.set_defaults(func=cmd_model_judge)
+
     apply_judge = subparsers.add_parser(
         "apply-judge-report",
         help="Attach an aggregated judge report to a benchmark report",
@@ -2404,7 +2538,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--json-trace",
         dest="native_tools",
         action="store_false",
-        help="Use the legacy JSON trace adapter instead of native tools",
+        help="Use the JSON action-loop fallback instead of native tools",
     )
     score_provider.add_argument("--max-output-tokens", type=int, default=700)
     score_provider.add_argument(

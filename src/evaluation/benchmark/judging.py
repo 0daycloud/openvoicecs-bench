@@ -7,15 +7,23 @@ quality dimensions such as empathy, clarity, and voice-channel fit.
 
 from __future__ import annotations
 
-from copy import deepcopy
-from dataclasses import dataclass
 import hashlib
 import json
-from pathlib import Path
+import re
 import statistics
 import time
+from collections.abc import Callable
+from copy import deepcopy
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.provider_adapters import (
+    OPENAI_COMPATIBLE_BASE_URLS,
+    PROVIDER_ENV_KEYS,
+    get_provider_api_key,
+    load_workspace_env,
+)
 
 DEFAULT_JUDGE_RUBRIC_PATH = Path("data/openvoicecs/judge_rubric_v0.1.json")
 DEFAULT_JUDGE_PROTOCOL_PATH = Path("data/openvoicecs/judging/judge_protocol_v0.1.json")
@@ -33,6 +41,23 @@ class JudgeIssue:
     item_id: str
     path: str
     message: str
+
+
+@dataclass(frozen=True)
+class ModelJudgeSpec:
+    """One OpenAI-compatible model used as an audited model judge."""
+
+    provider: str
+    model_id: str
+    rater_id: str | None = None
+    api_key: str | None = None
+    base_url: str | None = None
+
+
+ModelJudgeCaller = Callable[
+    [ModelJudgeSpec, list[dict[str, str]], int, float, float],
+    str,
+]
 
 
 def load_judge_rubric(path: str | Path = DEFAULT_JUDGE_RUBRIC_PATH) -> dict[str, Any]:
@@ -1304,6 +1329,476 @@ def load_judge_annotations(path: str | Path) -> list[dict[str, Any]]:
     raise ValueError(
         "judge annotations must be JSONL, a JSON list, or an object with annotations"
     )
+
+
+def parse_model_judge_spec(value: str) -> ModelJudgeSpec:
+    """Parse ``provider:model`` judge specs such as ``openrouter:anthropic/claude``."""
+    if ":" not in value:
+        raise ValueError("judge spec must use provider:model_id, for example openrouter:...")
+    provider, model_id = value.split(":", 1)
+    provider = _normalize_model_judge_provider(provider)
+    model_id = model_id.strip()
+    if not model_id:
+        raise ValueError("judge spec model_id must be non-empty")
+    if provider not in _openai_compatible_model_judge_providers():
+        allowed = ", ".join(sorted(_openai_compatible_model_judge_providers()))
+        raise ValueError(f"model judging currently supports OpenAI-compatible providers: {allowed}")
+    return ModelJudgeSpec(provider=provider, model_id=model_id)
+
+
+def generate_model_judge_annotations(
+    report: dict[str, Any],
+    *,
+    judge_specs: list[ModelJudgeSpec],
+    rubric: dict[str, Any],
+    prompt: str,
+    adjudicator: ModelJudgeSpec | None = None,
+    disagreement_threshold: float | None = None,
+    caller: ModelJudgeCaller | None = None,
+    max_output_tokens: int = 700,
+    temperature: float = 0.0,
+    timeout_seconds: float = 60.0,
+) -> list[dict[str, Any]]:
+    """Generate model-judge annotations for every trial in a benchmark report."""
+    if not judge_specs:
+        raise ValueError("at least one judge spec is required")
+    issues = validate_judge_rubric(rubric)
+    if issues:
+        formatted = "\n".join(
+            f"- {issue.item_id}::{issue.path}: {issue.message}"
+            for issue in issues
+        )
+        raise ValueError(f"OpenVoiceCS judge rubric validation failed:\n{formatted}")
+
+    threshold = (
+        float(disagreement_threshold)
+        if disagreement_threshold is not None
+        else _rubric_disagreement_threshold(rubric)
+    )
+    call = caller or call_openai_compatible_model_judge
+    annotations: list[dict[str, Any]] = []
+    rater_ids = _model_judge_rater_ids(judge_specs)
+    adjudicator_id = (
+        _model_judge_rater_id(adjudicator, prefix="adjudicator")
+        if adjudicator
+        else None
+    )
+
+    for item in iter_blinded_judge_items(report):
+        item_annotations = []
+        for spec, rater_id in zip(judge_specs, rater_ids, strict=True):
+            annotation = _score_blinded_item_with_model_judge(
+                item,
+                spec=spec,
+                rater_id=rater_id,
+                rubric=rubric,
+                prompt=prompt,
+                caller=call,
+                max_output_tokens=max_output_tokens,
+                temperature=temperature,
+                timeout_seconds=timeout_seconds,
+            )
+            item_annotations.append(annotation)
+        if (
+            adjudicator is not None
+            and len(item_annotations) >= 2
+            and _requires_adjudication(item_annotations[:2], threshold=threshold)
+        ):
+            item_annotations.append(
+                _score_blinded_item_with_model_judge(
+                    item,
+                    spec=adjudicator,
+                    rater_id=adjudicator_id or "adjudicator",
+                    rubric=rubric,
+                    prompt=prompt,
+                    caller=call,
+                    max_output_tokens=max_output_tokens,
+                    temperature=temperature,
+                    timeout_seconds=timeout_seconds,
+                    adjudication=True,
+                )
+            )
+        annotations.extend(item_annotations)
+    return annotations
+
+
+def generate_model_judge_annotations_from_files(
+    report_path: str | Path,
+    *,
+    judge_specs: list[ModelJudgeSpec],
+    rubric_path: str | Path = DEFAULT_JUDGE_RUBRIC_PATH,
+    prompt_path: str | Path = "data/openvoicecs/judging/judge_prompt_v0.1.md",
+    adjudicator: ModelJudgeSpec | None = None,
+    disagreement_threshold: float | None = None,
+    caller: ModelJudgeCaller | None = None,
+    max_output_tokens: int = 700,
+    temperature: float = 0.0,
+    timeout_seconds: float = 60.0,
+    env_path: str | Path = ".env",
+) -> list[dict[str, Any]]:
+    """Load files and generate model-judge annotations."""
+    load_workspace_env(env_path)
+    with open(report_path, encoding="utf-8") as f:
+        report = json.load(f)
+    rubric = load_judge_rubric(rubric_path)
+    prompt = Path(prompt_path).read_text(encoding="utf-8")
+    return generate_model_judge_annotations(
+        report,
+        judge_specs=judge_specs,
+        rubric=rubric,
+        prompt=prompt,
+        adjudicator=adjudicator,
+        disagreement_threshold=disagreement_threshold,
+        caller=caller,
+        max_output_tokens=max_output_tokens,
+        temperature=temperature,
+        timeout_seconds=timeout_seconds,
+    )
+
+
+def iter_blinded_judge_items(report: dict[str, Any]) -> list[dict[str, Any]]:
+    """Return trial-level items with model identity, oracle, and scoring data removed."""
+    items: list[dict[str, Any]] = []
+    for result in report.get("results", []):
+        if not isinstance(result, dict):
+            continue
+        scenario_id = str(result.get("id") or "")
+        if not scenario_id:
+            continue
+        trials = result.get("trials") if isinstance(result.get("trials"), list) else []
+        for fallback_index, trial in enumerate(trials):
+            if not isinstance(trial, dict):
+                continue
+            trial_index = _trial_index_from_report(trial, fallback_index)
+            item_id = f"{scenario_id}:{trial_index}"
+            items.append({
+                "item_id": item_id,
+                "scenario_id": scenario_id,
+                "trial_index": trial_index,
+                "domain": result.get("domain"),
+                "track": result.get("track"),
+                "difficulty": result.get("difficulty"),
+                "customer_goal": result.get("customer_goal"),
+                "input_modality": result.get("input_modality"),
+                "audio_variant": _blinded_audio_variant(result.get("audio_variant")),
+                "messages": _blinded_messages(trial.get("messages")),
+            })
+    return items
+
+
+def write_judge_annotations_jsonl(rows: list[dict[str, Any]], path: str | Path) -> None:
+    """Write judge annotations as sorted-key JSONL."""
+    output = Path(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with open(output, "w", encoding="utf-8") as f:
+        for row in rows:
+            f.write(json.dumps(row, sort_keys=True))
+            f.write("\n")
+
+
+def call_openai_compatible_model_judge(
+    spec: ModelJudgeSpec,
+    messages: list[dict[str, str]],
+    max_output_tokens: int,
+    temperature: float,
+    timeout_seconds: float,
+) -> str:
+    """Call an OpenAI-compatible chat-completions endpoint for model judging."""
+    import httpx
+
+    api_key = get_provider_api_key(spec.provider, spec.api_key)
+    if not api_key:
+        names = "/".join(PROVIDER_ENV_KEYS[spec.provider])
+        raise ValueError(f"{names} is required for provider={spec.provider}")
+    base_url = spec.base_url or OPENAI_COMPATIBLE_BASE_URLS.get(spec.provider)
+    if not base_url and spec.provider == "openai":
+        base_url = "https://api.openai.com/v1"
+    if not base_url:
+        raise ValueError(f"provider={spec.provider} does not have an OpenAI-compatible base URL")
+    request: dict[str, Any] = {
+        "model": spec.model_id,
+        "messages": messages,
+        "temperature": temperature,
+    }
+    if spec.provider == "openai":
+        request["max_completion_tokens"] = max_output_tokens
+    else:
+        request["max_tokens"] = max_output_tokens
+    response = httpx.post(
+        f"{base_url.rstrip('/')}/chat/completions",
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json=request,
+        timeout=timeout_seconds,
+    )
+    response.raise_for_status()
+    payload = response.json()
+    try:
+        content = payload["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise ValueError("model judge response did not include choices[0].message.content") from exc
+    if isinstance(content, list):
+        return "\n".join(
+            str(part.get("text", ""))
+            for part in content
+            if isinstance(part, dict) and part.get("text")
+        )
+    return str(content)
+
+
+def _score_blinded_item_with_model_judge(
+    item: dict[str, Any],
+    *,
+    spec: ModelJudgeSpec,
+    rater_id: str,
+    rubric: dict[str, Any],
+    prompt: str,
+    caller: ModelJudgeCaller,
+    max_output_tokens: int,
+    temperature: float,
+    timeout_seconds: float,
+    adjudication: bool = False,
+) -> dict[str, Any]:
+    messages = _build_model_judge_messages(
+        item,
+        rubric=rubric,
+        prompt=prompt,
+        adjudication=adjudication,
+    )
+    response_text = caller(spec, messages, max_output_tokens, temperature, timeout_seconds)
+    parsed = _parse_model_judge_response(response_text, rubric)
+    annotation: dict[str, Any] = {
+        "item_id": item["item_id"],
+        "scenario_id": item["scenario_id"],
+        "rater_id": rater_id,
+        "scores": parsed["scores"],
+        "judge": {
+            "type": "audited_model_judge",
+            "provider": spec.provider,
+            "model_id": spec.model_id,
+            "adjudicator": adjudication,
+        },
+    }
+    if parsed.get("notes"):
+        annotation["notes"] = parsed["notes"]
+    return annotation
+
+
+def _build_model_judge_messages(
+    item: dict[str, Any],
+    *,
+    rubric: dict[str, Any],
+    prompt: str,
+    adjudication: bool,
+) -> list[dict[str, str]]:
+    dimensions = [dimension["id"] for dimension in rubric.get("dimensions", [])]
+    scale = rubric.get("scale", {})
+    system = (
+        prompt.strip()
+        + "\n\nReturn only JSON. The JSON object must have this shape:\n"
+        + json.dumps(
+            {
+                "scores": {dimension: scale.get("max", 5) for dimension in dimensions},
+                "notes": "short rationale",
+            },
+            sort_keys=True,
+        )
+        + "\nScores must be integers for every rubric dimension. Do not include "
+        "markdown, extra keys, deterministic benchmark scores, or tool/oracle analysis."
+    )
+    if adjudication:
+        system += (
+            "\nYou are adjudicating a disagreement. Score independently from the "
+            "customer-facing transcript and rubric only."
+        )
+    rubric_view = {
+        "name": rubric.get("name"),
+        "version": rubric.get("version"),
+        "scale": rubric.get("scale"),
+        "dimensions": [
+            {
+                "id": dimension.get("id"),
+                "name": dimension.get("name"),
+                "description": dimension.get("description"),
+            }
+            for dimension in rubric.get("dimensions", [])
+        ],
+    }
+    user = {
+        "blinded_item": item,
+        "rubric": rubric_view,
+        "instruction": (
+            "Score only the agent's customer-facing behavior. The item is blinded: "
+            "system identity, hidden oracle, pass/fail status, and tool checks are omitted."
+        ),
+    }
+    return [
+        {"role": "system", "content": system},
+        {"role": "user", "content": json.dumps(user, ensure_ascii=True, sort_keys=True)},
+    ]
+
+
+def _parse_model_judge_response(text: str, rubric: dict[str, Any]) -> dict[str, Any]:
+    payload = json.loads(_extract_json_object(text))
+    if not isinstance(payload, dict):
+        raise ValueError("model judge response JSON must be an object")
+    dimensions = [dimension["id"] for dimension in rubric.get("dimensions", [])]
+    source_scores = payload.get("scores")
+    if not isinstance(source_scores, dict):
+        source_scores = {
+            dimension: payload.get(dimension)
+            for dimension in dimensions
+            if dimension in payload
+        }
+    scores: dict[str, int] = {}
+    min_score = rubric.get("scale", {}).get("min", 1)
+    max_score = rubric.get("scale", {}).get("max", 5)
+    for dimension in dimensions:
+        if dimension not in source_scores:
+            raise ValueError(f"model judge response missing score for {dimension}")
+        value = source_scores[dimension]
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f"model judge score for {dimension} must be numeric")
+        if isinstance(value, float) and not value.is_integer():
+            raise ValueError(f"model judge score for {dimension} must be an integer")
+        int_value = int(value)
+        if int_value < min_score or int_value > max_score:
+            raise ValueError(
+                f"model judge score for {dimension} must be between {min_score} and {max_score}"
+            )
+        scores[dimension] = int_value
+    extra = set(source_scores) - set(dimensions)
+    if extra:
+        raise ValueError(f"model judge response included unknown dimensions: {sorted(extra)}")
+    notes = payload.get("notes") or payload.get("rationale")
+    if notes is not None and not isinstance(notes, str):
+        raise ValueError("model judge notes must be a string")
+    return {"scores": scores, "notes": notes}
+
+
+def _requires_adjudication(
+    annotations: list[dict[str, Any]],
+    *,
+    threshold: float,
+) -> bool:
+    if len(annotations) < 2:
+        return False
+    first, second = annotations[0], annotations[1]
+    first_scores = first.get("scores", {})
+    second_scores = second.get("scores", {})
+    for dimension, value in first_scores.items():
+        other = second_scores.get(dimension)
+        if isinstance(value, (int, float)) and isinstance(other, (int, float)):
+            if abs(float(value) - float(other)) >= threshold:
+                return True
+    return False
+
+
+def _extract_json_object(text: str) -> str:
+    text = text.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text)
+        text = re.sub(r"\s*```$", "", text)
+        text = text.strip()
+    try:
+        json.loads(text)
+        return text
+    except json.JSONDecodeError:
+        pass
+    start = text.find("{")
+    end = text.rfind("}")
+    if start == -1 or end == -1 or end <= start:
+        raise ValueError("model judge response did not contain a JSON object")
+    candidate = text[start : end + 1]
+    json.loads(candidate)
+    return candidate
+
+
+def _normalize_model_judge_provider(provider: str) -> str:
+    normalized = provider.strip().lower().replace("_", "-")
+    aliases = {
+        "open-router": "openrouter",
+        "dashscope": "alibaba",
+        "aliyun": "alibaba",
+        "alibaba-cloud": "alibaba",
+        "moonshot": "kimi",
+        "moonshotai": "kimi",
+        "mini-max": "minimax",
+        "grok": "xai",
+    }
+    normalized = aliases.get(normalized, normalized)
+    if normalized not in PROVIDER_ENV_KEYS:
+        raise ValueError(f"provider must be one of: {', '.join(sorted(PROVIDER_ENV_KEYS))}")
+    return normalized
+
+
+def _openai_compatible_model_judge_providers() -> set[str]:
+    return set(OPENAI_COMPATIBLE_BASE_URLS) | {"openai"}
+
+
+def _model_judge_rater_ids(specs: list[ModelJudgeSpec]) -> list[str]:
+    counts: dict[str, int] = {}
+    rater_ids = []
+    for spec in specs:
+        base = _model_judge_rater_id(spec)
+        counts[base] = counts.get(base, 0) + 1
+        rater_ids.append(base if counts[base] == 1 else f"{base}-{counts[base]}")
+    return rater_ids
+
+
+def _model_judge_rater_id(
+    spec: ModelJudgeSpec | None,
+    *,
+    prefix: str = "model-judge",
+) -> str:
+    if spec is None:
+        return prefix
+    if spec.rater_id:
+        return spec.rater_id
+    value = f"{prefix}-{spec.provider}-{spec.model_id}"
+    value = re.sub(r"[^a-zA-Z0-9_.-]+", "-", value).strip("-").lower()
+    return value or prefix
+
+
+def _rubric_disagreement_threshold(rubric: dict[str, Any]) -> float:
+    # The judge protocol uses two scale points for v0.1; the rubric alone does not
+    # define an adjudication trigger, so keep that release default here.
+    scale_min = rubric.get("scale", {}).get("min", 1)
+    scale_max = rubric.get("scale", {}).get("max", 5)
+    if isinstance(scale_min, int) and isinstance(scale_max, int) and scale_max <= 2:
+        return 1.0
+    return 2.0
+
+
+def _trial_index_from_report(trial: dict[str, Any], fallback: int) -> int:
+    value = trial.get("trial_index", fallback)
+    if isinstance(value, bool) or not isinstance(value, int):
+        return fallback
+    return value
+
+
+def _blinded_messages(messages: Any) -> list[dict[str, str]]:
+    if not isinstance(messages, list):
+        return []
+    blinded = []
+    for message in messages:
+        if not isinstance(message, dict):
+            continue
+        text = message.get("text") or message.get("content")
+        if not isinstance(text, str) or not text.strip():
+            continue
+        role = message.get("role") if isinstance(message.get("role"), str) else "agent"
+        blinded.append({"role": role, "text": text})
+    return blinded
+
+
+def _blinded_audio_variant(variant: Any) -> dict[str, Any] | None:
+    if not isinstance(variant, dict):
+        return None
+    return {
+        "track": variant.get("track"),
+        "transcript": variant.get("transcript"),
+        "perturbations": variant.get("perturbations", []),
+    }
 
 
 def validate_judge_annotations(

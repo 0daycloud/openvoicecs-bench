@@ -652,6 +652,28 @@ python scripts/run_openvoicecs.py apply-judge-report \
   --output data/openvoicecs/reports/candidate_judged.json
 ```
 
+Automate audited model-judge annotation collection with OpenAI-compatible
+providers, including OpenRouter:
+
+```bash
+python scripts/run_openvoicecs.py model-judge \
+  data/openvoicecs/reports/candidate.json \
+  --judge openrouter:anthropic/claude-sonnet-4.6 \
+  --judge openrouter:google/gemini-3-flash-preview \
+  --adjudicator openrouter:openai/gpt-5.4-mini \
+  --rubric data/openvoicecs/judge_rubric_v0.1.json \
+  --prompt data/openvoicecs/judging/judge_prompt_v0.1.md \
+  --annotations-output data/openvoicecs/judging/candidate_annotations.jsonl \
+  --judge-report-output data/openvoicecs/judging/candidate_judge_report.json \
+  --judged-report-output data/openvoicecs/reports/candidate_judged.json
+```
+
+`model-judge` creates blinded trial-level items from the saved report, calls
+each `--judge` model for strict rubric JSON, adds `--adjudicator` only when the
+first two model judges disagree by the protocol threshold, writes annotation
+JSONL, builds the aggregate judge report, and optionally writes the judged
+benchmark report. This is audited model-judge evidence, not human judging.
+
 Judge reports are separate from deterministic oracle scores. They aggregate
 empathy, clarity, naturalness, professionalism, resolution communication, and
 voice-channel fit on a 1-5 scale, report item/rater coverage, and compute

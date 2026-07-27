@@ -5,20 +5,26 @@ from __future__ import annotations
 import json
 from copy import deepcopy
 
+import pytest
+
 from src.evaluation.benchmark.judging import (
+    ModelJudgeSpec,
     apply_judge_report,
     apply_judge_report_from_files,
     build_judge_report,
     build_judge_report_from_files,
+    generate_model_judge_annotations,
+    iter_blinded_judge_items,
     judge_annotation_package_stats,
     judge_study_stats,
     load_judge_annotation_package,
     load_judge_protocol,
     load_judge_rubric,
     load_judge_study_manifest,
-    validate_judge_annotations,
+    parse_model_judge_spec,
     validate_judge_annotation_package,
     validate_judge_annotation_package_file,
+    validate_judge_annotations,
     validate_judge_protocol,
     validate_judge_protocol_file,
     validate_judge_report,
@@ -312,3 +318,112 @@ def test_validate_judge_annotations_catches_bad_scores():
     assert ("annotations[0].scenario_id", "unknown scenario id") in messages
     assert ("annotations[0].scores.clarity", "missing score") in messages
     assert ("annotations[0].scores.empathy", "must be between 1 and 5") in messages
+
+
+def test_parse_model_judge_spec_accepts_openrouter_model():
+    spec = parse_model_judge_spec("openrouter:anthropic/claude-sonnet-4.6")
+
+    assert spec.provider == "openrouter"
+    assert spec.model_id == "anthropic/claude-sonnet-4.6"
+
+
+def test_model_judge_annotations_blind_items_and_aggregate():
+    report = OpenVoiceCSBench.load().score_agent(oracle_agent, max_scenarios=1, trials=1)
+    rubric = load_judge_rubric()
+    dimensions = [dimension["id"] for dimension in rubric["dimensions"]]
+    seen_payloads = []
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, max_output_tokens, temperature, timeout_seconds
+        payload = json.loads(messages[1]["content"])
+        seen_payloads.append(payload)
+        item = payload["blinded_item"]
+        assert "model_metadata" not in item
+        assert "scores" not in item
+        assert "tool_calls" not in item
+        assert "tool_check" not in item
+        assert item["messages"]
+        return json.dumps({
+            "scores": {dimension: 5 for dimension in dimensions},
+            "notes": "clear and natural",
+        })
+
+    annotations = generate_model_judge_annotations(
+        report,
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        rubric=rubric,
+        prompt="Judge this transcript.",
+        caller=caller,
+    )
+
+    assert len(annotations) == 2
+    assert {row["rater_id"] for row in annotations} == {
+        "model-judge-openrouter-judge-a",
+        "model-judge-openrouter-judge-b",
+    }
+    assert len(seen_payloads) == 2
+    judge_report = build_judge_report(report, annotations, rubric)
+    assert validate_judge_report(judge_report) == []
+
+
+def test_model_judge_annotations_calls_adjudicator_on_large_disagreement():
+    report = OpenVoiceCSBench.load().score_agent(oracle_agent, max_scenarios=1, trials=1)
+    rubric = load_judge_rubric()
+    dimensions = [dimension["id"] for dimension in rubric["dimensions"]]
+    calls = []
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del messages, max_output_tokens, temperature, timeout_seconds
+        calls.append(spec.model_id)
+        score = {"judge-a": 1, "judge-b": 5}.get(spec.model_id, 3)
+        return json.dumps({"scores": {dimension: score for dimension in dimensions}})
+
+    annotations = generate_model_judge_annotations(
+        report,
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        rubric=rubric,
+        prompt="Judge this transcript.",
+        adjudicator=ModelJudgeSpec(provider="openrouter", model_id="judge-c"),
+        disagreement_threshold=2,
+        caller=caller,
+    )
+
+    assert calls == ["judge-a", "judge-b", "judge-c"]
+    assert len(annotations) == 3
+    assert annotations[-1]["judge"]["adjudicator"] is True
+
+
+def test_model_judge_annotations_rejects_bad_model_score():
+    report = OpenVoiceCSBench.load().score_agent(oracle_agent, max_scenarios=1, trials=1)
+    rubric = load_judge_rubric()
+    dimensions = [dimension["id"] for dimension in rubric["dimensions"]]
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, messages, max_output_tokens, temperature, timeout_seconds
+        return json.dumps({"scores": {dimension: 9 for dimension in dimensions}})
+
+    with pytest.raises(ValueError, match="must be between 1 and 5"):
+        generate_model_judge_annotations(
+            report,
+            judge_specs=[ModelJudgeSpec(provider="openrouter", model_id="judge-a")],
+            rubric=rubric,
+            prompt="Judge this transcript.",
+            caller=caller,
+        )
+
+
+def test_iter_blinded_judge_items_uses_trial_item_ids():
+    report = OpenVoiceCSBench.load().score_agent(oracle_agent, max_scenarios=1, trials=1)
+
+    items = iter_blinded_judge_items(report)
+
+    assert items[0]["item_id"] == f"{report['results'][0]['id']}:0"
+    assert items[0]["scenario_id"] == report["results"][0]["id"]
+    assert "messages" in items[0]
+    assert "model_metadata" not in items[0]
