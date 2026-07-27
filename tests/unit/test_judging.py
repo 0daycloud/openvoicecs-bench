@@ -79,7 +79,11 @@ def test_judge_rubric_validates():
 
     assert validate_judge_rubric(rubric) == []
     assert validate_judge_rubric_file() == []
-    assert sum(dimension["weight"] for dimension in rubric["dimensions"]) == 1.0
+    # Production validation uses a 1e-6 tolerance (judging.py); exact equality here is
+    # version-dependent because CPython 3.12+ uses compensated summation in sum().
+    assert sum(dimension["weight"] for dimension in rubric["dimensions"]) == pytest.approx(
+        1.0, abs=1e-6
+    )
 
 
 def test_judge_protocol_validates():
