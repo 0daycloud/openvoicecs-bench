@@ -3,21 +3,25 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench
 from src.evaluation.benchmark.provider_adapters import (
     ProviderSpec,
-    build_provider_spec,
-    build_provider_agent,
-    build_trace_prompt,
-    estimate_cost_usd,
-    parse_provider_response_text,
-    provider_metadata,
     _derive_events,
     _execute_scenario_tool,
     _openai_tool_schemas,
     _parse_native_final_trace,
+    build_json_action_prompt,
+    build_provider_agent,
+    build_provider_spec,
+    build_trace_prompt,
+    estimate_cost_usd,
+    parse_json_action_response,
+    parse_provider_response_text,
+    provider_metadata,
 )
 from src.evaluation.benchmark.submission import score_provider
 
@@ -101,12 +105,160 @@ def test_parse_provider_response_text_accepts_legacy_experience_overall():
     assert trace["experience_judgment"]["score"] == 1
 
 
+def test_json_action_prompt_uses_stepwise_protocol():
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+
+    _system, user = build_json_action_prompt(scenario, trial_index=1)
+
+    response_contract = user.split("Customer session:", 1)[0]
+    assert '"action":"call_tool"' in response_contract
+    assert '"action":"final"' in response_contract
+    assert "tool result" in response_contract.lower()
+    assert "Do not invent tool results" in response_contract
+    assert '"trial_index": 1' in user
+
+
+def test_parse_json_action_response_accepts_call_tool_and_final():
+    call = parse_json_action_response(
+        '```json\n{"action":"call_tool","name":"verify_identity","arguments":{"account_id":"acct_1"}}\n```'
+    )
+    final = parse_json_action_response('{"action":"final","message":"Done."}')
+
+    assert call == {
+        "action": "call_tool",
+        "name": "verify_identity",
+        "arguments": {"account_id": "acct_1"},
+    }
+    assert final == {"action": "final", "message": "Done."}
+
+
+def test_parse_json_action_response_tolerates_legacy_trace_shape():
+    action = parse_json_action_response(
+        json.dumps({
+            "messages": [{"role": "agent", "text": "I can help."}],
+            "tool_calls": [{"name": "verify_identity", "arguments": {"account_id": "acct_1"}}],
+        })
+    )
+
+    assert action == {
+        "action": "call_tool",
+        "name": "verify_identity",
+        "arguments": {"account_id": "acct_1"},
+    }
+
+
+def test_parse_json_action_response_treats_plain_text_as_final():
+    action = parse_json_action_response("I can help with that.")
+
+    assert action == {"action": "final", "message": "I can help with that."}
+
+
+def test_parse_json_action_response_accepts_common_aliases():
+    tool_action = parse_json_action_response(
+        json.dumps({
+            "action": "tool_call",
+            "tool_name": "verify_identity",
+            "args": {"account_id": "acct_1"},
+        })
+    )
+    final_action = parse_json_action_response(json.dumps({"action": "respond", "text": "Done."}))
+
+    assert tool_action == {
+        "action": "call_tool",
+        "name": "verify_identity",
+        "arguments": {"account_id": "acct_1"},
+    }
+    assert final_action == {"action": "final", "message": "Done."}
+
+
+def test_parse_json_action_response_accepts_tool_name_as_action():
+    action = parse_json_action_response(
+        json.dumps({"action": "verify_identity", "arguments": {"account_id": "acct_1"}})
+    )
+
+    assert action == {
+        "action": "call_tool",
+        "name": "verify_identity",
+        "arguments": {"account_id": "acct_1"},
+    }
+
+
 def test_native_final_trace_accepts_empty_or_plain_text():
     empty = _parse_native_final_trace("")
     plain = _parse_native_final_trace("I completed the request.")
 
     assert empty == {"messages": [], "tool_calls": [], "events": []}
     assert plain["messages"] == [{"role": "agent", "text": "I completed the request."}]
+
+
+def test_openai_compatible_json_action_loop_executes_tools(monkeypatch):
+    requests = []
+    responses = [
+        {"action": "call_tool", "name": "verify_identity", "arguments": {"account_id": "acct_1"}},
+        {"action": "call_tool", "name": "create_case", "arguments": {"account_id": "acct_1"}},
+        {"action": "final", "message": "Your case is created."},
+    ]
+
+    class FakeCompletions:
+        def create(self, **request):
+            requests.append(request)
+            payload = responses.pop(0)
+            message = SimpleNamespace(content=json.dumps(payload))
+            return SimpleNamespace(
+                choices=[SimpleNamespace(message=message)],
+                usage=SimpleNamespace(prompt_tokens=10, completion_tokens=5),
+            )
+
+    class FakeOpenAI:
+        def __init__(self, **_kwargs):
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setitem(sys.modules, "openai", SimpleNamespace(OpenAI=FakeOpenAI))
+    scenario = {
+        "id": "case-test",
+        "domain": "retail",
+        "customer_goal": "Create a case.",
+        "conversation": [{"role": "customer", "text": "Please open a case."}],
+        "initial_state": {
+            "accounts": {"acct_1": {"identity_verified": False}},
+            "cases": {},
+        },
+        "policy": {},
+        "tools": [
+            {
+                "name": "verify_identity",
+                "required_arguments": {"account_id": "acct_1"},
+                "state_updates": [{"path": "accounts.acct_1.identity_verified", "value": True}],
+            },
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "account_id": "acct_1"},
+                "generated_arguments": {"case_id": "case_1"},
+                "preconditions": [{"path": "accounts.acct_1.identity_verified", "value": True}],
+                "state_updates": [{"path": "cases.case_1.status", "value": "open"}],
+            },
+        ],
+    }
+    agent = build_provider_agent(
+        ProviderSpec(
+            provider="openrouter",
+            model_id="fake/model",
+            api_key="test-key",
+            native_tools=False,
+        )
+    )
+
+    trace = agent(scenario, 0)
+
+    assert trace["tool_calls"] == [
+        {"name": "verify_identity", "arguments": {"account_id": "acct_1"}},
+        {"name": "create_case", "arguments": {"account_id": "acct_1"}},
+    ]
+    assert trace["tool_results"][0]["ok"] is True
+    assert trace["tool_results"][1]["generated_arguments"] == {"case_id": "case_1"}
+    assert trace["messages"] == [{"role": "agent", "text": "Your case is created."}]
+    assert trace["usage"] == {"input_tokens": 30, "output_tokens": 15}
+    assert any("tool_result" in message["content"] for message in requests[1]["messages"])
 
 
 def test_estimate_cost_usd_from_usage_and_pricing():

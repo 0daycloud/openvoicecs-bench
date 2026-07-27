@@ -1,21 +1,23 @@
 """Provider adapters for running OpenVoiceCS-Bench against hosted LLMs.
 
-The benchmark evaluates a trace, not free-form chat text. Each provider is
-therefore asked to produce one small JSON trace containing messages, tool
-calls, policy events, and optional claims. The provider-specific layer is kept
-thin so official runs can pin model IDs and pricing externally.
+The benchmark evaluates a trace, not free-form chat text. Provider adapters
+collect that trace either through native tool calls or through a JSON action
+loop where the harness executes scenario tools and returns API-like results.
+The provider-specific layer is kept thin so official runs can pin model IDs and
+pricing externally.
 """
 
 from __future__ import annotations
 
-from copy import deepcopy
-from dataclasses import dataclass
 import json
 import os
 import re
 import time
+from collections.abc import Callable
+from copy import deepcopy
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 PIPELINE_PROVIDERS = {
     "openai",
@@ -65,6 +67,7 @@ DEFAULT_MODEL_IDS = {
 DEFAULT_MAX_OUTPUT_TOKENS = 700
 DEFAULT_TEMPERATURE = 0.1
 REASONING_EFFORTS = {"none", "low", "medium", "high", "xhigh"}
+MAX_JSON_ACTION_ROUNDS = 8
 
 
 @dataclass(frozen=True)
@@ -262,6 +265,47 @@ def build_trace_prompt(
     return system, user
 
 
+def build_json_action_prompt(
+    scenario: dict[str, Any],
+    trial_index: int,
+) -> tuple[str, str]:
+    """Build the non-native stepwise action prompt for chat-only providers."""
+    system, _legacy_user = build_trace_prompt(scenario, trial_index, native_tools=True)
+    customer_text = _scenario_customer_text(scenario)
+    tool_specs = [
+        {
+            "name": tool.get("name"),
+            "description": tool.get("description") or _tool_description(tool),
+            "parameters": _tool_argument_types(tool),
+        }
+        for tool in scenario.get("tools", [])
+    ]
+    scenario_view = {
+        "id": scenario.get("id"),
+        "domain": scenario.get("domain"),
+        "customer_goal": scenario.get("customer_goal"),
+        "customer_context": scenario.get("customer_profile", {}),
+        "customer_utterance": customer_text,
+        "customer_records": scenario.get("initial_state", {}),
+        "policy": _provider_policy_view(scenario.get("policy", {})),
+        "available_tools": tool_specs,
+        "audio_variant": _summarize_audio_variant(scenario.get("audio_variant")),
+        "trial_index": trial_index,
+    }
+    user = (
+        "Use this stepwise JSON action protocol. Return only one JSON object per turn.\n"
+        "To call a tool, return:\n"
+        '{"action":"call_tool","name":"tool_name","arguments":{}}\n'
+        "After each tool call, you will receive the real tool result from the benchmark harness. "
+        "Do not invent tool results or claim a state change until the tool result confirms it.\n"
+        "When no more tools are needed, return:\n"
+        '{"action":"final","message":"concise natural customer reply"}\n\n'
+        "Customer session:\n"
+        f"{json.dumps(scenario_view, ensure_ascii=True, indent=2)}"
+    )
+    return system, user
+
+
 def estimate_cost_usd(usage: dict[str, Any], pricing: dict[str, Any] | None) -> float | None:
     """Estimate text-token API cost from usage and per-million-token pricing."""
     if not pricing:
@@ -345,32 +389,76 @@ def _build_openai_compatible_agent(spec: ProviderSpec) -> Callable[[dict[str, An
     client = OpenAI(**kwargs)
 
     def run(scenario: dict[str, Any], trial_index: int) -> dict[str, Any]:
-        system, user = build_trace_prompt(scenario, trial_index, native_tools=False)
+        system, user = build_json_action_prompt(scenario, trial_index)
         started = time.perf_counter()
-        request: dict[str, Any] = {
-            "model": spec.model_id,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            "temperature": spec.temperature,
-        }
-        if spec.provider == "openai":
-            request["max_completion_tokens"] = spec.max_output_tokens
-        else:
-            request["max_tokens"] = spec.max_output_tokens
-        if spec.reasoning_effort is not None:
-            request["reasoning_effort"] = spec.reasoning_effort
-        response = client.chat.completions.create(**request)
-        latency_ms = (time.perf_counter() - started) * 1000
-        text = _extract_openai_message_text(response.choices[0].message)
-        trace = parse_provider_response_text(text)
-        trace["events"] = _derive_events(scenario, trace["tool_calls"], trace["messages"])
-        usage = _extract_openai_usage(response)
-        trace["usage"] = usage
-        trace["cost_usd"] = estimate_cost_usd(usage, spec.pricing)
-        trace.setdefault("latency_ms", round(latency_ms, 3))
-        return trace
+        state = deepcopy(scenario.get("initial_state", {}))
+        executed_calls: list[dict[str, Any]] = []
+        tool_results: list[dict[str, Any]] = []
+        usage: dict[str, int] = {}
+        messages: list[dict[str, str]] = [
+            {
+                "role": "system",
+                "content": (
+                    system
+                    + " Use the JSON action protocol exactly. "
+                    "Never fabricate tool results; wait for tool_result messages."
+                ),
+            },
+            {"role": "user", "content": user},
+        ]
+
+        for _ in range(MAX_JSON_ACTION_ROUNDS):
+            request: dict[str, Any] = {
+                "model": spec.model_id,
+                "messages": messages,
+                "temperature": spec.temperature,
+            }
+            if spec.provider == "openai":
+                request["max_completion_tokens"] = spec.max_output_tokens
+            else:
+                request["max_tokens"] = spec.max_output_tokens
+            if spec.reasoning_effort is not None:
+                request["reasoning_effort"] = spec.reasoning_effort
+            response = client.chat.completions.create(**request)
+            usage = _merge_openai_usage(usage, _extract_openai_usage(response))
+            text = _extract_openai_message_text(response.choices[0].message)
+            action = parse_json_action_response(text)
+            messages.append({"role": "assistant", "content": json.dumps(action, ensure_ascii=True)})
+            if action["action"] == "final":
+                final_messages = [{"role": "agent", "text": action["message"]}] if action["message"] else []
+                return _finalize_provider_trace(
+                    scenario,
+                    executed_calls,
+                    final_messages,
+                    tool_results=tool_results,
+                    usage=usage,
+                    pricing=spec.pricing,
+                    started=started,
+                )
+            name = action["name"]
+            arguments = action["arguments"]
+            executed_calls.append({"name": name, "arguments": arguments})
+            tool_result = _execute_scenario_tool(
+                scenario,
+                state,
+                name,
+                arguments,
+                tool_results=tool_results,
+            )
+            tool_results.append(tool_result)
+            messages.append({
+                "role": "user",
+                "content": json.dumps(
+                    {
+                        "type": "tool_result",
+                        "name": name,
+                        "result": tool_result,
+                    },
+                    ensure_ascii=True,
+                ),
+            })
+
+        raise ValueError("JSON action loop exceeded maximum tool rounds")
 
     return run
 
@@ -475,6 +563,104 @@ def _parse_native_final_trace(text: str) -> dict[str, Any]:
         return parse_provider_response_text(text)
     except (ValueError, json.JSONDecodeError):
         return {"messages": [{"role": "agent", "text": text}], "tool_calls": [], "events": []}
+
+
+def parse_json_action_response(text: str) -> dict[str, Any]:
+    """Parse one step from the JSON action protocol."""
+    try:
+        payload = json.loads(_extract_json_object(text))
+    except ValueError:
+        if text.strip():
+            return {"action": "final", "message": text.strip()}
+        raise
+    if not isinstance(payload, dict):
+        raise ValueError("JSON action response must be an object")
+    action = payload.get("action")
+    if isinstance(action, str):
+        normalized_action = action.strip().lower()
+        if normalized_action in {"tool_call", "tool", "call", "call_tool"}:
+            action = "call_tool"
+        elif normalized_action in {"reply", "respond", "response", "final_response", "final"}:
+            action = "final"
+        elif payload.get("arguments") is not None or payload.get("args") is not None:
+            payload = {
+                "action": "call_tool",
+                "name": action,
+                "arguments": payload.get("arguments") or payload.get("args") or {},
+            }
+            action = "call_tool"
+    if action is None and isinstance(payload.get("tool_calls"), list) and payload["tool_calls"]:
+        first_call = payload["tool_calls"][0]
+        if isinstance(first_call, dict):
+            payload = {
+                "action": "call_tool",
+                "name": first_call.get("name"),
+                "arguments": first_call.get("arguments") or {},
+            }
+            action = "call_tool"
+    if action is None and any(payload.get(key) is not None for key in ("name", "tool_name", "tool")):
+        payload = {
+            "action": "call_tool",
+            "name": payload.get("name") or payload.get("tool_name") or payload.get("tool"),
+            "arguments": payload.get("arguments") or payload.get("args") or {},
+        }
+        action = "call_tool"
+    if action is None and (payload.get("response") is not None or payload.get("messages") is not None):
+        payload = {
+            "action": "final",
+            "message": payload.get("response"),
+            "messages": payload.get("messages"),
+        }
+        action = "final"
+    if action is None and any(payload.get(key) is not None for key in ("message", "text", "content")):
+        payload = {
+            "action": "final",
+            "message": payload.get("message") or payload.get("text") or payload.get("content"),
+        }
+        action = "final"
+    if action == "call_tool":
+        name = payload.get("name") or payload.get("tool_name") or payload.get("tool")
+        arguments = payload.get("arguments") or payload.get("args") or {}
+        if not isinstance(name, str) or not name:
+            raise ValueError("call_tool action requires a non-empty string name")
+        if not isinstance(arguments, dict):
+            raise ValueError("call_tool action arguments must be an object")
+        return {"action": "call_tool", "name": name, "arguments": arguments}
+    if action == "final":
+        message = payload.get("message") or payload.get("response") or payload.get("text") or payload.get("content")
+        if message is None and isinstance(payload.get("messages"), list):
+            message = _messages_text(payload["messages"])
+        if not isinstance(message, str):
+            raise ValueError("final action requires a string message")
+        return {"action": "final", "message": message}
+    raise ValueError("JSON action response action must be call_tool or final")
+
+
+def _finalize_provider_trace(
+    scenario: dict[str, Any],
+    executed_calls: list[dict[str, Any]],
+    messages: list[dict[str, Any]],
+    *,
+    tool_results: list[dict[str, Any]],
+    usage: dict[str, int],
+    pricing: dict[str, Any] | None,
+    started: float,
+) -> dict[str, Any]:
+    trace = {
+        "messages": messages,
+        "tool_calls": executed_calls,
+        "events": _derive_events(
+            scenario,
+            executed_calls,
+            messages,
+            tool_results=tool_results,
+        ),
+        "tool_results": tool_results,
+        "usage": usage,
+        "cost_usd": estimate_cost_usd(usage, pricing),
+        "latency_ms": round((time.perf_counter() - started) * 1000, 3),
+    }
+    return trace
 
 
 def _build_anthropic_agent(spec: ProviderSpec) -> Callable[[dict[str, Any], int], dict[str, Any]]:
