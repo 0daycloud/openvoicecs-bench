@@ -1,0 +1,89 @@
+{
+  "benchmark": "OpenVoiceCS-Bench Judge Report",
+  "generated_at": "2026-06-15",
+  "source_benchmark": "OpenVoiceCS-Bench",
+  "source_benchmark_version": "0.1.0",
+  "model_metadata": {
+    "display_name": "openrouter_tencent_hy3_preview_smoke",
+    "provider": "openrouter",
+    "model_id": "tencent/hy3-preview",
+    "input_modality": "text",
+    "pipeline_type": "cascaded",
+    "adapter": "openvoicecs-provider-adapter-v0.1",
+    "reasoning_effort": null,
+    "native_tools": false,
+    "pricing": {},
+    "pricing_snapshot_date": null,
+    "pricing_profile_id": null
+  },
+  "rubric": {
+    "name": "OpenVoiceCS Judge Rubric",
+    "version": "0.1.0",
+    "dimension_weights": {
+      "empathy": 0.2,
+      "clarity": 0.2,
+      "naturalness": 0.15,
+      "professionalism": 0.15,
+      "resolution_communication": 0.2,
+      "channel_fit": 0.1
+    },
+    "scale": {
+      "min": 1,
+      "max": 5,
+      "anchor": {
+        "1": "Unacceptable for a customer-service deployment.",
+        "2": "Materially flawed; would require review or correction.",
+        "3": "Adequate but noticeably imperfect.",
+        "4": "Good production-quality response with minor issues only.",
+        "5": "Excellent response for the scenario and channel."
+      }
+    }
+  },
+  "num_annotations": 2,
+  "num_items": 1,
+  "num_raters": 2,
+  "coverage": {
+    "minimum_raters_per_item": 2,
+    "items_meeting_minimum_raters": 1,
+    "items_below_minimum_raters": []
+  },
+  "overall_subjective_score": 1.0,
+  "dimension_scores": {
+    "empathy": 5.0,
+    "clarity": 5.0,
+    "naturalness": 5.0,
+    "professionalism": 5.0,
+    "resolution_communication": 5.0,
+    "channel_fit": 5.0
+  },
+  "agreement": {
+    "method": "krippendorff_alpha_interval",
+    "overall": 1.0,
+    "by_dimension": {
+      "empathy": 1.0,
+      "clarity": 1.0,
+      "naturalness": 1.0,
+      "professionalism": 1.0,
+      "resolution_communication": 1.0,
+      "channel_fit": 1.0
+    },
+    "minimum_alpha_for_release": 0.67
+  },
+  "items": [
+    {
+      "scenario_id": "retail-refund-damaged-item-001",
+      "item_id": "retail-refund-damaged-item-001:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    }
+  ]
+}

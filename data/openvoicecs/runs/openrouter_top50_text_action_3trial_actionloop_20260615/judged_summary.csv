@@ -1,0 +1,17 @@
+model_id,path,status,detail
+anthropic/claude-sonnet-4.6,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/anthropic_claude_sonnet_4_6_judged.json,judge_error,judge exited with code 1
+minimax/minimax-m3,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/minimax_minimax_m3_judged.json,judge_error,judge exited with code 1
+anthropic/claude-opus-4.7,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/anthropic_claude_opus_4_7_judged.json,judge_error,judge exited with code 1
+anthropic/claude-opus-4.8,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/anthropic_claude_opus_4_8_judged.json,judge_error,judge exited with code 1
+deepseek/deepseek-v3.2,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/deepseek_deepseek_v3_2_judged.json,judge_error,judge exited with code 1
+stepfun/step-3.7-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/stepfun_step_3_7_flash_judged.json,judge_error,judge exited with code 1
+google/gemini-2.5-flash-lite,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/google_gemini_2_5_flash_lite_judged.json,judge_error,judge exited with code 1
+xiaomi/mimo-v2.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/xiaomi_mimo_v2_5_judged.json,judge_error,judge exited with code 1
+google/gemini-3-flash-preview,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/google_gemini_3_flash_preview_judged.json,judge_error,judge exited with code 1
+xiaomi/mimo-v2.5-pro,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/xiaomi_mimo_v2_5_pro_judged.json,judge_error,judge exited with code 1
+google/gemini-2.5-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/google_gemini_2_5_flash_judged.json,judge_error,judge exited with code 1
+openai/gpt-5.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/openai_gpt_5_5_judged.json,judge_error,judge exited with code 1
+z-ai/glm-5.1,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/z_ai_glm_5_1_judged.json,judge_error,judge exited with code 1
+nex-agi/nex-n2-pro:free,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/nex_agi_nex_n2_pro_free_judged.json,judge_error,judge exited with code 1
+google/gemini-3.5-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/google_gemini_3_5_flash_judged.json,judge_error,judge exited with code 1
+openai/gpt-4o-mini,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/judged_reports/openai_gpt_4o_mini_judged.json,judge_error,judge exited with code 1

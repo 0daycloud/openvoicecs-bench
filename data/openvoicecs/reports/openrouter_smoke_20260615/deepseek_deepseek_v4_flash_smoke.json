@@ -1,0 +1,212 @@
+{
+  "overall_score": 0.0,
+  "metric_scores": {
+    "task_success": 0.0,
+    "factual_grounding": 0.0,
+    "sop_compliance": 0.0,
+    "privacy": 0.0,
+    "auth_integrity": 0.0,
+    "tool_correctness": 0.0,
+    "safety": 0.0,
+    "experience_proxy": 0.0
+  },
+  "pass_at_k": 0.0,
+  "pass_k": 0.0,
+  "mean_pass_rate": 0.0,
+  "reliability_gates": {
+    "pass_k": {
+      "value": 0.0,
+      "minimum_for_leaderboard": 0.95,
+      "passed": false
+    },
+    "mean_pass_rate": {
+      "value": 0.0,
+      "minimum_for_leaderboard": 0.98,
+      "passed": false
+    }
+  },
+  "confidence_intervals": {
+    "pass_at_k": {
+      "successes": 0,
+      "total": 1,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.7935
+    },
+    "pass_k": {
+      "successes": 0,
+      "total": 1,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.7935
+    },
+    "trial_pass_rate": {
+      "successes": 0,
+      "total": 1,
+      "estimate": 0.0,
+      "low": 0.0,
+      "high": 0.7935
+    }
+  },
+  "stability_metrics": {
+    "scenario_flake_rate": 0.0,
+    "unstable_scenario_count": 0,
+    "unstable_scenarios": [],
+    "mean_pass_variance": 0.0,
+    "avg_wasted_tool_calls": null,
+    "tool_failure_recovery_rate": null
+  },
+  "conversation_experience_score": null,
+  "conversation_experience": {
+    "score": null,
+    "coverage": 0.0,
+    "num_judged_trials": 0,
+    "judge_counts": {}
+  },
+  "num_scenarios": 1,
+  "num_trials_per_scenario": 1,
+  "operational_metrics": {
+    "median_latency_ms": null,
+    "p95_latency_ms": null,
+    "avg_latency_ms": null,
+    "avg_input_tokens": null,
+    "avg_output_tokens": null,
+    "avg_tool_calls": null,
+    "avg_wasted_tool_calls": null,
+    "avg_policy_events": null,
+    "avg_cost_usd": null,
+    "total_cost_usd": null
+  },
+  "failure_analysis": {
+    "num_failed_trials": 1,
+    "categories": {
+      "adapter_or_api_error": 1
+    },
+    "scenarios": {
+      "retail-refund-damaged-item-001": {
+        "domain": "retail",
+        "track": "text_to_action",
+        "difficulty": "medium",
+        "categories": [
+          "adapter_or_api_error"
+        ]
+      }
+    }
+  },
+  "domain_breakdown": {
+    "retail": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "track_breakdown": {
+    "text_to_action": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "difficulty_breakdown": {
+    "medium": {
+      "count": 1,
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "scenario_family_breakdown": {
+    "retail-refund-damaged-item-001": {
+      "count": 1,
+      "variants": [
+        "base"
+      ],
+      "pass_at_k": 0.0,
+      "pass_k": 0.0,
+      "mean_pass_rate": 0.0
+    }
+  },
+  "results": [
+    {
+      "id": "retail-refund-damaged-item-001",
+      "base_scenario_id": null,
+      "scenario_family": {
+        "id": "retail-refund-damaged-item-001",
+        "variant": "base"
+      },
+      "domain": "retail",
+      "track": "text_to_action",
+      "difficulty": "medium",
+      "customer_goal": "Customer wants a refund for a damaged blender delivered today.",
+      "tags": [
+        "refund",
+        "identity",
+        "damaged_item"
+      ],
+      "scenario_diagnostics": {
+        "required_tool_count": 3,
+        "required_auth_gate_count": 1,
+        "external_failure_present": false,
+        "external_failure_tools": [],
+        "ambiguity_level": "low",
+        "all_needed_facts_available": true,
+        "missing_prompt_or_state_facts": []
+      },
+      "input_modality": "text",
+      "audio_variant": null,
+      "pass_at_k": false,
+      "pass_k": false,
+      "pass_rate": 0.0,
+      "stability": {
+        "num_trials": 1,
+        "pass_variance": 0.0,
+        "flaky": false
+      },
+      "avg_scores": {
+        "task_success": 0.0,
+        "factual_grounding": 0.0,
+        "sop_compliance": 0.0,
+        "privacy": 0.0,
+        "auth_integrity": 0.0,
+        "tool_correctness": 0.0,
+        "safety": 0.0,
+        "experience_proxy": 0.0
+      },
+      "trials": [
+        {
+          "trial_index": 0,
+          "error": "provider response did not contain a JSON object",
+          "passed": false,
+          "scores": {
+            "task_success": 0.0,
+            "factual_grounding": 0.0,
+            "sop_compliance": 0.0,
+            "privacy": 0.0,
+            "auth_integrity": 0.0,
+            "tool_correctness": 0.0,
+            "safety": 0.0,
+            "experience_proxy": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "benchmark": "OpenVoiceCS-Bench",
+  "benchmark_version": "0.1.0",
+  "model_metadata": {
+    "display_name": "openrouter_deepseek_v4_flash_smoke",
+    "provider": "openrouter",
+    "model_id": "deepseek/deepseek-v4-flash",
+    "input_modality": "text",
+    "pipeline_type": "cascaded",
+    "adapter": "openvoicecs-provider-adapter-v0.1",
+    "reasoning_effort": null,
+    "native_tools": false,
+    "pricing": {},
+    "pricing_snapshot_date": null,
+    "pricing_profile_id": null
+  },
+  "elapsed_seconds": 28.481
+}

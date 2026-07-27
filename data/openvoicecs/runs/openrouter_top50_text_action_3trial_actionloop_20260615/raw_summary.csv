@@ -1,0 +1,51 @@
+model_id,path,overall_score,task_success,tool_correctness,safety,pass_at_k,pass_k,mean_pass_rate,conversation_experience_score,median_latency_ms,avg_tool_calls,num_trials,adapter_error_trials,status,detail
+google/gemini-3-flash-preview,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_3_flash_preview.json,47.01,0.0833,0.378,0.0625,0.0312,0.0312,0.0312,,5473.916,3.15,192,10,,
+z-ai/glm-5.1,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/z_ai_glm_5_1.json,29.62,0.0781,0.2413,0.0625,0.0469,0.0469,0.0469,,21045.933,4.16,192,84,,
+google/gemini-3.5-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_3_5_flash.json,12.48,0.0781,0.1189,0.0781,0.0469,0.0469,0.0469,,10786.497,2.57,192,155,,
+deepseek/deepseek-v3.2,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/deepseek_deepseek_v3_2.json,52.73,0.0781,0.3932,0.0729,0.0625,0.0312,0.0469,,12196.946,3.29,192,4,,
+anthropic/claude-opus-4.7,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_opus_4_7.json,49.35,0.0781,0.3906,0.0521,0.0469,0.0312,0.0365,,9531.558,3.13,192,1,,
+google/gemini-2.5-flash-lite,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_2_5_flash_lite.json,47.65,0.0781,0.3828,0.0625,0.0312,0.0312,0.0312,,2501.437,2.97,192,3,,
+google/gemini-2.5-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_2_5_flash.json,46.87,0.0781,0.3793,0.0677,0.0312,0.0312,0.0312,,7149.763,2.89,192,5,,
+stepfun/step-3.7-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/stepfun_step_3_7_flash.json,8.21,0.0781,0.0816,0.0885,0.0625,0.0312,0.0469,,7094.753,2.25,192,172,,
+anthropic/claude-sonnet-4.6,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_sonnet_4_6.json,46.92,0.0781,0.3863,0.0417,0.0312,0.0156,0.026,,10523.896,3.21,192,4,,
+openai/gpt-5.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_5_5.json,13.39,0.0781,0.1259,0.0573,0.0469,0.0156,0.0312,,13303.859,2.85,192,151,,
+minimax/minimax-m3,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/minimax_minimax_m3.json,42.57,0.0677,0.3038,0.1667,0.0469,0.0156,0.0312,,15086.986,4.01,192,30,,
+xiaomi/mimo-v2.5-pro,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/xiaomi_mimo_v2_5_pro.json,5.47,0.0521,0.0582,0.0521,0.0625,0.0156,0.0365,,22583.186,3.23,192,179,,
+anthropic/claude-opus-4.8,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_opus_4_8.json,51.42,0.0365,0.3593,0.2344,0.0,0.0,0.0,,11164.339,2.89,192,3,,
+xiaomi/mimo-v2.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/xiaomi_mimo_v2_5.json,11.37,0.0365,0.0851,0.0885,0.0312,0.0,0.0104,,15871.078,2.6,192,147,,
+openai/gpt-4o-mini,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_4o_mini.json,1.75,0.0156,0.0182,0.0156,0.0156,0.0156,0.0156,,5199.175,2.75,192,188,,
+nex-agi/nex-n2-pro:free,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/nex_agi_nex_n2_pro_free.json,14.92,0.0052,0.0998,0.1094,0.0156,0.0,0.0052,,13775.476,1.8,192,132,,
+tencent/hy3-preview,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/tencent_hy3_preview.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+deepseek/deepseek-v4-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/deepseek_deepseek_v4_flash.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+openrouter/owl-alpha,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openrouter_owl_alpha.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+deepseek/deepseek-v4-pro,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/deepseek_deepseek_v4_pro.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+nvidia/nemotron-3-ultra-550b-a55b:free,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/nvidia_nemotron_3_ultra_550b_a55b_free.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+poolside/laguna-m.1:free,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/poolside_laguna_m_1_free.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+moonshotai/kimi-k2.6,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/moonshotai_kimi_k2_6.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+google/gemini-3.1-flash-lite,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_3_1_flash_lite.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+anthropic/claude-opus-4.6,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_opus_4_6.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+openai/gpt-oss-120b,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_oss_120b.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+google/gemini-3.1-pro-preview,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_3_1_pro_preview.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+openai/gpt-5.4,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_5_4.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+anthropic/claude-haiku-4.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_haiku_4_5.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+anthropic/claude-fable-5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_fable_5.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+google/gemma-4-26b-a4b-it,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemma_4_26b_a4b_it.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+google/gemma-4-31b-it,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemma_4_31b_it.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+minimax/minimax-m2.7,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/minimax_minimax_m2_7.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+qwen/qwen3.7-max,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/qwen_qwen3_7_max.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+openai/gpt-5.4-mini,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_5_4_mini.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+openai/gpt-5-mini,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_5_mini.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+google/gemini-3.1-flash-lite-preview,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/google_gemini_3_1_flash_lite_preview.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+qwen/qwen3-235b-a22b-2507,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/qwen_qwen3_235b_a22b_2507.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+mistralai/mistral-nemo,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/mistralai_mistral_nemo.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+moonshotai/kimi-k2.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/moonshotai_kimi_k2_5.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+z-ai/glm-5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/z_ai_glm_5.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+openai/gpt-5.3-codex,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_5_3_codex.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+qwen/qwen3.7-plus,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/qwen_qwen3_7_plus.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+minimax/minimax-m2.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/minimax_minimax_m2_5.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+z-ai/glm-4.5-air,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/z_ai_glm_4_5_air.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+anthropic/claude-sonnet-4.5,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/anthropic_claude_sonnet_4_5.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+inclusionai/ling-2.6-flash,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/inclusionai_ling_2_6_flash.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+openai/gpt-5.4-nano,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_5_4_nano.json,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,,192,192,,
+nvidia/nemotron-3-super-120b-a12b:free,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/nvidia_nemotron_3_super_120b_a12b_free.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
+openai/gpt-oss-120b:free,data/openvoicecs/runs/openrouter_top50_text_action_3trial_actionloop_20260615/reports/openai_gpt_oss_120b_free.json,,,,,,,,,,,,,timeout,raw model timeout after 3600s
