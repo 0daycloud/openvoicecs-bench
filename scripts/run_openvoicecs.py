@@ -797,7 +797,10 @@ def cmd_model_judge(args: argparse.Namespace) -> None:
     prompt = Path(args.prompt).read_text(encoding="utf-8")
     judge_specs = [parse_model_judge_spec(value) for value in args.judge]
     if len(judge_specs) < 2:
-        print("model-judge requires at least two --judge specs for audited model judging")
+        print(
+            "model-judge requires at least two --judge specs for audited model judging",
+            file=sys.stderr,
+        )
         raise SystemExit(2)
     adjudicator = parse_model_judge_spec(args.adjudicator) if args.adjudicator else None
     disagreement_threshold = args.disagreement_threshold

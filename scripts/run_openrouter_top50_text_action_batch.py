@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
-PYTHON = ROOT / ".venv" / "bin" / "python"
+PYTHON = Path(sys.executable)
 RUNNER = ROOT / "scripts" / "run_openvoicecs.py"
 DEFAULT_MODELS = ROOT / "openrouter-top-100-models.md"
 
@@ -54,6 +54,13 @@ def main() -> int:
     parser.add_argument("--skip-judging", action="store_true")
     parser.add_argument("--rerun", action="store_true")
     args = parser.parse_args()
+
+    if not args.skip_judging and len(args.judge) < 2:
+        raise SystemExit(
+            "audited model judging needs at least two --judge specs "
+            "(for example --judge openrouter:openai/gpt-4o-mini "
+            "--judge openrouter:google/gemini-2.5-flash), or pass --skip-judging"
+        )
 
     models = parse_openrouter_models(args.models_file)[: args.top]
     if len(models) < args.top:
@@ -209,7 +216,7 @@ def run_judge_model(
             ]
         )
         try:
-            run(command, cwd=ROOT, timeout=args.judge_timeout_seconds)
+            run_capturing_stderr(command, cwd=ROOT, timeout=args.judge_timeout_seconds)
         except subprocess.TimeoutExpired:
             return skipped_summary(
                 model,
@@ -218,11 +225,15 @@ def run_judge_model(
                 detail=f"judge timeout after {args.judge_timeout_seconds}s",
             )
         except subprocess.CalledProcessError as exc:
+            reason = (exc.stderr or "").strip().splitlines()
+            detail = f"judge exited with code {exc.returncode}"
+            if reason:
+                detail = f"{detail}: {reason[-1]}"
             return skipped_summary(
                 model,
                 judged_path,
                 status="judge_error",
-                detail=f"judge exited with code {exc.returncode}",
+                detail=detail,
             )
     if judged_path.exists():
         return report_summary(judged_path, judge_report_path=judge_report_path)
@@ -242,6 +253,19 @@ def parse_openrouter_models(path: Path) -> list[str]:
 def run(command: list[str], *, cwd: Path, timeout: int | None = None) -> None:
     print("+", " ".join(command), flush=True)
     subprocess.run(command, cwd=cwd, check=True, timeout=timeout)
+
+
+def run_capturing_stderr(command: list[str], *, cwd: Path, timeout: int | None = None) -> None:
+    """Run a command, re-raising failures with the child's stderr attached."""
+    print("+", " ".join(command), flush=True)
+    subprocess.run(
+        command,
+        cwd=cwd,
+        check=True,
+        timeout=timeout,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
 
 
 def slugify(value: str) -> str:
