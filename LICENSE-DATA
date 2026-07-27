@@ -1,0 +1,69 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright 2026 Sezgin Saygili
+
+This license covers the OpenVoiceCS-Bench *benchmark data and artifacts*, that
+is, everything under `data/openvoicecs/`:
+
+- scenario suites, audio manifests, and generated WAV assets;
+- split, provenance, changelog, datasheet, review, and release manifests;
+- judge rubrics, protocols, prompts, annotations, and judged reports;
+- baseline, sweep, and leaderboard reports under `baselines/`, `reports/`,
+  `releases/`, and `runs/`.
+
+Source code in this repository (`src/`, `scripts/`, `tests/`, `examples/`) is
+licensed separately under the Apache License, Version 2.0. See `LICENSE`.
+
+---
+
+You are free to:
+
+  Share  - copy and redistribute the material in any medium or format.
+  Adapt  - remix, transform, and build upon the material for any purpose,
+           even commercially.
+
+The licensor cannot revoke these freedoms as long as you follow the license
+terms.
+
+Under the following terms:
+
+  Attribution - You must give appropriate credit, provide a link to the
+  license, and indicate if changes were made. You may do so in any reasonable
+  manner, but not in any way that suggests the licensor endorses you or your
+  use.
+
+  No additional restrictions - You may not apply legal terms or technological
+  measures that legally restrict others from doing anything the license
+  permits.
+
+The full legal code is available at:
+
+  https://creativecommons.org/licenses/by/4.0/legalcode
+
+A human-readable summary (not a substitute for the license) is available at:
+
+  https://creativecommons.org/licenses/by/4.0/
+
+---
+
+Suggested attribution:
+
+  OpenVoiceCS-Bench v0.1 (https://github.com/0daycloud/openvoicecs-bench),
+  Sezgin Saygili, licensed under CC BY 4.0.
+
+See `CITATION.cff` for a machine-readable citation record.
+
+---
+
+Data provenance note
+
+All scenarios in this release are synthetic. They contain no real customer
+data, no real personal data, and no recordings of real people. Personas,
+account identifiers, and contact details are fabricated; e-mail addresses use
+the reserved `example.test` domain. Audio assets are synthesized via TTS.
+Per-scenario source, license, consent, and contamination metadata is recorded
+in `data/openvoicecs/provenance_v0.1.json`.
+
+Real customer data is out of scope for this benchmark unless it is newly
+collected, consented, licensed, anonymized, and contamination-reviewed. See
+`GOVERNANCE.md`.

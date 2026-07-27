@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+title: "OpenVoiceCS-Bench: An Open Benchmark for Voice AI Customer-Service Agents"
+message: >-
+  If you use OpenVoiceCS-Bench in your research, please cite it using the
+  metadata below. Please cite the specific release version together with the
+  release-bundle SHA-256 you evaluated against, so results remain traceable to
+  a fixed set of artifacts.
+type: software
+authors:
+  - family-names: Saygili
+    given-names: Sezgin
+repository-code: "https://github.com/0daycloud/openvoicecs-bench"
+abstract: >-
+  OpenVoiceCS-Bench evaluates voice AI customer-service agents on whether they
+  resolve customer tasks, follow standard operating procedures, use tools
+  correctly, protect privacy, preserve authentication boundaries, and refuse
+  forbidden actions. Agents emit a replayable trace of messages, tool calls,
+  and policy events, which is scored deterministically against a per-scenario
+  oracle; subjective conversational quality is scored separately through a
+  blinded, multi-rater, adjudicated judging protocol. The v0.1 release contains
+  204 synthetic scenarios across six customer-service domains and five tracks
+  spanning text, audio, robustness, and adversarial compliance, with
+  hash-pinned scenario, split, provenance, judging, and release manifests. v0.1
+  is a research preview; see docs/known-limitations.md for measurement
+  limitations that currently prevent its scores from being used as a model
+  ranking.
+keywords:
+  - benchmark
+  - voice agents
+  - customer service
+  - conversational ai
+  - tool use
+  - agent evaluation
+  - llm evaluation
+  - ai safety
+license: Apache-2.0
+license-url: "https://github.com/0daycloud/openvoicecs-bench/blob/main/LICENSE"
+version: 0.1.0
+date-released: "2026-06-15"
