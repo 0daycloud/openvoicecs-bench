@@ -1,0 +1,68 @@
+name: Benchmark validity issue
+description: The benchmark measures something other than what it claims to measure
+labels: ["validity"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use this for scoring that is wrong in principle rather than broken in
+        code: a metric that cannot fail, a scenario no agent can pass, a check
+        that penalizes the wrong thing, or a number that does not mean what the
+        docs say it means. These are the highest-priority issues in the project.
+
+
+        Please check
+        [docs/known-limitations.md](https://github.com/0daycloud/openvoicecs-bench/blob/main/docs/known-limitations.md)
+        first — several are already documented with reproductions.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Event derivation (required or forbidden events)
+        - Scoring or metric definition
+        - Trial pass/fail gating
+        - Scenario oracle or expected state
+        - Tool replay and argument matching
+        - Split, provenance, or contamination control
+        - Judging protocol
+        - Latency, cost, or operational metrics
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: What the benchmark claims to measure
+      description: Quote the metric, docs line, or scenario field.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What it actually measures
+      description: Explain the gap and why the current result is misleading.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction
+      description: >-
+        A command, script, or scenario ID that demonstrates the gap. Numbers
+        from a run are far more useful than reasoning alone.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: scenarios
+    attributes:
+      label: Affected scenario IDs
+      description: Comma-separated, or "all", or "unknown".
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed fix
+      description: >-
+        Optional. Note whether it changes scores — scoring-affecting changes
+        need a new release version or a recorded erratum per GOVERNANCE.md.

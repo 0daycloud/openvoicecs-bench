@@ -4,9 +4,36 @@ Contributions should improve benchmark validity, reproducibility, coverage, or
 release integrity. Avoid changes that only make a model look better without
 improving the benchmark contract.
 
+**Start here:** [`docs/known-limitations.md`](docs/known-limitations.md) lists
+the measurement bugs that currently block v0.1 from producing a valid model
+ranking, each with a reproduction command. Items 1-4 in its priority list are
+the highest-value contributions available and are well-scoped.
+
+## Setup
+
+Requires Python 3.10+.
+
+```bash
+python -m pip install -e ".[dev]"     # add ",providers" for direct provider SDKs
+```
+
+No API key is needed to develop, validate, or test. Keys are only required to
+score a hosted model; see `.env.example`.
+
 ## Local Checks
 
-Run these before opening a pull request:
+Run the full gate before opening a pull request:
+
+```bash
+make check
+```
+
+That expands to scenario validation, review-manifest validation, submission
+intake validation, the strict release gate, release-bundle verification, and
+the unit tests — the same set CI runs.
+
+If your change touches judging, sealed-test policy, external systems, or
+claims, also run the validators for the artifacts you touched:
 
 ```bash
 python scripts/run_openvoicecs.py validate-judge-protocol --protocol data/openvoicecs/judging/judge_protocol_v0.1.json
@@ -16,18 +43,14 @@ python scripts/run_openvoicecs.py validate-sealed-ops --sealed-ops data/openvoic
 python scripts/run_openvoicecs.py validate-sealed-queue --queue data/openvoicecs/sealed_evaluator_queue_v0.1.json --sealed-ops data/openvoicecs/sealed_ops_v0.1.json --split-commitments data/openvoicecs/split_commitments_v0.1.json
 python scripts/run_openvoicecs.py validate-external-systems --registry data/openvoicecs/external_systems_v0.1.json
 python scripts/run_openvoicecs.py validate-claims --claims data/openvoicecs/claims/leaderboard_claims_v0.1.json
-python scripts/run_openvoicecs.py validate-submission-intake --intake data/openvoicecs/submissions/reference_submission_intake_v0.1.json
-make openvoicecs-verify-release
-make openvoicecs-validate-release-bundle
-pytest tests/unit/ -q
 ```
 
-If you edit Python code, also run:
+If you edit Python code, lint the files you touched. CI does not gate on lint,
+and the tree carries pre-existing `E501` debt, so a repo-wide `make lint` will
+report unrelated findings:
 
 ```bash
-python3 -m py_compile \
-  src/evaluation/benchmark/*.py \
-  scripts/run_openvoicecs.py
+python -m ruff check $(git diff --name-only main...HEAD -- '*.py')
 ```
 
 ## Scenario Changes
@@ -83,13 +106,13 @@ python scripts/run_openvoicecs.py verify-release --require-audio-assets --strict
 If scenario, audio, scoring, or release metadata changes, regenerate and commit:
 
 ```bash
-make openvoicecs-baselines
-make openvoicecs-validate-reviews
-make openvoicecs-audit
-make openvoicecs-datasheet
-make openvoicecs-validate-submission-intake
-make openvoicecs-verify-release
-make openvoicecs-validate-release-bundle
+make baselines
+make validate-reviews
+make audit
+make datasheet
+make validate-submission-intake
+make verify-release
+make validate-release-bundle
 ```
 
 Baseline reports must be deterministic enough that repeated generation does not

@@ -171,8 +171,6 @@ Validate the seed suite:
 
 ```bash
 python scripts/run_openvoicecs.py validate
-# or
-make openvoicecs-validate
 ```
 
 This validates both the scenario suite and the audio manifest by default.
@@ -221,8 +219,6 @@ python scripts/run_openvoicecs.py audit \
   --baseline-manifest data/openvoicecs/baselines/reference_baselines_v0.1.json \
   --review-manifest data/openvoicecs/scenario_reviews_v0.1.json \
   --output data/openvoicecs/release_audit.json
-# or
-make openvoicecs-audit
 ```
 
 The audit includes scenario/audio/pricing/baseline/review file SHA-256 hashes,
@@ -247,8 +243,6 @@ python scripts/run_openvoicecs.py datasheet \
 
 python scripts/run_openvoicecs.py validate-datasheet \
   data/openvoicecs/datasheet_v0.1.json
-# or
-make openvoicecs-datasheet
 ```
 
 The datasheet is a machine-readable release card for benchmark governance. It
@@ -267,8 +261,6 @@ python scripts/run_openvoicecs.py verify-release \
   --run-manifest data/openvoicecs/releases/frontier_seed/run_manifest.json \
   --plot-dir data/openvoicecs/releases/frontier_seed/plots \
   --strict
-# or
-make openvoicecs-verify-release
 ```
 
 `verify-release` composes the scenario, audio manifest, pricing, split,
@@ -297,8 +289,6 @@ python scripts/run_openvoicecs.py readiness \
   --frontier-report data/openvoicecs/frontier/frontier_2026-06-11.json \
   --run-manifest data/openvoicecs/run_manifest.json \
   --plot-dir data/openvoicecs/frontier
-# or
-make openvoicecs-readiness
 ```
 
 Readiness profiles are stricter than basic validation. `seed` checks that the
@@ -327,24 +317,18 @@ Run the oracle baseline:
 
 ```bash
 python scripts/run_openvoicecs.py score --agent oracle --trials 3
-# or
-make openvoicecs-oracle
 ```
 
 Run the no-op baseline:
 
 ```bash
 python scripts/run_openvoicecs.py score --agent noop --trials 1
-# or
-make openvoicecs-noop
 ```
 
 Run oracle over audio manifest variants:
 
 ```bash
 python scripts/run_openvoicecs.py score-audio --agent oracle --track robustness --trials 3
-# or
-make openvoicecs-audio-oracle
 ```
 
 Build and validate the reproducible reference baseline package:
@@ -357,9 +341,6 @@ python scripts/run_openvoicecs.py baselines \
 
 python scripts/run_openvoicecs.py validate-baselines \
   data/openvoicecs/baselines/reference_baselines_v0.1.json
-# or
-make openvoicecs-baselines
-make openvoicecs-validate-baselines
 ```
 
 The package writes oracle and no-op reports for text scenarios and audio
@@ -426,8 +407,6 @@ Register external-system evidence:
 ```bash
 python scripts/run_openvoicecs.py validate-external-systems \
   --registry data/openvoicecs/external_systems_v0.1.json
-# or
-make openvoicecs-validate-external-systems
 ```
 
 The external-system registry is a versioned release artifact that records
@@ -452,8 +431,6 @@ Validate saved reports before leaderboard or frontier ingestion:
 
 ```bash
 python scripts/run_openvoicecs.py validate-report data/openvoicecs/reports/oracle.json
-# or
-make openvoicecs-validate-reports
 ```
 
 The report validator checks required top-level fields, score ranges, metric
@@ -469,8 +446,6 @@ Validate public/sealed split assignments:
 ```bash
 python scripts/run_openvoicecs.py validate-splits \
   --splits data/openvoicecs/splits_v0.1.json
-# or
-make openvoicecs-validate-splits
 ```
 
 The v0.1 suite has both `public_dev` and `sealed_test` assignments. Public IDs
@@ -502,8 +477,6 @@ python scripts/run_openvoicecs.py validate-sealed-ops \
   --sealed-ops data/openvoicecs/sealed_ops_v0.1.json \
   --splits data/openvoicecs/splits_v0.1.json \
   --split-commitments data/openvoicecs/split_commitments_v0.1.json
-# or
-make openvoicecs-validate-sealed-ops
 ```
 
 The sealed-ops manifest defines custody, permitted roles, conflict
@@ -519,8 +492,6 @@ python scripts/run_openvoicecs.py validate-sealed-queue \
   --queue data/openvoicecs/sealed_evaluator_queue_v0.1.json \
   --sealed-ops data/openvoicecs/sealed_ops_v0.1.json \
   --split-commitments data/openvoicecs/split_commitments_v0.1.json
-# or
-make openvoicecs-validate-sealed-queue
 ```
 
 The queue manifest is the operational ledger for submissions that pass through
@@ -536,8 +507,6 @@ Validate provenance, consent, license, and contamination metadata:
 ```bash
 python scripts/run_openvoicecs.py validate-provenance \
   --provenance data/openvoicecs/provenance_v0.1.json
-# or
-make openvoicecs-validate-provenance
 ```
 
 The provenance manifest covers every scenario and audio variant. It records
@@ -572,8 +541,6 @@ Validate the subjective-quality judge rubric:
 ```bash
 python scripts/run_openvoicecs.py validate-judge-rubric \
   --rubric data/openvoicecs/judge_rubric_v0.1.json
-# or
-make openvoicecs-validate-judge-rubric
 ```
 
 Validate the judging protocol:
@@ -581,8 +548,6 @@ Validate the judging protocol:
 ```bash
 python scripts/run_openvoicecs.py validate-judge-protocol \
   --protocol data/openvoicecs/judging/judge_protocol_v0.1.json
-# or
-make openvoicecs-validate-judge-protocol
 ```
 
 The judge protocol is a machine-readable release artifact. It pins the rubric
@@ -600,8 +565,6 @@ Validate the judge study:
 ```bash
 python scripts/run_openvoicecs.py validate-judge-study \
   --study data/openvoicecs/judging/judge_study_v0.1.json
-# or
-make openvoicecs-validate-judge-study
 ```
 
 The judge study is the study-level governance artifact for official subjective
@@ -617,8 +580,6 @@ Validate the judge annotation package:
 ```bash
 python scripts/run_openvoicecs.py validate-judge-annotation-package \
   --package data/openvoicecs/judging/judge_annotation_package_v0.1.json
-# or
-make openvoicecs-validate-judge-annotation-package
 ```
 
 The annotation package is the evidence envelope for judged releases. It
@@ -724,8 +685,6 @@ Validate leaderboard claims:
 ```bash
 python scripts/run_openvoicecs.py validate-claims \
   --claims data/openvoicecs/claims/leaderboard_claims_v0.1.json
-# or
-make openvoicecs-validate-claims
 ```
 
 The claim package is the governance layer for public statements. It pins
@@ -742,8 +701,6 @@ Validate the official-submission intake envelope:
 ```bash
 python scripts/run_openvoicecs.py validate-submission-intake \
   --intake data/openvoicecs/submissions/reference_submission_intake_v0.1.json
-# or
-make openvoicecs-validate-submission-intake
 ```
 
 The intake envelope is the handoff format for leaderboard submissions. It binds
@@ -1233,8 +1190,6 @@ Validate it against the scenario suite and audio manifest:
 ```bash
 python scripts/run_openvoicecs.py validate-changelog \
   --changelog data/openvoicecs/changelog_v0.1.json
-# or
-make openvoicecs-validate-changelog
 ```
 
 Changelog entries record the release/change ID, change type, date, summary,

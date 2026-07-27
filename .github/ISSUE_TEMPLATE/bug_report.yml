@@ -1,0 +1,74 @@
+name: Bug report
+description: Something in the harness, CLI, or validators is broken
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        For scoring that is wrong *in principle* rather than broken in code,
+        use the "Benchmark validity issue" template instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Command and output
+      description: >-
+        The exact command and the error. Redact API keys — if a key appeared in
+        any output, stop and report it privately via SECURITY.md instead.
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Component
+      options:
+        - CLI (scripts/run_openvoicecs.py)
+        - Provider adapter / JSON action loop
+        - Scoring and oracle replay
+        - Judging (model-judge, judge-report)
+        - Release validators (verify-release, validate-*)
+        - Realtime / audio path
+        - Sweep driver (run_openrouter_top50_text_action_batch.py)
+        - Tests or CI
+        - Documentation
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.11.9"
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit or version
+      placeholder: "git rev-parse --short HEAD"
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Provider and model
+      description: If the bug involves scoring a hosted model.
+      placeholder: "openrouter / openai/gpt-4o-mini"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before filing
+      options:
+        - label: "`make check` was run and I noted whether it passes"
+        - label: I checked docs/known-limitations.md

@@ -1,0 +1,13 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/0daycloud/openvoicecs-bench/security/advisories/new
+    about: >-
+      Report privately. Do not open a public issue for credential leakage,
+      sealed-split disclosure, integrity bypass, or code execution from
+      untrusted input. See SECURITY.md for the threat model.
+  - name: Known limitations
+    url: https://github.com/0daycloud/openvoicecs-bench/blob/main/docs/known-limitations.md
+    about: >-
+      Low scores, uniform pass rates, and adapter errors in v0.1 are already
+      documented and root-caused here. Please check before filing.

@@ -1,0 +1,85 @@
+name: Scenario proposal
+description: Propose a new customer-service scenario or coverage area
+labels: ["scenario"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        The scenario corpus is the most reusable part of this project.
+        Proposals are welcome before you write anything — a good scenario
+        description is more valuable than a rushed JSON file.
+
+
+        Read the scenario rules in
+        [CONTRIBUTING.md](https://github.com/0daycloud/openvoicecs-bench/blob/main/CONTRIBUTING.md)
+        and the review criteria in
+        [GOVERNANCE.md](https://github.com/0daycloud/openvoicecs-bench/blob/main/GOVERNANCE.md)
+        first. Run `python scripts/run_openvoicecs.py coverage-plan --profile public_beta`
+        to see where the corpus is actually short.
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      options:
+        - retail
+        - travel
+        - telecom
+        - healthcare_admin
+        - fintech_sandbox
+        - saas_support
+        - utility_support
+        - new domain (describe below)
+    validations:
+      required: true
+  - type: dropdown
+    id: track
+    attributes:
+      label: Track
+      options:
+        - text_to_action
+        - adversarial_compliance
+        - audio_to_action
+        - robustness
+        - end_to_end_voice
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Customer goal and SOP
+      description: What the customer wants, and the procedure the agent must follow.
+    validations:
+      required: true
+  - type: textarea
+    id: oracle
+    attributes:
+      label: What separates pass from fail
+      description: >-
+        Expected final state, required events, forbidden events, and any
+        privacy, authentication, or grounding probe. Be specific — a scenario
+        without a deterministic oracle cannot be scored.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this is worth adding
+      description: >-
+        What failure mode does it catch that existing scenarios miss? Cite the
+        coverage-plan gap it fills if there is one.
+    validations:
+      required: true
+  - type: checkboxes
+    id: provenance
+    attributes:
+      label: Provenance
+      options:
+        - label: >-
+            This scenario is fully synthetic. It contains no real customer
+            data, no real personal data, and no content traceable to a real
+            person or organization.
+          required: true
+        - label: >-
+            I understand it needs split assignment, provenance, changelog, and
+            scenario-review entries before it can be merged.
+          required: true
