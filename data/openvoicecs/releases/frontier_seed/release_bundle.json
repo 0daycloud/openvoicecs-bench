@@ -5,8 +5,8 @@
   "output_dir": "data/openvoicecs/releases/frontier_seed",
   "inputs": {
     "reports": [
-      "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
-      "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_text_realtime_judged.json"
+      "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
+      "data/openvoicecs/reports/oracle_text_realtime_judged.json"
     ],
     "scenario_path": "data/openvoicecs/scenarios_v0.1.json",
     "audio_manifest_path": "data/openvoicecs/audio_manifest_v0.1.json",
@@ -23,13 +23,13 @@
         "path": "inputs/reports/001_oracle_audio_manifest_realtime_judged.json",
         "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
         "bytes": 8955639,
-        "source_path": "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json"
+        "source_path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json"
       },
       {
         "path": "inputs/reports/002_oracle_text_realtime_judged.json",
         "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
         "bytes": 7494153,
-        "source_path": "/Users/cloud/dev/pd_gpu_experimental/data/openvoicecs/reports/oracle_text_realtime_judged.json"
+        "source_path": "data/openvoicecs/reports/oracle_text_realtime_judged.json"
       }
     ],
     "scenario": {

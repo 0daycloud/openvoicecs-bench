@@ -25,12 +25,12 @@
     },
     "release_bundle": {
       "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-      "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
-      "bytes": 10793
+      "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
+      "bytes": 10645
     },
     "external_systems_registry": {
       "path": "data/openvoicecs/external_systems_v0.1.json",
-      "sha256": "0c8fb9052f8522b0b178109021d2e4b77d977ea991b597b809ee016fbab90570",
+      "sha256": "1c5660eb0282d794c37c6e86650c002b4ebe3968a425af87dd2467f36c382afa",
       "bytes": 4315
     },
     "judge_annotation_package": {
@@ -40,7 +40,7 @@
     },
     "leaderboard_claims": {
       "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-      "sha256": "10cbc4fcc5fbb85d37cdcf291d2724c5023349c0c44d4672e5fc1b2f10e9c318",
+      "sha256": "7f18c1f06e90ebd838e1ab0b926976678d08f199c5b76ec1703fdf0a60785bc8",
       "bytes": 2730
     }
   },

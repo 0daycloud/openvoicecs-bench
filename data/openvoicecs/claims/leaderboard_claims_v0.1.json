@@ -46,7 +46,7 @@
       },
       "external_systems_registry": {
         "path": "data/openvoicecs/external_systems_v0.1.json",
-        "sha256": "0c8fb9052f8522b0b178109021d2e4b77d977ea991b597b809ee016fbab90570",
+        "sha256": "1c5660eb0282d794c37c6e86650c002b4ebe3968a425af87dd2467f36c382afa",
         "bytes": 4315
       },
       "judging_evidence": {

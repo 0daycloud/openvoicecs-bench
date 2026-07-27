@@ -34,7 +34,7 @@
       "submitted_at": "2026-06-11",
       "intake": {
         "path": "data/openvoicecs/submissions/reference_submission_intake_v0.1.json",
-        "sha256": "ded4838fabab44fd1ac34315ad260a4882bf63955c5146a7caec0b877c2552b1",
+        "sha256": "4c65ab09e34d583e337983b78a1586eb79687c1e3b01edc967663ce88a40d375",
         "bytes": 2478
       },
       "attempt_limit": 2,
@@ -70,8 +70,8 @@
             },
             "release_bundle": {
               "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-              "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
-              "bytes": 10793
+              "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
+              "bytes": 10645
             },
             "judge_annotation_package": {
               "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
@@ -80,7 +80,7 @@
             },
             "leaderboard_claims": {
               "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-              "sha256": "10cbc4fcc5fbb85d37cdcf291d2724c5023349c0c44d4672e5fc1b2f10e9c318",
+              "sha256": "7f18c1f06e90ebd838e1ab0b926976678d08f199c5b76ec1703fdf0a60785bc8",
               "bytes": 2730
             }
           }

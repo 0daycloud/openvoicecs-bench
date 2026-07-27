@@ -1,7 +1,7 @@
 {
   "benchmark": "OpenVoiceCS-Bench",
   "version": "0.1.0",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-07-27",
   "release_stage": "seed",
   "files": {
     "scenario_suite": {
@@ -71,7 +71,7 @@
     },
     "sealed_queue": {
       "path": "data/openvoicecs/sealed_evaluator_queue_v0.1.json",
-      "sha256": "2e2b69d4a797476bd18b13d4731cce6c5c0b95dc003fc12e816c99e087dfd21f",
+      "sha256": "183c497309516070f79ce52828fc182e4af24c5a7d5a50ad8a127d5691864b3c",
       "bytes": 3996
     },
     "external_endpoint_contract": {
@@ -81,17 +81,17 @@
     },
     "external_systems": {
       "path": "data/openvoicecs/external_systems_v0.1.json",
-      "sha256": "0c8fb9052f8522b0b178109021d2e4b77d977ea991b597b809ee016fbab90570",
+      "sha256": "1c5660eb0282d794c37c6e86650c002b4ebe3968a425af87dd2467f36c382afa",
       "bytes": 4315
     },
     "leaderboard_claims": {
       "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-      "sha256": "10cbc4fcc5fbb85d37cdcf291d2724c5023349c0c44d4672e5fc1b2f10e9c318",
+      "sha256": "7f18c1f06e90ebd838e1ab0b926976678d08f199c5b76ec1703fdf0a60785bc8",
       "bytes": 2730
     },
     "submission_intake": {
       "path": "data/openvoicecs/submissions/reference_submission_intake_v0.1.json",
-      "sha256": "ded4838fabab44fd1ac34315ad260a4882bf63955c5146a7caec0b877c2552b1",
+      "sha256": "4c65ab09e34d583e337983b78a1586eb79687c1e3b01edc967663ce88a40d375",
       "bytes": 2478
     }
   },

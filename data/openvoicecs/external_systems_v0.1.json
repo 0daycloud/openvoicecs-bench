@@ -46,8 +46,8 @@
       },
       "release_bundle": {
         "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-        "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
-        "bytes": 10793
+        "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
+        "bytes": 10645
       },
       "judge_evidence": {
         "annotation_mode": "reference_fixture",
@@ -85,8 +85,8 @@
       },
       "release_bundle": {
         "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-        "sha256": "ea06907257698fea7a3ccd8a077cf02cdb3ffff2a83ebf3353af79a3e5283f12",
-        "bytes": 10793
+        "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
+        "bytes": 10645
       },
       "judge_evidence": {
         "annotation_mode": "reference_fixture",
