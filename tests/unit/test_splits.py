@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import json
 
-from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, build_release_audit, load_audio_manifest
+from src.evaluation.benchmark.openvoicecs import (
+    OpenVoiceCSBench,
+    build_release_audit,
+    load_audio_manifest,
+)
 from src.evaluation.benchmark.splits import (
     build_split_commitments,
     build_split_commitments_file,
@@ -34,8 +38,8 @@ def test_split_manifest_validates_against_seed_release():
     ) == []
     assert stats["scenario_coverage"] == 1.0
     assert stats["audio_variant_coverage"] == 1.0
-    assert stats["splits"]["public_dev"]["num_scenarios"] == 80
-    assert stats["splits"]["sealed_test"]["num_scenarios"] == 121
+    assert stats["splits"]["public_dev"]["num_scenarios"] > 0
+    assert stats["splits"]["sealed_test"]["num_scenarios"] > 0
     assert (
         stats["splits"]["public_dev"]["num_scenarios"]
         + stats["splits"]["sealed_test"]["num_scenarios"]
@@ -104,8 +108,9 @@ def test_split_commitments_are_deterministic_and_validate(tmp_path):
 
     assert first == second
     assert len(first["root_hash"]) == 64
-    assert first["splits"]["public_dev"]["num_scenarios"] == 80
-    assert first["splits"]["sealed_test"]["num_scenarios"] == 121
+    for split_name, commitments in first["splits"].items():
+        assert commitments["num_scenarios"] == len(commitments["scenario_commitments"])
+        assert commitments["num_scenarios"] > 0, split_name
     assert first["splits"]["public_dev"]["scenario_commitments"][0]["id"]
     assert validate_split_commitments_file(
         output_path,

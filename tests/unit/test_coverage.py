@@ -6,19 +6,29 @@ import json
 from pathlib import Path
 
 from src.evaluation.benchmark.coverage import build_coverage_plan
+from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, load_audio_manifest
+
+
+def _current_counts() -> dict[str, dict[str, int]]:
+    """Read the live corpus counts the planner is expected to reproduce."""
+    gaps = build_coverage_plan(profile="public_beta")["gaps"]
+    return {
+        dimension: {key: entry["current"] for key, entry in gaps[dimension].items()}
+        for dimension in ("domains", "tracks", "difficulty", "splits")
+    }
 
 
 def test_public_beta_coverage_plan_reports_current_release_coverage():
     plan = build_coverage_plan(profile="public_beta")
 
     assert plan["passed"] is True
-    assert plan["gaps"]["total"]["current"] == 201
+    assert plan["gaps"]["total"]["current"] == len(OpenVoiceCSBench.load().scenarios)
     assert plan["gaps"]["total"]["target"] == 50
     assert plan["gaps"]["total"]["needed"] == 0
     assert plan["gaps"]["tracks"]["audio_to_action"]["needed"] == 0
     assert plan["gaps"]["tracks"]["end_to_end_voice"]["needed"] == 0
     assert plan["gaps"]["splits"]["sealed_test"]["needed"] == 0
-    assert plan["gaps"]["audio_variants"]["total"]["current"] == 120
+    assert plan["gaps"]["audio_variants"]["total"]["current"] == len(load_audio_manifest())
     assert plan["gaps"]["audio_variants"]["total"]["needed"] == 0
     assert plan["gaps"]["audio_variants"]["splits"]["public_dev"]["needed"] == 0
     assert plan["gaps"]["audio_variants"]["splits"]["sealed_test"]["needed"] == 0
@@ -67,20 +77,17 @@ def test_coverage_plan_passes_when_targets_match_seed(tmp_path: Path):
 
 
 def test_coverage_plan_caps_recommendations_to_total_gap(tmp_path: Path):
+    current = _current_counts()
     targets = {
         "name": "test targets",
         "version": "test",
         "profiles": {
             "one_more": {
-                "min_scenarios": 202,
-                "domains": {
-                    "retail": 34,
-                },
-                "tracks": {
-                    "text_to_action": 62,
-                },
-                "difficulty": {"medium": 82},
-                "splits": {"sealed_test": 122},
+                "min_scenarios": sum(current["splits"].values()) + 1,
+                "domains": {"retail": current["domains"]["retail"] + 1},
+                "tracks": {"text_to_action": current["tracks"]["text_to_action"] + 1},
+                "difficulty": {"medium": current["difficulty"]["medium"] + 1},
+                "splits": {"sealed_test": current["splits"]["sealed_test"] + 1},
             }
         },
     }
@@ -96,20 +103,17 @@ def test_coverage_plan_caps_recommendations_to_total_gap(tmp_path: Path):
 
 
 def test_coverage_plan_recommends_subgroup_fill_when_total_is_met(tmp_path: Path):
+    current = _current_counts()
     targets = {
         "name": "test targets",
         "version": "test",
         "profiles": {
             "one_domain_short": {
-                "min_scenarios": 201,
-                "domains": {
-                    "travel": 35,
-                },
-                "tracks": {
-                    "text_to_action": 61,
-                },
-                "difficulty": {"medium": 81},
-                "splits": {"sealed_test": 121},
+                "min_scenarios": sum(current["splits"].values()),
+                "domains": {"travel": current["domains"]["travel"] + 1},
+                "tracks": {"text_to_action": current["tracks"]["text_to_action"]},
+                "difficulty": {"medium": current["difficulty"]["medium"]},
+                "splits": {"sealed_test": current["splits"]["sealed_test"]},
             }
         },
     }

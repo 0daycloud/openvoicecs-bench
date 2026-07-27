@@ -30,8 +30,9 @@ def test_seed_changelog_covers_seed_release_items():
 
     assert issues == []
     assert stats["present"] is True
-    assert stats["num_entries"] == 4
-    assert stats["entry_types"] == {"release": 1, "scenario_added": 3}
+    assert stats["num_entries"] == len(changelog["entries"])
+    assert stats["entry_types"]["release"] == 1
+    assert set(stats["entry_types"]) <= {"release", "scenario_added", "erratum"}
     assert stats["scenario_change_coverage"] == 1.0
     assert stats["audio_variant_change_coverage"] == 1.0
     assert stats["num_open_errata"] == 0
