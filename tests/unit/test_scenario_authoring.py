@@ -119,6 +119,13 @@ def test_scaffold_scenario_drafts_do_not_validate_as_release_ready(tmp_path: Pat
 
 
 def _extra_scenario_target_path(tmp_path: Path) -> Path:
+    """A synthetic profile whose targets sit above the current suite.
+
+    The margins (+6 total, +5 retail, +6 text_to_action, +9 medium, +9
+    sealed_test) are what make the planner emit more candidates than the
+    ``count`` the caller asks for, so the scaffold's truncation path is
+    actually exercised. They are re-pinned whenever the suite grows.
+    """
     target_path = tmp_path / "openvoicecs_extra_scenario_targets.json"
     target_path.write_text(
         json.dumps({
@@ -126,14 +133,14 @@ def _extra_scenario_target_path(tmp_path: Path) -> Path:
             "version": "test",
             "profiles": {
                 "extra_scenarios": {
-                    "min_scenarios": 210,
+                    "min_scenarios": 226,
                     "domains": {
-                        "retail": 40,
+                        "retail": 43,
                     },
                     "tracks": {
-                        "text_to_action": 70,
+                        "text_to_action": 75,
                     },
-                    "difficulty": {"medium": 90},
+                    "difficulty": {"medium": 95},
                     "splits": {"sealed_test": 130},
                 }
             },

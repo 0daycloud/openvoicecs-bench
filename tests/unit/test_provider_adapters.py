@@ -71,10 +71,19 @@ def test_openai_tool_schemas_are_generic_typed_without_constants():
     assert "state_updates" not in encoded
     assert "preconditions" not in encoded
     create_case_schema = next(item for item in schemas if item["function"]["name"] == "create_case")
-    assert create_case_schema["function"]["parameters"]["properties"] == {
-        "account_id": {"type": "string"}
+    create_case_params = create_case_schema["function"]["parameters"]
+    # System-assigned arguments stay visible so the agent can tell what the tool
+    # records, but are excluded from `required` so it is never asked to invent a
+    # value it has no way to know.
+    generated = {
+        name
+        for name, schema in create_case_params["properties"].items()
+        if "Assigned by the system" in (schema.get("description") or "")
     }
-    assert create_case_schema["function"]["parameters"]["required"] == ["account_id"]
+    assert generated, "generated arguments must still be advertised to the model"
+    assert create_case_params["required"] == ["account_id"]
+    assert generated.isdisjoint(create_case_params["required"])
+    assert set(create_case_params["properties"]) == {"account_id"} | generated
 
 
 def test_parse_provider_response_text_handles_markdown_json():

@@ -180,7 +180,7 @@ def test_judge_annotation_package_validates():
     assert validate_judge_annotation_package_file() == []
     stats = judge_annotation_package_stats(package)
     assert stats["num_packages"] == 2
-    assert stats["num_annotations"] == 5292
+    assert stats["num_annotations"] == 5520
     assert stats["official_judging"] is False
 
 

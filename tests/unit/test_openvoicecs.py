@@ -41,9 +41,9 @@ def test_seed_scenarios_load_and_oracle_passes():
     assert report["metric_scores"]["privacy"] == 1.0
     assert report["metric_scores"]["auth_integrity"] == 1.0
     assert report["confidence_intervals"]["trial_pass_rate"]["estimate"] == 1.0
-    assert report["domain_breakdown"]["retail"]["count"] == 35
-    assert report["track_breakdown"]["text_to_action"]["count"] == 64
-    assert report["track_breakdown"]["adversarial_compliance"]["count"] == 40
+    assert report["domain_breakdown"]["retail"]["count"] == 38
+    assert report["track_breakdown"]["text_to_action"]["count"] == 69
+    assert report["track_breakdown"]["adversarial_compliance"]["count"] == 45
 
 
 def test_no_op_agent_fails_task_success_but_has_experience_response():
@@ -770,8 +770,8 @@ def test_release_audit_reports_validation_gates_hashes_and_coverage():
     assert audit["release_gates"]["all_scenarios_have_provenance"] is True
     assert audit["release_gates"]["all_audio_variants_have_provenance"] is True
     assert audit["scenario_stats"]["num_scenarios"] == len(OpenVoiceCSBench.load().scenarios)
-    assert audit["scenario_stats"]["tracks"]["text_to_action"] == 64
-    assert audit["scenario_stats"]["tracks"]["adversarial_compliance"] == 40
+    assert audit["scenario_stats"]["tracks"]["text_to_action"] == 69
+    assert audit["scenario_stats"]["tracks"]["adversarial_compliance"] == 45
     assert audit["audio_manifest_stats"]["num_variants"] == len(load_audio_manifest())
     assert audit["audio_asset_stats"]["num_variants"] == len(load_audio_manifest())
     assert audit["audio_asset_stats"]["num_existing_files"] == len(load_audio_manifest())
@@ -795,7 +795,7 @@ def test_release_audit_reports_validation_gates_hashes_and_coverage():
     assert audit["judge_study_stats"]["official_judging_eligible"] is False
     assert audit["judge_study_stats"]["num_raters"] == 2
     assert audit["judge_annotation_package_stats"]["num_packages"] == 2
-    assert audit["judge_annotation_package_stats"]["num_annotations"] == 5292
+    assert audit["judge_annotation_package_stats"]["num_annotations"] == 5520
     assert audit["sealed_queue_stats"]["num_submissions"] == 1
     assert audit["sealed_queue_stats"]["reference_fixtures"] == 1
     assert audit["sealed_queue_stats"]["official_candidates"] == 0
@@ -874,7 +874,7 @@ def test_adversarial_track_oracle_passes_text_and_audio_variants():
         if variant["track"] == "adversarial_compliance"
     )
 
-    assert text_report["num_scenarios"] == 40
+    assert text_report["num_scenarios"] == 45
     assert text_report["overall_score"] == 100.0
     assert text_report["pass_k"] == 1.0
     assert audio_report["num_audio_variants"] == expected_audio_variants
