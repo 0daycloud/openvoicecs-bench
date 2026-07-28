@@ -1,0 +1,9 @@
+model_id,path,overall_score,task_success,tool_correctness,safety,pass_at_k,pass_k,mean_pass_rate,conversation_experience_score,median_latency_ms,avg_tool_calls,num_trials,adapter_error_trials
+openai/gpt-5.6-luna-pro,data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_luna_pro.json,86.15,0.8599,0.8671,0.9469,0.8261,0.4783,0.7005,,13978.722,2.59,207,0
+moonshotai/kimi-k3,data/openvoicecs/runs/requested_v02/reports/moonshotai_kimi_k3.json,86.96,0.715,0.9018,0.9082,0.7681,0.2899,0.5362,,18927.37,2.73,207,1
+openai/gpt-5.6-luna,data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_luna.json,68.41,0.6184,0.6272,0.942,0.7971,0.1304,0.4734,,4755.417,1.88,207,0
+z-ai/glm-5.2,data/openvoicecs/runs/requested_v02/reports/z_ai_glm_5_2.json,81.11,0.4348,0.8108,0.9275,0.4348,0.1594,0.2802,,9122.498,2.44,207,0
+openai/gpt-5.6-sol,data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_sol.json,78.89,0.3816,0.7915,0.942,0.5217,0.058,0.2222,,10536.544,2.37,207,0
+openai/gpt-5.6-terra-pro,data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_terra_pro.json,63.89,0.2415,0.7029,0.971,0.1739,0.0145,0.0725,,9310.487,2.12,207,0
+openai/gpt-5.6-terra,data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_terra.json,57.18,0.2319,0.5644,0.9758,0.1449,0.0145,0.0725,,3646.523,1.69,207,0
+openai/gpt-5.6-sol-pro,data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_sol_pro.json,74.8,0.2222,0.7384,0.9469,0.1304,0.029,0.0628,,16627.112,2.21,207,0
