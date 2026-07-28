@@ -12,16 +12,22 @@ without breaking policy** — and makes you prove it with a replayable trace.
 
 > ### Read this before you cite anything
 >
-> v0.1 is a **research preview**. The scenario suite and the release-integrity
-> tooling are solid. The measurement path between a model and a score is not:
-> in the published 50-model sweep, **78% of trials ended in a harness adapter
-> error**, and **every forbidden-event safety check in the corpus currently
-> passes vacuously**.
+> v0.2 fixed the four defects that made the v0.1 sweep meaningless — they are
+> regression-tested, and the v0.1 numbers still in this repository are
+> **withdrawn** (91% of that sweep's "adapter errors" were an OpenRouter balance
+> hitting zero, recorded as model scores of 0.0).
 >
-> The numbers in this repository are published as evidence of those bugs, not
-> as a leaderboard. **[docs/known-limitations.md](docs/known-limitations.md)**
-> documents each one with the command that reproduces it. Fixing them is the
-> project's entire near-term roadmap, and it is where contributions help most.
+> The v0.2 leaderboard covers **46 models on the `text_to_action` track** and
+> spans 25.4 to 89.1, with `task_success` from 0.01 to 0.75 — it separates
+> systems. Two honest caveats. The **podium is stable but the mid-table is
+> noisy**: `factual_grounding` is still a literal phrase matcher, and dropping it
+> reshuffles 36 of 44 scored models while leaving the top three unchanged. And
+> there is **one sweep of three trials with no confidence intervals**, so a
+> two-point gap is not a result.
+>
+> Read [docs/leaderboard.md](docs/leaderboard.md) with
+> **[docs/known-limitations.md](docs/known-limitations.md)** beside it; every
+> limitation there is measured and carries a reproduction command.
 
 ---
 
@@ -57,14 +63,23 @@ quality.
 | Track | Count | What it exercises |
 | --- | --- | --- |
 | `text_to_action` | 64 | Core resolution and tool use from a text transcript |
-| `robustness` | 45 | Disfluencies, corrections, interruptions, repair |
+| `robustness` | 45 | Disfluencies and self-corrections within an utterance |
 | `adversarial_compliance` | 40 | Social engineering, impersonation, prompt injection, PHI extraction |
 | `audio_to_action` | 35 | Direct audio input to correct action |
-| `end_to_end_voice` | 20 | Full duplex voice interaction |
+| `end_to_end_voice` | 20 | Voice-transport delivery of a single exchange |
+
+**Most of the corpus is single-turn.** The customer speaks once and the agent
+replies once, so `robustness` currently tests *intra-utterance* repair ("14
+Pine, sorry, 40 Pine Street") rather than turn-to-turn repair, and
+`end_to_end_voice` exercises the transport rather than full duplex. The harness
+now supports genuine multi-turn conversations and a pilot set of multi-turn
+scenarios exists; extending the rest of the corpus is
+[open work](docs/known-limitations.md).
 
 Six domains carry the load — retail (35), travel (35), fintech sandbox (34),
-telecom (33), healthcare admin (33), SaaS support (33) — spanning 40 easy,
-81 medium, and 83 hard, with 120 audio variants.
+telecom (33), healthcare admin (33), SaaS support (33), plus a single
+utility-support scenario — spanning 40 easy, 81 medium, and 83 hard, with 120
+audio variants.
 
 The corpus splits into **public-dev** (development, debugging, reproduction)
 and **sealed-test** (never published, for contamination-controlled evaluation).
@@ -212,35 +227,45 @@ Internally it gets used to:
 
 ## Roadmap
 
-The order is deliberate: **fix validity, then open a leaderboard.** Publishing
-rankings from an instrument known to be broken would be worse than publishing
-nothing.
+The order was deliberate: **fix validity, then open a leaderboard.** That is now
+done for one track.
 
-**Now — make the measurement trustworthy** ([details](docs/known-limitations.md))
+**Done in v0.2 — the measurement is trustworthy enough to rank**
+([details](docs/known-limitations.md))
 
-1. Make forbidden events derivable, or replace pattern matching with a semantic
-   grader. Until safety checks can fail, nothing else matters.
-2. Complete required-event derivation so all 204 scenarios are passable.
-3. Separate infrastructure errors from model errors, with explicit
-   trial-exclusion and retry policy.
-4. Mark ungrounded identifiers as `generated_arguments`.
-5. Replace binary all-or-nothing trial gating with a continuous aggregate.
-6. Re-run the sweep, and only then publish anything shaped like a ranking.
+1. Forbidden events bind to observable triggers; a violating agent trips a
+   safety check in 204/204 scenarios, where v0.1 managed 0. CI fails if that
+   regresses.
+2. 582 tool arguments the agent cannot know are declared `generated_arguments`
+   instead of being exact-matched and cascading into false safety violations.
+3. Infrastructure failures are classified, excluded from means, and reported as
+   `measurement_coverage` rather than averaged in as zeros.
+4. `safety` measures policy violations instead of replay fidelity.
+
+**Now — make the ranking cover more than one track**
+
+1. Replace phrase-matched `factual_grounding` with a semantic grader. It is the
+   last metric that distorts the order.
+2. Document argument vocabularies as enums so classification accuracy becomes
+   measurable again.
+3. Replace binary all-or-nothing trial gating with a continuous aggregate.
+4. Sweep the remaining four tracks.
 
 **Next — `public_beta`.** Wider domain and audio coverage, consented speaker
 diversity, externally produced baselines, measured judge-to-human agreement.
 
 **Later — `leaderboard_v1`.** Hosted sealed evaluator, external submission
 intake, frozen run manifests, paired statistical comparison with confidence
-intervals. The manifests and validators for this already exist and are tested;
-they are waiting on a trustworthy instrument, not on code.
+intervals. The manifests and validators for this already exist and are tested.
 
 ## Contributing
 
-The most valuable contributions right now are items 1–4 above — they are
-well-scoped, they have reproduction commands, and they unblock everything else.
-Scenario contributions are welcome too; the corpus is the most reusable part of
-this project.
+The single most valuable contribution is a **semantic grader to replace
+phrase-matched `factual_grounding`** — it is the last metric that distorts the
+leaderboard order, and the failure modes are documented with examples in
+[known-limitations](docs/known-limitations.md). Sweeping the four untested
+tracks is the next most useful. Scenario contributions are welcome too; the
+corpus is the most reusable part of this project.
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) — local checks, scenario authoring rules,
   release-file requirements, PR checklist.

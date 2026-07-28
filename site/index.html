@@ -6,6 +6,7 @@
     <title>OpenVoiceCS-Bench - Voice Customer-Service Agent Benchmark</title>
     <meta name="description" content="OpenVoiceCS-Bench is an open benchmark for voice AI customer-service agents, measuring task resolution, SOP compliance, privacy, authentication, tool use, latency, and cost.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <script src="site.js" defer></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -399,6 +400,41 @@
         .site-footer a { color: rgba(255,255,255,0.68); text-decoration: underline; text-underline-offset: 3px; }
         .site-footer a:hover { color: #fff; }
 
+        .data-status {
+            padding: 12px 48px;
+            background: #fbf3e3;
+            border-bottom: 1px solid var(--accent);
+            color: #6b5320;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .leaderboard td.placeholder {
+            white-space: normal;
+            color: var(--muted-light);
+            font-style: italic;
+        }
+
+        .disclosure {
+            margin-top: 32px;
+            max-width: 860px;
+            padding: 22px 26px;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-left: 3px solid var(--accent);
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        .disclosure strong { color: var(--fg); }
+        .disclosure code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.9em;
+            background: var(--surface);
+            padding: 1px 5px;
+        }
+
         @media (max-width: 1060px) {
             .hero { grid-template-columns: 1fr; }
             .hero-panel { max-width: 680px; }
@@ -433,6 +469,7 @@
             <nav class="header-nav" aria-label="Primary">
                 <a class="active" href="index.html">Overview</a>
                 <a href="results.html">Results &amp; Methodology</a>
+                <a href="../docs/known-limitations.md">Known Limitations</a>
                 <a href="../README.md">Repository</a>
             </nav>
         </header>
@@ -449,18 +486,18 @@
             </div>
 
             <aside class="hero-panel" aria-label="Release snapshot">
-                <div class="hero-panel-title">v0.1 Leaderboard Release</div>
+                <div class="hero-panel-title">Release Snapshot</div>
                 <div class="mini-metric">
-                    <strong>201</strong>
+                    <strong data-bind="corpus.num_scenarios">—</strong>
                     <span>audited scenarios assigned to public and sealed splits</span>
                 </div>
                 <div class="mini-metric">
-                    <strong>120</strong>
+                    <strong data-bind="corpus.num_audio_variants">—</strong>
                     <span>hash-pinned WAV variants with verified duration and sample rate</span>
                 </div>
                 <div class="mini-metric">
-                    <strong>100</strong>
-                    <span>concurrency target included in the latency frontier report</span>
+                    <strong data-bind="leaderboard.ranked_models">—</strong>
+                    <span>models ranked on the v0.2 text_to_action leaderboard</span>
                 </div>
             </aside>
         </section>
@@ -473,19 +510,19 @@
 
         <div class="stats">
             <div class="stat">
-                <div class="stat-value">5</div>
+                <div class="stat-value"><span data-bind="corpus.num_tracks">—</span></div>
                 <div class="stat-label">Evaluation Tracks</div>
             </div>
             <div class="stat">
-                <div class="stat-value">7</div>
+                <div class="stat-value"><span data-bind="corpus.num_domains">—</span></div>
                 <div class="stat-label">Service Domains</div>
             </div>
             <div class="stat">
-                <div class="stat-value">80 / 121</div>
+                <div class="stat-value"><span data-bind="corpus.splits.public_dev.scenarios">—</span> / <span data-bind="corpus.splits.sealed_test.scenarios">—</span></div>
                 <div class="stat-label">Public / Sealed Scenarios</div>
             </div>
             <div class="stat">
-                <div class="stat-value">0</div>
+                <div class="stat-value"><span data-bind="release.num_validation_issues">—</span></div>
                 <div class="stat-label">Release Issues</div>
             </div>
         </div>
@@ -515,21 +552,21 @@
     <section class="section">
         <div class="section-label">Tracks</div>
         <h2>Five Ways to Fail a Customer-Service Call</h2>
-        <p class="desc">The scenario suite covers text-to-action, audio-to-action, end-to-end voice, robustness, and adversarial compliance. Counts below are from the audited release stats.</p>
+        <p class="desc">The scenario suite covers text-to-action, audio-to-action, end-to-end voice, robustness, and adversarial compliance. Counts below are rendered from the audited release artifacts.</p>
 
-        <div class="track-grid">
-            <div class="track"><strong>61</strong><span>Text to action</span></div>
-            <div class="track"><strong>35</strong><span>Audio to action</span></div>
-            <div class="track"><strong>20</strong><span>End-to-end voice</span></div>
-            <div class="track"><strong>45</strong><span>Robustness</span></div>
-            <div class="track"><strong>40</strong><span>Adversarial compliance</span></div>
+        <div class="track-grid" data-table="track-grid">
+            <div class="track"><strong>—</strong><span>Text to action</span></div>
+            <div class="track"><strong>—</strong><span>Audio to action</span></div>
+            <div class="track"><strong>—</strong><span>End-to-end voice</span></div>
+            <div class="track"><strong>—</strong><span>Robustness</span></div>
+            <div class="track"><strong>—</strong><span>Adversarial compliance</span></div>
         </div>
     </section>
 
     <section class="section">
         <div class="section-label">Results Snapshot</div>
-        <h2>Reference Frontier and Exploratory Batch</h2>
-        <p class="desc">The official seed frontier currently contains reference oracle systems. The repository also includes a 2026-06-13 OpenRouter native-tools smoke batch over 10 scenarios; it is useful as a quick model comparison but is not the official sealed leaderboard.</p>
+        <h2>Reference Frontier and the v0.2 Leaderboard</h2>
+        <p class="desc">The official seed frontier currently contains reference oracle systems that prove the pipeline. The ranked leaderboard comes from a <span data-bind="leaderboard.models_attempted">—</span>-model OpenRouter sweep of the text_to_action track scored with the corrected v0.2 scorer — three trials per scenario, and only models whose trials actually completed. The withdrawn v0.1 exploratory numbers no longer appear on this site.</p>
 
         <div class="split">
             <div class="plot-card">
@@ -538,39 +575,39 @@
                     <span>frontier_seed plot</span>
                 </div>
                 <img src="../data/openvoicecs/releases/frontier_seed/plots/all_latency_vs_quality.svg" alt="Latency versus quality frontier plot for OpenVoiceCS-Bench">
-                <div class="note">The official reference systems both reach 100% task success in the seed frontier, with p95 voice-to-voice TTFB at 860 ms.</div>
+                <div class="note">The official reference systems both reach <span data-bind="frontier.systems.0.task_success" data-fmt="pct0">—</span> task success in the seed frontier, with p95 voice-to-voice TTFB at <span data-bind="frontier.p95_ttfb_ms" data-fmt="ms">—</span>.</div>
             </div>
 
             <div class="table-card">
                 <div class="card-head">
-                    <strong>Top Exploratory Batch Scores</strong>
-                    <span>10 scenarios</span>
+                    <strong>v0.2 Leaderboard — Top 5</strong>
+                    <span><span data-bind="leaderboard.track">—</span> track</span>
                 </div>
                 <table class="leaderboard">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Model</th>
-                            <th class="num">Score</th>
-                            <th class="num">Pass</th>
+                            <th class="num">Coverage</th>
+                            <th class="num">Overall</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td>1</td><td class="model">OpenRouter Qwen3.7 Plus</td><td class="num best">64.14</td><td class="num">0.10</td></tr>
-                        <tr><td>2</td><td class="model">OpenRouter Qwen3.7 Max</td><td class="num">63.37</td><td class="num">0.10</td></tr>
-                        <tr><td>3</td><td class="model">OpenRouter DeepSeek V3.2</td><td class="num">62.37</td><td class="num">0.10</td></tr>
-                        <tr><td>4</td><td class="model">OpenRouter Claude Haiku 4.5</td><td class="num">61.14</td><td class="num">0.10</td></tr>
-                        <tr><td>5</td><td class="model">OpenRouter GPT-4.1 Mini</td><td class="num">61.14</td><td class="num">0.10</td></tr>
+                    <tbody data-table="leaderboard-top">
+                        <tr><td colspan="4" class="placeholder">Leaderboard not loaded — generate <code>site/data.json</code> with <code>python scripts/build_site_data.py</code>.</td></tr>
                     </tbody>
                 </table>
-                <div class="note">Pass columns are pass@k, pass^k, and mean pass rate in the underlying batch summary; all top rows here report 0.10 on the 10-scenario smoke subset.</div>
+                <div class="note"><span data-when="leaderboard.top_tie" hidden>&dagger; Ranks 1 and 2 are tied: the provisional grounding metric alone is wide enough to swap them. </span>Reference anchors: oracle <span data-bind="anchors.oracle.overall_score" data-fmt="num2">—</span> overall, no-op <span data-bind="anchors.noop.overall_score" data-fmt="num2">—</span> — a model scoring below the no-op is doing worse than silence. <a href="results.html#leaderboard">Full table and caveats</a>.</div>
             </div>
+        </div>
+
+        <div class="disclosure">
+            <strong>Before quoting these numbers:</strong> the <code>factual_grounding</code> metric is provisional — a literal phrase matcher that penalises paraphrase and honest failure reports; removing it reorders <span data-bind="leaderboard.grounding_moved_models">—</span> of the <span data-bind="leaderboard.ranked_models">—</span> ranked positions, so trust the podium, not small gaps. Models are ranked only when at least 90% of their trials produced a usable trace; the other <span data-bind="leaderboard.excluded_models">—</span> of <span data-bind="leaderboard.models_attempted">—</span> attempted models are excluded as <em>unmeasured</em> — free-tier rate limits and dead endpoints — which is a different statement from “scored badly”. The full accounting is in <a href="../docs/known-limitations.md">docs/known-limitations.md</a>.
         </div>
     </section>
 
     <section class="cta">
         <h2>Read the detailed release report</h2>
-        <p>The results page includes the official frontier scorecards, exploratory batch table, scoring weights, scenario composition, audio perturbations, release gates, and reproduction commands.</p>
+        <p>The results page includes the ranked v0.2 leaderboard, official frontier scorecards, scoring weights, scenario composition, audio perturbations, release gates, known limitations, and reproduction commands.</p>
         <a class="btn primary" href="results.html">Open Results &amp; Methodology</a>
     </section>
 

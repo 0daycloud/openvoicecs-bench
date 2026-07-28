@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenVoiceCS-Bench Results and Methodology</title>
-    <meta name="description" content="Detailed OpenVoiceCS-Bench v0.1 results, methodology, scenario coverage, scoring weights, frontier plots, and release integrity notes.">
+    <meta name="description" content="OpenVoiceCS-Bench results: the v0.2 text_to_action leaderboard, reference frontier, methodology, scenario coverage, release integrity, and known limitations.">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+    <script src="site.js" defer></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -304,8 +305,8 @@
 
         .metric-card strong { font-size: 30px; }
 
-        .tldr-card span,
-        .metric-card span {
+        .tldr-card > span,
+        .metric-card > span {
             color: var(--muted);
             font-size: 14px;
             line-height: 1.55;
@@ -462,6 +463,33 @@
         .site-footer a { color: rgba(255,255,255,0.7); }
         .site-footer a:hover { color: #fff; }
 
+        .data-status {
+            padding: 12px 24px;
+            background: #f7efdd;
+            border-bottom: 1px solid var(--gold);
+            color: #6b5320;
+            font-family: "Archivo Narrow", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        td.placeholder {
+            white-space: normal;
+            text-align: center;
+            color: var(--muted-light);
+            font-style: italic;
+            padding: 22px;
+        }
+
+        .article-body .table-footnote {
+            column-span: all;
+            font-size: 14px;
+            color: var(--muted-light);
+            line-height: 1.6;
+            margin: -14px 0 18px;
+        }
+
         @media (max-width: 960px) {
             .article-body { column-count: 1; }
             .toc-list,
@@ -493,6 +521,7 @@
             <nav class="header-nav" aria-label="Primary">
                 <a href="index.html">Overview</a>
                 <a class="active" href="results.html">Results &amp; Methodology</a>
+                <a href="../docs/known-limitations.md">Known Limitations</a>
                 <a href="../README.md">Repository</a>
             </nav>
         </div>
@@ -500,9 +529,9 @@
 
     <section class="article-hero">
         <div class="hero-section-label">Detailed Results</div>
-        <h1 class="hero-headline">The v0.1 seed release measures quality, cost, and latency together.</h1>
-        <p class="hero-deck">OpenVoiceCS-Bench ranks customer-service voice agents by whether they complete realistic tasks safely and repeatably, not just whether they sound fluent. This page summarizes the release artifacts in the repository.</p>
-        <div class="hero-byline">Release artifacts generated 2026-06-11 / exploratory batch captured 2026-06-13</div>
+        <h1 class="hero-headline">One track has a ranked leaderboard. The v0.1 sweep numbers are withdrawn.</h1>
+        <p class="hero-deck">OpenVoiceCS-Bench ranks customer-service voice agents by whether they complete realistic tasks safely and repeatably, not just whether they sound fluent. This page reports the v0.2 text_to_action leaderboard, the reference frontier, and exactly what the release does not yet measure.</p>
+        <div class="hero-byline">Release artifacts generated <span data-bind="release.generated_at">—</span> &middot; sweep <span data-bind="leaderboard.source_run">—</span> scored with scorer v0.2</div>
     </section>
 
     <main class="article-wrap">
@@ -510,11 +539,11 @@
             <section class="toc-shell" aria-label="Table of contents">
                 <div class="toc-label">Contents</div>
                 <div class="toc-title">What is in this report</div>
-                <p class="toc-intro">The page separates official seed frontier evidence from exploratory model smoke tests, then documents how the benchmark is scored and governed.</p>
+                <p class="toc-intro">The page separates the ranked v0.2 leaderboard from reference frontier evidence, then documents how the benchmark is scored and governed — and where it falls short.</p>
                 <ul class="toc-list">
                     <li><a href="#headline"><span>Headline</span><span>Snapshot</span></a></li>
                     <li><a href="#frontier"><span>Frontier Results</span><span>Official</span></a></li>
-                    <li><a href="#batch"><span>Model Batch</span><span>Exploratory</span></a></li>
+                    <li><a href="#leaderboard"><span>Leaderboard</span><span>v0.2 ranked</span></a></li>
                     <li><a href="#methodology"><span>Methodology</span><span>Scoring</span></a></li>
                     <li><a href="#coverage"><span>Coverage</span><span>Suite shape</span></a></li>
                     <li><a href="#governance"><span>Governance</span><span>Release gates</span></a></li>
@@ -525,15 +554,17 @@
 
             <section class="tldr-shell" id="headline">
                 <div class="tldr-label">TL;DR</div>
-                <div class="tldr-title">The release is leaderboard-ready, but the current official frontier is reference-only.</div>
-                <p class="tldr-intro">The validated v0.1 release has enough scenarios, audio variants, provenance, split policy, pricing evidence, latency instrumentation, and sealed-test machinery for a scientific leaderboard profile.</p>
+                <div class="tldr-title">A ranked leaderboard exists for one track; the v0.1 numbers are withdrawn.</div>
+                <p class="tldr-intro">A fresh <span data-bind="leaderboard.models_attempted">—</span>-model sweep scored with the corrected v0.2 scorer produces a real leaderboard for the <code>text_to_action</code> track. The other four tracks have audited scenarios and release gates but no provider sweep yet, and the withdrawn v0.1 sweep numbers should not be quoted for any purpose. Read <a href="../docs/known-limitations.md"><strong>docs/known-limitations.md</strong></a> before quoting anything on this page.</p>
                 <div class="tldr-grid">
-                    <div class="tldr-card"><strong>201 scenarios</strong><span>Audited release count assigned to public and sealed splits.</span></div>
-                    <div class="tldr-card"><strong>120 audio variants</strong><span>All WAV assets exist and pass hash, sample-rate, and duration checks.</span></div>
-                    <div class="tldr-card"><strong>2 official systems</strong><span>Reference oracle text and audio-manifest systems are frontier eligible.</span></div>
-                    <div class="tldr-card"><strong>16 smoke runs</strong><span>OpenRouter native-tools batch reports are included as exploratory evidence.</span></div>
+                    <div class="tldr-card"><strong><span data-bind="corpus.num_scenarios">—</span> scenarios</strong><span>Audited release count, fully assigned to public and sealed splits.</span></div>
+                    <div class="tldr-card"><strong><span data-bind="corpus.num_audio_variants">—</span> audio variants</strong><span>All WAV assets exist and pass hash, sample-rate, and duration checks.</span></div>
+                    <div class="tldr-card"><strong><span data-bind="leaderboard.ranked_models">—</span> models ranked</strong><span>Cleared the 90% trial-coverage bar on the text_to_action track.</span></div>
+                    <div class="tldr-card"><strong><span data-bind="leaderboard.excluded_models">—</span> unmeasured</strong><span>Attempted models excluded for insufficient trial coverage — unmeasured, not scored badly.</span></div>
                 </div>
             </section>
+
+            <div class="callout"><strong>Two caveats govern every number on this page.</strong> The <code>factual_grounding</code> metric is provisional — a literal phrase matcher that penalises paraphrase and honest failure reports. At weight <span data-bind="leaderboard.grounding_weight" data-fmt="num2">—</span> it moves <span data-bind="leaderboard.grounding_moved_models">—</span> of the <span data-bind="leaderboard.ranked_models">—</span> ranked positions if removed<span data-when="leaderboard.podium_stable" hidden> (the top three do not change)</span>: the podium is trustworthy, fine-grained mid-table ordering is not. And models are ranked only when at least <span data-bind="leaderboard.min_trial_coverage" data-fmt="pct0">—</span> of their trials produced a usable trace: <span data-bind="leaderboard.excluded_models">—</span> of <span data-bind="leaderboard.models_attempted">—</span> attempted models are excluded as unmeasured rather than scored. The complete accounting is in <a href="../docs/known-limitations.md">docs/known-limitations.md</a>.</div>
 
             <h2 id="frontier">Official Frontier Results</h2>
             <p>The official seed frontier uses three primary axes: p95 voice-to-voice time to first byte, cost per successful conversation, and task success rate. Lower latency and lower cost are better; higher quality is better. Conversation experience is treated as a gate rather than an optimization axis.</p>
@@ -542,7 +573,7 @@
                 <div class="figure-card">
                     <div class="figure-label">Figure 1</div>
                     <div class="figure-title">Latency vs quality</div>
-                    <p class="figure-intro">Both reference systems sit at 100% task success with p95 voice-to-voice TTFB at 860 ms.</p>
+                    <p class="figure-intro">Both reference systems sit at <span data-bind="frontier.systems.0.task_success" data-fmt="pct0">—</span> task success with p95 voice-to-voice TTFB at <span data-bind="frontier.p95_ttfb_ms" data-fmt="ms">—</span>.</p>
                     <img src="../data/openvoicecs/releases/frontier_seed/plots/all_latency_vs_quality.svg" alt="OpenVoiceCS-Bench all-domain latency versus quality plot">
                 </div>
                 <div class="figure-card">
@@ -570,79 +601,66 @@
                             <th class="num">Experience</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="wrap"><strong>oracle_audio_manifest</strong></td>
-                            <td>audio</td>
-                            <td class="num">120</td>
-                            <td class="num">1,440</td>
-                            <td class="num best">1.000</td>
-                            <td class="num">0.9973-1.0000</td>
-                            <td class="num">790 ms</td>
-                            <td class="num">860 ms</td>
-                            <td class="num">1,210 ms</td>
-                            <td class="num">$0.00</td>
-                            <td class="num">1.000</td>
-                        </tr>
-                        <tr>
-                            <td class="wrap"><strong>oracle_text</strong></td>
-                            <td>text</td>
-                            <td class="num">201</td>
-                            <td class="num">1,206</td>
-                            <td class="num best">1.000</td>
-                            <td class="num">0.9968-1.0000</td>
-                            <td class="num">770 ms</td>
-                            <td class="num">860 ms</td>
-                            <td class="num">1,210 ms</td>
-                            <td class="num">$0.00</td>
-                            <td class="num">1.000</td>
-                        </tr>
+                    <tbody data-table="frontier">
+                        <tr><td colspan="11" class="placeholder">Frontier data not loaded — generate <code>site/data.json</code> with <code>python scripts/build_site_data.py</code>.</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="callout"><strong>Interpretation:</strong> the official frontier currently proves the release pipeline and instrumentation. It is not yet a vendor leaderboard because the eligible official systems are reference fixtures.</div>
 
-            <h2 id="batch">Exploratory Model Batch</h2>
-            <p>The repository includes an OpenRouter batch captured on 2026-06-13. These runs used native tool calls over a 10-scenario subset, so they are best read as smoke-test evidence. The ranking below is sorted by overall score, not by an official sealed leaderboard claim.</p>
+            <h2 id="leaderboard">The v0.2 Ranked Leaderboard</h2>
+            <p>The table below replaces the withdrawn v0.1 sweep, which measured the harness rather than the models. It comes from the <code data-bind="leaderboard.source_run">—</code> run: <span data-bind="leaderboard.models_attempted">—</span> models attempted against the <span data-bind="leaderboard.track_scenarios">—</span>-scenario <code>text_to_action</code> track, <span data-bind="leaderboard.trials_per_scenario">—</span> trials per scenario, scored by the corrected v0.2 scorer. Every row of the source CSV is shown, with its rank and trial coverage.</p>
+            <p>A model is ranked only if at least <span data-bind="leaderboard.min_trial_coverage" data-fmt="pct0">—</span> of its trials produced a usable trace, and <span data-bind="leaderboard.excluded_models">—</span> of the <span data-bind="leaderboard.models_attempted">—</span> attempted models fall below that bar — free-tier rate limiting and dead endpoints, not model behaviour. They are <strong>unmeasured, which is a different statement from &ldquo;scored badly&rdquo;</strong>, and are excluded rather than averaged in. The rule is load-bearing: without it, a model with 7% coverage ranked first and two models that returned HTTP 404 ranked as though they had been evaluated and failed.</p>
 
             <div class="table-wrap">
                 <table>
                     <thead>
                         <tr>
-                            <th class="num">Rank</th>
+                            <th class="num">#</th>
                             <th>Model</th>
+                            <th class="num">Coverage</th>
                             <th class="num">Overall</th>
-                            <th class="num">pass@k</th>
-                            <th class="num">pass^k</th>
-                            <th class="num">Mean Pass</th>
-                            <th class="num">Scenarios</th>
-                            <th class="num">Elapsed</th>
+                            <th class="num">Task</th>
+                            <th class="num">Tool</th>
+                            <th class="num">SOP</th>
+                            <th class="num">Privacy</th>
+                            <th class="num">Auth</th>
+                            <th class="num">Safety</th>
+                            <th class="num">Grounding&#42;</th>
+                            <th class="num">Tokens/Success</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td class="num">1</td><td class="wrap"><strong>OpenRouter Qwen3.7 Plus</strong></td><td class="num best">64.14</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">237.0s</td></tr>
-                        <tr><td class="num">2</td><td class="wrap"><strong>OpenRouter Qwen3.7 Max</strong></td><td class="num">63.37</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">274.9s</td></tr>
-                        <tr><td class="num">3</td><td class="wrap"><strong>OpenRouter DeepSeek V3.2</strong></td><td class="num">62.37</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">207.4s</td></tr>
-                        <tr><td class="num">4</td><td class="wrap"><strong>OpenRouter Claude Haiku 4.5</strong></td><td class="num">61.14</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">58.6s</td></tr>
-                        <tr><td class="num">5</td><td class="wrap"><strong>OpenRouter GPT-4.1 Mini</strong></td><td class="num">61.14</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">46.3s</td></tr>
-                        <tr><td class="num">6</td><td class="wrap">OpenRouter Gemini 3 Flash Preview</td><td class="num">60.14</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">45.8s</td></tr>
-                        <tr><td class="num">7</td><td class="wrap">OpenRouter Gemini 3.1 Flash Lite</td><td class="num">58.14</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">44.0s</td></tr>
-                        <tr><td class="num">8</td><td class="wrap">OpenRouter Claude Sonnet 4.6</td><td class="num">57.94</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">129.0s</td></tr>
-                        <tr><td class="num">9</td><td class="wrap">OpenRouter Qwen3.6 Flash</td><td class="num">56.47</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">155.4s</td></tr>
-                        <tr><td class="num">10</td><td class="wrap">OpenRouter Kimi K2.7 Code</td><td class="num">52.14</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">180.0s</td></tr>
-                        <tr><td class="num">11</td><td class="wrap">OpenRouter GPT-5.4 Nano</td><td class="num">49.72</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">62.0s</td></tr>
-                        <tr><td class="num">12</td><td class="wrap">OpenRouter GPT-5.4 Mini</td><td class="num">48.69</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">35.4s</td></tr>
-                        <tr><td class="num">13</td><td class="wrap">OpenRouter DeepSeek V4 Flash</td><td class="num">45.97</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">308.5s</td></tr>
-                        <tr><td class="num">14</td><td class="wrap">OpenRouter Kimi K2.6</td><td class="num">41.95</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">209.1s</td></tr>
-                        <tr><td class="num">15</td><td class="wrap">OpenRouter Gemini 3.5 Flash</td><td class="num">40.95</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">122.4s</td></tr>
-                        <tr><td class="num">16</td><td class="wrap">OpenRouter GPT-4o Mini</td><td class="num">22.30</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">0.10</td><td class="num">10</td><td class="num">80.3s</td></tr>
+                    <tbody data-table="leaderboard">
+                        <tr><td colspan="12" class="placeholder">Leaderboard not loaded — generate <code>site/data.json</code> with <code>python scripts/build_site_data.py</code>.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-footnote">&#42; <code>factual_grounding</code> is <strong>provisional</strong>: a literal phrase matcher that penalises paraphrase and honest failure reports as heavily as real omissions. It carries weight <span data-bind="leaderboard.grounding_weight" data-fmt="num2">—</span> in the overall score; removing it reorders <span data-bind="leaderboard.grounding_moved_models">—</span> of <span data-bind="leaderboard.ranked_models">—</span> ranked positions, so treat small gaps as noise.<span data-when="leaderboard.top_tie" hidden> &dagger; Ranks 1 and 2 are tied — the provisional grounding metric alone is wide enough to swap them.</span> Tokens/Success is total tokens spent divided by scenarios actually resolved — it charges an agent for the budget it burns on failures. Details in <a href="../docs/known-limitations.md">docs/known-limitations.md</a>.</p>
+
+            <h3>Reference anchors</h3>
+            <p>Two fixtures calibrate the scale: the oracle replays the correct trace by construction, and the no-op returns nothing at all.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th class="num">Overall</th>
+                            <th class="num">pass^k</th>
+                            <th class="num">Safety</th>
+                        </tr>
+                    </thead>
+                    <tbody data-table="anchors">
+                        <tr><td colspan="4" class="placeholder">Anchor data not loaded.</td></tr>
                     </tbody>
                 </table>
             </div>
 
+            <div class="callout"><strong>The no-op floor makes the scale readable:</strong> a model scoring below <span data-bind="anchors.noop.overall_score" data-fmt="num2">—</span> overall is doing worse than silence — it is taking actions that actively violate policy rather than failing to act. The lowest ranked model scores <span data-bind="leaderboard.overall_floor" data-fmt="num2">—</span>, so the bottom of the table is barely distinguishable from doing nothing at all. The no-op&rsquo;s safety score of <span data-bind="anchors.noop.safety" data-fmt="num3">—</span> is also the honest caveat on that metric: safety is a <em>don&rsquo;t-do-harm</em> measure, trivially satisfied by inaction, and must be read next to task success, never alone.</div>
+
             <h2 id="methodology">Methodology</h2>
-            <p>Each evaluated agent receives a scenario and trial index, then returns messages, tool calls, events, latency evidence, usage, and cost. Tool calls are replayed against the scenario's initial state. Missing or mismatched required arguments are replay errors and count against safety.</p>
+            <p>Each evaluated agent receives a scenario and trial index, then returns messages, tool calls, events, latency evidence, usage, and cost. Tool calls are replayed against the scenario's initial state. Argument and tool-resolution mistakes are scored by tool correctness; only acting before a required guard is satisfied counts against safety. Failed trials are classified as infrastructure or model failures, and infrastructure failures are excluded from metric means rather than averaged in as zeros.</p>
 
             <h3>Composite Score</h3>
             <p>The deterministic score is a weighted 0-100 composite. The weights intentionally emphasize task completion, factual grounding, SOP compliance, and tool correctness while still reserving capacity for privacy, authentication, safety, and experience.</p>
@@ -658,7 +676,7 @@
                     </thead>
                     <tbody>
                         <tr><td><strong>task_success</strong></td><td class="num">20%</td><td class="wrap">Expected final state reached and required tools called.</td></tr>
-                        <tr><td><strong>factual_grounding</strong></td><td class="num">20%</td><td class="wrap">Required facts stated and unsupported claims avoided.</td></tr>
+                        <tr><td><strong>factual_grounding</strong> (provisional)</td><td class="num">20%</td><td class="wrap">Required facts stated and unsupported claims avoided. Currently a literal phrase matcher — see limitations.</td></tr>
                         <tr><td><strong>sop_compliance</strong></td><td class="num">18%</td><td class="wrap">Required policy events present and forbidden events absent.</td></tr>
                         <tr><td><strong>tool_correctness</strong></td><td class="num">17%</td><td class="wrap">Required calls present and forbidden calls absent.</td></tr>
                         <tr><td><strong>privacy</strong></td><td class="num">10%</td><td class="wrap">PII and PHI minimization observed.</td></tr>
@@ -670,16 +688,16 @@
             </div>
 
             <h3>Reliability Metrics</h3>
-            <p>The benchmark reports <code>pass@k</code>, <code>pass^k</code>, mean pass rate, and Wilson 95% confidence intervals. For customer-service deployments, <code>pass^k</code> is especially important because repeated reliability matters more than lucky one-off success.</p>
+            <p>The benchmark reports <code>pass@k</code>, <code>pass^k</code>, mean pass rate, and Wilson 95% confidence intervals. A trial counts as passed only when all seven metrics equal exactly 1.0, so with grounding still phrase-matched the pass-rate family currently carries little information — the per-metric means and the overall score are the informative signal.</p>
 
             <h2 id="coverage">Scenario and Audio Coverage</h2>
-            <p>The release audit reports 201 approved scenarios across seven domains and five tracks. A raw local scenario file currently contains 204 scenario objects, but the audited release, splits, scorecards, and readiness gates are based on the 201 assigned release scenarios.</p>
+            <p>The audited release contains <span data-bind="corpus.num_scenarios">—</span> approved scenarios across <span data-bind="corpus.num_domains">—</span> domains and <span data-bind="corpus.num_tracks">—</span> tracks, every one reviewed and assigned to a split. The counts below are rendered from the release audit and split commitments, not typed in.</p>
 
             <div class="metric-grid">
-                <div class="metric-card"><strong>80</strong><span>public development scenarios</span></div>
-                <div class="metric-card"><strong>121</strong><span>sealed test scenarios</span></div>
-                <div class="metric-card"><strong>40</strong><span>public development audio variants</span></div>
-                <div class="metric-card"><strong>80</strong><span>sealed test audio variants</span></div>
+                <div class="metric-card"><strong data-bind="corpus.splits.public_dev.scenarios">—</strong><span>public development scenarios</span></div>
+                <div class="metric-card"><strong data-bind="corpus.splits.sealed_test.scenarios">—</strong><span>sealed test scenarios</span></div>
+                <div class="metric-card"><strong data-bind="corpus.splits.public_dev.audio_variants">—</strong><span>public development audio variants</span></div>
+                <div class="metric-card"><strong data-bind="corpus.splits.sealed_test.audio_variants">—</strong><span>sealed test audio variants</span></div>
             </div>
 
             <div class="table-wrap">
@@ -691,12 +709,8 @@
                             <th>Purpose</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td><strong>text_to_action</strong></td><td class="num">61</td><td class="wrap">Transcript and customer request in, tool trace out.</td></tr>
-                        <tr><td><strong>audio_to_action</strong></td><td class="num">35</td><td class="wrap">Customer audio in, tool trace out.</td></tr>
-                        <tr><td><strong>end_to_end_voice</strong></td><td class="num">20</td><td class="wrap">Customer audio in, spoken response and tool trace out.</td></tr>
-                        <tr><td><strong>robustness</strong></td><td class="num">45</td><td class="wrap">Noise, crosstalk, interruption, disfluency, and low-bandwidth style variants.</td></tr>
-                        <tr><td><strong>adversarial_compliance</strong></td><td class="num">40</td><td class="wrap">Fraud, privacy, prompt injection, policy bypass, and unsafe escalation tests.</td></tr>
+                    <tbody data-table="tracks">
+                        <tr><td colspan="3" class="placeholder">Track counts not loaded.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -711,11 +725,8 @@
                             <th class="num">Scenarios</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td>retail</td><td class="num">34</td><td>travel</td><td class="num">34</td></tr>
-                        <tr><td>fintech_sandbox</td><td class="num">33</td><td>healthcare_admin</td><td class="num">33</td></tr>
-                        <tr><td>saas_support</td><td class="num">33</td><td>telecom</td><td class="num">33</td></tr>
-                        <tr><td>utility_support</td><td class="num">1</td><td></td><td class="num"></td></tr>
+                    <tbody data-table="domains">
+                        <tr><td colspan="4" class="placeholder">Domain counts not loaded.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -730,11 +741,8 @@
                             <th class="num">Variants</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td>background_noise</td><td class="num">33</td><td>self_repair</td><td class="num">33</td></tr>
-                        <tr><td>prompt_injection</td><td class="num">25</td><td>social_engineering</td><td class="num">25</td></tr>
-                        <tr><td>multi_turn_voice</td><td class="num">6</td><td>emotional_pressure</td><td class="num">2</td></tr>
-                        <tr><td>interruption</td><td class="num">1</td><td>role_confusion</td><td class="num">1</td></tr>
+                    <tbody data-table="perturbations">
+                        <tr><td colspan="4" class="placeholder">Perturbation counts not loaded.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -748,20 +756,21 @@
             </div>
 
             <h2 id="governance">Release Governance</h2>
-            <p>The release audit passes with zero validation issues. It verifies JSON contracts, audio assets, pricing profiles, splits, provenance, changelog coverage, reference baselines, scenario reviews, judge protocol, sealed operations, external-system registry, claims evidence, and submission intake artifacts.</p>
+            <p>The release audit passes with <span data-bind="release.num_validation_issues">—</span> validation issues and <span data-bind="release.gates_passed">—</span> of <span data-bind="release.gates_total">—</span> release gates green. It verifies JSON contracts, audio assets, pricing profiles, splits, provenance, changelog coverage, reference baselines, scenario reviews, judge protocol, sealed operations, external-system registry, claims evidence, and submission intake artifacts.</p>
 
             <div class="metric-grid">
-                <div class="metric-card"><strong>100%</strong><span>scenario review approval coverage</span></div>
-                <div class="metric-card"><strong>100%</strong><span>scenario and audio provenance coverage</span></div>
-                <div class="metric-card"><strong>100%</strong><span>audio speaker consent and open-license rate</span></div>
-                <div class="metric-card"><strong>0</strong><span>open errata in the v0.1 changelog</span></div>
+                <div class="metric-card"><strong data-bind="release.review_approval_coverage" data-fmt="pct0">—</strong><span>scenario review approval coverage</span></div>
+                <div class="metric-card"><strong data-bind="release.provenance_scenario_coverage" data-fmt="pct0">—</strong><span>scenario and audio provenance coverage</span></div>
+                <div class="metric-card"><strong data-bind="release.audio_speaker_consent_rate" data-fmt="pct0">—</strong><span>audio speaker consent and open-license rate</span></div>
+                <div class="metric-card"><strong data-bind="release.open_errata">—</strong><span>open errata in the v0.1 changelog</span></div>
             </div>
 
-            <p>The leaderboard readiness profile requires at least 200 scenarios, six domains, 120 sealed-test scenarios, 120 audio variants, five pricing profiles, audio integrity, low contamination risk, oracle coverage, release gates, judged experience, comparable pricing, a run manifest, plot artifacts, hardware profile, and latency evidence at 100 concurrency. The current readiness artifact passes all checks.</p>
+            <p>The leaderboard readiness profile requires at least 200 scenarios, six domains, 120 sealed-test scenarios, 120 audio variants, five pricing profiles, audio integrity, low contamination risk, oracle coverage, release gates, judged experience, comparable pricing, a run manifest, plot artifacts, hardware profile, and latency evidence at 100 concurrency. The current readiness artifact <span data-bind="release.readiness.passed" data-fmt="passes">—</span>. Readiness measures artifact integrity — it is not a claim that the leaderboard covers more than the <code>text_to_action</code> track, and it does not mean the other tracks have been swept.</p>
 
             <h2 id="limitations">Known Limitations</h2>
-            <p>The official frontier contains reference fixtures, so it should not be presented as a competitive vendor leaderboard yet. The OpenRouter batch is a smoke test over only 10 scenarios, so its ranking is not statistically strong enough for official claims.</p>
-            <p>The reference oracle cost profile is zero-cost by design. It validates the cost-reporting machinery but does not represent real provider pricing. The release also relies on synthetic, consented audio assets; broader speaker coverage would improve external validity.</p>
+            <p>The ranked leaderboard covers one track — <code>text_to_action</code>, <span data-bind="leaderboard.track_scenarios">—</span> of <span data-bind="corpus.num_scenarios">—</span> scenarios — from a single sweep with <span data-bind="leaderboard.trials_per_scenario">—</span> trials per scenario. The other four tracks have no provider sweep yet. There is no hosted sealed evaluator, so published numbers carry no contamination control, and there are no confidence intervals across independent runs.</p>
+            <p>Two metric caveats matter most. <code>factual_grounding</code> is a literal phrase matcher that penalises paraphrase and honest failure reports as heavily as genuine omissions; it spans <span data-bind="leaderboard.grounding_min" data-fmt="num3">—</span>&ndash;<span data-bind="leaderboard.grounding_max" data-fmt="num3">—</span> across the ranked cohort at weight <span data-bind="leaderboard.grounding_weight" data-fmt="num2">—</span>, and removing it moves <span data-bind="leaderboard.grounding_moved_models">—</span> of <span data-bind="leaderboard.ranked_models">—</span> ranked positions — trust the podium, not small mid-table gaps. And <code>safety</code> is a don&rsquo;t-do-harm measure trivially satisfied by inaction — the no-op baseline scores <span data-bind="anchors.noop.safety" data-fmt="num3">—</span> on it — so it must always be read next to task success. Median latency figures measure the full JSON action loop (up to 8 sequential provider calls), not single-turn voice latency, and most scenarios are single-turn — multi-turn behaviour is exercised only by a small pilot.</p>
+            <p>The reference oracle cost profile is zero-cost by design, validating the cost-reporting machinery rather than vendor economics, and the release relies on synthetic, consented audio assets from a small speaker set. The complete, numbered accounting — including what was broken in v0.1 and why those numbers were withdrawn — is maintained in <a href="../docs/known-limitations.md"><strong>docs/known-limitations.md</strong></a>.</p>
 
             <h2 id="reproduce">Reproduce the Release</h2>
             <p>The main release verifier composes scenario, audio, pricing, split, provenance, changelog, baseline, review, datasheet, judging, sealed operations, audit, readiness, frontier, run-manifest, and plot checks.</p>
@@ -773,6 +782,12 @@
   --run-manifest data/openvoicecs/releases/frontier_seed/run_manifest.json \
   --plot-dir data/openvoicecs/releases/frontier_seed/plots \
   --strict</pre>
+
+            <p>The leaderboard table rebuilds offline from the published per-model reports and requires no API key — the reports are in the repository. Refresh the site's data file afterwards with <code>python scripts/build_site_data.py</code>.</p>
+
+            <pre class="code-block">python scripts/build_leaderboard.py \
+  data/openvoicecs/runs/openrouter_top50_text_action_3trial_v02/reports \
+  --output /tmp/leaderboard.csv</pre>
 
             <p>Reference baselines and custom submissions can be run with the same command-line entrypoint. The repository includes adapters for custom agents and external endpoints, plus a release bundle under <code>data/openvoicecs/releases/frontier_seed/</code>.</p>
 
@@ -791,7 +806,7 @@ python scripts/run_openvoicecs.py submit submissions/my_agent.py:run \
     <footer class="site-footer">
         <div class="footer-inner">
             <div>OpenVoiceCS-Bench v0.1.0 detailed report</div>
-            <div><a href="index.html">Overview</a> / <a href="../data/openvoicecs/releases/frontier_seed/frontier_report.json">Frontier JSON</a> / <a href="../data/openvoicecs/release_audit.json">Release audit</a></div>
+            <div><a href="index.html">Overview</a> / <a href="../docs/known-limitations.md">Known limitations</a> / <a href="../data/openvoicecs/runs/openrouter_top50_text_action_3trial_v02/leaderboard.csv">Leaderboard CSV</a> / <a href="../data/openvoicecs/release_audit.json">Release audit</a></div>
         </div>
     </footer>
 </body>
