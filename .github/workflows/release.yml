@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+# Build-and-attach only. No PyPI publishing, no secrets, no id-token.
+permissions:
+  contents: read
+
+# Tag builds must not cancel each other: every tag produces its own artifact.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+jobs:
+  build:
+    name: Build sdist and wheel
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      # Same validity gates as CI: a tag must never ship a corpus with
+      # ungrounded exact-matched arguments or vacuous forbidden events.
+      - name: Check tool arguments are grounded or declared generated
+        run: python scripts/mark_ungrounded_tool_arguments.py --check
+
+      - name: Check forbidden events are bound to a trigger
+        run: python scripts/bind_forbidden_event_triggers.py --check
+
+      - name: Install build backend
+        run: python -m pip install build
+
+      - name: Build distributions
+        run: python -m build
+
+      - name: List distributions
+        run: ls -l dist
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: openvoicecs-bench-dist-${{ github.ref_name }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 14

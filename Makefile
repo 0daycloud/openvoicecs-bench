@@ -1,6 +1,7 @@
 .PHONY: install dev test lint validate validate-reviews validate-submission-intake \
 	audit datasheet verify-release validate-release-bundle baselines \
-	submit-example score-provider-help check
+	submit-example score-provider-help check \
+	check-tool-arguments check-forbidden-events validity-gates
 
 PYTHON ?= python
 
@@ -46,5 +47,15 @@ submit-example:
 score-provider-help:
 	$(PYTHON) scripts/run_openvoicecs.py score-provider --help
 
+# Scenario validity gates. Both scripts exit non-zero when the corpus
+# reintroduces a scoring-validity bug, so they are cheap regression guards.
+check-tool-arguments:
+	$(PYTHON) scripts/mark_ungrounded_tool_arguments.py --check
+
+check-forbidden-events:
+	$(PYTHON) scripts/bind_forbidden_event_triggers.py --check
+
+validity-gates: check-tool-arguments check-forbidden-events
+
 # Full pre-release gate: everything CI runs, in one target.
-check: validate validate-reviews validate-submission-intake verify-release validate-release-bundle test
+check: lint validity-gates validate validate-reviews validate-submission-intake verify-release validate-release-bundle test

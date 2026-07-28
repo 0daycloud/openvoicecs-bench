@@ -6,9 +6,11 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import re
 import subprocess
 import sys
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
@@ -17,6 +19,38 @@ ROOT = Path(__file__).resolve().parent.parent
 PYTHON = Path(sys.executable)
 RUNNER = ROOT / "scripts" / "run_openvoicecs.py"
 DEFAULT_MODELS = ROOT / "openrouter-top-100-models.md"
+
+
+def require_openrouter_credits(minimum_usd: float) -> None:
+    """Refuse to start a sweep that cannot be paid for.
+
+    The v0.1 sweep ran its OpenRouter balance to zero partway through and
+    recorded 5,680 HTTP 402 trials as model scores of 0.0 across 26 models.
+    Failing loudly here costs one API call; failing later costs the whole run.
+    """
+    if minimum_usd <= 0:
+        return
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        raise SystemExit("OPENROUTER_API_KEY is not set")
+    request = urllib.request.Request(
+        "https://openrouter.ai/api/v1/credits",
+        headers={"Authorization": f"Bearer {api_key}"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            payload = json.loads(response.read())
+    except Exception as exc:  # network, auth, or schema failure
+        raise SystemExit(f"could not verify OpenRouter credits: {exc}") from exc
+    data = payload.get("data") or {}
+    remaining = float(data.get("total_credits", 0)) - float(data.get("total_usage", 0))
+    if remaining < minimum_usd:
+        raise SystemExit(
+            f"OpenRouter balance ${remaining:.2f} is below the ${minimum_usd:.2f} floor "
+            f"required to start this sweep; top up at "
+            f"https://openrouter.ai/settings/credits or lower --min-credits-usd"
+        )
+    print(f"OpenRouter balance: ${remaining:.2f} (floor ${minimum_usd:.2f})")
 
 
 def main() -> int:
@@ -53,6 +87,12 @@ def main() -> int:
     parser.add_argument("--adjudicator", default=None)
     parser.add_argument("--skip-judging", action="store_true")
     parser.add_argument("--rerun", action="store_true")
+    parser.add_argument(
+        "--min-credits-usd",
+        type=float,
+        default=5.0,
+        help="refuse to start unless the OpenRouter balance is at least this; 0 disables",
+    )
     args = parser.parse_args()
 
     if not args.skip_judging and len(args.judge) < 2:
@@ -61,6 +101,8 @@ def main() -> int:
             "(for example --judge openrouter:openai/gpt-4o-mini "
             "--judge openrouter:google/gemini-2.5-flash), or pass --skip-judging"
         )
+
+    require_openrouter_credits(args.min_credits_usd)
 
     models = parse_openrouter_models(args.models_file)[: args.top]
     if len(models) < args.top:
