@@ -31,23 +31,23 @@
       "pricing_snapshot_date": "2026-06-11",
       "report": {
         "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
-        "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
-        "bytes": 7494153
+        "sha256": "3debaf22f2833920435024a46a38f4f06991d75175e2b8324157c6a4a404ba78",
+        "bytes": 11229766
       },
       "submission_card": {
         "path": "data/openvoicecs/submission_cards/oracle_text_realtime_reference_card.json",
-        "sha256": "356cb8932acc377b1216555484fdb8f2de0739c538a696ded73dd12dd9031542",
+        "sha256": "cbb9126fe7f6969255c8cac88ae8929c952e4aea47cc079de98e9c4bfdcf5a7b",
         "bytes": 1539
       },
       "run_manifest": {
         "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
-        "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
-        "bytes": 19640
+        "sha256": "1a4d240ad2c5cd72fd93e15c3330925c767365b1dad1ab79cac968524b8640c0",
+        "bytes": 22814
       },
       "release_bundle": {
         "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-        "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
-        "bytes": 10645
+        "sha256": "1c04b543c73e3e3512361cd6d93c8809d1f1465720c69cd0372dc5fec68ed068",
+        "bytes": 10647
       },
       "judge_evidence": {
         "annotation_mode": "reference_fixture",
@@ -70,23 +70,23 @@
       "pricing_snapshot_date": "2026-06-11",
       "report": {
         "path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
-        "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
-        "bytes": 8955639
+        "sha256": "2159464d13a994bc469181d45dbe5beb214240cebebca15857278d2227f1563d",
+        "bytes": 12133733
       },
       "submission_card": {
         "path": "data/openvoicecs/submission_cards/oracle_audio_manifest_realtime_reference_card.json",
-        "sha256": "0a88aa342cd7beb6b538bed84fd29c5ff063620a32e94a15e259a403d3a4e480",
+        "sha256": "5e2f9d46ff77ca9e0f419580e220d17e2476c775606e4eb6f733b0d63610710c",
         "bytes": 1603
       },
       "run_manifest": {
         "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
-        "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
-        "bytes": 19640
+        "sha256": "1a4d240ad2c5cd72fd93e15c3330925c767365b1dad1ab79cac968524b8640c0",
+        "bytes": 22814
       },
       "release_bundle": {
         "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-        "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
-        "bytes": 10645
+        "sha256": "1c04b543c73e3e3512361cd6d93c8809d1f1465720c69cd0372dc5fec68ed068",
+        "bytes": 10647
       },
       "judge_evidence": {
         "annotation_mode": "reference_fixture",

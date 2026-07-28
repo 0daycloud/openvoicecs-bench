@@ -1,6 +1,6 @@
 {
   "benchmark": "Latency-Cost-Quality Frontier",
-  "generated_at": "2026-06-11",
+  "generated_at": "2026-07-28",
   "axes": {
     "latency": {
       "primary": "p95_v2v_ttfb_ms",
@@ -59,8 +59,7 @@
     },
     "fintech_sandbox": {
       "frontier": [
-        "oracle_audio_manifest",
-        "oracle_text"
+        "oracle_audio_manifest"
       ],
       "points": [
         {
@@ -78,16 +77,15 @@
           "domain": "fintech_sandbox",
           "frontier_eligible": true,
           "exclusion_reasons": [],
-          "p95_v2v_ttfb_ms": 860.0,
+          "p95_v2v_ttfb_ms": 898.0,
           "cost_usd_per_successful_conversation": 0.0,
           "task_success_rate": 1.0,
-          "on_frontier": true
+          "on_frontier": false
         }
       ],
       "projections": {
         "latency_vs_quality": [
-          "oracle_audio_manifest",
-          "oracle_text"
+          "oracle_audio_manifest"
         ],
         "cost_vs_quality": [
           "oracle_audio_manifest",

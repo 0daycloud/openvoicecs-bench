@@ -42,21 +42,21 @@
       "system_id": "oracle_text_realtime_reference",
       "source_report": {
         "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
-        "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
-        "bytes": 7494153
+        "sha256": "3debaf22f2833920435024a46a38f4f06991d75175e2b8324157c6a4a404ba78",
+        "bytes": 11229766
       },
       "annotations": {
         "path": "data/openvoicecs/judging/oracle_text_realtime_annotations.jsonl",
-        "sha256": "15a087099aa2b48c9f8fe0e055d5d8fcff8acce0244b72ed1f1240ae31eda6ab",
-        "bytes": 620940
+        "sha256": "68efd1a13bd1ba80463ed98e676a6d80de0400f9afc9f6ecb6babc6401fc7e7d",
+        "bytes": 685392
       },
       "judge_report": {
         "path": "data/openvoicecs/judging/oracle_text_realtime_judge_report.json",
-        "sha256": "e47a3544a1b7af7eacfd175f75efc7f42c10658d0262a221411929411f201638",
-        "bytes": 166619
+        "sha256": "da7f79475572b2de62bb0e9928c3d04c9232b7e115c8ddcd03756cefdebaac98",
+        "bytes": 183120
       },
-      "num_annotations": 2412,
-      "num_items": 402,
+      "num_annotations": 2640,
+      "num_items": 440,
       "num_raters": 2,
       "blinding": {
         "hide_system_identity": true,
@@ -73,8 +73,8 @@
       "system_id": "oracle_audio_manifest_realtime_reference",
       "source_report": {
         "path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json",
-        "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
-        "bytes": 8955639
+        "sha256": "2159464d13a994bc469181d45dbe5beb214240cebebca15857278d2227f1563d",
+        "bytes": 12133733
       },
       "annotations": {
         "path": "data/openvoicecs/judging/oracle_audio_manifest_realtime_annotations.jsonl",
@@ -83,8 +83,8 @@
       },
       "judge_report": {
         "path": "data/openvoicecs/judging/oracle_audio_manifest_realtime_judge_report.json",
-        "sha256": "d36986d2e59713943b837c51ab7192ec3950c9847cb2b3b08362eb9ec82c3d20",
-        "bytes": 211384
+        "sha256": "6386305233352f3c838ebf42ab072c73f27deb4b97f633ed873aae3fd30e8a18",
+        "bytes": 211367
       },
       "num_annotations": 2880,
       "num_items": 480,

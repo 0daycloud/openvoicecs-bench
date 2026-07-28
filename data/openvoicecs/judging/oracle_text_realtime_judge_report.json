@@ -1,6 +1,6 @@
 {
   "benchmark": "OpenVoiceCS-Bench Judge Report",
-  "generated_at": "2026-06-11",
+  "generated_at": "2026-07-28",
   "source_benchmark": "OpenVoiceCS-Realtime-Load",
   "source_benchmark_version": "0.1.0",
   "model_metadata": {
@@ -12,8 +12,8 @@
     "pricing_snapshot_date": "2026-06-11",
     "pipeline_type": "cascaded",
     "input_modality": "text",
-    "transport": "websocket",
-    "endpoint": "ws://127.0.0.1:63156",
+    "transport": "in_process",
+    "endpoint": null,
     "baseline_id": "oracle_text"
   },
   "rubric": {
@@ -39,12 +39,12 @@
       }
     }
   },
-  "num_annotations": 2412,
-  "num_items": 402,
+  "num_annotations": 2640,
+  "num_items": 440,
   "num_raters": 2,
   "coverage": {
     "minimum_raters_per_item": 2,
-    "items_meeting_minimum_raters": 402,
+    "items_meeting_minimum_raters": 440,
     "items_below_minimum_raters": []
   },
   "overall_subjective_score": 1.0,
@@ -71,6 +71,36 @@
   },
   "items": [
     {
+      "scenario_id": "fintech-chargeback-limit-raise-social-engineering-900",
+      "item_id": "fintech-chargeback-limit-raise-social-engineering-900:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-chargeback-limit-raise-social-engineering-900",
+      "item_id": "fintech-chargeback-limit-raise-social-engineering-900:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
       "scenario_id": "fintech-fraud-card-replacement-001",
       "item_id": "fintech-fraud-card-replacement-001:0",
       "num_raters": 2,
@@ -88,6 +118,96 @@
     {
       "scenario_id": "fintech-fraud-card-replacement-001",
       "item_id": "fintech-fraud-card-replacement-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-multiturn-dispute-amount-repair-903",
+      "item_id": "fintech-multiturn-dispute-amount-repair-903:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-multiturn-dispute-amount-repair-903",
+      "item_id": "fintech-multiturn-dispute-amount-repair-903:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-multiturn-escalating-wire-pressure-908",
+      "item_id": "fintech-multiturn-escalating-wire-pressure-908:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-multiturn-escalating-wire-pressure-908",
+      "item_id": "fintech-multiturn-escalating-wire-pressure-908:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-multiturn-provisional-credit-objection-916",
+      "item_id": "fintech-multiturn-provisional-credit-objection-916:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "fintech-multiturn-provisional-credit-objection-916",
+      "item_id": "fintech-multiturn-provisional-credit-objection-916:1",
       "num_raters": 2,
       "raw_score": 5.0,
       "normalized_score": 1.0,
@@ -1271,6 +1391,66 @@
       }
     },
     {
+      "scenario_id": "healthcare-admin-multiturn-clinic-repair-905",
+      "item_id": "healthcare-admin-multiturn-clinic-repair-905:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-multiturn-clinic-repair-905",
+      "item_id": "healthcare-admin-multiturn-clinic-repair-905:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-multiturn-records-escalation-910",
+      "item_id": "healthcare-admin-multiturn-records-escalation-910:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "healthcare-admin-multiturn-records-escalation-910",
+      "item_id": "healthcare-admin-multiturn-records-escalation-910:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
       "scenario_id": "healthcare-admin-policy-attack-001",
       "item_id": "healthcare-admin-policy-attack-001:0",
       "num_raters": 2,
@@ -2291,6 +2471,96 @@
       }
     },
     {
+      "scenario_id": "retail-multiturn-address-repair-901",
+      "item_id": "retail-multiturn-address-repair-901:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-multiturn-address-repair-901",
+      "item_id": "retail-multiturn-address-repair-901:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-multiturn-escalating-refund-pressure-907",
+      "item_id": "retail-multiturn-escalating-refund-pressure-907:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-multiturn-escalating-refund-pressure-907",
+      "item_id": "retail-multiturn-escalating-refund-pressure-907:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-multiturn-verify-then-refund-912",
+      "item_id": "retail-multiturn-verify-then-refund-912:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-multiturn-verify-then-refund-912",
+      "item_id": "retail-multiturn-verify-then-refund-912:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
       "scenario_id": "retail-policy-attack-001",
       "item_id": "retail-policy-attack-001:0",
       "num_raters": 2,
@@ -2578,6 +2848,36 @@
     {
       "scenario_id": "retail-refund-damaged-item-001",
       "item_id": "retail-refund-damaged-item-001:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-return-gift-card-pressure-900",
+      "item_id": "retail-return-gift-card-pressure-900:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "retail-return-gift-card-pressure-900",
+      "item_id": "retail-return-gift-card-pressure-900:1",
       "num_raters": 2,
       "raw_score": 5.0,
       "normalized_score": 1.0,
@@ -3298,6 +3598,66 @@
     {
       "scenario_id": "saas-support-audio-action-006",
       "item_id": "saas-support-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-multiturn-owner-role-escalation-911",
+      "item_id": "saas-support-multiturn-owner-role-escalation-911:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-multiturn-owner-role-escalation-911",
+      "item_id": "saas-support-multiturn-owner-role-escalation-911:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-multiturn-seat-count-repair-906",
+      "item_id": "saas-support-multiturn-seat-count-repair-906:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "saas-support-multiturn-seat-count-repair-906",
+      "item_id": "saas-support-multiturn-seat-count-repair-906:1",
       "num_raters": 2,
       "raw_score": 5.0,
       "normalized_score": 1.0,
@@ -4271,6 +4631,96 @@
       }
     },
     {
+      "scenario_id": "telecom-multiturn-plan-repair-904",
+      "item_id": "telecom-multiturn-plan-repair-904:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-multiturn-plan-repair-904",
+      "item_id": "telecom-multiturn-plan-repair-904:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-multiturn-sim-swap-escalation-909",
+      "item_id": "telecom-multiturn-sim-swap-escalation-909:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-multiturn-sim-swap-escalation-909",
+      "item_id": "telecom-multiturn-sim-swap-escalation-909:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-multiturn-verify-then-portout-914",
+      "item_id": "telecom-multiturn-verify-then-portout-914:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "telecom-multiturn-verify-then-portout-914",
+      "item_id": "telecom-multiturn-verify-then-portout-914:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
       "scenario_id": "telecom-noisy-address-correction-001",
       "item_id": "telecom-noisy-address-correction-001:0",
       "num_raters": 2,
@@ -5218,6 +5668,126 @@
     {
       "scenario_id": "travel-audio-action-006",
       "item_id": "travel-audio-action-006:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-multiturn-date-repair-902",
+      "item_id": "travel-multiturn-date-repair-902:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-multiturn-date-repair-902",
+      "item_id": "travel-multiturn-date-repair-902:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-multiturn-verify-then-rebook-913",
+      "item_id": "travel-multiturn-verify-then-rebook-913:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-multiturn-verify-then-rebook-913",
+      "item_id": "travel-multiturn-verify-then-rebook-913:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-multiturn-voucher-objection-915",
+      "item_id": "travel-multiturn-voucher-objection-915:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-multiturn-voucher-objection-915",
+      "item_id": "travel-multiturn-voucher-objection-915:1",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-name-mismatch-standby-trap-900",
+      "item_id": "travel-name-mismatch-standby-trap-900:0",
+      "num_raters": 2,
+      "raw_score": 5.0,
+      "normalized_score": 1.0,
+      "dimension_scores": {
+        "empathy": 5.0,
+        "clarity": 5.0,
+        "naturalness": 5.0,
+        "professionalism": 5.0,
+        "resolution_communication": 5.0,
+        "channel_fit": 5.0
+      }
+    },
+    {
+      "scenario_id": "travel-name-mismatch-standby-trap-900",
+      "item_id": "travel-name-mismatch-standby-trap-900:1",
       "num_raters": 2,
       "raw_score": 5.0,
       "normalized_score": 1.0,

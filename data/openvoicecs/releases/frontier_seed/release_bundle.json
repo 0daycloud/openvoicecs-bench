@@ -1,7 +1,7 @@
 {
   "benchmark": "Latency-Cost-Quality Frontier",
   "bundle_version": "0.1.0",
-  "generated_at": "2026-06-11",
+  "generated_at": "2026-07-28",
   "output_dir": "data/openvoicecs/releases/frontier_seed",
   "inputs": {
     "reports": [
@@ -21,21 +21,21 @@
     "reports": [
       {
         "path": "inputs/reports/001_oracle_audio_manifest_realtime_judged.json",
-        "sha256": "bf83a3c9e5c0755576a8228080aceda86fd9a36037a534f89b85b6052e010462",
-        "bytes": 8955639,
+        "sha256": "2159464d13a994bc469181d45dbe5beb214240cebebca15857278d2227f1563d",
+        "bytes": 12133733,
         "source_path": "data/openvoicecs/reports/oracle_audio_manifest_realtime_judged.json"
       },
       {
         "path": "inputs/reports/002_oracle_text_realtime_judged.json",
-        "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
-        "bytes": 7494153,
+        "sha256": "3debaf22f2833920435024a46a38f4f06991d75175e2b8324157c6a4a404ba78",
+        "bytes": 11229766,
         "source_path": "data/openvoicecs/reports/oracle_text_realtime_judged.json"
       }
     ],
     "scenario": {
       "path": "inputs/manifests/scenarios.json",
-      "sha256": "430a87f3673fd6c1584e8a0a4b5f41fcbce37325e60c5b811c77c0f8c4b5e6c5",
-      "bytes": 1173811,
+      "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
+      "bytes": 1467912,
       "source_path": "data/openvoicecs/scenarios_v0.1.json"
     },
     "audio_manifest": {
@@ -52,32 +52,32 @@
     },
     "split_manifest": {
       "path": "inputs/manifests/splits.json",
-      "sha256": "d21af3eaba73b8caa45bfd6dc894f5f8c4d67f49a7c68ecc3eb651ad8c36c3ae",
-      "bytes": 15578,
+      "sha256": "580f86e4feaacb3a6967c8c474e34742bc9dc51de311e46a47ab796f6b33e93f",
+      "bytes": 16601,
       "source_path": "data/openvoicecs/splits_v0.1.json"
     },
     "provenance_manifest": {
       "path": "inputs/manifests/provenance.json",
-      "sha256": "baba76a9ec1ba92e8be725f52d684dbc56a26f2c3e42d91954f621561e6e73ba",
-      "bytes": 112160,
+      "sha256": "40a5de86804b66b27019b1334cb91591bfcc97f8b3ac0bf3e02f111673a93202",
+      "bytes": 118328,
       "source_path": "data/openvoicecs/provenance_v0.1.json"
     },
     "changelog": {
       "path": "inputs/manifests/changelog.json",
-      "sha256": "255d47ae3bde764ccc882009652a8e7982641f83cdad211f6f9c410c02a65909",
-      "bytes": 17122,
+      "sha256": "945b502beccd936e28ff1570a0c48cab627b31078bd97476f8e104405430b71a",
+      "bytes": 19245,
       "source_path": "data/openvoicecs/changelog_v0.1.json"
     },
     "baseline_manifest": {
       "path": "inputs/manifests/reference_baselines.json",
-      "sha256": "8bd14e51770892d9b39abe5fd2472238dc84b3d32c767fdff3b30481b0d368bf",
-      "bytes": 3149,
+      "sha256": "984931f1f47f7865881c3a39f98d7e7a57f4201f5b4eab35c79208a887919257",
+      "bytes": 3152,
       "source_path": "data/openvoicecs/baselines/reference_baselines_v0.1.json"
     },
     "review_manifest": {
       "path": "inputs/manifests/scenario_reviews.json",
-      "sha256": "e78292aa1ef474e28377685bbc61d77e524268ef9290547d3ed72bc6530dc706",
-      "bytes": 167376,
+      "sha256": "5303a5119bf182da2ac362c2360acf851589ecd4947b11507e86bcbd61009538",
+      "bytes": 183291,
       "source_path": "data/openvoicecs/scenario_reviews_v0.1.json"
     },
     "judge_prompt": {
@@ -107,8 +107,8 @@
   "artifacts": {
     "frontier_report": {
       "path": "frontier_report.json",
-      "sha256": "0c206a7a71d4f89a65c29128ba32eeb4adbc83d147de298a2130190794125b7f",
-      "bytes": 41844
+      "sha256": "e33115f17f691a9d77a30f77febf3ef4c1ea0ed40ef81e10c0edd709b056dc80",
+      "bytes": 42000
     },
     "plot:all:3d": {
       "path": "plots/all_3d.svg",
@@ -127,17 +127,17 @@
     },
     "plot:fintech_sandbox:3d": {
       "path": "plots/fintech-sandbox_3d.svg",
-      "sha256": "8a0298995cb98c1857e3bb532a8586746c57f9101e01708ed696bc127804c0f1",
+      "sha256": "3b0a1873b8d7f86aed068d8ce218f87a388909539fe95fdb07ef85d12cf682a8",
       "bytes": 1207
     },
     "plot:fintech_sandbox:cost_vs_quality": {
       "path": "plots/fintech-sandbox_cost_vs_quality.svg",
-      "sha256": "70f545ad194a577d8d84e0845b0592fa5a207cbbd745c07c7ab6d37c81d88e12",
+      "sha256": "32e07105a6b4d775981ec8df153e089b31b4268ea9770d6d62bc7af8855b361c",
       "bytes": 1143
     },
     "plot:fintech_sandbox:latency_vs_quality": {
       "path": "plots/fintech-sandbox_latency_vs_quality.svg",
-      "sha256": "929d709826adff1445475b2fd9e12fd94ac1537eee617ff97bbe68c5fb41f4d0",
+      "sha256": "6bdb080348b08ce0932ff4db67b52c5a008f0b9967b36c24f022d626ee156134",
       "bytes": 1139
     },
     "plot:healthcare_admin:3d": {
@@ -157,8 +157,8 @@
     },
     "plot:plot_data": {
       "path": "plots/frontier_plot_data.json",
-      "sha256": "d1abc862115e2c83f96b90c80e650c7504e2f9eaffafdcc086030672ec7af9f8",
-      "bytes": 8676
+      "sha256": "d9770acd56eed929650148b4da985c38f4c73252a2372d39751ea2607e86e9f6",
+      "bytes": 8629
     },
     "plot:retail:3d": {
       "path": "plots/retail_3d.svg",
@@ -242,17 +242,17 @@
     },
     "run_manifest": {
       "path": "run_manifest.json",
-      "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
-      "bytes": 19640
+      "sha256": "1a4d240ad2c5cd72fd93e15c3330925c767365b1dad1ab79cac968524b8640c0",
+      "bytes": 22814
     },
     "scorecard:csv": {
       "path": "scorecards/scorecards.csv",
-      "sha256": "7630479f78c835c18a4bf6c61812121dd27780855002ed462c96c1665bf98988",
+      "sha256": "2705a6295a75270662b34d03dc3800453ba9efabd8b24cfc2bce45544c502faf",
       "bytes": 1188
     },
     "scorecard:json": {
       "path": "scorecards/scorecards.json",
-      "sha256": "d550e7d5b3deb45592f122d7e2e84124c475164b20d2230d0f586f6eb1bc8f59",
+      "sha256": "9a3d46bf2127da257aeddbb10465d15784f5463692b7d37d9bb66d1d604a9fc0",
       "bytes": 2520
     },
     "scorecard:markdown": {

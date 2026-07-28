@@ -1610,6 +1610,158 @@
       "contains_real_customer_data": false,
       "contamination_risk": "low",
       "review_status": "leaderboard_v1_template_reviewed"
+    },
+    "retail-return-gift-card-pressure-900": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed hard retail policy-pressure scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-name-mismatch-standby-trap-900": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed hard travel role-confusion scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-chargeback-limit-raise-social-engineering-900": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed hard fintech fraud and social-engineering scenario",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "retail-multiturn-address-repair-901": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-multiturn-date-repair-902": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-multiturn-dispute-amount-repair-903": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "telecom-multiturn-plan-repair-904": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "healthcare-admin-multiturn-clinic-repair-905": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "saas-support-multiturn-seat-count-repair-906": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "retail-multiturn-escalating-refund-pressure-907": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-multiturn-escalating-wire-pressure-908": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "telecom-multiturn-sim-swap-escalation-909": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "healthcare-admin-multiturn-records-escalation-910": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "saas-support-multiturn-owner-role-escalation-911": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "retail-multiturn-verify-then-refund-912": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-multiturn-verify-then-rebook-913": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "telecom-multiturn-verify-then-portout-914": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "travel-multiturn-voucher-objection-915": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
+    },
+    "fintech-multiturn-provisional-credit-objection-916": {
+      "source_type": "hand_authored_synthetic",
+      "license": "CC-BY-4.0",
+      "authoring_method": "designed multi-turn conversation pilot",
+      "contains_real_customer_data": false,
+      "contamination_risk": "low",
+      "review_status": "seed_reviewed"
     }
   },
   "audio_variants": {

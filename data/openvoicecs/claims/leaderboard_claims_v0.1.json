@@ -36,18 +36,18 @@
       },
       "baseline_report": {
         "path": "data/openvoicecs/baselines/noop_text.json",
-        "sha256": "2d9894792da524ae6a2a82000d16d5e15928422237dd26fb3660810de482a41a",
-        "bytes": 4936097
+        "sha256": "fe1f1f3e631b65165885871688bd2ca964059cbb6fc18b2f140f5615b40ff920",
+        "bytes": 4886067
       },
       "candidate_report": {
         "path": "data/openvoicecs/baselines/oracle_text.json",
-        "sha256": "b8ac888a4a6e75c2e4728b34d41dbcee3f2022d1230341ca35b26c77bdc72dc6",
-        "bytes": 4686634
+        "sha256": "cb82ac719bb37f4c450963633e32b9a336212d26ee3d8be62c830a4533098711",
+        "bytes": 4787710
       },
       "external_systems_registry": {
         "path": "data/openvoicecs/external_systems_v0.1.json",
-        "sha256": "1c5660eb0282d794c37c6e86650c002b4ebe3968a425af87dd2467f36c382afa",
-        "bytes": 4315
+        "sha256": "2f7042943993b21c4efe1f6b83b7911ae6f129f04b84a06baccf1c8585ef0069",
+        "bytes": 4317
       },
       "judging_evidence": {
         "annotation_mode": "reference_fixture",

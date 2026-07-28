@@ -1,6 +1,6 @@
 {
   "benchmark": "OpenVoiceCS-Bench Judge Report",
-  "generated_at": "2026-06-11",
+  "generated_at": "2026-07-28",
   "source_benchmark": "OpenVoiceCS-Realtime-Load",
   "source_benchmark_version": "0.1.0",
   "model_metadata": {
@@ -12,8 +12,8 @@
     "pricing_snapshot_date": "2026-06-11",
     "pipeline_type": "cascaded",
     "input_modality": "audio",
-    "transport": "websocket",
-    "endpoint": "ws://127.0.0.1:63156",
+    "transport": "in_process",
+    "endpoint": null,
     "baseline_id": "oracle_audio_manifest"
   },
   "rubric": {

@@ -1,7 +1,7 @@
 {
   "benchmark": "OpenVoiceCS-Bench Submission Card",
   "card_version": "0.1.0",
-  "generated_at": "2026-06-11",
+  "generated_at": "2026-07-28",
   "submitter": {
     "name": "OpenVoiceCS",
     "organization": "OpenVoiceCS",
@@ -25,12 +25,12 @@
   "evaluation": {
     "report": {
       "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
-      "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
-      "bytes": 7494153
+      "sha256": "3debaf22f2833920435024a46a38f4f06991d75175e2b8324157c6a4a404ba78",
+      "bytes": 11229766
     },
     "benchmark_version": "0.1.0",
     "evaluation_mode": "text",
-    "num_scenarios": 201,
+    "num_scenarios": 220,
     "num_audio_variants": null,
     "num_trials_per_scenario": 6,
     "overall_score": 100.0,

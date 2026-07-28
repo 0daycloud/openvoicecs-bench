@@ -1,13 +1,13 @@
 {
   "benchmark": "OpenVoiceCS-Bench",
   "version": "0.1.0",
-  "generated_at": "2026-07-27",
+  "generated_at": "2026-07-28",
   "release_stage": "seed",
   "files": {
     "scenario_suite": {
       "path": "data/openvoicecs/scenarios_v0.1.json",
-      "sha256": "c4506730061f1ce3123de8b8731840bb728e1adccf3bf5845c911d82451383b1",
-      "bytes": 1225827
+      "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
+      "bytes": 1467912
     },
     "audio_manifest": {
       "path": "data/openvoicecs/audio_manifest_v0.1.json",
@@ -21,33 +21,33 @@
     },
     "split_manifest": {
       "path": "data/openvoicecs/splits_v0.1.json",
-      "sha256": "fbccf6608561abf494e060ab203f9ce3c72ed780e09bd61fe09323f8e2e8894f",
-      "bytes": 15740
+      "sha256": "580f86e4feaacb3a6967c8c474e34742bc9dc51de311e46a47ab796f6b33e93f",
+      "bytes": 16601
     },
     "split_commitments": {
       "path": "data/openvoicecs/split_commitments_v0.1.json",
-      "sha256": "7e569bae23f907a53e6c45b8adfdf9ad7f4efb599e15c6a91c4917fe7f3ac9e3",
-      "bytes": 52640
+      "sha256": "99288c11297f09d95bbcd9c8631b09229f5ed3a173edc53617469e911aa80666",
+      "bytes": 48341
     },
     "provenance_manifest": {
       "path": "data/openvoicecs/provenance_v0.1.json",
-      "sha256": "6455f82eccfefc8d8bd2bf7bb0d2677df6e1445752c7bca54c60ec3a4feef5a9",
-      "bytes": 113163
+      "sha256": "40a5de86804b66b27019b1334cb91591bfcc97f8b3ac0bf3e02f111673a93202",
+      "bytes": 118328
     },
     "changelog": {
       "path": "data/openvoicecs/changelog_v0.1.json",
-      "sha256": "2d44c061db52d78adfb40639be52d68520a62b84036c46ea3aedd87aaa6f183b",
-      "bytes": 17822
+      "sha256": "945b502beccd936e28ff1570a0c48cab627b31078bd97476f8e104405430b71a",
+      "bytes": 19245
     },
     "baseline_manifest": {
       "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
-      "sha256": "7cc81354b69a9a20079f4714358dd85bed122924c2253f38e1236b7a27d98ef9",
+      "sha256": "984931f1f47f7865881c3a39f98d7e7a57f4201f5b4eab35c79208a887919257",
       "bytes": 3152
     },
     "review_manifest": {
       "path": "data/openvoicecs/scenario_reviews_v0.1.json",
-      "sha256": "72df07f6e11fd36fb02ff51c92e993bfd39d418f8c5f0a94c0cf2b7396ac071d",
-      "bytes": 169850
+      "sha256": "5303a5119bf182da2ac362c2360acf851589ecd4947b11507e86bcbd61009538",
+      "bytes": 183291
     },
     "judge_protocol": {
       "path": "data/openvoicecs/judging/judge_protocol_v0.1.json",
@@ -56,13 +56,13 @@
     },
     "judge_study": {
       "path": "data/openvoicecs/judging/judge_study_v0.1.json",
-      "sha256": "97c663ed0c5957cd83ec11352348320eabffa6a263c61b3a68de2eb4249a4691",
+      "sha256": "b2b3ff294fc46e8c7972641c9633d517e283e2422fcd6d1591f08dfb5c60a953",
       "bytes": 3203
     },
     "judge_annotation_package": {
       "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
-      "sha256": "7e2dd2f19eb3c8195a538790b2a6bc60aff176b0e8464e18163eda606599aa76",
-      "bytes": 3695
+      "sha256": "6391b0e09acbac4f777afef7d2db92fb334199f672c66972e8b4ddc3d6452300",
+      "bytes": 3697
     },
     "sealed_ops": {
       "path": "data/openvoicecs/sealed_ops_v0.1.json",
@@ -71,8 +71,8 @@
     },
     "sealed_queue": {
       "path": "data/openvoicecs/sealed_evaluator_queue_v0.1.json",
-      "sha256": "183c497309516070f79ce52828fc182e4af24c5a7d5a50ad8a127d5691864b3c",
-      "bytes": 3996
+      "sha256": "88844ea7f2f43c1f2defa2759e8137de23400e6292bd44922d4f2a501d839ae6",
+      "bytes": 3997
     },
     "external_endpoint_contract": {
       "path": "data/openvoicecs/external_endpoint_contract_v0.1.json",
@@ -81,18 +81,18 @@
     },
     "external_systems": {
       "path": "data/openvoicecs/external_systems_v0.1.json",
-      "sha256": "1c5660eb0282d794c37c6e86650c002b4ebe3968a425af87dd2467f36c382afa",
-      "bytes": 4315
+      "sha256": "2f7042943993b21c4efe1f6b83b7911ae6f129f04b84a06baccf1c8585ef0069",
+      "bytes": 4317
     },
     "leaderboard_claims": {
       "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-      "sha256": "7f18c1f06e90ebd838e1ab0b926976678d08f199c5b76ec1703fdf0a60785bc8",
+      "sha256": "bf5c14979e37b5fdf1ad1261a8e897015297f5da981eaa9dc1598c60f11b1ea4",
       "bytes": 2730
     },
     "submission_intake": {
       "path": "data/openvoicecs/submissions/reference_submission_intake_v0.1.json",
-      "sha256": "4c65ab09e34d583e337983b78a1586eb79687c1e3b01edc967663ce88a40d375",
-      "bytes": 2478
+      "sha256": "1760f9171ab0bda6f54f277ef9cc08813d1f1ba4a3b87337a411cee77378fea1",
+      "bytes": 2479
     }
   },
   "validation": {
@@ -101,27 +101,27 @@
     "issues": []
   },
   "scenario_stats": {
-    "num_scenarios": 204,
+    "num_scenarios": 220,
     "domains": {
-      "fintech_sandbox": 34,
-      "healthcare_admin": 33,
-      "retail": 35,
-      "saas_support": 33,
-      "telecom": 33,
-      "travel": 35,
+      "fintech_sandbox": 37,
+      "healthcare_admin": 35,
+      "retail": 38,
+      "saas_support": 35,
+      "telecom": 36,
+      "travel": 38,
       "utility_support": 1
     },
     "tracks": {
-      "adversarial_compliance": 40,
+      "adversarial_compliance": 45,
       "audio_to_action": 35,
       "end_to_end_voice": 20,
-      "robustness": 45,
-      "text_to_action": 64
+      "robustness": 51,
+      "text_to_action": 69
     },
     "difficulty": {
       "easy": 40,
-      "hard": 83,
-      "medium": 81
+      "hard": 94,
+      "medium": 86
     },
     "tags": {
       "SIM_replacement": 4,
@@ -130,12 +130,13 @@
       "account_recovery": 1,
       "address_update": 4,
       "adversarial": 4,
-      "adversarial_compliance": 36,
+      "adversarial_compliance": 41,
       "adversarial_customer": 1,
       "appointment_reschedule": 6,
       "audio": 1,
       "audio_to_action": 34,
       "audit_export": 4,
+      "authority_claim": 2,
       "bag_claim": 5,
       "billing": 1,
       "billing_credit": 4,
@@ -147,15 +148,17 @@
       "clinical_boundary": 2,
       "credit": 1,
       "damaged_furniture": 3,
-      "damaged_item": 2,
-      "distractor_tool": 3,
+      "damaged_item": 3,
+      "distractor_tool": 13,
       "end_to_end_voice": 20,
+      "escalating_social_engineering": 5,
       "escalation": 1,
       "executive_impersonation": 1,
+      "fintech": 3,
       "fraud": 3,
       "generated_public_beta": 188,
       "hard": 3,
-      "healthcare_admin": 1,
+      "healthcare_admin": 3,
       "hotel_rebooking": 5,
       "identity": 154,
       "insurance_update": 4,
@@ -166,13 +169,36 @@
       "loyalty_credit": 1,
       "merchant_hold": 5,
       "mfa": 2,
+      "mid_call_correction": 6,
       "missing_accessory": 3,
+      "multi_turn": 16,
+      "needs_turns: finance revises the seat count in the last turn, so provisioning against the turn-two number over-bills the workspace": 1,
+      "needs_turns: pressure escalates from a polite exception to an authority claim to an explicit order to skip policy, which only exists as a trajectory across turns": 1,
+      "needs_turns: the account passcode required by verify_identity is only spoken in turn two, so the port-out gate cannot be cleared on the opening turn": 1,
+      "needs_turns: the booking reference and callback code arrive only in turn two, so the protected rebooking cannot legitimately happen on the opening turn": 1,
+      "needs_turns: the caller only reveals the claimed fraud-team role and the demand to skip callback after the routine framing fails, so the attack signal is spread over four turns": 1,
+      "needs_turns: the caller starts as a helpful relative and only claims legal entitlement and demands the form be skipped after the first refusal": 1,
+      "needs_turns: the clinic named in turn three is corrected in turn five, so booking on the earlier turn sends the patient to the wrong site": 1,
+      "needs_turns: the customer refuses the correct provisional-credit resolution twice before accepting, so policy holding is only measurable across the objection turns": 1,
+      "needs_turns: the customer rejects the correct voucher resolution and presses twice more, so holding the fare rule is only observable after the objection turns": 1,
+      "needs_turns: the customer replaces the shipping address two turns after first stating it, so the correct address only exists in the later turn": 1,
+      "needs_turns: the customer supersedes the requested return date two turns after giving it, so only the later turn carries the bookable date": 1,
+      "needs_turns: the disputed amount stated in turn two is corrected in turn four, so a single-turn read files the dispute for the wrong sum": 1,
+      "needs_turns: the executive claim and the explicit instruction to skip owner approval arrive only after the operational story fails, so a single turn never shows the escalation": 1,
+      "needs_turns: the one-time code that verify_identity requires exists only in turn two, so no protected order action is possible on the opening turn": 1,
+      "needs_turns: the plan named in turn two is replaced in turn four, so the bookable plan exists only after the correction": 1,
+      "needs_turns: the request starts as an ordinary lost-phone SIM swap and only becomes an authority-backed demand to disable the code gate by turn four": 1,
       "no_upsell": 1,
       "noise": 1,
+      "objection_handling": 2,
       "outage": 1,
+      "ownership_takeover": 1,
       "phi": 1,
+      "phi_extraction": 1,
       "plan_correction": 4,
+      "policy_hold": 2,
       "policy_override": 36,
+      "port_out": 1,
       "portal_access": 3,
       "price_adjustment": 3,
       "privacy": 2,
@@ -181,27 +207,31 @@
       "refill_routing": 5,
       "refund": 3,
       "replacement_card": 3,
+      "retail": 3,
       "return_label": 3,
-      "robustness": 45,
+      "robustness": 51,
       "role_confusion": 1,
+      "saas_support": 2,
       "seat_accommodation": 4,
       "seat_downgrade": 4,
       "security": 1,
-      "self_repair": 1,
+      "self_repair": 7,
       "service_outage": 5,
+      "sim_swap": 1,
       "sms": 1,
       "social_engineering": 3,
       "statement_correction": 3,
       "subscription_cancellation": 3,
       "technician_visit": 4,
-      "telecom": 1,
-      "text_to_action": 55,
+      "telecom": 4,
+      "text_to_action": 60,
       "transfer_limit": 5,
-      "travel": 1,
+      "travel": 4,
       "travel_disruption": 1,
       "travel_notice": 3,
-      "travel_rebook": 1,
+      "travel_rebook": 2,
       "utility": 1,
+      "verification_back_and_forth": 3,
       "voucher": 1,
       "voucher_extension": 4,
       "waiver": 1,
@@ -212,33 +242,33 @@
   },
   "oracle_coverage": {
     "expected_state": {
-      "count": 204,
-      "total": 204,
+      "count": 220,
+      "total": 220,
       "rate": 1.0
     },
     "required_events": {
-      "count": 204,
-      "total": 204,
+      "count": 220,
+      "total": 220,
       "rate": 1.0
     },
     "forbidden_tool_calls": {
-      "count": 204,
-      "total": 204,
+      "count": 220,
+      "total": 220,
       "rate": 1.0
     },
     "grounding": {
-      "count": 204,
-      "total": 204,
+      "count": 220,
+      "total": 220,
       "rate": 1.0
     },
     "privacy": {
-      "count": 204,
-      "total": 204,
+      "count": 220,
+      "total": 220,
       "rate": 1.0
     },
     "auth": {
-      "count": 204,
-      "total": 204,
+      "count": 220,
+      "total": 220,
       "rate": 1.0
     }
   },
@@ -416,7 +446,7 @@
     "version": "0.1.0",
     "splits": {
       "public_dev": {
-        "num_scenarios": 83,
+        "num_scenarios": 99,
         "num_audio_variants": 40
       },
       "sealed_test": {
@@ -440,7 +470,7 @@
     "no_real_customer_data_rate": 1.0,
     "low_contamination_risk_rate": 1.0,
     "source_types": {
-      "hand_authored_synthetic": 204,
+      "hand_authored_synthetic": 220,
       "synthetic": 120
     }
   },
@@ -448,16 +478,16 @@
     "present": true,
     "version": "0.1.0",
     "benchmark_version": "0.1.0",
-    "num_entries": 5,
+    "num_entries": 6,
     "entry_types": {
       "release": 1,
-      "scenario_added": 4
+      "scenario_added": 5
     },
     "compatibility": {
-      "backward_compatible": 4,
+      "backward_compatible": 5,
       "initial_release": 1
     },
-    "num_changed_scenarios": 204,
+    "num_changed_scenarios": 220,
     "num_changed_audio_variants": 120,
     "scenario_change_coverage": 1.0,
     "audio_variant_change_coverage": 1.0,
@@ -476,20 +506,20 @@
         "pass_at_k": 1.0,
         "pass_k": 1.0,
         "mean_pass_rate": 1.0,
-        "num_scenarios": 204,
+        "num_scenarios": 220,
         "num_trials_per_scenario": 3,
         "task_success": 1.0,
         "safety": 1.0
       },
       "noop_text": {
-        "overall_score": 25.68,
+        "overall_score": 24.89,
         "pass_at_k": 0.0,
         "pass_k": 0.0,
         "mean_pass_rate": 0.0,
-        "num_scenarios": 204,
+        "num_scenarios": 220,
         "num_trials_per_scenario": 3,
         "task_success": 0.0,
-        "safety": 0.9902
+        "safety": 0.9909
       },
       "oracle_audio_manifest": {
         "overall_score": 100.0,
@@ -530,24 +560,24 @@
       "provenance_reviewed",
       "contamination_reviewed"
     ],
-    "num_reviews": 204,
-    "num_reviewed_scenarios": 204,
-    "num_approved_scenarios": 204,
+    "num_reviews": 220,
+    "num_reviewed_scenarios": 220,
+    "num_approved_scenarios": 220,
     "scenario_review_coverage": 1.0,
     "scenario_approval_coverage": 1.0,
     "unreviewed_scenario_ids": [],
     "unapproved_scenario_ids": [],
     "check_pass_counts": {
-      "realistic_customer_goal": 204,
-      "tool_contract_replayable": 204,
-      "oracle_expected_state_correct": 204,
-      "sop_policy_coverage": 204,
-      "privacy_coverage": 204,
-      "auth_integrity_coverage": 204,
-      "grounding_coverage": 204,
-      "forbidden_action_coverage": 204,
-      "provenance_reviewed": 204,
-      "contamination_reviewed": 204
+      "realistic_customer_goal": 220,
+      "tool_contract_replayable": 220,
+      "oracle_expected_state_correct": 220,
+      "sop_policy_coverage": 220,
+      "privacy_coverage": 220,
+      "auth_integrity_coverage": 220,
+      "grounding_coverage": 220,
+      "forbidden_action_coverage": 220,
+      "provenance_reviewed": 220,
+      "contamination_reviewed": 220
     },
     "check_pass_rates": {
       "realistic_customer_goal": 1.0,
@@ -582,8 +612,8 @@
     "annotation_mode": "reference_fixture",
     "official_judging": false,
     "num_packages": 2,
-    "num_annotations": 5292,
-    "num_items": 882
+    "num_annotations": 5520,
+    "num_items": 920
   },
   "sealed_queue_stats": {
     "present": true,

@@ -8,6 +8,6 @@
 <text class="label" x="24.00" y="312.00" font-size="13" transform="rotate(-90 24.00 312.00)">task success rate</text>
 <circle cx="508.00" cy="312.00" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
 <text class="muted" x="517.00" y="305.00">oracle_audio_manifest</text>
-<circle cx="508.00" cy="312.00" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
+<circle cx="508.00" cy="312.00" r="5" fill="#94a3b8" stroke="#0f172a" stroke-width="1"/>
 <text class="muted" x="517.00" y="305.00">oracle_text</text>
 </svg>

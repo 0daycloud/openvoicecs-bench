@@ -8,8 +8,8 @@
 <text class="label" x="785.12" y="550.88" font-size="13">latency</text>
 <text class="label" x="593.04" y="244.16" font-size="13">cost</text>
 <text class="label" x="279.76" y="171.20" font-size="13">quality</text>
-<circle cx="682.08" cy="261.28" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
-<text class="muted" x="691.08" y="254.28">oracle_audio_manifest</text>
-<circle cx="682.08" cy="261.28" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
-<text class="muted" x="691.08" y="254.28">oracle_text</text>
+<circle cx="484.08" cy="221.97" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1"/>
+<text class="muted" x="493.08" y="214.97">oracle_audio_manifest</text>
+<circle cx="880.08" cy="300.59" r="5" fill="#94a3b8" stroke="#0f172a" stroke-width="1"/>
+<text class="muted" x="889.08" y="293.59">oracle_text</text>
 </svg>

@@ -1,14 +1,14 @@
 {
   "benchmark": "OpenVoiceCS-Bench Datasheet",
   "datasheet_version": "0.1.0",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-07-28",
   "release": {
     "benchmark_version": "0.1.0",
     "release_stage": "seed",
     "scenario_file": {
       "path": "data/openvoicecs/scenarios_v0.1.json",
-      "sha256": "c4506730061f1ce3123de8b8731840bb728e1adccf3bf5845c911d82451383b1",
-      "bytes": 1225827
+      "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
+      "bytes": 1467912
     },
     "audio_manifest_file": {
       "path": "data/openvoicecs/audio_manifest_v0.1.json",
@@ -22,35 +22,35 @@
     },
     "split_manifest_file": {
       "path": "data/openvoicecs/splits_v0.1.json",
-      "sha256": "fbccf6608561abf494e060ab203f9ce3c72ed780e09bd61fe09323f8e2e8894f",
-      "bytes": 15740
+      "sha256": "580f86e4feaacb3a6967c8c474e34742bc9dc51de311e46a47ab796f6b33e93f",
+      "bytes": 16601
     },
     "provenance_manifest_file": {
       "path": "data/openvoicecs/provenance_v0.1.json",
-      "sha256": "6455f82eccfefc8d8bd2bf7bb0d2677df6e1445752c7bca54c60ec3a4feef5a9",
-      "bytes": 113163
+      "sha256": "40a5de86804b66b27019b1334cb91591bfcc97f8b3ac0bf3e02f111673a93202",
+      "bytes": 118328
     },
     "changelog_file": {
       "path": "data/openvoicecs/changelog_v0.1.json",
-      "sha256": "2d44c061db52d78adfb40639be52d68520a62b84036c46ea3aedd87aaa6f183b",
-      "bytes": 17822
+      "sha256": "945b502beccd936e28ff1570a0c48cab627b31078bd97476f8e104405430b71a",
+      "bytes": 19245
     },
     "baseline_manifest_file": {
       "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
-      "sha256": "7cc81354b69a9a20079f4714358dd85bed122924c2253f38e1236b7a27d98ef9",
+      "sha256": "984931f1f47f7865881c3a39f98d7e7a57f4201f5b4eab35c79208a887919257",
       "bytes": 3152
     },
     "review_manifest_file": {
       "path": "data/openvoicecs/scenario_reviews_v0.1.json",
-      "sha256": "72df07f6e11fd36fb02ff51c92e993bfd39d418f8c5f0a94c0cf2b7396ac071d",
-      "bytes": 169850
+      "sha256": "5303a5119bf182da2ac362c2360acf851589ecd4947b11507e86bcbd61009538",
+      "bytes": 183291
     },
     "split_commitment_file": {
       "path": "data/openvoicecs/split_commitments_v0.1.json",
-      "sha256": "7e569bae23f907a53e6c45b8adfdf9ad7f4efb599e15c6a91c4917fe7f3ac9e3",
-      "bytes": 52640
+      "sha256": "99288c11297f09d95bbcd9c8631b09229f5ed3a173edc53617469e911aa80666",
+      "bytes": 48341
     },
-    "split_commitment_root_hash": "b1723c555c1753fe1857c3438be42f7068082c32796229a3811031eb2185ffc7"
+    "split_commitment_root_hash": "3a412ab8dc2a6515976a4305563113041ee4111255489f728b3fc1e71b38f66a"
   },
   "intended_use": [
     "Evaluate voice AI and customer-service agents on task completion, policy compliance, tool use, safety, privacy, authentication, latency, and cost.",
@@ -62,27 +62,27 @@
     "Training on sealed-test scenarios, transcripts, tool oracles, expected states, or audio assets."
   ],
   "data_summary": {
-    "num_scenarios": 204,
+    "num_scenarios": 220,
     "domains": {
-      "fintech_sandbox": 34,
-      "healthcare_admin": 33,
-      "retail": 35,
-      "saas_support": 33,
-      "telecom": 33,
-      "travel": 35,
+      "fintech_sandbox": 37,
+      "healthcare_admin": 35,
+      "retail": 38,
+      "saas_support": 35,
+      "telecom": 36,
+      "travel": 38,
       "utility_support": 1
     },
     "tracks": {
-      "adversarial_compliance": 40,
+      "adversarial_compliance": 45,
       "audio_to_action": 35,
       "end_to_end_voice": 20,
-      "robustness": 45,
-      "text_to_action": 64
+      "robustness": 51,
+      "text_to_action": 69
     },
     "difficulty": {
       "easy": 40,
-      "hard": 83,
-      "medium": 81
+      "hard": 94,
+      "medium": 86
     },
     "num_audio_variants": 120,
     "audio_perturbations": {
@@ -102,7 +102,7 @@
     "audio_variant_coverage": 1.0,
     "splits": {
       "public_dev": {
-        "num_scenarios": 83,
+        "num_scenarios": 99,
         "num_audio_variants": 40
       },
       "sealed_test": {
@@ -111,7 +111,7 @@
       }
     },
     "sealed_test_policy": "Sealed items must not be published with full transcripts, tool oracles, expected states, or audio assets before evaluation.",
-    "commitment_root_hash": "b1723c555c1753fe1857c3438be42f7068082c32796229a3811031eb2185ffc7",
+    "commitment_root_hash": "3a412ab8dc2a6515976a4305563113041ee4111255489f728b3fc1e71b38f66a",
     "sealed_ids_revealed": false
   },
   "provenance": {
@@ -125,7 +125,7 @@
     "no_real_customer_data_rate": 1.0,
     "low_contamination_risk_rate": 1.0,
     "source_types": {
-      "hand_authored_synthetic": 204,
+      "hand_authored_synthetic": 220,
       "synthetic": 120
     }
   },
@@ -133,16 +133,16 @@
     "present": true,
     "version": "0.1.0",
     "benchmark_version": "0.1.0",
-    "num_entries": 5,
+    "num_entries": 6,
     "entry_types": {
       "release": 1,
-      "scenario_added": 4
+      "scenario_added": 5
     },
     "compatibility": {
-      "backward_compatible": 4,
+      "backward_compatible": 5,
       "initial_release": 1
     },
-    "num_changed_scenarios": 204,
+    "num_changed_scenarios": 220,
     "num_changed_audio_variants": 120,
     "scenario_change_coverage": 1.0,
     "audio_variant_change_coverage": 1.0,
@@ -161,20 +161,20 @@
         "pass_at_k": 1.0,
         "pass_k": 1.0,
         "mean_pass_rate": 1.0,
-        "num_scenarios": 204,
+        "num_scenarios": 220,
         "num_trials_per_scenario": 3,
         "task_success": 1.0,
         "safety": 1.0
       },
       "noop_text": {
-        "overall_score": 25.68,
+        "overall_score": 24.89,
         "pass_at_k": 0.0,
         "pass_k": 0.0,
         "mean_pass_rate": 0.0,
-        "num_scenarios": 204,
+        "num_scenarios": 220,
         "num_trials_per_scenario": 3,
         "task_success": 0.0,
-        "safety": 0.9902
+        "safety": 0.9909
       },
       "oracle_audio_manifest": {
         "overall_score": 100.0,
@@ -215,24 +215,24 @@
       "provenance_reviewed",
       "contamination_reviewed"
     ],
-    "num_reviews": 204,
-    "num_reviewed_scenarios": 204,
-    "num_approved_scenarios": 204,
+    "num_reviews": 220,
+    "num_reviewed_scenarios": 220,
+    "num_approved_scenarios": 220,
     "scenario_review_coverage": 1.0,
     "scenario_approval_coverage": 1.0,
     "unreviewed_scenario_ids": [],
     "unapproved_scenario_ids": [],
     "check_pass_counts": {
-      "realistic_customer_goal": 204,
-      "tool_contract_replayable": 204,
-      "oracle_expected_state_correct": 204,
-      "sop_policy_coverage": 204,
-      "privacy_coverage": 204,
-      "auth_integrity_coverage": 204,
-      "grounding_coverage": 204,
-      "forbidden_action_coverage": 204,
-      "provenance_reviewed": 204,
-      "contamination_reviewed": 204
+      "realistic_customer_goal": 220,
+      "tool_contract_replayable": 220,
+      "oracle_expected_state_correct": 220,
+      "sop_policy_coverage": 220,
+      "privacy_coverage": 220,
+      "auth_integrity_coverage": 220,
+      "grounding_coverage": 220,
+      "forbidden_action_coverage": 220,
+      "provenance_reviewed": 220,
+      "contamination_reviewed": 220
     },
     "check_pass_rates": {
       "realistic_customer_goal": 1.0,

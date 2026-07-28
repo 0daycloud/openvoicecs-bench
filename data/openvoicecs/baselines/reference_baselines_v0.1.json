@@ -2,11 +2,11 @@
   "name": "OpenVoiceCS-Bench Reference Baselines",
   "version": "0.1.0",
   "benchmark_version": "0.1.0",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-07-28",
   "scenario_file": {
     "path": "data/openvoicecs/scenarios_v0.1.json",
-    "sha256": "c4506730061f1ce3123de8b8731840bb728e1adccf3bf5845c911d82451383b1",
-    "bytes": 1225827
+    "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
+    "bytes": 1467912
   },
   "audio_manifest_file": {
     "path": "data/openvoicecs/audio_manifest_v0.1.json",
@@ -22,15 +22,15 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/oracle_text.json",
-        "sha256": "b8ac888a4a6e75c2e4728b34d41dbcee3f2022d1230341ca35b26c77bdc72dc6",
-        "bytes": 4686634
+        "sha256": "cb82ac719bb37f4c450963633e32b9a336212d26ee3d8be62c830a4533098711",
+        "bytes": 4787710
       },
       "expected": {
         "overall_score": 100.0,
         "pass_at_k": 1.0,
         "pass_k": 1.0,
         "mean_pass_rate": 1.0,
-        "num_scenarios": 204,
+        "num_scenarios": 220,
         "num_trials_per_scenario": 3,
         "task_success": 1.0,
         "safety": 1.0
@@ -44,18 +44,18 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/noop_text.json",
-        "sha256": "2d9894792da524ae6a2a82000d16d5e15928422237dd26fb3660810de482a41a",
-        "bytes": 4936097
+        "sha256": "fe1f1f3e631b65165885871688bd2ca964059cbb6fc18b2f140f5615b40ff920",
+        "bytes": 4886067
       },
       "expected": {
-        "overall_score": 25.68,
+        "overall_score": 24.89,
         "pass_at_k": 0.0,
         "pass_k": 0.0,
         "mean_pass_rate": 0.0,
-        "num_scenarios": 204,
+        "num_scenarios": 220,
         "num_trials_per_scenario": 3,
         "task_success": 0.0,
-        "safety": 0.9902
+        "safety": 0.9909
       }
     },
     {
@@ -66,8 +66,8 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/oracle_audio_manifest.json",
-        "sha256": "2942f696f85cabf454162ff373496e62f75e72ae2b0dee18c2022c65b5ef8698",
-        "bytes": 2825668
+        "sha256": "b63f96dfddc03893574ecdd2f026318f60ee804fa748afce910c6f14c614903b",
+        "bytes": 2671873
       },
       "expected": {
         "overall_score": 100.0,
@@ -88,8 +88,8 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/noop_audio_manifest.json",
-        "sha256": "67eb415ca034b2a8b33d1a8310dc4121a1a65425837a17d74f537edcba508a85",
-        "bytes": 2969625
+        "sha256": "27d7da6f8004cb6b87e7761edd38155b3f334500a56a3f1552beeeafa5d84618",
+        "bytes": 2728910
       },
       "expected": {
         "overall_score": 25.98,

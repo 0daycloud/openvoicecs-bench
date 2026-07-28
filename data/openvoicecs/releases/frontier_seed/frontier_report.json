@@ -1,6 +1,6 @@
 {
   "benchmark": "Latency-Cost-Quality Frontier",
-  "generated_at": "2026-06-11",
+  "generated_at": "2026-07-28",
   "axes": {
     "latency": {
       "primary": "p95_v2v_ttfb_ms",
@@ -53,20 +53,32 @@
     ]
   },
   "constrained_frontiers": {
-    "latency_targets_ms": [],
-    "cost_targets_usd": [],
-    "entries": []
+    "latency_targets_ms": [
+      300.0
+    ],
+    "cost_targets_usd": [
+      0.1
+    ],
+    "entries": [
+      {
+        "constraint": {
+          "latency_ms": 300.0,
+          "cost_usd": 0.1
+        },
+        "frontier": [],
+        "eligible_systems": [],
+        "num_eligible_systems": 0
+      }
+    ]
   },
   "domain_frontiers": {
     "fintech_sandbox": {
       "frontier": [
-        "oracle_audio_manifest",
-        "oracle_text"
+        "oracle_audio_manifest"
       ],
       "projection_frontiers": {
         "latency_vs_quality": [
-          "oracle_audio_manifest",
-          "oracle_text"
+          "oracle_audio_manifest"
         ],
         "cost_vs_quality": [
           "oracle_audio_manifest",
@@ -244,8 +256,8 @@
         "pricing_snapshot_date": "2026-06-11",
         "pipeline_type": "cascaded",
         "input_modality": "audio",
-        "transport": "websocket",
-        "endpoint": "ws://127.0.0.1:63156",
+        "transport": "in_process",
+        "endpoint": null,
         "baseline_id": "oracle_audio_manifest"
       },
       "axes": {
@@ -307,7 +319,7 @@
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 1,
-              "wall_seconds": 0.485
+              "wall_seconds": 0.12
             },
             "10": {
               "target_concurrency": 10,
@@ -319,7 +331,7 @@
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 10,
-              "wall_seconds": 0.289
+              "wall_seconds": 0.112
             },
             "100": {
               "target_concurrency": 100,
@@ -331,7 +343,7 @@
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 100,
-              "wall_seconds": 0.27
+              "wall_seconds": 0.117
             }
           }
         },
@@ -484,7 +496,7 @@
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 1,
-              "wall_seconds": 0.485
+              "wall_seconds": 0.12
             },
             "10": {
               "target_concurrency": 10,
@@ -496,7 +508,7 @@
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 10,
-              "wall_seconds": 0.289
+              "wall_seconds": 0.112
             },
             "100": {
               "target_concurrency": 100,
@@ -508,7 +520,7 @@
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 100,
-              "wall_seconds": 0.27
+              "wall_seconds": 0.117
             }
           }
         },
@@ -680,8 +692,8 @@
         "pricing_snapshot_date": "2026-06-11",
         "pipeline_type": "cascaded",
         "input_modality": "text",
-        "transport": "websocket",
-        "endpoint": "ws://127.0.0.1:63156",
+        "transport": "in_process",
+        "endpoint": null,
         "baseline_id": "oracle_text"
       },
       "axes": {
@@ -693,7 +705,7 @@
         "p50_v2v_ttfb_ms": 770.0,
         "p90_v2v_ttfb_ms": 860.0,
         "p95_v2v_ttfb_ms": 860.0,
-        "p99_v2v_ttfb_ms": 860.0,
+        "p99_v2v_ttfb_ms": 900.0,
         "p50_v2v_last_byte_ms": 1120.0,
         "p95_v2v_last_byte_ms": 1210.0,
         "barge_in_stop_p95_ms": 120.0,
@@ -714,64 +726,64 @@
           }
         },
         "latency_measurement": {
-          "sample_count": 1206,
+          "sample_count": 1320,
           "source_counts": {
-            "event_stream": 1206,
+            "event_stream": 1320,
             "reported_latency": 0,
             "runtime_fallback": 0,
             "unknown": 0
           },
-          "event_stream_samples": 1206,
+          "event_stream_samples": 1320,
           "reported_latency_samples": 0,
           "runtime_fallback_samples": 0,
           "unknown_samples": 0,
-          "vad_origin_samples": 1206,
-          "first_audio_event_samples": 1206,
-          "last_audio_event_samples": 1206,
-          "barge_in_stop_event_samples": 1206,
-          "interruption_recovery_event_samples": 1206
+          "vad_origin_samples": 1320,
+          "first_audio_event_samples": 1320,
+          "last_audio_event_samples": 1320,
+          "barge_in_stop_event_samples": 1320,
+          "interruption_recovery_event_samples": 1320
         },
         "latency_load": {
           "levels": {
             "1": {
               "target_concurrency": 1,
-              "sample_count": 402,
+              "sample_count": 440,
               "saturated": true,
               "p95_v2v_ttfb_ms": 860.0,
-              "requested_calls": 402,
-              "completed_calls": 402,
+              "requested_calls": 440,
+              "completed_calls": 440,
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 1,
-              "wall_seconds": 0.42
+              "wall_seconds": 0.112
             },
             "10": {
               "target_concurrency": 10,
-              "sample_count": 402,
+              "sample_count": 440,
               "saturated": true,
               "p95_v2v_ttfb_ms": 860.0,
-              "requested_calls": 402,
-              "completed_calls": 402,
+              "requested_calls": 440,
+              "completed_calls": 440,
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 10,
-              "wall_seconds": 0.213
+              "wall_seconds": 0.096
             },
             "100": {
               "target_concurrency": 100,
-              "sample_count": 402,
+              "sample_count": 440,
               "saturated": true,
               "p95_v2v_ttfb_ms": 860.0,
-              "requested_calls": 402,
-              "completed_calls": 402,
+              "requested_calls": 440,
+              "completed_calls": 440,
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 100,
-              "wall_seconds": 0.195
+              "wall_seconds": 0.113
             }
           }
         },
-        "sample_count": 1206
+        "sample_count": 1320
       },
       "cost": {
         "cost_usd_per_conversation": 0.0,
@@ -785,10 +797,10 @@
           "transport": 0.0
         },
         "cost_provenance": {
-          "sample_count": 1206,
-          "direct_cost_samples": 1206,
-          "derived_cost_samples": 1206,
-          "fully_loaded_samples": 1206,
+          "sample_count": 1320,
+          "direct_cost_samples": 1320,
+          "derived_cost_samples": 1320,
+          "fully_loaded_samples": 1320,
           "missing_cost_samples": 0,
           "required_components": [
             "asr",
@@ -798,17 +810,17 @@
             "transport"
           ],
           "component_sample_counts": {
-            "asr": 1206,
-            "llm": 1206,
-            "tts": 1206,
+            "asr": 1320,
+            "llm": 1320,
+            "tts": 1320,
             "speech_to_speech": 0,
-            "telephony": 1206,
-            "transport": 1206
+            "telephony": 1320,
+            "transport": 1320
           },
           "pricing_source": "profile",
           "pipeline_type": "cascaded"
         },
-        "sample_count": 1206
+        "sample_count": 1320
       },
       "quality": {
         "task_success_rate": 1.0,
@@ -851,7 +863,7 @@
           "task_success_rate": 1.0
         },
         "fintech_sandbox": {
-          "p95_v2v_ttfb_ms": 860.0,
+          "p95_v2v_ttfb_ms": 898.0,
           "cost_usd_per_successful_conversation": 0.0,
           "task_success_rate": 1.0
         },
@@ -870,7 +882,7 @@
         "p50_v2v_ttfb_ms": 770.0,
         "p90_v2v_ttfb_ms": 860.0,
         "p95_v2v_ttfb_ms": 860.0,
-        "p99_v2v_ttfb_ms": 860.0,
+        "p99_v2v_ttfb_ms": 900.0,
         "p50_v2v_last_byte_ms": 1120.0,
         "p95_v2v_last_byte_ms": 1210.0,
         "barge_in_stop_p95_ms": 120.0,
@@ -891,60 +903,60 @@
           }
         },
         "latency_measurement": {
-          "sample_count": 1206,
+          "sample_count": 1320,
           "source_counts": {
-            "event_stream": 1206,
+            "event_stream": 1320,
             "reported_latency": 0,
             "runtime_fallback": 0,
             "unknown": 0
           },
-          "event_stream_samples": 1206,
+          "event_stream_samples": 1320,
           "reported_latency_samples": 0,
           "runtime_fallback_samples": 0,
           "unknown_samples": 0,
-          "vad_origin_samples": 1206,
-          "first_audio_event_samples": 1206,
-          "last_audio_event_samples": 1206,
-          "barge_in_stop_event_samples": 1206,
-          "interruption_recovery_event_samples": 1206
+          "vad_origin_samples": 1320,
+          "first_audio_event_samples": 1320,
+          "last_audio_event_samples": 1320,
+          "barge_in_stop_event_samples": 1320,
+          "interruption_recovery_event_samples": 1320
         },
         "latency_load": {
           "levels": {
             "1": {
               "target_concurrency": 1,
-              "sample_count": 402,
+              "sample_count": 440,
               "saturated": true,
               "p95_v2v_ttfb_ms": 860.0,
-              "requested_calls": 402,
-              "completed_calls": 402,
+              "requested_calls": 440,
+              "completed_calls": 440,
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 1,
-              "wall_seconds": 0.42
+              "wall_seconds": 0.112
             },
             "10": {
               "target_concurrency": 10,
-              "sample_count": 402,
+              "sample_count": 440,
               "saturated": true,
               "p95_v2v_ttfb_ms": 860.0,
-              "requested_calls": 402,
-              "completed_calls": 402,
+              "requested_calls": 440,
+              "completed_calls": 440,
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 10,
-              "wall_seconds": 0.213
+              "wall_seconds": 0.096
             },
             "100": {
               "target_concurrency": 100,
-              "sample_count": 402,
+              "sample_count": 440,
               "saturated": true,
               "p95_v2v_ttfb_ms": 860.0,
-              "requested_calls": 402,
-              "completed_calls": 402,
+              "requested_calls": 440,
+              "completed_calls": 440,
               "error_calls": 0,
               "error_rate": 0.0,
               "peak_active_calls": 100,
-              "wall_seconds": 0.195
+              "wall_seconds": 0.113
             }
           }
         },
@@ -959,10 +971,10 @@
           "transport": 0.0
         },
         "cost_provenance": {
-          "sample_count": 1206,
-          "direct_cost_samples": 1206,
-          "derived_cost_samples": 1206,
-          "fully_loaded_samples": 1206,
+          "sample_count": 1320,
+          "direct_cost_samples": 1320,
+          "derived_cost_samples": 1320,
+          "fully_loaded_samples": 1320,
           "missing_cost_samples": 0,
           "required_components": [
             "asr",
@@ -972,12 +984,12 @@
             "transport"
           ],
           "component_sample_counts": {
-            "asr": 1206,
-            "llm": 1206,
-            "tts": 1206,
+            "asr": 1320,
+            "llm": 1320,
+            "tts": 1320,
             "speech_to_speech": 0,
-            "telephony": 1206,
-            "transport": 1206
+            "telephony": 1320,
+            "transport": 1320
           },
           "pricing_source": "profile",
           "pipeline_type": "cascaded"
@@ -987,15 +999,15 @@
         "experience_score_source": "judged",
         "experience_evidence": {
           "coverage": 1.0,
-          "num_judged_trials": 1206,
-          "num_trials": 1206,
+          "num_judged_trials": 1320,
+          "num_trials": 1320,
           "judge_counts": {
-            "OpenVoiceCS Judge Rubric@0.1.0": 1206
+            "OpenVoiceCS Judge Rubric@0.1.0": 1320
           }
         },
         "overall_quality_score": 1.0,
         "pricing_snapshot_date": "2026-06-11",
-        "num_scenarios": 201,
+        "num_scenarios": 220,
         "axis_confidence_intervals": {
           "p95_v2v_ttfb_ms": {
             "method": "bootstrap_percentile",
@@ -1003,7 +1015,7 @@
             "estimate": 860.0,
             "low": 860.0,
             "high": 860.0,
-            "n": 1206,
+            "n": 1320,
             "iterations": 1000,
             "seed": 0
           },
@@ -1013,7 +1025,7 @@
             "estimate": 0.0,
             "low": 0.0,
             "high": 0.0,
-            "n": 1206,
+            "n": 1320,
             "iterations": 1000,
             "seed": 0
           },
@@ -1023,7 +1035,7 @@
             "estimate": 0.0,
             "low": 0.0,
             "high": 0.0,
-            "n": 1206,
+            "n": 1320,
             "iterations": 1000,
             "seed": 0
           },
@@ -1031,9 +1043,9 @@
             "method": "source_report",
             "confidence": 0.95,
             "estimate": 1.0,
-            "low": 0.9968,
+            "low": 0.9971,
             "high": 1.0,
-            "n": 1206
+            "n": 1320
           }
         }
       },
@@ -1041,24 +1053,24 @@
       "exclusion_reasons": [],
       "confidence_intervals": {
         "pass_at_k": {
-          "successes": 201,
-          "total": 201,
+          "successes": 220,
+          "total": 220,
           "estimate": 1.0,
-          "low": 0.9812,
+          "low": 0.9828,
           "high": 1.0
         },
         "pass_k": {
-          "successes": 201,
-          "total": 201,
+          "successes": 220,
+          "total": 220,
           "estimate": 1.0,
-          "low": 0.9812,
+          "low": 0.9828,
           "high": 1.0
         },
         "trial_pass_rate": {
-          "successes": 1206,
-          "total": 1206,
+          "successes": 1320,
+          "total": 1320,
           "estimate": 1.0,
-          "low": 0.9968,
+          "low": 0.9971,
           "high": 1.0
         },
         "frontier_axes": {
@@ -1068,7 +1080,7 @@
             "estimate": 860.0,
             "low": 860.0,
             "high": 860.0,
-            "n": 1206,
+            "n": 1320,
             "iterations": 1000,
             "seed": 0
           },
@@ -1078,7 +1090,7 @@
             "estimate": 0.0,
             "low": 0.0,
             "high": 0.0,
-            "n": 1206,
+            "n": 1320,
             "iterations": 1000,
             "seed": 0
           },
@@ -1088,7 +1100,7 @@
             "estimate": 0.0,
             "low": 0.0,
             "high": 0.0,
-            "n": 1206,
+            "n": 1320,
             "iterations": 1000,
             "seed": 0
           },
@@ -1096,9 +1108,9 @@
             "method": "source_report",
             "confidence": 0.95,
             "estimate": 1.0,
-            "low": 0.9968,
+            "low": 0.9971,
             "high": 1.0,
-            "n": 1206
+            "n": 1320
           }
         }
       }
@@ -1159,7 +1171,7 @@
             "error_calls": 0,
             "error_rate": 0.0,
             "peak_active_calls": 1,
-            "wall_seconds": 0.485
+            "wall_seconds": 0.12
           },
           "10": {
             "target_concurrency": 10,
@@ -1171,7 +1183,7 @@
             "error_calls": 0,
             "error_rate": 0.0,
             "peak_active_calls": 10,
-            "wall_seconds": 0.289
+            "wall_seconds": 0.112
           },
           "100": {
             "target_concurrency": 100,
@@ -1183,7 +1195,7 @@
             "error_calls": 0,
             "error_rate": 0.0,
             "peak_active_calls": 100,
-            "wall_seconds": 0.27
+            "wall_seconds": 0.117
           }
         }
       },
@@ -1280,7 +1292,7 @@
       "p50_v2v_ttfb_ms": 770.0,
       "p90_v2v_ttfb_ms": 860.0,
       "p95_v2v_ttfb_ms": 860.0,
-      "p99_v2v_ttfb_ms": 860.0,
+      "p99_v2v_ttfb_ms": 900.0,
       "p50_v2v_last_byte_ms": 1120.0,
       "p95_v2v_last_byte_ms": 1210.0,
       "barge_in_stop_p95_ms": 120.0,
@@ -1301,60 +1313,60 @@
         }
       },
       "latency_measurement": {
-        "sample_count": 1206,
+        "sample_count": 1320,
         "source_counts": {
-          "event_stream": 1206,
+          "event_stream": 1320,
           "reported_latency": 0,
           "runtime_fallback": 0,
           "unknown": 0
         },
-        "event_stream_samples": 1206,
+        "event_stream_samples": 1320,
         "reported_latency_samples": 0,
         "runtime_fallback_samples": 0,
         "unknown_samples": 0,
-        "vad_origin_samples": 1206,
-        "first_audio_event_samples": 1206,
-        "last_audio_event_samples": 1206,
-        "barge_in_stop_event_samples": 1206,
-        "interruption_recovery_event_samples": 1206
+        "vad_origin_samples": 1320,
+        "first_audio_event_samples": 1320,
+        "last_audio_event_samples": 1320,
+        "barge_in_stop_event_samples": 1320,
+        "interruption_recovery_event_samples": 1320
       },
       "latency_load": {
         "levels": {
           "1": {
             "target_concurrency": 1,
-            "sample_count": 402,
+            "sample_count": 440,
             "saturated": true,
             "p95_v2v_ttfb_ms": 860.0,
-            "requested_calls": 402,
-            "completed_calls": 402,
+            "requested_calls": 440,
+            "completed_calls": 440,
             "error_calls": 0,
             "error_rate": 0.0,
             "peak_active_calls": 1,
-            "wall_seconds": 0.42
+            "wall_seconds": 0.112
           },
           "10": {
             "target_concurrency": 10,
-            "sample_count": 402,
+            "sample_count": 440,
             "saturated": true,
             "p95_v2v_ttfb_ms": 860.0,
-            "requested_calls": 402,
-            "completed_calls": 402,
+            "requested_calls": 440,
+            "completed_calls": 440,
             "error_calls": 0,
             "error_rate": 0.0,
             "peak_active_calls": 10,
-            "wall_seconds": 0.213
+            "wall_seconds": 0.096
           },
           "100": {
             "target_concurrency": 100,
-            "sample_count": 402,
+            "sample_count": 440,
             "saturated": true,
             "p95_v2v_ttfb_ms": 860.0,
-            "requested_calls": 402,
-            "completed_calls": 402,
+            "requested_calls": 440,
+            "completed_calls": 440,
             "error_calls": 0,
             "error_rate": 0.0,
             "peak_active_calls": 100,
-            "wall_seconds": 0.195
+            "wall_seconds": 0.113
           }
         }
       },
@@ -1369,10 +1381,10 @@
         "transport": 0.0
       },
       "cost_provenance": {
-        "sample_count": 1206,
-        "direct_cost_samples": 1206,
-        "derived_cost_samples": 1206,
-        "fully_loaded_samples": 1206,
+        "sample_count": 1320,
+        "direct_cost_samples": 1320,
+        "derived_cost_samples": 1320,
+        "fully_loaded_samples": 1320,
         "missing_cost_samples": 0,
         "required_components": [
           "asr",
@@ -1382,12 +1394,12 @@
           "transport"
         ],
         "component_sample_counts": {
-          "asr": 1206,
-          "llm": 1206,
-          "tts": 1206,
+          "asr": 1320,
+          "llm": 1320,
+          "tts": 1320,
           "speech_to_speech": 0,
-          "telephony": 1206,
-          "transport": 1206
+          "telephony": 1320,
+          "transport": 1320
         },
         "pricing_source": "profile",
         "pipeline_type": "cascaded"
@@ -1397,15 +1409,15 @@
       "experience_score_source": "judged",
       "experience_evidence": {
         "coverage": 1.0,
-        "num_judged_trials": 1206,
-        "num_trials": 1206,
+        "num_judged_trials": 1320,
+        "num_trials": 1320,
         "judge_counts": {
-          "OpenVoiceCS Judge Rubric@0.1.0": 1206
+          "OpenVoiceCS Judge Rubric@0.1.0": 1320
         }
       },
       "overall_quality_score": 1.0,
       "pricing_snapshot_date": "2026-06-11",
-      "num_scenarios": 201,
+      "num_scenarios": 220,
       "axis_confidence_intervals": {
         "p95_v2v_ttfb_ms": {
           "method": "bootstrap_percentile",
@@ -1413,7 +1425,7 @@
           "estimate": 860.0,
           "low": 860.0,
           "high": 860.0,
-          "n": 1206,
+          "n": 1320,
           "iterations": 1000,
           "seed": 0
         },
@@ -1423,7 +1435,7 @@
           "estimate": 0.0,
           "low": 0.0,
           "high": 0.0,
-          "n": 1206,
+          "n": 1320,
           "iterations": 1000,
           "seed": 0
         },
@@ -1433,7 +1445,7 @@
           "estimate": 0.0,
           "low": 0.0,
           "high": 0.0,
-          "n": 1206,
+          "n": 1320,
           "iterations": 1000,
           "seed": 0
         },
@@ -1441,9 +1453,9 @@
           "method": "source_report",
           "confidence": 0.95,
           "estimate": 1.0,
-          "low": 0.9968,
+          "low": 0.9971,
           "high": 1.0,
-          "n": 1206
+          "n": 1320
         }
       }
     }

@@ -10,37 +10,37 @@
   "artifacts": {
     "submission_card": {
       "path": "data/openvoicecs/submission_cards/oracle_text_realtime_reference_card.json",
-      "sha256": "356cb8932acc377b1216555484fdb8f2de0739c538a696ded73dd12dd9031542",
+      "sha256": "cbb9126fe7f6969255c8cac88ae8929c952e4aea47cc079de98e9c4bfdcf5a7b",
       "bytes": 1539
     },
     "report": {
       "path": "data/openvoicecs/reports/oracle_text_realtime_judged.json",
-      "sha256": "99c4c99265d0d54cad366b662e24691e36447fba8e788c8c02aea116e5e20fca",
-      "bytes": 7494153
+      "sha256": "3debaf22f2833920435024a46a38f4f06991d75175e2b8324157c6a4a404ba78",
+      "bytes": 11229766
     },
     "run_manifest": {
       "path": "data/openvoicecs/releases/frontier_seed/run_manifest.json",
-      "sha256": "2cc652b09a3ce2df7690cd8dd4531be732cbd0d20ce5becf961140f5cf2e95a9",
-      "bytes": 19640
+      "sha256": "1a4d240ad2c5cd72fd93e15c3330925c767365b1dad1ab79cac968524b8640c0",
+      "bytes": 22814
     },
     "release_bundle": {
       "path": "data/openvoicecs/releases/frontier_seed/release_bundle.json",
-      "sha256": "9242e621c86811bea1e6a9131216ea0b3f8b6231239efae66c331c60f21ee426",
-      "bytes": 10645
+      "sha256": "1c04b543c73e3e3512361cd6d93c8809d1f1465720c69cd0372dc5fec68ed068",
+      "bytes": 10647
     },
     "external_systems_registry": {
       "path": "data/openvoicecs/external_systems_v0.1.json",
-      "sha256": "1c5660eb0282d794c37c6e86650c002b4ebe3968a425af87dd2467f36c382afa",
-      "bytes": 4315
+      "sha256": "2f7042943993b21c4efe1f6b83b7911ae6f129f04b84a06baccf1c8585ef0069",
+      "bytes": 4317
     },
     "judge_annotation_package": {
       "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
-      "sha256": "7e2dd2f19eb3c8195a538790b2a6bc60aff176b0e8464e18163eda606599aa76",
-      "bytes": 3695
+      "sha256": "6391b0e09acbac4f777afef7d2db92fb334199f672c66972e8b4ddc3d6452300",
+      "bytes": 3697
     },
     "leaderboard_claims": {
       "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-      "sha256": "7f18c1f06e90ebd838e1ab0b926976678d08f199c5b76ec1703fdf0a60785bc8",
+      "sha256": "bf5c14979e37b5fdf1ad1261a8e897015297f5da981eaa9dc1598c60f11b1ea4",
       "bytes": 2730
     }
   },

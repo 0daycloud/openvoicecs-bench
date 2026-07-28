@@ -22,8 +22,8 @@
   },
   "annotation_package": {
     "path": "data/openvoicecs/judging/judge_annotation_package_v0.1.json",
-    "sha256": "7e2dd2f19eb3c8195a538790b2a6bc60aff176b0e8464e18163eda606599aa76",
-    "bytes": 3695
+    "sha256": "6391b0e09acbac4f777afef7d2db92fb334199f672c66972e8b4ddc3d6452300",
+    "bytes": 3697
   },
   "study_design": {
     "target_systems": [

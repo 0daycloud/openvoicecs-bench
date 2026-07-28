@@ -181,21 +181,29 @@ def build_frontier_release_bundle(
         "benchmark": "Latency-Cost-Quality Frontier",
         "bundle_version": "0.1.0",
         "generated_at": time.strftime("%Y-%m-%d"),
-        "output_dir": str(output),
+        "output_dir": _portable_source_path(output),
         "inputs": {
-            "reports": [str(path) for path in report_paths],
-            "scenario_path": str(scenario_path),
-            "audio_manifest_path": str(audio_manifest_path) if audio_manifest_path else None,
-            "pricing_manifest_path": str(pricing_manifest_path) if pricing_manifest_path else None,
-            "split_manifest_path": str(split_manifest_path) if split_manifest_path else None,
+            "reports": [_portable_source_path(path) for path in report_paths],
+            "scenario_path": _portable_source_path(scenario_path),
+            "audio_manifest_path": (
+                _portable_source_path(audio_manifest_path) if audio_manifest_path else None
+            ),
+            "pricing_manifest_path": (
+                _portable_source_path(pricing_manifest_path) if pricing_manifest_path else None
+            ),
+            "split_manifest_path": (
+                _portable_source_path(split_manifest_path) if split_manifest_path else None
+            ),
             "provenance_manifest_path": (
-                str(provenance_manifest_path) if provenance_manifest_path else None
+                _portable_source_path(provenance_manifest_path) if provenance_manifest_path else None
             ),
-            "changelog_path": str(changelog_path) if changelog_path else None,
+            "changelog_path": _portable_source_path(changelog_path) if changelog_path else None,
             "baseline_manifest_path": (
-                str(baseline_manifest_path) if baseline_manifest_path else None
+                _portable_source_path(baseline_manifest_path) if baseline_manifest_path else None
             ),
-            "review_manifest_path": str(review_manifest_path) if review_manifest_path else None,
+            "review_manifest_path": (
+                _portable_source_path(review_manifest_path) if review_manifest_path else None
+            ),
         },
         "input_files": input_files,
         "release_tuple": {
@@ -545,8 +553,26 @@ def _snapshot_artifact_entry(source: Path, destination: Path, *, base_dir: Path)
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination)
     entry = _artifact_entry(destination, base_dir=base_dir)
-    entry["source_path"] = str(source)
+    entry["source_path"] = _portable_source_path(source)
     return entry
+
+
+def _portable_source_path(source: Path) -> str:
+    """Record where an input came from without leaking the builder's filesystem.
+
+    ``source_path`` is audit context, not a locator — the bundle validates against
+    its own ``inputs/`` snapshot. An absolute path here publishes the operator's
+    home directory and username into a public release artifact, which has already
+    had to be scrubbed once (see the repository history). Relative to the current
+    working directory keeps the provenance and drops the machine.
+    """
+    resolved = Path(source).resolve()
+    try:
+        return str(resolved.relative_to(Path.cwd().resolve()))
+    except ValueError:
+        # Outside the working tree: keep only the final two components so the
+        # entry stays meaningful without naming intermediate directories.
+        return str(Path(*resolved.parts[-2:]))
 
 
 def _validate_input_files(
