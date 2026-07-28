@@ -235,6 +235,7 @@ def build_trace_prompt(
         "available_tools": tool_specs,
         "audio_variant": _summarize_audio_variant(scenario.get("audio_variant")),
         "trial_index": trial_index,
+        **_conversation_view(scenario),
     }
 
     system = (
@@ -291,6 +292,7 @@ def build_json_action_prompt(
         "available_tools": tool_specs,
         "audio_variant": _summarize_audio_variant(scenario.get("audio_variant")),
         "trial_index": trial_index,
+        **_conversation_view(scenario),
     }
     user = (
         "Use this stepwise JSON action protocol. Return only one JSON object per turn.\n"
@@ -342,12 +344,24 @@ def _provider_policy_view(policy: Any) -> dict[str, Any]:
 
 
 def _tool_argument_types(tool: dict[str, Any]) -> dict[str, str]:
+    """Advertise every argument, marking the ones the system assigns.
+
+    ``generated_arguments`` governs *scoring*, not disclosure. Hiding those
+    arguments entirely also hides what the tool is for — a ``create_case`` whose
+    ``reason`` and ``case_id`` vanish looks like a no-op, and models stopped
+    calling it. Naming the argument while excusing the agent from inventing its
+    value keeps the semantic signal without scoring an unguessable string.
+    """
     generated = set((tool.get("generated_arguments") or {}).keys())
-    return {
-        str(name): _json_schema_for_value(value)["type"]
-        for name, value in (tool.get("required_arguments") or {}).items()
-        if name not in generated
-    }
+    types = {}
+    for name, value in (tool.get("required_arguments") or {}).items():
+        declared = _json_schema_for_value(value)["type"]
+        types[str(name)] = (
+            f"{declared} (assigned by the system; omit or leave blank)"
+            if name in generated
+            else declared
+        )
+    return types
 
 
 def load_workspace_env(path: str | Path = ".env") -> None:
@@ -421,7 +435,7 @@ def _build_openai_compatible_agent(spec: ProviderSpec) -> Callable[[dict[str, An
                 request["reasoning_effort"] = spec.reasoning_effort
             response = client.chat.completions.create(**request)
             usage = _merge_openai_usage(usage, _extract_openai_usage(response))
-            text = _extract_openai_message_text(response.choices[0].message)
+            text = _extract_openai_message_text(_first_choice(response).message)
             action = parse_json_action_response(text)
             messages.append({"role": "assistant", "content": json.dumps(action, ensure_ascii=True)})
             if action["action"] == "final":
@@ -513,7 +527,7 @@ def _build_openai_native_tool_agent(spec: ProviderSpec) -> Callable[[dict[str, A
                 request["reasoning_effort"] = spec.reasoning_effort
             response = client.chat.completions.create(**request)
             usage = _merge_openai_usage(usage, _extract_openai_usage(response))
-            message = response.choices[0].message
+            message = _first_choice(response).message
             tool_calls = list(getattr(message, "tool_calls", None) or [])
             if not tool_calls:
                 text = _extract_openai_message_text(message)
@@ -697,10 +711,19 @@ def _openai_tool_schemas(scenario: dict[str, Any]) -> list[dict[str, Any]]:
     for tool in scenario.get("tools", []):
         properties = {}
         required = []
+        generated = tool.get("generated_arguments") or {}
         for name, value in (tool.get("required_arguments") or {}).items():
-            if name in (tool.get("generated_arguments") or {}):
+            schema = _json_schema_for_value(value)
+            if name in generated:
+                # Declared but not required: the agent learns the tool records
+                # this field without being scored on guessing its exact value.
+                schema = {
+                    **schema,
+                    "description": "Assigned by the system; may be omitted.",
+                }
+                properties[name] = schema
                 continue
-            properties[name] = _json_schema_for_value(value)
+            properties[name] = schema
             required.append(name)
         schemas.append({
             "type": "function",
@@ -1213,6 +1236,20 @@ def _extract_json_object(text: str) -> str:
     return candidate
 
 
+def _first_choice(response: Any) -> Any:
+    """Return the first completion choice, or fail with a classifiable message.
+
+    Some gateways answer with ``choices: null`` — a rate-limited or filtered
+    upstream wrapped in a 200. Subscripting that raised ``'NoneType' object is
+    not subscriptable``, which `classify_trial_error` then blamed on the model.
+    An envelope with no completion is a provider fault, so it is named as one.
+    """
+    choices = getattr(response, "choices", None)
+    if not choices:
+        raise RuntimeError("provider returned no completion choices (service unavailable)")
+    return choices[0]
+
+
 def _extract_openai_message_text(message: Any) -> str:
     content = getattr(message, "content", None)
     if isinstance(content, str) and content:
@@ -1278,6 +1315,33 @@ def _extract_google_usage(response: Any) -> dict[str, int]:
     }
 
 
+def _conversation_view(scenario: dict[str, Any]) -> dict[str, Any]:
+    """Extra prompt fields that only exist mid-conversation.
+
+    Empty for single-turn scenarios, so their prompts are unchanged. When the
+    harness is replaying turns it supplies ``turn_index``, and the agent needs
+    the dialogue so far plus the results of tools it already called — otherwise
+    it re-greets the customer and repeats work every turn.
+    """
+    turn_index = scenario.get("turn_index")
+    if turn_index is None:
+        return {}
+    conversation = [
+        {"role": str(turn.get("role", "customer")), "text": str(turn.get("text", ""))}
+        for turn in scenario.get("conversation") or []
+        if isinstance(turn, dict)
+    ]
+    view: dict[str, Any] = {
+        "conversation_so_far": conversation,
+        "turn_number": int(turn_index) + 1,
+        "total_turns": scenario.get("num_turns"),
+    }
+    prior = scenario.get("prior_tool_results")
+    if prior:
+        view["tools_already_called"] = prior
+    return view
+
+
 def _scenario_customer_text(scenario: dict[str, Any]) -> str:
     audio_variant = scenario.get("audio_variant") or {}
     if isinstance(audio_variant, dict) and audio_variant.get("transcript"):
@@ -1293,7 +1357,9 @@ def _scenario_customer_text(scenario: dict[str, Any]) -> str:
             if isinstance(turn, dict) and turn.get("role") in {"customer", "user", "patient"}
         ]
         if parts:
-            return "\n".join(parts)
+            # Mid-conversation the earlier turns are already in
+            # `conversation_so_far`; this field is what the customer just said.
+            return parts[-1] if scenario.get("turn_index") is not None else "\n".join(parts)
     return ""
 
 

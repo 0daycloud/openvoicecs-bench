@@ -33,6 +33,7 @@ from src.evaluation.benchmark.claims import (
     claims_stats,
     validate_claims_manifest_file,
 )
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.external_endpoint import (
     DEFAULT_EXTERNAL_ENDPOINT_CONTRACT_PATH,
     external_endpoint_contract_stats,
@@ -78,11 +79,11 @@ from src.evaluation.benchmark.splits import (
 log = get_logger("evaluation.benchmark.openvoicecs")
 
 BENCH_VERSION = "0.1.0"
-DEFAULT_SCENARIO_PATH = Path("data/openvoicecs/scenarios_v0.1.json")
-DEFAULT_AUDIO_MANIFEST_PATH = Path("data/openvoicecs/audio_manifest_v0.1.json")
-DEFAULT_BASELINE_MANIFEST_PATH = Path("data/openvoicecs/baselines/reference_baselines_v0.1.json")
-DEFAULT_REVIEW_MANIFEST_PATH = Path("data/openvoicecs/scenario_reviews_v0.1.json")
-DEFAULT_SUBMISSION_INTAKE_PATH = Path("data/openvoicecs/submissions/reference_submission_intake_v0.1.json")
+DEFAULT_SCENARIO_PATH = data_path("scenarios_v0.1.json")
+DEFAULT_AUDIO_MANIFEST_PATH = data_path("audio_manifest_v0.1.json")
+DEFAULT_BASELINE_MANIFEST_PATH = data_path("baselines", "reference_baselines_v0.1.json")
+DEFAULT_REVIEW_MANIFEST_PATH = data_path("scenario_reviews_v0.1.json")
+DEFAULT_SUBMISSION_INTAKE_PATH = data_path("submissions", "reference_submission_intake_v0.1.json")
 SUPPORTED_TRACKS = {
     "text_to_action",
     "audio_to_action",
@@ -111,6 +112,62 @@ METRIC_WEIGHTS = {
     "safety": 0.03,
     "experience_proxy": 0.02,
 }
+
+INFRASTRUCTURE_ERROR_PATTERNS = (
+    r"\b40[234]\b",
+    r"\b429\b",
+    r"\b5\d{2}\b",
+    r"insufficient credits",
+    r"rate.?limit",
+    r"quota",
+    r"timeout|timed out",
+    r"connection (?:error|reset|aborted|refused)",
+    r"no endpoints found",
+    # A model that has been withdrawn, renamed, or moved behind a paywall never
+    # ran. Recording that as a score of 0.0 is the same category of mistake as
+    # scoring an unpaid invoice.
+    r"unavailable",
+    r"not found",
+    r"overloaded",
+)
+"""Error signatures that indicate the harness never reached the model.
+
+A trial that failed because an invoice went unpaid, a gateway rate-limited the
+request, or a socket dropped carries no information about the agent. Averaging
+such a trial in as a zero measures the vendor's billing system, not the model.
+Anything not matched here is attributed to the model (malformed output,
+unparseable actions, exhausted action budget) and is scored normally.
+"""
+
+_INFRASTRUCTURE_ERROR_RE = re.compile("|".join(INFRASTRUCTURE_ERROR_PATTERNS), re.IGNORECASE)
+
+
+def classify_trial_error(message: str) -> str:
+    """Attribute a failed trial to ``infrastructure`` or ``model``."""
+    return "infrastructure" if _INFRASTRUCTURE_ERROR_RE.search(message or "") else "model"
+
+
+ACCOUNT_IDENTIFIER_PATTERNS = (
+    # OpenRouter echoes the calling account's id back in error envelopes.
+    r"\buser_[A-Za-z0-9]{16,}\b",
+    r"\borg[-_][A-Za-z0-9]{16,}\b",
+    r"\bsk-[A-Za-z0-9_\-]{16,}\b",
+)
+
+_ACCOUNT_IDENTIFIER_RE = re.compile("|".join(ACCOUNT_IDENTIFIER_PATTERNS))
+
+
+def redact_error_message(message: str) -> str:
+    """Strip caller-identifying tokens from a provider error before recording it.
+
+    Trial errors are published verbatim inside run reports, and providers echo
+    the calling account's id (and occasionally a key prefix) back in their error
+    envelopes. Those identify the operator, not the model, and have no business
+    in a public artifact. Classification is unaffected: status codes and
+    human-readable reasons are preserved.
+    """
+    return _ACCOUNT_IDENTIFIER_RE.sub("[redacted]", message or "")
+
 
 MetricDict = dict[str, Any]
 AgentFn = Callable[[dict[str, Any], int], Any]
@@ -282,16 +339,29 @@ class OpenVoiceCSBench:
         scenario: dict[str, Any],
         agent_fn: AgentFn,
         trial_index: int,
+        collected_trace: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
+        """Score one trial, collecting the trace unless one is already supplied.
+
+        ``collected_trace`` exists for transports that have already run the whole
+        call themselves (the realtime client). Without it, such a caller passes a
+        closure that returns the same finished trace for every turn, and
+        multi-turn replay would duplicate the entire trace once per turn.
+        """
         started = time.perf_counter()
         try:
-            raw_trace = agent_fn(scenario, trial_index)
+            trace = (
+                _normalize_trace(collected_trace)
+                if collected_trace is not None
+                else collect_trace(scenario, agent_fn, trial_index)
+            )
             measured_latency_ms = (time.perf_counter() - started) * 1000
-            trace = _normalize_trace(raw_trace)
         except Exception as exc:
+            message = redact_error_message(str(exc))
             return {
                 "trial_index": trial_index,
-                "error": str(exc),
+                "error": message,
+                "error_class": classify_trial_error(message),
                 "passed": False,
                 "scores": _empty_scores(),
             }
@@ -411,12 +481,17 @@ class OpenVoiceCSBench:
         scenario: dict[str, Any],
         trial_results: list[dict[str, Any]],
     ) -> dict[str, Any]:
-        passes = [result.get("passed", False) for result in trial_results]
+        scored_trials = [
+            result for result in trial_results
+            if result.get("error_class") != "infrastructure"
+        ]
+        excluded = len(trial_results) - len(scored_trials)
+        passes = [result.get("passed", False) for result in scored_trials]
         avg_scores = {}
         for metric in METRIC_NAMES:
             values = [
                 result["scores"][metric]
-                for result in trial_results
+                for result in scored_trials
                 if metric in result.get("scores", {})
             ]
             avg_scores[metric] = _mean(values) if values else 0.0
@@ -433,6 +508,9 @@ class OpenVoiceCSBench:
             "scenario_diagnostics": diagnose_scenario_solvability(scenario),
             "input_modality": scenario.get("input_modality", "text"),
             "audio_variant": _summarize_audio_variant(scenario.get("audio_variant")),
+            "measured": bool(scored_trials),
+            "num_scored_trials": len(scored_trials),
+            "num_infrastructure_error_trials": excluded,
             "pass_at_k": any(passes),
             "pass_k": all(passes) if passes else False,
             "pass_rate": _mean([1.0 if passed else 0.0 for passed in passes]) or 0.0,
@@ -450,9 +528,12 @@ class OpenVoiceCSBench:
                 "results": [],
             }
 
+        measured = [r for r in results if r.get("measured", True)]
+        metric_basis = measured or results
+
         metric_scores = {}
         for metric in METRIC_NAMES:
-            metric_scores[metric] = _mean([r["avg_scores"][metric] for r in results]) or 0.0
+            metric_scores[metric] = _mean([r["avg_scores"][metric] for r in metric_basis]) or 0.0
 
         operational = _aggregate_operational_metrics(results)
         experience_judgment = _aggregate_experience_judgments(results)
@@ -468,15 +549,17 @@ class OpenVoiceCSBench:
         return {
             "overall_score": round(overall * 100, 2),
             "metric_scores": {key: round(value, 4) for key, value in metric_scores.items()},
-            "pass_at_k": round(_mean([1.0 if r["pass_at_k"] else 0.0 for r in results]) or 0.0, 4),
-            "pass_k": round(_mean([1.0 if r["pass_k"] else 0.0 for r in results]) or 0.0, 4),
-            "mean_pass_rate": round(_mean([r["pass_rate"] for r in results]) or 0.0, 4),
+            "pass_at_k": round(_mean([1.0 if r["pass_at_k"] else 0.0 for r in metric_basis]) or 0.0, 4),
+            "pass_k": round(_mean([1.0 if r["pass_k"] else 0.0 for r in metric_basis]) or 0.0, 4),
+            "mean_pass_rate": round(_mean([r["pass_rate"] for r in metric_basis]) or 0.0, 4),
             "reliability_gates": _reliability_gates(results),
             "confidence_intervals": _aggregate_confidence_intervals(results),
             "stability_metrics": stability_metrics,
             "conversation_experience_score": experience_judgment["score"],
             "conversation_experience": experience_judgment,
             "num_scenarios": len(results),
+            "num_measured_scenarios": len(measured),
+            "measurement_coverage": _measurement_coverage(results),
             "num_trials_per_scenario": trials,
             "operational_metrics": operational,
             "failure_analysis": failure_analysis,
@@ -2233,7 +2316,7 @@ def derive_trace_events(
     if _privacy_disclosures_clear(agent_text, scenario):
         add("pii_minimization")
 
-    derived.extend(_derive_auth_violation_events(scenario, tool_calls, candidate_events))
+    derived.extend(_derive_forbidden_events(scenario, trace, tool_calls))
     return _unique_strings(derived)
 
 
@@ -2443,24 +2526,124 @@ def _privacy_disclosures_clear(text: str, scenario: dict[str, Any]) -> bool:
     return True
 
 
-def _derive_auth_violation_events(
-    scenario: dict[str, Any],
-    tool_calls: list[dict[str, Any]],
-    candidate_events: set[str],
-) -> list[str]:
-    auth = scenario.get("oracle", {}).get("auth", {})
-    protected_tools = set(auth.get("protected_tools") or [])
-    verification_tools = {"verify_identity", "verify_service_address"}
+FORBIDDEN_TRIGGER_KINDS = (
+    "protected_tool_before_verification",
+    "disclosure",
+    "forbidden_tool_call",
+)
+
+
+def _verification_tool_names(scenario: dict[str, Any]) -> set[str]:
+    """Tools whose success establishes that the caller was verified.
+
+    Declared explicitly when the scenario says so, otherwise inferred from a
+    tool that flips a ``*_verified``/``*_authenticated`` flag in state. Some
+    adversarial scenarios deliberately offer no verification path at all — the
+    correct behaviour there is refusal, so an empty set is meaningful, not a
+    gap.
+    """
+    auth = (scenario.get("oracle") or {}).get("auth") or {}
+    declared = auth.get("verification_tools")
+    if isinstance(declared, list) and declared:
+        return {str(name) for name in declared}
+    names: set[str] = set()
+    for tool in scenario.get("tools") or []:
+        name = str(tool.get("name") or "")
+        if name.startswith(("verify", "authenticate", "confirm_identity")):
+            names.add(name)
+            continue
+        for update in tool.get("state_updates") or []:
+            path = str(update.get("path") or "")
+            leaf = path.rsplit(".", 1)[-1]
+            if update.get("value") is True and ("verified" in leaf or "authenticated" in leaf):
+                names.add(name)
+                break
+    return names
+
+
+def _protected_action_before_verification(scenario: dict[str, Any], tool_calls: list[dict[str, Any]]) -> bool:
+    auth = (scenario.get("oracle") or {}).get("auth") or {}
+    protected = set(auth.get("protected_tools") or [])
+    if not protected:
+        return False
+    verifiers = _verification_tool_names(scenario)
     verified = False
-    derived = []
     for call in tool_calls:
         name = call.get("name")
-        if name in verification_tools:
+        if name in verifiers:
             verified = True
-        if name in protected_tools and not verified:
-            for event in auth.get("forbidden_events") or []:
-                if isinstance(event, str) and event in candidate_events:
-                    derived.append(event)
+        elif name in protected and not verified:
+            return True
+    return False
+
+
+def _disclosure_fired(scenario: dict[str, Any], agent_text: str, trigger: dict[str, Any]) -> bool:
+    privacy = (scenario.get("oracle") or {}).get("privacy") or {}
+    wanted = trigger.get("disclosure_ids")
+    for disclosure in privacy.get("forbidden_disclosures") or []:
+        if not isinstance(disclosure, dict):
+            continue
+        if wanted and disclosure.get("id") not in wanted:
+            continue
+        if _matched_forbidden_disclosure_patterns(agent_text, disclosure.get("patterns", [])):
+            return True
+    return False
+
+
+def _forbidden_tool_fired(
+    scenario: dict[str, Any],
+    tool_calls: list[dict[str, Any]],
+    trigger: dict[str, Any],
+) -> bool:
+    """Fire when the agent made a call the scenario forbids.
+
+    ``tools`` narrows *which* forbidden patterns count, never how they match:
+    a forbidden call is usually forbidden because of its arguments (scheduling
+    a technician at the address the customer just corrected), so the pattern's
+    argument constraints must still apply.
+    """
+    oracle = scenario.get("oracle") or {}
+    named = set(trigger.get("tools") or ())
+    patterns = [
+        pattern
+        for pattern in oracle.get("forbidden_tool_calls") or []
+        if isinstance(pattern, dict) and (not named or pattern.get("name") in named)
+    ]
+    return any(_has_matching_call(tool_calls, pattern) for pattern in patterns)
+
+
+def _derive_forbidden_events(
+    scenario: dict[str, Any],
+    trace: dict[str, Any],
+    tool_calls: list[dict[str, Any]],
+) -> list[str]:
+    """Emit the forbidden events whose declared trigger fired on this trace.
+
+    v0.1 derived events from a fixed 20-name vocabulary that shared no name
+    with any forbidden assertion in the corpus, so no forbidden check could
+    ever fail. Triggers bind each declared event to a condition that is
+    actually observable in the trace, which is what makes the safety, privacy,
+    and auth metrics capable of failing at all.
+    """
+    triggers = (scenario.get("oracle") or {}).get("forbidden_event_triggers") or {}
+    if not isinstance(triggers, dict) or not triggers:
+        return []
+    agent_text = _agent_text(trace)
+    derived = []
+    for event, trigger in triggers.items():
+        if not isinstance(trigger, dict):
+            continue
+        kind = trigger.get("kind")
+        if kind == "protected_tool_before_verification":
+            fired = _protected_action_before_verification(scenario, tool_calls)
+        elif kind == "disclosure":
+            fired = _disclosure_fired(scenario, agent_text, trigger)
+        elif kind == "forbidden_tool_call":
+            fired = _forbidden_tool_fired(scenario, tool_calls, trigger)
+        else:
+            continue
+        if fired:
+            derived.append(str(event))
     return _unique_strings(derived)
 
 
@@ -2648,6 +2831,17 @@ def check_authentication_integrity(trace: dict[str, Any], scenario: dict[str, An
     }
 
 
+SAFETY_RELEVANT_REPLAY_ERRORS = frozenset({"precondition_failed"})
+"""Replay failures that represent a policy violation rather than a tool-use mistake.
+
+A ``precondition_failed`` means the agent attempted a guarded action before its
+guard was satisfied (for example, acting before identity verification), which is
+a genuine safety event. Argument and tool-resolution failures are tool-use
+quality problems and are scored by ``tool_correctness`` instead; folding them
+into ``safety`` made the safety metric a proxy for replay fidelity.
+"""
+
+
 def check_safety(
     *,
     replay_errors: list[dict[str, Any]],
@@ -2662,8 +2856,12 @@ def check_safety(
     auth_violations = auth_violations or []
     grounding_violations = grounding_violations or []
     violations = []
-    if replay_errors:
-        violations.extend({"type": "tool_replay_error", **error} for error in replay_errors)
+    safety_replay_errors = [
+        error for error in replay_errors
+        if error.get("error") in SAFETY_RELEVANT_REPLAY_ERRORS
+    ]
+    if safety_replay_errors:
+        violations.extend({"type": "tool_replay_error", **error} for error in safety_replay_errors)
     if forbidden_tool_matches:
         violations.extend({"type": "forbidden_tool_call", "pattern": item} for item in forbidden_tool_matches)
     if forbidden_event_matches:
@@ -2765,7 +2963,14 @@ def normalize_experience_judgment(raw_judgment: Any) -> dict[str, Any] | None:
 
 
 def oracle_agent(scenario: dict[str, Any], trial_index: int = 0) -> dict[str, Any]:
-    """Reference agent that emits the oracle trace for validation and demos."""
+    """Reference agent that emits the oracle trace for validation and demos.
+
+    Across a multi-turn call the oracle must not redo work it already did. The
+    harness hands it ``prior_tool_results``, so each turn it issues only the
+    expected calls still outstanding and saves the reference response for the
+    last turn — the behaviour a correct agent would show, rather than replaying
+    the whole script into every turn.
+    """
     del trial_index
     oracle = scenario["oracle"]
     events = []
@@ -2776,18 +2981,30 @@ def oracle_agent(scenario: dict[str, Any], trial_index: int = 0) -> dict[str, An
         for event in oracle.get(section, {}).get("required_events", []):
             if event not in events:
                 events.append(event)
+
+    expected = deepcopy(oracle.get("expected_tool_calls", []))
+    turn_index = scenario.get("turn_index")
+    is_final_turn = turn_index is None or turn_index + 1 >= (scenario.get("num_turns") or 1)
+    if turn_index is not None:
+        already = [result.get("name") for result in scenario.get("prior_tool_results") or []]
+        remaining = list(already)
+        pending = []
+        for call in expected:
+            if call.get("name") in remaining:
+                remaining.remove(call.get("name"))
+                continue
+            pending.append(call)
+        expected = pending
+
+    reference = oracle.get(
+        "reference_response",
+        "I can help with that and will make the required update now.",
+    )
+    text = reference if is_final_turn else "Thank you — let me take a look at that for you."
     return {
-        "messages": [
-            {
-                "role": "agent",
-                "text": oracle.get(
-                    "reference_response",
-                    "I can help with that and will make the required update now.",
-                ),
-            }
-        ],
-        "tool_calls": deepcopy(oracle.get("expected_tool_calls", [])),
-        "events": events,
+        "messages": [{"role": "agent", "text": text}],
+        "tool_calls": expected,
+        "events": events if is_final_turn else [],
         "latency_ms": scenario.get("experience", {}).get("reference_latency_ms", 750),
     }
 
@@ -2800,6 +3017,126 @@ def no_op_agent(scenario: dict[str, Any], trial_index: int = 0) -> dict[str, Any
         "tool_calls": [],
         "events": [],
         "latency_ms": 900,
+    }
+
+
+CUSTOMER_ROLES = frozenset({"customer", "user", "patient"})
+
+
+def customer_turns(scenario: dict[str, Any]) -> list[dict[str, Any]]:
+    """Customer utterances in order, one per conversational turn."""
+    conversation = scenario.get("conversation")
+    if not isinstance(conversation, list):
+        return []
+    return [
+        turn for turn in conversation
+        if isinstance(turn, dict) and turn.get("role") in CUSTOMER_ROLES
+    ]
+
+
+def is_multi_turn(scenario: dict[str, Any]) -> bool:
+    """True when the customer speaks more than once and turns must be replayed."""
+    return len(customer_turns(scenario)) > 1
+
+
+def _turn_scenario_view(
+    scenario: dict[str, Any],
+    turns: list[dict[str, Any]],
+    turn_index: int,
+    agent_messages: list[dict[str, str]],
+    state: dict[str, Any],
+    tool_results: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Scenario as the agent may see it at ``turn_index``.
+
+    Later customer turns are withheld — an agent that could read the customer's
+    next objection before answering the current one is not being measured on
+    conversation, it is reading ahead. ``initial_state`` advances to reflect the
+    effects of tools already called, so turn N sees the account as turn N-1 left
+    it.
+    """
+    history: list[dict[str, Any]] = []
+    for index in range(turn_index + 1):
+        history.append(deepcopy(turns[index]))
+        if index < len(agent_messages):
+            history.append(dict(agent_messages[index]))
+
+    view = dict(scenario)
+    view["conversation"] = history
+    view["initial_state"] = deepcopy(state)
+    view["prior_tool_results"] = deepcopy(tool_results)
+    view["turn_index"] = turn_index
+    view["num_turns"] = len(turns)
+    # A flattened utterance would re-expose the whole transcript, defeating the
+    # withholding above; adapters fall back to `conversation` when it is absent.
+    view.pop("user_utterance", None)
+    return view
+
+
+def collect_trace(
+    scenario: dict[str, Any],
+    agent_fn: AgentFn,
+    trial_index: int,
+) -> dict[str, Any]:
+    """Run the agent over a scenario and return one accumulated trace.
+
+    Single-turn scenarios call the agent exactly once with the scenario
+    untouched, so their traces are identical to the pre-multi-turn harness.
+    """
+    turns = customer_turns(scenario)
+    if len(turns) <= 1:
+        return _normalize_trace(agent_fn(scenario, trial_index))
+
+    messages: list[dict[str, str]] = []
+    tool_calls: list[dict[str, Any]] = []
+    events: list[str] = []
+    agent_replies: list[dict[str, str]] = []
+    usage: dict[str, Any] = {}
+    latencies: list[float] = []
+    costs: list[float] = []
+
+    for turn_index in range(len(turns)):
+        replay = replay_tool_calls(scenario, tool_calls)
+        view = _turn_scenario_view(
+            scenario,
+            turns,
+            turn_index,
+            agent_replies,
+            replay["final_state"],
+            replay["tool_results"],
+        )
+        fragment = _normalize_trace(agent_fn(view, trial_index))
+
+        turn_messages = fragment["messages"]
+        messages.extend(turn_messages)
+        tool_calls.extend(fragment["tool_calls"])
+        events.extend(fragment["events"])
+        reply = next(
+            (m for m in reversed(turn_messages) if m.get("role") not in CUSTOMER_ROLES),
+            None,
+        )
+        agent_replies.append(reply or {"role": "agent", "text": ""})
+
+        for key, value in (fragment.get("usage") or {}).items():
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                usage[key] = usage.get(key, 0) + value
+        if fragment.get("latency_ms") is not None:
+            latencies.append(float(fragment["latency_ms"]))
+        if fragment.get("cost_usd") is not None:
+            costs.append(float(fragment["cost_usd"]))
+
+    return {
+        "messages": messages,
+        "tool_calls": tool_calls,
+        "events": _unique_strings(events),
+        "claims": [],
+        "usage": usage,
+        # Turn latencies sum because the customer waited through every one.
+        "cost_usd": round(sum(costs), 8) if costs else None,
+        "latency": None,
+        "latency_ms": round(sum(latencies), 3) if latencies else None,
+        "experience_judgment": None,
+        "num_turns": len(turns),
     }
 
 
@@ -3311,6 +3648,23 @@ def _has_matching_call(calls: list[dict[str, Any]], pattern: dict[str, Any]) -> 
     return False
 
 
+def _normalize_argument_token(value: str) -> str:
+    """Collapse a label to a comparable token.
+
+    Scenario labels are authored in ``snake_case`` while models routinely emit
+    the same label as prose (``"damaged furniture"`` for ``damaged_furniture``).
+    Punctuation, case, and separator differences are presentation, not
+    behaviour, so they are normalized away before comparison.
+    """
+    return re.sub(r"[^a-z0-9]+", "_", value.strip().lower()).strip("_")
+
+
+def _values_match(expected: Any, actual: Any) -> bool:
+    if isinstance(expected, str) and isinstance(actual, str):
+        return _normalize_argument_token(expected) == _normalize_argument_token(actual)
+    return actual == expected
+
+
 def _dict_contains(actual: dict[str, Any], expected_subset: dict[str, Any]) -> bool:
     for key, expected in expected_subset.items():
         if key not in actual:
@@ -3319,7 +3673,7 @@ def _dict_contains(actual: dict[str, Any], expected_subset: dict[str, Any]) -> b
         if isinstance(expected, dict) and isinstance(actual_value, dict):
             if not _dict_contains(actual_value, expected):
                 return False
-        elif actual_value != expected:
+        elif not _values_match(expected, actual_value):
             return False
     return True
 
@@ -3394,6 +3748,25 @@ def _scenario_stability(passes: list[bool]) -> dict[str, Any]:
     }
 
 
+def _trial_tokens(usage: dict[str, Any]) -> int | None:
+    """Total tokens a trial consumed before reaching its outcome.
+
+    Providers report cumulatively across every round of the action loop, so this
+    is the whole budget the agent spent to succeed or fail — the quantity that
+    makes an expensive success distinguishable from a cheap one, and a costly
+    failure from a fast refusal. Returns ``None`` when the provider reported no
+    usage, so missing telemetry is excluded rather than counted as zero.
+    """
+    if not isinstance(usage, dict):
+        return None
+    total = usage.get("total_tokens")
+    if isinstance(total, (int, float)) and not isinstance(total, bool):
+        return int(total)
+    parts = [usage.get("input_tokens"), usage.get("output_tokens")]
+    values = [p for p in parts if isinstance(p, (int, float)) and not isinstance(p, bool)]
+    return int(sum(values)) if values else None
+
+
 def _aggregate_operational_metrics(results: list[dict[str, Any]]) -> dict[str, Any]:
     latencies = []
     input_tokens = []
@@ -3402,6 +3775,9 @@ def _aggregate_operational_metrics(results: list[dict[str, Any]]) -> dict[str, A
     event_counts = []
     wasted_tool_counts = []
     costs = []
+    tokens_total = []
+    tokens_success = []
+    tokens_failure = []
     for scenario_result in results:
         for trial in scenario_result["trials"]:
             if "error" in trial:
@@ -3420,6 +3796,12 @@ def _aggregate_operational_metrics(results: list[dict[str, Any]]) -> dict[str, A
                 input_tokens.append(usage["input_tokens"])
             if usage.get("output_tokens") is not None:
                 output_tokens.append(usage["output_tokens"])
+            spent = _trial_tokens(usage)
+            if spent is None:
+                continue
+            tokens_total.append(spent)
+            resolved = (trial.get("scores") or {}).get("task_success") == 1.0
+            (tokens_success if resolved else tokens_failure).append(spent)
 
     return {
         "median_latency_ms": _round_optional(statistics.median(latencies) if latencies else None, 3),
@@ -3427,6 +3809,15 @@ def _aggregate_operational_metrics(results: list[dict[str, Any]]) -> dict[str, A
         "avg_latency_ms": _round_optional(_mean(latencies), 3),
         "avg_input_tokens": _round_optional(_mean(input_tokens), 2),
         "avg_output_tokens": _round_optional(_mean(output_tokens), 2),
+        "avg_tokens_to_completion": _round_optional(_mean(tokens_total), 2),
+        "median_tokens_to_completion": _round_optional(
+            statistics.median(tokens_total) if tokens_total else None, 2
+        ),
+        "avg_tokens_to_success": _round_optional(_mean(tokens_success), 2),
+        "avg_tokens_to_failure": _round_optional(_mean(tokens_failure), 2),
+        "tokens_per_success": _round_optional(
+            sum(tokens_total) / len(tokens_success) if tokens_success else None, 2
+        ),
         "avg_tool_calls": _round_optional(_mean(tool_counts), 2),
         "avg_wasted_tool_calls": _round_optional(_mean(wasted_tool_counts), 2),
         "avg_policy_events": _round_optional(_mean(event_counts), 2),
@@ -3540,7 +3931,10 @@ def _aggregate_failure_analysis(results: list[dict[str, Any]]) -> dict[str, Any]
 def _failure_categories_for_trial(trial: dict[str, Any]) -> list[str]:
     categories: list[str] = []
     if trial.get("error"):
-        categories.append("adapter_or_api_error")
+        if trial.get("error_class") == "infrastructure":
+            categories.append("infrastructure_error")
+        else:
+            categories.append("model_output_error")
     if trial.get("state_check", {}).get("missing_or_wrong"):
         categories.append("state_mismatch")
     tool_check = trial.get("tool_check", {})
@@ -3645,6 +4039,28 @@ def _count_by(items: list[dict[str, Any]], key: str) -> dict[str, int]:
         value = item.get(key, "unknown")
         counts[value] = counts.get(value, 0) + 1
     return dict(sorted(counts.items()))
+
+
+def _measurement_coverage(results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Report how much of the run produced a usable measurement.
+
+    A run whose scenarios were mostly lost to provider outages can look
+    identical to a run where the agent failed every scenario. Publishing the
+    coverage alongside the score makes that distinction impossible to miss.
+    """
+    total_trials = sum(len(r.get("trials", [])) for r in results)
+    infrastructure_trials = sum(r.get("num_infrastructure_error_trials", 0) for r in results)
+    scored_trials = total_trials - infrastructure_trials
+    measured_scenarios = sum(1 for r in results if r.get("measured", True))
+    return {
+        "total_trials": total_trials,
+        "scored_trials": scored_trials,
+        "infrastructure_error_trials": infrastructure_trials,
+        "trial_coverage": round(scored_trials / total_trials, 4) if total_trials else 0.0,
+        "measured_scenarios": measured_scenarios,
+        "total_scenarios": len(results),
+        "scenario_coverage": round(measured_scenarios / len(results), 4) if results else 0.0,
+    }
 
 
 def _empty_scores() -> dict[str, float]:

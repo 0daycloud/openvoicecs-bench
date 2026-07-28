@@ -336,6 +336,7 @@ async def run_openvoicecs_realtime_load_async(
                         scenario=deepcopy(scenario),
                         agent_fn=lambda _scenario, _trial: trace,
                         trial_index=trial_index,
+                        collected_trace=trace,
                     )
                 except Exception as exc:
                     scored = _failed_realtime_trial(trial_index=trial_index, error=exc)
