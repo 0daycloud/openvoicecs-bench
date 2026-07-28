@@ -7,13 +7,14 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,
     DEFAULT_SCENARIO_PATH,
 )
 from src.evaluation.benchmark.splits import DEFAULT_SPLIT_MANIFEST_PATH
 
-DEFAULT_COVERAGE_TARGET_PATH = Path("data/openvoicecs/coverage_targets_v0.1.json")
+DEFAULT_COVERAGE_TARGET_PATH = data_path("coverage_targets_v0.1.json")
 
 
 def build_coverage_plan(

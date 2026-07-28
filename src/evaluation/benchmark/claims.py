@@ -8,7 +8,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_CLAIMS_MANIFEST_PATH = Path("data/openvoicecs/claims/leaderboard_claims_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_CLAIMS_MANIFEST_PATH = data_path("claims", "leaderboard_claims_v0.1.json")
 CLAIM_TYPES = {"reference_sanity", "candidate_beats_baseline", "frontier_membership", "slice_regression"}
 CLAIM_STATUSES = {"reference_fixture", "pending_review", "official", "rejected", "retired"}
 PROTECTED_SLICE_FIELDS = ("privacy", "auth_integrity", "safety")

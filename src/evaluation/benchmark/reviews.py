@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_REVIEW_MANIFEST_PATH = Path("data/openvoicecs/scenario_reviews_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_REVIEW_MANIFEST_PATH = data_path("scenario_reviews_v0.1.json")
 
 SUPPORTED_REVIEW_STATUSES = {
     "approved",

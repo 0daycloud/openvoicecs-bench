@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,
     DEFAULT_SCENARIO_PATH,
@@ -19,7 +20,7 @@ from src.evaluation.benchmark.openvoicecs import (
     validate_report,
 )
 
-DEFAULT_BASELINE_DIR = Path("data/openvoicecs/baselines")
+DEFAULT_BASELINE_DIR = data_path("baselines")
 DEFAULT_BASELINE_MANIFEST_PATH = DEFAULT_BASELINE_DIR / "reference_baselines_v0.1.json"
 
 

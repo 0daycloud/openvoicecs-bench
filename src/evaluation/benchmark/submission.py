@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,
     DEFAULT_SCENARIO_PATH,
@@ -31,7 +32,7 @@ from src.evaluation.benchmark.provider_adapters import (
 SubmissionFn = Callable[[dict[str, Any], int], Any]
 PIPELINE_TYPES = {"cascaded", "native_speech_to_speech", "unknown"}
 INPUT_MODALITIES = {"text", "audio", "multimodal", "unknown"}
-DEFAULT_SUBMISSION_INTAKE_PATH = Path("data/openvoicecs/submissions/reference_submission_intake_v0.1.json")
+DEFAULT_SUBMISSION_INTAKE_PATH = data_path("submissions", "reference_submission_intake_v0.1.json")
 SUBMISSION_STATUSES = {"reference_fixture", "pending_review", "official", "rejected", "retired"}
 SUBMISSION_REQUIRED_ARTIFACTS = (
     "submission_card",

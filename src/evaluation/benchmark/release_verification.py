@@ -20,6 +20,7 @@ from src.evaluation.benchmark.claims import (
     DEFAULT_CLAIMS_MANIFEST_PATH,
     validate_claims_manifest_file,
 )
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.datasheet import (
     DEFAULT_DATASHEET_PATH,
     validate_benchmark_datasheet_file,
@@ -75,7 +76,7 @@ from src.evaluation.benchmark.splits import (
     validate_split_manifest_file,
 )
 
-DEFAULT_RELEASE_AUDIT_PATH = Path("data/openvoicecs/release_audit.json")
+DEFAULT_RELEASE_AUDIT_PATH = data_path("release_audit.json")
 
 
 @dataclass(frozen=True)

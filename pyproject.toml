@@ -2,14 +2,38 @@
 name = "openvoicecs-bench"
 version = "0.1.0"
 description = "Open benchmark for voice AI customer service agents"
+readme = "README.md"
 requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "LICENSE-DATA"]
+authors = [
+    { name = "Sezgin Saygili" },
+]
+keywords = [
+    "benchmark",
+    "voice-ai",
+    "customer-service",
+    "agents",
+    "evaluation",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
+]
 dependencies = [
     "anthropic>=0.40",
-    "fastapi>=0.115",
     "httpx>=0.27",
-    "pydantic>=2.0",
     "rich>=13.0",
-    "uvicorn>=0.32",
 ]
 
 [project.optional-dependencies]
@@ -22,13 +46,55 @@ providers = [
     "openai>=1.0",
     "google-genai>=1.0",
 ]
+realtime = [
+    "websockets>=13.0",
+]
+all = [
+    "openvoicecs-bench[providers,realtime]",
+]
+
+[project.urls]
+Homepage = "https://github.com/0daycloud/openvoicecs-bench"
+Repository = "https://github.com/0daycloud/openvoicecs-bench"
+Issues = "https://github.com/0daycloud/openvoicecs-bench/issues"
+
+[project.scripts]
+openvoicecs-bench = "openvoicecs_bench_cli.run_openvoicecs:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
+# The library is imported as `src.evaluation.*` from 182 call sites across 49
+# files, so the wheel deliberately ships the tree under its on-disk name rather
+# than renaming it. `src` is a generic top-level import name and can collide
+# with another distribution installed into the same environment; renaming the
+# package to `openvoicecs_bench` is tracked as a follow-up because it is a
+# mechanical but repo-wide codemod.
 packages = ["src"]
+
+[tool.hatch.build.targets.wheel.force-include]
+# `scripts/` is not importable under its own name without squatting an even more
+# generic top-level name, so the CLI is published as `openvoicecs_bench_cli`.
+# The modules keep working unchanged because they import `src.*`, which the
+# wheel also ships.
+"scripts" = "openvoicecs_bench_cli"
+
+[tool.hatch.build.targets.sdist]
+# The benchmark corpus under `data/` is ~160 MB, so it is distributed with the
+# git repository and the release archives instead of the sdist/wheel. Set
+# OPENVOICECS_DATA_DIR to point an installed copy at a checkout.
+include = [
+    "src",
+    "scripts",
+    "tests",
+    "examples",
+    "README.md",
+    "LICENSE",
+    "LICENSE-DATA",
+    "pyproject.toml",
+]
 
 [tool.ruff]
 target-version = "py310"
@@ -36,6 +102,12 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W", "UP"]
+# Debt carve-out: the tree carries a few hundred pre-existing E501
+# (line-too-long) hits and zero other ruff findings, so the CI lint gate in
+# .github/workflows/openvoicecs.yml ignores E501 only.
+# `line-length = 100` above stays authoritative for new and reformatted code.
+# TODO(openvoicecs-bench): wrap the long lines and delete this ignore.
+ignore = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

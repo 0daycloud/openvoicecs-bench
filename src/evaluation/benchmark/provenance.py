@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_PROVENANCE_MANIFEST_PATH = Path("data/openvoicecs/provenance_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_PROVENANCE_MANIFEST_PATH = data_path("provenance_v0.1.json")
 OPEN_LICENSES = {
     "CC-BY-4.0",
     "CC0-1.0",

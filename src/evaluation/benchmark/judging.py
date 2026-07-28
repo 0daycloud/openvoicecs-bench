@@ -18,6 +18,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.provider_adapters import (
     OPENAI_COMPATIBLE_BASE_URLS,
     PROVIDER_ENV_KEYS,
@@ -25,12 +26,12 @@ from src.evaluation.benchmark.provider_adapters import (
     load_workspace_env,
 )
 
-DEFAULT_JUDGE_RUBRIC_PATH = Path("data/openvoicecs/judge_rubric_v0.1.json")
-DEFAULT_JUDGE_PROTOCOL_PATH = Path("data/openvoicecs/judging/judge_protocol_v0.1.json")
+DEFAULT_JUDGE_RUBRIC_PATH = data_path("judge_rubric_v0.1.json")
+DEFAULT_JUDGE_PROTOCOL_PATH = data_path("judging", "judge_protocol_v0.1.json")
 DEFAULT_JUDGE_ANNOTATION_PACKAGE_PATH = Path(
     "data/openvoicecs/judging/judge_annotation_package_v0.1.json"
 )
-DEFAULT_JUDGE_STUDY_PATH = Path("data/openvoicecs/judging/judge_study_v0.1.json")
+DEFAULT_JUDGE_STUDY_PATH = data_path("judging", "judge_study_v0.1.json")
 JUDGE_STUDY_STATUSES = {"reference_fixture", "planned", "active", "completed", "retired"}
 
 

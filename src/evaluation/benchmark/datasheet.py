@@ -14,6 +14,7 @@ from src.evaluation.benchmark.baselines import (
     reference_baseline_stats,
 )
 from src.evaluation.benchmark.changelog import DEFAULT_CHANGELOG_PATH
+from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.openvoicecs import (
     DEFAULT_AUDIO_MANIFEST_PATH,
     DEFAULT_SCENARIO_PATH,
@@ -30,7 +31,7 @@ from src.evaluation.benchmark.splits import (
     DEFAULT_SPLIT_MANIFEST_PATH,
 )
 
-DEFAULT_DATASHEET_PATH = Path("data/openvoicecs/datasheet_v0.1.json")
+DEFAULT_DATASHEET_PATH = data_path("datasheet_v0.1.json")
 
 
 @dataclass(frozen=True)

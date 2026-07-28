@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_PRICING_MANIFEST_PATH = Path("data/openvoicecs/pricing_snapshot_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_PRICING_MANIFEST_PATH = data_path("pricing_snapshot_v0.1.json")
 SUPPORTED_COMPONENTS = {
     "asr",
     "llm",

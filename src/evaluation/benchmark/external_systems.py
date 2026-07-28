@@ -8,7 +8,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_EXTERNAL_SYSTEMS_PATH = Path("data/openvoicecs/external_systems_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_EXTERNAL_SYSTEMS_PATH = data_path("external_systems_v0.1.json")
 SYSTEM_STATUSES = {"reference_fixture", "pending_external", "official", "rejected", "retired"}
 SYSTEM_TYPES = {"reference", "external_voice_agent", "external_text_agent", "research_system"}
 INPUT_MODALITIES = {"text", "audio", "multimodal"}

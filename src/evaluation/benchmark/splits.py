@@ -8,8 +8,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_SPLIT_MANIFEST_PATH = Path("data/openvoicecs/splits_v0.1.json")
-DEFAULT_SPLIT_COMMITMENT_PATH = Path("data/openvoicecs/split_commitments_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_SPLIT_MANIFEST_PATH = data_path("splits_v0.1.json")
+DEFAULT_SPLIT_COMMITMENT_PATH = data_path("split_commitments_v0.1.json")
 REQUIRED_SPLITS = {"public_dev", "sealed_test"}
 
 

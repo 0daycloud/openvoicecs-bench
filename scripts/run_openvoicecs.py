@@ -36,6 +36,8 @@ from src.evaluation.benchmark.coverage import (
     DEFAULT_COVERAGE_TARGET_PATH,
     build_coverage_plan,
 )
+from src.evaluation.benchmark.datapaths import ENV_VAR as DATA_DIR_ENV_VAR
+from src.evaluation.benchmark.datapaths import resolve_data_dir
 from src.evaluation.benchmark.datasheet import (
     DEFAULT_DATASHEET_PATH,
     build_benchmark_datasheet_file,
@@ -2913,7 +2915,22 @@ def main() -> None:
     setup_logging()
     parser = build_parser()
     args = parser.parse_args()
-    args.func(args)
+    try:
+        args.func(args)
+    except FileNotFoundError as exc:
+        data_dir = resolve_data_dir()
+        if data_dir.is_dir():
+            raise
+        print(
+            f"error: {exc}\n\n"
+            f"The OpenVoiceCS-Bench data directory was not found at '{data_dir}'.\n"
+            "The ~160 MB corpus ships with the git repository rather than the\n"
+            f"published wheel. Set {DATA_DIR_ENV_VAR} to a checkout or an unpacked\n"
+            "release, for example:\n\n"
+            f"    export {DATA_DIR_ENV_VAR}=/path/to/openvoicecs-bench/data/openvoicecs\n",
+            file=sys.stderr,
+        )
+        raise SystemExit(2) from exc
 
 
 if __name__ == "__main__":

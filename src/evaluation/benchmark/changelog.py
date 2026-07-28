@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-DEFAULT_CHANGELOG_PATH = Path("data/openvoicecs/changelog_v0.1.json")
+from src.evaluation.benchmark.datapaths import data_path
+
+DEFAULT_CHANGELOG_PATH = data_path("changelog_v0.1.json")
 CHANGE_TYPES = {
     "release",
     "scenario_added",
