@@ -58,6 +58,10 @@ from src.evaluation.benchmark.frontier import (
     write_frontier_artifacts,
     write_scorecard_artifacts,
 )
+from src.evaluation.benchmark.grader_eval import (
+    evaluate_grader,
+    unreachable_forbidden_patterns,
+)
 from src.evaluation.benchmark.judging import (
     DEFAULT_JUDGE_ANNOTATION_PACKAGE_PATH,
     DEFAULT_JUDGE_PROTOCOL_PATH,
@@ -887,6 +891,35 @@ def cmd_compare(args: argparse.Namespace) -> None:
         with open(output, "w", encoding="utf-8") as f:
             json.dump(comparison, f, indent=2)
         print(f"\nSaved comparison report to {output}")
+
+
+def cmd_grader_eval(args: argparse.Namespace) -> None:
+    bench = OpenVoiceCSBench.load()
+    reachability = unreachable_forbidden_patterns(bench)
+    report = evaluate_grader(bench)
+    report["forbidden_pattern_reachability"] = reachability
+
+    print(
+        f"Graded {report['cases_applied']} fabricated traces "
+        f"over {report['num_scenarios']} scenarios"
+    )
+    print(f"Misgraded: {report['cases_misgraded']} ({report['error_rate'] * 100:.1f}%)\n")
+    print(f"{'mutation':24}{'expects':9}{'cases':>6}{'ok':>6}{'false pass':>12}{'false fail':>12}")
+    for name, counts in report["by_mutation"].items():
+        print(
+            f"{name:24}{counts['expects']:9}{counts['applied']:6}{counts['correct']:6}"
+            f"{counts['false_pass']:12}{counts['false_fail']:12}"
+        )
+
+    print(
+        f"\nForbidden tool patterns: {reachability['unreachable_patterns']} of "
+        f"{reachability['total_patterns']} cannot be triggered by any agent, "
+        f"across {reachability['scenarios_affected']} scenarios"
+    )
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
+        print(f"Wrote {args.output}")
 
 
 def cmd_score(args: argparse.Namespace) -> None:
@@ -2461,6 +2494,13 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--confidence", type=float, default=0.95)
     compare.add_argument("--output", default=None)
     compare.set_defaults(func=cmd_compare)
+
+    grader_eval = subparsers.add_parser(
+        "grader-eval",
+        help="Score fabricated traces whose correct grade is known, and report disagreements",
+    )
+    grader_eval.add_argument("--output", default=None)
+    grader_eval.set_defaults(func=cmd_grader_eval)
 
     score = subparsers.add_parser("score", help="Score a built-in baseline agent")
     score.add_argument("--agent", choices=["oracle", "noop"], default="oracle")
