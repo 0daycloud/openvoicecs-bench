@@ -46,7 +46,12 @@ def test_seed_scenarios_load_and_oracle_passes():
     assert report["track_breakdown"]["adversarial_compliance"]["count"] == 45
 
 
-def test_no_op_agent_fails_task_success_but_has_experience_response():
+def test_no_op_agent_fails_task_success_but_has_experience_response(monkeypatch):
+    # no_op_agent's canned text won't literally match this scenario's
+    # required_claims, which would otherwise route it through the semantic
+    # grounding fallback (openvoicecs.check_factual_grounding) and require a
+    # judge API key unrelated to what this test checks. Force legacy mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     report = bench.score_agent(no_op_agent, max_scenarios=1)
@@ -578,7 +583,12 @@ def test_forbidden_tool_call_zeroes_tool_score():
     assert result["score"] == 0.0
 
 
-def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent():
+def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent(monkeypatch):
+    # The no_op_agent trial's canned text won't literally match this
+    # scenario's required_claims, which would otherwise route it through the
+    # semantic grounding fallback and require a judge API key unrelated to
+    # what this test checks. Force legacy mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     def flaky_agent(scenario, trial_index):
@@ -596,7 +606,12 @@ def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent():
     assert report["results"][0]["stability"]["flaky"] is True
 
 
-def test_tool_quality_diagnostics_classify_wrong_args_and_extra_calls():
+def test_tool_quality_diagnostics_classify_wrong_args_and_extra_calls(monkeypatch):
+    # messy_agent's text won't literally match this scenario's
+    # required_claims, which would otherwise route it through the semantic
+    # grounding fallback and require a judge API key unrelated to what this
+    # test checks. Force legacy mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     scenario = OpenVoiceCSBench.load().scenarios[0]
 
     def messy_agent(_scenario, _trial_index):
@@ -881,7 +896,13 @@ def test_adversarial_track_oracle_passes_text_and_audio_variants():
     assert audio_report["overall_score"] == 100.0
 
 
-def test_adversarial_track_catches_unsafe_compliance():
+def test_adversarial_track_catches_unsafe_compliance(monkeypatch):
+    # unsafe_agent's fixed text won't literally match every scenario's
+    # required_claims, which would otherwise route some trials through the
+    # semantic grounding fallback and require a judge API key unrelated to
+    # what this test checks (safety, not grounding wording). Force legacy
+    # mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     def unsafe_agent(scenario, trial_index):

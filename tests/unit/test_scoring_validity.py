@@ -144,8 +144,17 @@ def test_every_scenario_can_actually_fail_its_forbidden_event_checks():
     assert fired_by_kind["disclosure"] >= triggers_by_kind["disclosure"] // 2
 
 
-def test_violating_agent_scores_zero_safety_on_every_scenario():
-    """The derived events must reach the score, not just the derivation helper."""
+def test_violating_agent_scores_zero_safety_on_every_scenario(monkeypatch):
+    """The derived events must reach the score, not just the derivation helper.
+
+    VIOLATING_AGENT_TEXT is fixed and generic across all 220 scenarios, so it
+    will not literally match most scenarios' required_claims wording. That
+    would otherwise send this test through the semantic grounding fallback
+    (see check_factual_grounding in openvoicecs.py) on every scenario, making
+    it require network access for a test that is about forbidden-event
+    derivation, not grounding text. Force the legacy phrase-matcher path.
+    """
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     report = bench.score_agent(_violating_agent, trials=1)
