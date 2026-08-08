@@ -18,8 +18,10 @@ from __future__ import annotations
 import pytest
 
 from src.evaluation.benchmark.openvoicecs import (
+    DERIVABLE_EVENTS,
     FORBIDDEN_TRIGGER_KINDS,
     OpenVoiceCSBench,
+    check_policy_events,
     check_safety,
     check_tool_calls,
     classify_trial_error,
@@ -180,6 +182,68 @@ def test_oracle_agent_triggers_no_forbidden_events_across_the_suite():
         replay = replay_tool_calls(scenario, trace["tool_calls"])
         events = set(derive_trace_events(scenario, trace, replay))
         assert not events & _declared_forbidden_events(scenario), scenario["id"]
+
+
+def test_derivable_events_covers_everything_derivation_actually_emits():
+    """``DERIVABLE_EVENTS`` must not drift from what ``derive_trace_events`` produces.
+
+    The constant decides which required events are scorable. If a new derivation
+    is added without listing its event, that event silently stays unscorable and
+    an agent stops getting credit for demonstrating it.
+    """
+    bench = OpenVoiceCSBench.load()
+    declared_forbidden = set()
+    for scenario in bench.scenarios:
+        declared_forbidden |= _declared_forbidden_events(scenario)
+
+    for scenario in bench.scenarios:
+        trace = oracle_agent(scenario)
+        trace["events"] = []
+        replay = replay_tool_calls(scenario, trace["tool_calls"])
+        for event in derive_trace_events(scenario, trace, replay):
+            assert event in DERIVABLE_EVENTS or event in declared_forbidden, (
+                f"{scenario['id']} derived {event!r}, which DERIVABLE_EVENTS does not list"
+            )
+
+
+def test_events_no_behaviour_can_emit_are_not_charged_to_the_agent():
+    """A required event outside the derivable vocabulary is not a measurement.
+
+    The corpus declares 53 distinct required events and derivation produces 20.
+    Scoring the remainder as missing charged every agent for steps it had no way
+    to demonstrate — 22 scenarios, and 17 of the 19 multi-turn ones, could not be
+    passed by an agent reproducing the oracle exactly.
+    """
+    result = check_policy_events(
+        ["identity_verified"],
+        required=["identity_verified", "fare_rules_explained"],
+        forbidden=[],
+    )
+    assert result["score"] == 1.0
+    assert result["unobservable_required"] == ["fare_rules_explained"]
+    assert result["missing_required"] == []
+
+
+def test_a_missing_derivable_event_is_still_charged():
+    """Dropping unscorable names must not soften the events that do work."""
+    result = check_policy_events([], required=["identity_verified"], forbidden=[])
+    assert result["score"] == 0.0
+    assert result["missing_required"] == ["identity_verified"]
+    assert "unobservable_required" not in result
+
+
+def test_an_agent_that_reports_an_event_itself_still_gets_credit():
+    """The trace contract lets an agent declare events; that path must survive.
+
+    Provider adapters have no events channel, which is why the vocabulary check
+    exists, but a custom submission can report its own. Such an event is
+    observable by definition and must stay scored, not dropped as noise.
+    """
+    reported = check_policy_events(
+        ["fare_rules_explained"], required=["fare_rules_explained"], forbidden=[]
+    )
+    assert reported["score"] == 1.0
+    assert "unobservable_required" not in reported
 
 
 @pytest.mark.parametrize(
