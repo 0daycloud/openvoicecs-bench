@@ -16,6 +16,7 @@ import json
 import re
 import statistics
 import time
+from copy import deepcopy
 from typing import Any
 
 from src.evaluation.benchmark.judging import (
@@ -466,3 +467,52 @@ def validate_semantic_grounding_report(report: dict[str, Any]) -> list[JudgeIssu
         if not isinstance(claims, list) or not claims:
             issues.append(JudgeIssue(scenario_id, f"{path}.claims", "must be a non-empty list"))
     return issues
+
+
+def apply_semantic_grounding_report(
+    report: dict[str, Any],
+    semantic_report: dict[str, Any],
+) -> dict[str, Any]:
+    """Attach an aggregated semantic grounding report to an OpenVoiceCS report.
+
+    Additive only: never modifies ``metric_scores``, ``overall_score``, or
+    any existing ``trial["grounding_check"]`` entry produced by the literal
+    matcher.
+    """
+    updated = deepcopy(report)
+    items_by_key = {
+        (str(item.get("scenario_id")), int(item.get("trial_index", 0))): item
+        for item in semantic_report.get("items", [])
+        if isinstance(item, dict)
+    }
+    assigned_scores = []
+    assigned_count = 0
+    total_trials = 0
+    for result in updated.get("results", []):
+        scenario_id = str(result.get("id"))
+        for trial in result.get("trials", []):
+            total_trials += 1
+            trial_index = trial.get("trial_index", 0)
+            item = items_by_key.get((scenario_id, trial_index))
+            if item is None:
+                continue
+            trial["semantic_grounding_check"] = {
+                "score": item["required_score"],
+                "claims": item["claims"],
+                "source": "audited_grounding_judge",
+            }
+            assigned_scores.append(item["required_score"])
+            assigned_count += 1
+
+    updated["semantic_grounding"] = {
+        "score": round(statistics.mean(assigned_scores), 6) if assigned_scores else None,
+        "coverage": round(assigned_count / total_trials, 4) if total_trials else 0.0,
+        "num_judged_trials": assigned_count,
+        "verdict_breakdown": semantic_report.get("verdict_breakdown", {}),
+        "source_report": {
+            "num_annotations": semantic_report.get("num_annotations"),
+            "num_raters": semantic_report.get("num_raters"),
+            "agreement": semantic_report.get("agreement"),
+        },
+    }
+    return updated
