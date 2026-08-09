@@ -338,7 +338,7 @@ class OpenVoiceCSBench:
             metadata={
                 **self.metadata,
                 "source_scenario_count": len(self.scenarios),
-                "audio_manifest_path": str(manifest_path),
+                "audio_manifest_path": Path(manifest_path).as_posix(),
                 "evaluation_mode": "audio_manifest",
             },
             version=self.version,
@@ -350,7 +350,7 @@ class OpenVoiceCSBench:
             grounding_mode=grounding_mode,
         )
         report["evaluation_mode"] = "audio_manifest"
-        report["audio_manifest_path"] = str(manifest_path)
+        report["audio_manifest_path"] = Path(manifest_path).as_posix()
         report["num_audio_variants"] = len(variant_scenarios)
         return report
 

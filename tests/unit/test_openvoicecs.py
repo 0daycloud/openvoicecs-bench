@@ -878,6 +878,18 @@ def test_score_audio_manifest_uses_variant_ids_and_tracks():
     assert report["results"][0]["base_scenario_id"]
 
 
+def test_score_audio_manifest_serializes_manifest_path_with_forward_slashes():
+    # Report artifacts must be canonical across platforms; Windows renders
+    # Path.__str__() with backslashes, which produced a spurious cross-platform
+    # diff in generated baseline reports.
+    bench = OpenVoiceCSBench.load()
+
+    report = bench.score_audio_manifest(oracle_agent, max_variants=1, trials=1)
+
+    assert report["audio_manifest_path"] == "data/openvoicecs/audio_manifest_v0.1.json"
+    assert "\\" not in report["audio_manifest_path"]
+
+
 def test_adversarial_track_oracle_passes_text_and_audio_variants():
     bench = OpenVoiceCSBench.load()
 

@@ -41,6 +41,15 @@ def test_build_reference_baselines_writes_reports_and_valid_manifest(tmp_path: P
         "oracle_audio_manifest",
         "noop_audio_manifest",
     }
+
+    # _file_entry() paths must be platform-independent (forward-slash) so the
+    # manifest is byte-identical whether generated on Windows or POSIX.
+    manifest_paths = [manifest["scenario_file"]["path"], manifest["audio_manifest_file"]["path"]]
+    manifest_paths += [baseline["report"]["path"] for baseline in manifest["baselines"]]
+    for path in manifest_paths:
+        assert "\\" not in path, path
+        assert "/" in path, path
+
     assert validate_reference_baselines(manifest) == []
     assert validate_reference_baselines_file(manifest_path) == []
     assert manifest["baselines"][0]["report"]["sha256"]
@@ -155,6 +164,24 @@ def test_score_agent_default_grounding_mode_stays_hybrid(monkeypatch):
 
     assert report["results"][0]["num_infrastructure_error_trials"] == 1
     assert report["results"][0]["measured"] is False
+
+
+def test_build_reference_baselines_writes_lf_only_json(tmp_path: Path):
+    # Path.write_text() without newline="\n" translates "\n" to the platform
+    # line separator on Windows, producing CRLF reports that diverge from the
+    # LF-committed artifacts on every line.
+    output_dir = tmp_path / "baselines"
+    manifest_path = output_dir / "reference_baselines.json"
+
+    manifest = build_reference_baselines(
+        output_dir=output_dir,
+        manifest_path=manifest_path,
+        trials=1,
+    )
+
+    assert b"\r\n" not in manifest_path.read_bytes()
+    for baseline in manifest["baselines"]:
+        assert b"\r\n" not in Path(baseline["report"]["path"]).read_bytes()
 
 
 def test_validate_reference_baselines_rejects_missing_required_baseline():
