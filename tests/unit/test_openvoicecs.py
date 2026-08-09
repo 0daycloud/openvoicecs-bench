@@ -13,6 +13,7 @@ from src.evaluation.benchmark.openvoicecs import (
     check_privacy,
     check_tool_calls,
     derive_trace_events,
+    diagnose_scenario_solvability,
     load_audio_manifest,
     load_reports,
     no_op_agent,
@@ -229,17 +230,9 @@ def test_seed_scenarios_mark_ungrounded_ids_as_generated_arguments():
             "review_id": "sec_1001",
             "reason": "prompt_injection_refund_request",
         },
-        ("fintech-social-engineering-transfer-001", "create_security_alert"): {
-            "alert_id": "alert_6001",
-            "reason": "social_engineering_wire_request",
-        },
         ("healthcare-phi-extraction-001", "create_privacy_review"): {
             "review_id": "privacy_5001",
             "reason": "unverified_phi_extraction",
-        },
-        ("saas-ceo-impersonation-mfa-001", "create_security_alert"): {
-            "alert_id": "alert_7001",
-            "reason": "ceo_impersonation_mfa_bypass",
         },
     }
 
@@ -248,6 +241,27 @@ def test_seed_scenarios_mark_ungrounded_ids_as_generated_arguments():
             item for item in scenarios[scenario_id]["tools"] if item["name"] == tool_name
         )
         assert tool.get("generated_arguments") == generated
+
+    # create_security_alert's `reason` is a closed-vocabulary classification
+    # (which social-engineering pattern this is), not an opaque system ID, so
+    # it has moved to argument_enums instead of staying unfalsifiable forever
+    # in generated_arguments -- only `alert_id` remains generated.
+    enum_expected = {
+        ("fintech-social-engineering-transfer-001", "create_security_alert"): (
+            "alert_6001",
+            "social_engineering_wire_request",
+        ),
+        ("saas-ceo-impersonation-mfa-001", "create_security_alert"): (
+            "alert_7001",
+            "ceo_impersonation_mfa_bypass",
+        ),
+    }
+    for (scenario_id, tool_name), (alert_id, reason) in enum_expected.items():
+        tool = next(
+            item for item in scenarios[scenario_id]["tools"] if item["name"] == tool_name
+        )
+        assert tool.get("generated_arguments") == {"alert_id": alert_id}
+        assert reason in (tool.get("argument_enums") or {}).get("reason", [])
 
 
 def test_core_event_derivation_covers_travel_and_saas_batch_cases():
@@ -631,6 +645,46 @@ def test_scenario_solvability_marks_hidden_generated_ids():
     assert diagnostics["missing_prompt_or_state_facts"] == []
 
 
+def test_scenario_solvability_treats_argument_enum_fields_as_available():
+    """A documented classification vocabulary is not a hidden fact.
+
+    ``diagnose_scenario_solvability`` already excludes ``generated_arguments``
+    and ``argument_bindings`` keys from "does the agent have what it needs"
+    because those values are supplied for the agent. An ``argument_enums``
+    field is the same kind of case even though its golden value is not
+    verbatim in the prompt: the closed vocabulary itself is disclosed via the
+    tool schema, so the field must not count as a missing fact either.
+    """
+    scenario = {
+        "customer_goal": "Customer wants a case opened for a damaged item.",
+        "conversation": [],
+        "customer_profile": {},
+        "initial_state": {},
+        "policy": {},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "generated_arguments": {"case_id": "case_1"},
+                "argument_enums": {"reason": ["damaged_item", "goodwill_credit"]},
+            }
+        ],
+        "oracle": {
+            "expected_tool_calls": [
+                {
+                    "name": "create_case",
+                    "arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                }
+            ]
+        },
+    }
+
+    diagnostics = diagnose_scenario_solvability(scenario)
+
+    assert diagnostics["all_needed_facts_available"] is True
+    assert diagnostics["missing_prompt_or_state_facts"] == []
+
+
 def test_benchmark_save_and_load_round_trip(tmp_path: Path):
     bench = OpenVoiceCSBench.load()
     path = tmp_path / "openvoicecs.json"
@@ -955,6 +1009,87 @@ def test_validate_scenarios_reports_all_issues():
     assert ("difficulty", "unsupported difficulty") in messages
     assert ("oracle.expected_state", "missing expected_state") in messages
     assert ("oracle.expected_tool_calls[0].name", "unknown tool") in messages
+
+
+def test_validate_scenarios_reports_argument_enum_issues():
+    """``argument_enums`` documents a classification vocabulary, so it must be
+    internally consistent: the oracle's own golden value has to be a member of
+    the vocabulary it declares, the vocabulary must actually be a list of
+    strings, and a field cannot simultaneously be unscored (``generated_arguments``)
+    and scored against a closed vocabulary (``argument_enums``) — that
+    combination says both "don't check this" and "check this" at once.
+
+    Also covers two narrower malformed shapes that are still a list of
+    strings and so would otherwise slip past the type check: an empty
+    vocabulary (which can never contain the oracle's golden value, but
+    deserves its own direct message rather than being caught only
+    incidentally by the membership check) and a vocabulary whose members
+    collapse into fewer distinct choices than declared once normalized the
+    same way scoring normalizes them (e.g. ``"Damaged Item"`` and
+    ``"damaged_item"`` are, to the scorer, the same label wearing two
+    outfits) — a documented "closed vocabulary" that quietly contains a
+    duplicate is describing a choice that does not really exist.
+    """
+    issues = validate_scenarios([
+        {
+            "id": "bad-enum-001",
+            "domain": "retail",
+            "track": "text_to_action",
+            "difficulty": "easy",
+            "customer_goal": "Broken enum scenario",
+            "initial_state": {},
+            "tools": [
+                {
+                    "name": "issue_refund",
+                    "required_arguments": {"order_id": "ord_1", "reason": "damaged_item"},
+                    "argument_enums": {"reason": ["late_delivery", "wrong_item"]},
+                    "state_updates": [],
+                },
+                {
+                    "name": "create_case",
+                    "required_arguments": {"case_id": "case_1", "reason": "card_dispute"},
+                    "generated_arguments": {"reason": "card_dispute"},
+                    "argument_enums": {"reason": ["card_dispute", "merchant_hold"]},
+                    "state_updates": [],
+                },
+                {
+                    "name": "create_security_alert",
+                    "required_arguments": {"alert_id": "alert_1", "reason": "sim_swap_pressure"},
+                    "argument_enums": {"reason": "sim_swap_pressure"},
+                    "state_updates": [],
+                },
+                {
+                    "name": "escalate_to_human",
+                    "required_arguments": {"escalation_id": "esc_1", "reason": "damaged_item"},
+                    "argument_enums": {"reason": []},
+                    "state_updates": [],
+                },
+                {
+                    "name": "apply_account_credit",
+                    "required_arguments": {"credit_id": "credit_1", "reason": "damaged_item"},
+                    "argument_enums": {"reason": ["damaged_item", "Damaged Item"]},
+                    "state_updates": [],
+                },
+            ],
+            "oracle": {"expected_tool_calls": []},
+        }
+    ])
+
+    messages = {(issue.path, issue.message) for issue in issues}
+    assert (
+        "tools[0].argument_enums.reason",
+        "required_arguments value is not a member of its own enum",
+    ) in messages
+    assert (
+        "tools[1].argument_enums.reason",
+        "argument cannot be both enumerated and generated",
+    ) in messages
+    assert ("tools[2].argument_enums.reason", "must be a list of strings") in messages
+    assert ("tools[3].argument_enums.reason", "must not be empty") in messages
+    assert (
+        "tools[4].argument_enums.reason",
+        "contains duplicate values after normalization (e.g. same label in different casing/spacing)",
+    ) in messages
 
 
 def test_leaderboard_orders_by_reliability_then_score():

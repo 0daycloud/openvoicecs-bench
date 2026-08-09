@@ -41,8 +41,8 @@
       },
       "candidate_report": {
         "path": "data/openvoicecs/baselines/oracle_text.json",
-        "sha256": "cb82ac719bb37f4c450963633e32b9a336212d26ee3d8be62c830a4533098711",
-        "bytes": 4787710
+        "sha256": "fb3419828be1dd3e7896aabbdcee9b392a47cf52d4ec6168b092f36d3ba71a8c",
+        "bytes": 4764985
       },
       "external_systems_registry": {
         "path": "data/openvoicecs/external_systems_v0.1.json",

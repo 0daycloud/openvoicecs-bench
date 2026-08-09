@@ -1236,6 +1236,8 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
                 issues.append(
                     ValidationIssue(scenario_id, f"tools[{tool_index}].argument_bindings", "must be an object")
                 )
+            if "argument_enums" in tool:
+                _validate_tool_argument_enums(issues, scenario_id, tool_index, tool)
             if "preconditions" in tool and not isinstance(tool.get("preconditions"), list):
                 issues.append(
                     ValidationIssue(scenario_id, f"tools[{tool_index}].preconditions", "must be a list")
@@ -1280,6 +1282,67 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
                     ValidationIssue(scenario_id, "oracle.expected_state", "not reached by expected tool calls")
                 )
     return issues
+
+
+def _validate_tool_argument_enums(
+    issues: list[ValidationIssue],
+    scenario_id: str,
+    tool_index: int,
+    tool: dict[str, Any],
+) -> None:
+    """Validate a documented classification vocabulary.
+
+    ``argument_enums`` is what lets a classification field (``reason`` on
+    ``create_case``, say) stay scored instead of falling into
+    ``generated_arguments`` and becoming unfalsifiable: the model is told the
+    closed set of valid labels, and the scorer checks its choice against the
+    oracle's. Several independent things are checked here — the oracle's own
+    golden value must actually belong to the vocabulary it declares (otherwise
+    the oracle itself could never pass), a field cannot also be marked
+    ``generated_arguments``, which would mean "unscored" and "scored against
+    this vocabulary" at once, the vocabulary must not be empty (a choice with
+    no options isn't a documented vocabulary), and it must not contain two
+    members that collapse to the same value once normalized the way scoring
+    normalizes them — e.g. ``"Damaged Item"`` and ``"damaged_item"`` are, to
+    ``_normalize_argument_token``, the same label wearing two outfits, so a
+    vocabulary listing both is documenting a choice that doesn't really
+    exist.
+    """
+    path = f"tools[{tool_index}].argument_enums"
+    enums = tool.get("argument_enums")
+    if not isinstance(enums, dict):
+        issues.append(ValidationIssue(scenario_id, path, "must be an object"))
+        return
+    generated = set((tool.get("generated_arguments") or {}).keys())
+    required = tool.get("required_arguments")
+    required = required if isinstance(required, dict) else {}
+    for name, members in enums.items():
+        member_path = f"{path}.{name}"
+        if not isinstance(members, list) or not all(isinstance(member, str) for member in members):
+            issues.append(ValidationIssue(scenario_id, member_path, "must be a list of strings"))
+            continue
+        if not members:
+            issues.append(ValidationIssue(scenario_id, member_path, "must not be empty"))
+            continue
+        if name in generated:
+            issues.append(
+                ValidationIssue(scenario_id, member_path, "argument cannot be both enumerated and generated")
+            )
+        normalized_members = [_normalize_argument_token(member) for member in members]
+        if len(set(normalized_members)) != len(normalized_members):
+            issues.append(
+                ValidationIssue(
+                    scenario_id,
+                    member_path,
+                    "contains duplicate values after normalization "
+                    "(e.g. same label in different casing/spacing)",
+                )
+            )
+        golden = required.get(name)
+        if not isinstance(golden, str) or _normalize_argument_token(golden) not in set(normalized_members):
+            issues.append(
+                ValidationIssue(scenario_id, member_path, "required_arguments value is not a member of its own enum")
+            )
 
 
 def _validate_tool_failure(
@@ -2130,8 +2193,12 @@ def diagnose_scenario_solvability(scenario: dict[str, Any]) -> dict[str, Any]:
         tool_def = tools_by_name.get(call.get("name")) or {}
         generated_args = set((tool_def.get("generated_arguments") or {}).keys())
         bound_args = set((tool_def.get("argument_bindings") or {}).keys())
+        # An argument_enums value need not appear verbatim in the prompt either:
+        # the closed vocabulary itself is disclosed via the tool schema, so the
+        # agent has what it needs even though grep-style grounding would miss it.
+        enum_args = set((tool_def.get("argument_enums") or {}).keys())
         for argument, value in (call.get("arguments") or {}).items():
-            if argument in generated_args or argument in bound_args:
+            if argument in generated_args or argument in bound_args or argument in enum_args:
                 continue
             if _value_is_prompt_derivable(value, prompt_blob):
                 continue

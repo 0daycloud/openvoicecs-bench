@@ -1,6 +1,6 @@
-"""Regression tests for the two scoring-validity bugs that the suite could not see.
+"""Regression tests for the scoring-validity bugs that the suite could not see.
 
-Both bugs produced a benchmark that reported numbers without measuring anything:
+These bugs produced a benchmark that reported numbers without measuring anything:
 
 1. Every declared forbidden event was derived from a vocabulary that shared no
    name with any forbidden assertion, so the safety, privacy, and auth checks
@@ -8,6 +8,13 @@ Both bugs produced a benchmark that reported numbers without measuring anything:
 2. Provider-side failures (HTTP 402 "Insufficient credits", rate limits,
    dropped sockets) were folded in as model scores of 0.0, so an unpaid invoice
    looked exactly like a bad model.
+3. Classification arguments (``reason`` on ``create_case``, say) were marked
+   ``generated_arguments`` so the agent would not be scored on guessing an
+   unguessable ID format — but that also made them unfalsifiable: the scorer
+   overwrote whatever the agent actually sent with the oracle's golden value
+   before comparing, so an agent that picked a real but *wrong* classification
+   from the same vocabulary scored exactly like the oracle. ``argument_enums``
+   documents the vocabulary and returns the field to normal scoring.
 
 The tests below assert the observable contracts that make those states
 impossible to reintroduce.
@@ -27,6 +34,7 @@ from src.evaluation.benchmark.openvoicecs import (
     oracle_agent,
     replay_tool_calls,
 )
+from src.evaluation.benchmark.splits import load_split_manifest
 
 SUITE_SIZE = 220
 
@@ -352,3 +360,243 @@ def test_argument_labels_normalize_but_different_values_still_fail():
     )
     assert mismatched["expected_passed"] is False
     assert mismatched["missing_expected"] == expected
+
+
+def test_generated_arguments_silently_overwrites_a_wrong_classification():
+    """Pin the exact bug ``argument_enums`` exists to close.
+
+    While ``reason`` is declared ``generated_arguments``, ``_effective_tool_arguments``
+    substitutes the oracle's golden value over whatever the agent actually sent,
+    unconditionally, before the replay check ever runs — so an agent that chose a
+    real but wrong classification from the same vocabulary is indistinguishable
+    from the oracle. The next test proves ``argument_enums`` closes this.
+    """
+    scenario = {
+        "initial_state": {"cases": {"case_1": {"status": "open"}}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "generated_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+            }
+        ],
+    }
+
+    misclassified = replay_tool_calls(
+        scenario,
+        [{"name": "create_case", "arguments": {"reason": "goodwill_credit"}}],
+    )
+
+    assert misclassified["errors"] == []
+    assert misclassified["effective_tool_calls"][0]["arguments"]["reason"] == "damaged_item"
+    assert misclassified["final_state"]["cases"]["case_1"]["status"] == "created"
+
+
+def test_argument_enums_field_is_scored_like_a_normal_required_argument():
+    """Once out of ``generated_arguments``, an enum field is falsifiable again.
+
+    The scorer needs no special-case code for this: ``_model_required_arguments``
+    and ``_effective_tool_arguments`` only ever look at ``generated_arguments``
+    and ``argument_bindings``, so a field that carries ``argument_enums`` and is
+    absent from ``generated_arguments`` falls straight through to the existing
+    required-argument path, including its normalization contract.
+    """
+    scenario = {
+        "initial_state": {"cases": {"case_1": {"status": "open"}}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "generated_arguments": {"case_id": "case_1"},
+                "argument_enums": {"reason": ["damaged_item", "goodwill_credit", "billing_error"]},
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+            }
+        ],
+    }
+
+    def create_case_call(reason: str) -> dict:
+        return {"name": "create_case", "arguments": {"reason": reason}}
+
+    correct = replay_tool_calls(scenario, [create_case_call("damaged_item")])
+    assert correct["errors"] == []
+    assert correct["final_state"]["cases"]["case_1"]["status"] == "created"
+
+    normalized = replay_tool_calls(scenario, [create_case_call("Damaged Item")])
+    assert normalized["errors"] == []
+    assert normalized["final_state"]["cases"]["case_1"]["status"] == "created"
+
+    misclassified = replay_tool_calls(scenario, [create_case_call("goodwill_credit")])
+    assert misclassified["errors"][0]["error"] == "argument_mismatch"
+    assert misclassified["final_state"]["cases"]["case_1"]["status"] == "open"
+    # The bug in the previous test cannot reoccur: the agent's own (wrong)
+    # value survives into effective_tool_calls instead of being overwritten.
+    assert misclassified["effective_tool_calls"][0]["arguments"]["reason"] == "goodwill_credit"
+
+    expected = [{"name": "create_case", "arguments": {"reason": "damaged_item"}}]
+    matched = check_tool_calls([create_case_call("damaged_item")], expected=expected, forbidden=[])
+    assert matched["expected_passed"] is True
+
+    wrong = check_tool_calls([create_case_call("goodwill_credit")], expected=expected, forbidden=[])
+    assert wrong["expected_passed"] is False
+    assert wrong["missing_expected"] == expected
+
+
+# (tool name, argument name) pairs migrated from generated_arguments to
+# argument_enums across the real corpus. Kept in sync with the migration by
+# the last assertion in test_enum_classified_arguments_reject_a_wrong_sibling_value.
+ENUM_MIGRATED_TOOL_ARGUMENTS = {
+    ("create_case", "reason"),
+    ("issue_refund", "reason"),
+    ("create_security_alert", "reason"),
+}
+
+# Scenarios whose oracle expected_tool_calls include at least one call on one
+# of the pairs above. A regression in migration coverage (partial rollout for
+# a tool name, or a reverted pair) changes this number.
+SCENARIOS_WITH_ENUM_CLASSIFIED_CALLS = 160
+
+
+def _enum_vocabulary(bench: OpenVoiceCSBench) -> dict[tuple[str, str], set[str]]:
+    """Collect the declared argument_enums vocabulary for the migrated pairs."""
+    vocab: dict[tuple[str, str], set[str]] = {pair: set() for pair in ENUM_MIGRATED_TOOL_ARGUMENTS}
+    for scenario in bench.scenarios:
+        for tool in scenario.get("tools") or []:
+            for argument_name, members in (tool.get("argument_enums") or {}).items():
+                pair = (tool.get("name"), argument_name)
+                if pair in vocab:
+                    vocab[pair].update(members)
+    return vocab
+
+
+def _misclassify_enum_arguments(
+    trace: dict, scenario: dict, vocab: dict[tuple[str, str], set[str]]
+) -> tuple[dict, bool]:
+    """Swap every enum-classified argument in trace's tool calls for a wrong sibling.
+
+    The replacement is always a real value from the same corpus vocabulary
+    (never gibberish), because the point is to prove a genuine misclassification
+    is caught -- not that unknown tokens are rejected, which would be a much
+    weaker claim.
+    """
+    tools_by_name = {tool["name"]: tool for tool in scenario.get("tools") or []}
+    swapped = False
+    calls = []
+    for call in trace.get("tool_calls") or []:
+        tool_def = tools_by_name.get(call.get("name")) or {}
+        enums = tool_def.get("argument_enums") or {}
+        arguments = dict(call.get("arguments") or {})
+        for argument_name, golden in list(arguments.items()):
+            pair = (call.get("name"), argument_name)
+            if pair not in ENUM_MIGRATED_TOOL_ARGUMENTS or argument_name not in enums:
+                continue
+            siblings = sorted(value for value in vocab[pair] if value != golden)
+            if not siblings:
+                continue
+            arguments[argument_name] = siblings[0]
+            swapped = True
+        calls.append({"name": call.get("name"), "arguments": arguments})
+    return {**trace, "tool_calls": calls}, swapped
+
+
+def test_enum_classified_arguments_reject_a_wrong_sibling_value():
+    """The regression this whole fix exists to close, checked suite-wide.
+
+    Before argument_enums, a classification field like `reason` on
+    create_case was declared generated_arguments, so _effective_tool_arguments
+    silently substituted the oracle's golden value over whatever the agent
+    actually sent -- an agent that swapped in a real but *wrong* classification
+    from the same corpus vocabulary scored exactly like the oracle. This test
+    proves that hole is closed generically, across every migrated scenario in
+    the suite rather than one hand-picked example: swapping in a genuine
+    sibling label (a real value the corpus uses elsewhere for the same tool
+    argument, never gibberish) must now score `tool_correctness` and
+    `task_success` strictly below the oracle.
+    """
+    bench = OpenVoiceCSBench.load()
+    vocab = _enum_vocabulary(bench)
+    assert all(len(members) >= 2 for members in vocab.values()), (
+        "every migrated tool argument needs a real sibling value to swap to, "
+        "or this test cannot prove anything for that pair"
+    )
+
+    swapped_ids: list[str] = []
+
+    def misclassifying_agent(scenario: dict, trial_index: int = 0) -> dict:
+        trace = oracle_agent(scenario, trial_index)
+        trace, swapped = _misclassify_enum_arguments(trace, scenario, vocab)
+        if swapped:
+            swapped_ids.append(scenario["id"])
+        return trace
+
+    oracle_report = bench.score_agent(oracle_agent, trials=1)
+    misclassified_report = bench.score_agent(misclassifying_agent, trials=1)
+
+    assert len(swapped_ids) == SCENARIOS_WITH_ENUM_CLASSIFIED_CALLS
+
+    oracle_by_id = {result["id"]: result for result in oracle_report["results"]}
+    misclassified_by_id = {result["id"]: result for result in misclassified_report["results"]}
+
+    for scenario_id in swapped_ids:
+        oracle_scores = oracle_by_id[scenario_id]["avg_scores"]
+        bad_scores = misclassified_by_id[scenario_id]["avg_scores"]
+        assert bad_scores["tool_correctness"] < oracle_scores["tool_correctness"], scenario_id
+        assert bad_scores["task_success"] < oracle_scores["task_success"], scenario_id
+
+    # Every migrated pair is actually exercised somewhere in the suite, and
+    # nothing beyond the three pairs this fix migrated has crept in.
+    exercised_pairs = {
+        (tool.get("name"), argument_name)
+        for scenario in bench.scenarios
+        for tool in scenario.get("tools") or []
+        for argument_name in (tool.get("argument_enums") or {})
+    }
+    assert exercised_pairs == ENUM_MIGRATED_TOOL_ARGUMENTS
+
+
+def test_argument_enum_vocabularies_are_fully_derivable_from_the_public_split():
+    """Exposing a classification vocabulary in a tool schema must not leak
+    sealed-test information.
+
+    argument_enums vocabularies are derived from the golden required_arguments
+    values used across every scenario that calls a given tool -- and that
+    derivation does not itself distinguish public_dev from sealed_test
+    scenarios. splits_v0.1.json's contamination_rule promises sealed items are
+    never "published with full transcripts, tool oracles, expected states, or
+    audio assets before evaluation." An enum member that appears ONLY on a
+    sealed-test scenario's golden call would violate that promise the moment
+    it's shown to a model inside a tool schema, even though the sealed
+    scenario itself stays unpublished -- the model would still learn "this
+    label is a valid answer to something," which is exactly the kind of hint
+    a contamination-controlled split exists to prevent.
+
+    This is currently true by coincidence, not by construction: these three
+    migrated tools happen to use small, closed, universal category vocabularies
+    (damage/fraud/security-alert reasons) that are fully represented in the
+    public portion of the corpus. That coincidence is not a guarantee -- if a
+    future sealed-only scenario introduces a new reason value and someone
+    re-derives the enum the same way, it would silently leak. This test makes
+    that guarantee explicit and permanent rather than accidental.
+    """
+    bench = OpenVoiceCSBench.load()
+    full_vocab = _enum_vocabulary(bench)
+
+    public_ids = set(load_split_manifest()["splits"]["public_dev"]["scenario_ids"])
+    public_vocab: dict[tuple[str, str], set[str]] = {pair: set() for pair in ENUM_MIGRATED_TOOL_ARGUMENTS}
+    for scenario in bench.scenarios:
+        if scenario["id"] not in public_ids:
+            continue
+        for tool in scenario.get("tools") or []:
+            for argument_name, members in (tool.get("argument_enums") or {}).items():
+                pair = (tool.get("name"), argument_name)
+                if pair in public_vocab:
+                    public_vocab[pair].update(members)
+
+    for pair, members in full_vocab.items():
+        sealed_only = members - public_vocab[pair]
+        assert not sealed_only, (
+            f"{pair}: enum value(s) {sorted(sealed_only)} appear only on a sealed-test "
+            f"scenario's golden call. Showing them in a tool schema leaks sealed-split "
+            f"information. Every argument_enums member must be independently derivable "
+            f"from public_dev scenarios alone."
+        )
