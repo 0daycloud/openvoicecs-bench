@@ -122,15 +122,34 @@ All entries below are dated 2026-08-08 unless noted otherwise.
 - [PENDING] Live smoke test: run the semantic fallback against a handful
   of real (non-oracle-style) responses with a real OpenAI call, confirm the
   API call + JSON parsing actually works end-to-end (only tested via mocked
-  caller so far).
+  caller so far). Blocked 2026-08-09: the local `OPENAI_API_KEY` is
+  currently invalid (`401 invalid_api_key` from OpenAI itself — key format
+  is clean, no whitespace/quoting issue, `.env` loading path confirmed
+  working). Waiting on a replacement key.
 - [PENDING] Before/after comparison: re-score existing stored model runs
   (`data/openvoicecs/runs`) with the new grader, quantify how many of the
   36/44 previously-reshuffled rankings actually change and by how much.
-- [PENDING] Run the full `make check` gate (scenario validation, review-
-  manifest validation, submission intake validation, strict release gate,
-  release-bundle verification, unit tests).
-- [PENDING] Write the PR description and open a PR against
-  0daycloud/openvoicecs-bench.
+  Blocked on the same invalid API key as above.
+- [DONE] 2026-08-09: Ran the full `make check` gate by hand (no `make` on
+  this Windows shell, so its six steps were run individually with
+  `.venv/Scripts/python.exe`): `ruff check .` clean; both validity gates
+  (`mark_ungrounded_tool_arguments.py --check`,
+  `bind_forbidden_event_triggers.py --check`) pass; `validate` (220
+  scenarios) pass; `validate-reviews` pass; `validate-submission-intake`
+  pass; `validate-release-bundle` pass; `pytest tests/unit` → 250 passed,
+  1 skipped, 3 failed. The 3 failures are exactly the pre-existing Windows
+  path-separator bug already logged above
+  (`test_release_bundle.py::test_build_frontier_release_bundle_writes_valid_artifacts`,
+  `test_release_verification.py::test_verify_openvoicecs_seed_release_passes`,
+  `test_release_verification.py::test_verify_openvoicecs_release_can_require_audio_assets`)
+  — confirmed by diffing a freshly-generated release audit against the
+  saved one: every field matches except `path` using `\` instead of `/`.
+  Not fixed, per section 7. `verify-release --strict` also fails on the
+  same cause (`saved_release_audit` check compares path strings verbatim
+  against the committed `release_audit.json`).
+- [DONE] 2026-08-09: Wrote the PR description draft — see
+  [PR_DRAFT.md](PR_DRAFT.md). Not opened yet; still waiting on the two
+  API-key-blocked PENDING items above before this goes out for real.
 
 ## 6. Testing & Verification Strategy
 
