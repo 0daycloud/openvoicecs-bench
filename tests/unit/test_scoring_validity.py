@@ -34,6 +34,7 @@ from src.evaluation.benchmark.openvoicecs import (
     oracle_agent,
     replay_tool_calls,
 )
+from src.evaluation.benchmark.splits import load_split_manifest
 
 SUITE_SIZE = 220
 
@@ -551,3 +552,51 @@ def test_enum_classified_arguments_reject_a_wrong_sibling_value():
         for argument_name in (tool.get("argument_enums") or {})
     }
     assert exercised_pairs == ENUM_MIGRATED_TOOL_ARGUMENTS
+
+
+def test_argument_enum_vocabularies_are_fully_derivable_from_the_public_split():
+    """Exposing a classification vocabulary in a tool schema must not leak
+    sealed-test information.
+
+    argument_enums vocabularies are derived from the golden required_arguments
+    values used across every scenario that calls a given tool -- and that
+    derivation does not itself distinguish public_dev from sealed_test
+    scenarios. splits_v0.1.json's contamination_rule promises sealed items are
+    never "published with full transcripts, tool oracles, expected states, or
+    audio assets before evaluation." An enum member that appears ONLY on a
+    sealed-test scenario's golden call would violate that promise the moment
+    it's shown to a model inside a tool schema, even though the sealed
+    scenario itself stays unpublished -- the model would still learn "this
+    label is a valid answer to something," which is exactly the kind of hint
+    a contamination-controlled split exists to prevent.
+
+    This is currently true by coincidence, not by construction: these three
+    migrated tools happen to use small, closed, universal category vocabularies
+    (damage/fraud/security-alert reasons) that are fully represented in the
+    public portion of the corpus. That coincidence is not a guarantee -- if a
+    future sealed-only scenario introduces a new reason value and someone
+    re-derives the enum the same way, it would silently leak. This test makes
+    that guarantee explicit and permanent rather than accidental.
+    """
+    bench = OpenVoiceCSBench.load()
+    full_vocab = _enum_vocabulary(bench)
+
+    public_ids = set(load_split_manifest()["splits"]["public_dev"]["scenario_ids"])
+    public_vocab: dict[tuple[str, str], set[str]] = {pair: set() for pair in ENUM_MIGRATED_TOOL_ARGUMENTS}
+    for scenario in bench.scenarios:
+        if scenario["id"] not in public_ids:
+            continue
+        for tool in scenario.get("tools") or []:
+            for argument_name, members in (tool.get("argument_enums") or {}).items():
+                pair = (tool.get("name"), argument_name)
+                if pair in public_vocab:
+                    public_vocab[pair].update(members)
+
+    for pair, members in full_vocab.items():
+        sealed_only = members - public_vocab[pair]
+        assert not sealed_only, (
+            f"{pair}: enum value(s) {sorted(sealed_only)} appear only on a sealed-test "
+            f"scenario's golden call. Showing them in a tool schema leaks sealed-split "
+            f"information. Every argument_enums member must be independently derivable "
+            f"from public_dev scenarios alone."
+        )
