@@ -1182,6 +1182,40 @@ def test_paraphrase_layer_respects_family_boundaries(monkeypatch):
     assert legacy["score"] == 0.0  # legacy mode: no paraphrase layer, bit for bit
 
 
+def test_forbidden_claim_in_denial_context_is_not_a_violation(monkeypatch):
+    scenario = {"oracle": {"grounding": {
+        "required_claims": [{"id": "refund_processed", "any_terms": ["refund"]}],
+        "forbidden_claims": [{"id": "store_credit_claim", "patterns": ["store credit"]}],
+    }}}
+    denial = _trace("Your refund went to the original payment card, not store credit.")
+    check = check_factual_grounding(denial, scenario, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+    asserted = _trace("Your refund was issued as store credit to your account.")
+    check = check_factual_grounding(asserted, scenario, state_check={"passed": True})
+    assert check["score"] == 0.0  # a genuine assertion still fires
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(denial, scenario, state_check={"passed": True})
+    assert legacy["score"] == 0.0  # legacy keeps the historical behavior bit for bit
+
+
+def test_customer_stated_amounts_are_not_invented():
+    scenario = {
+        "conversation": [{"role": "customer", "text": "There is a 248 dollar charge and a $412 one I dispute."}],
+        "initial_state": {},
+        "tools": [{"name": "open_dispute", "required_arguments": {"amount_cents": 24800}}],
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    echo = _trace("I've completed that and logged it: the $248 and $412 charges are disputed.")
+    check = check_factual_grounding(echo, scenario, state_check={"passed": True}, final_state={})
+    assert check["score"] == 1.0
+
+    invented = _trace("I've completed that and logged it. The fee comes to $8843.")
+    check = check_factual_grounding(invented, scenario, state_check={"passed": True}, final_state={})
+    assert check["score"] == 0.0
+
+
 def test_paraphrase_judge_consulted_only_for_missed_claims_on_passed_state():
     calls = []
 
