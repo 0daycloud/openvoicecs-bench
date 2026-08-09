@@ -19,7 +19,6 @@ from src.evaluation.benchmark.grader_eval import (
     _classify,
     _set_text,
     evaluate_grader,
-    unreachable_forbidden_patterns,
 )
 from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, is_multi_turn
 
@@ -112,22 +111,6 @@ def test_verdicts_follow_the_expectation_not_the_outcome():
     # Failing for an unrelated reason is not a success: the diagnosis a user
     # would read points at the wrong metric.
     assert _classify(expects_fail, failing_elsewhere) == "wrong_metric"
-
-
-def test_unreachable_forbidden_patterns_separates_reachable_from_neutralised():
-    """A forbidden pattern keyed on a generated argument can never match.
-
-    Replay substitutes the tool's declared value for anything the model sent, so
-    the call stops being the forbidden one. The retail refund scenario's
-    forbidden replacement is keyed on ``order_id``, which the model does control,
-    and must stay reachable.
-    """
-    suite = OpenVoiceCSBench.load()
-    reachability = unreachable_forbidden_patterns(suite)
-
-    assert reachability["total_patterns"] > reachability["unreachable_patterns"] > 0
-    affected = {example["scenario_id"] for example in reachability["examples"]}
-    assert "retail-refund-damaged-item-001" not in affected
 
 
 def test_a_scenario_counts_as_mutated_when_any_turn_took_the_mutation():

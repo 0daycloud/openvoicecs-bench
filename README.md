@@ -263,12 +263,11 @@ intervals. The manifests and validators for this already exist and are tested.
 
 ## Contributing
 
-The single most valuable contribution is **making forbidden tool patterns
-reachable** — two thirds of them key on an argument no model controls, so the
-failure mode "performed the action the policy forbids" cannot be measured in
-those scenarios ([known-limitations](docs/known-limitations.md) section 7b).
-Re-scoring the published sweep against the current scorer is the next most
-useful, followed by sweeping the four untested tracks. Scenario contributions are
+The single most valuable contribution is **re-scoring the published sweep**
+against the current scorer: grounding now verifies claims against replayed state,
+required events no longer include ones nothing can emit, and forbidden tool
+patterns are matchable, so the ranked numbers predate the code that produced
+them. Sweeping the four untested tracks is the next most useful. Scenario contributions are
 welcome too; the corpus is the most reusable part of this project.
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) — local checks, scenario authoring rules,

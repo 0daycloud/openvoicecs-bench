@@ -58,10 +58,7 @@ from src.evaluation.benchmark.frontier import (
     write_frontier_artifacts,
     write_scorecard_artifacts,
 )
-from src.evaluation.benchmark.grader_eval import (
-    evaluate_grader,
-    unreachable_forbidden_patterns,
-)
+from src.evaluation.benchmark.grader_eval import evaluate_grader
 from src.evaluation.benchmark.judging import (
     DEFAULT_JUDGE_ANNOTATION_PACKAGE_PATH,
     DEFAULT_JUDGE_PROTOCOL_PATH,
@@ -894,10 +891,7 @@ def cmd_compare(args: argparse.Namespace) -> None:
 
 
 def cmd_grader_eval(args: argparse.Namespace) -> None:
-    bench = OpenVoiceCSBench.load()
-    reachability = unreachable_forbidden_patterns(bench)
-    report = evaluate_grader(bench)
-    report["forbidden_pattern_reachability"] = reachability
+    report = evaluate_grader(OpenVoiceCSBench.load())
 
     print(
         f"Graded {report['cases_applied']} fabricated traces "
@@ -911,11 +905,6 @@ def cmd_grader_eval(args: argparse.Namespace) -> None:
             f"{counts['false_pass']:12}{counts['false_fail']:12}"
         )
 
-    print(
-        f"\nForbidden tool patterns: {reachability['unreachable_patterns']} of "
-        f"{reachability['total_patterns']} cannot be triggered by any agent, "
-        f"across {reachability['scenarios_affected']} scenarios"
-    )
     if args.output:
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)

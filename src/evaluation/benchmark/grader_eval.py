@@ -31,10 +31,8 @@ from typing import Any
 from src.evaluation.benchmark.openvoicecs import (
     OpenVoiceCSBench,
     _agent_text,
-    _has_matching_call,
     _verification_tool_names,
     oracle_agent,
-    replay_tool_calls,
 )
 
 # Meaning-preserving rewrites. Two kinds, and the difference matters:
@@ -237,61 +235,18 @@ def _refuse_eligible(scenario: dict[str, Any], trace: dict[str, Any]) -> dict[st
 
 
 def _grant_forbidden(scenario: dict[str, Any], trace: dict[str, Any]) -> dict[str, Any] | None:
-    """Take the action the scenario explicitly forbids, with its exact arguments.
-
-    Only patterns that survive replay are used. Where the argument that makes a
-    pattern forbidden is one the tool declares ``generated``, replay substitutes
-    the correct value and the call stops being the forbidden one — asserting a
-    failure the trace does not actually contain would make the expectation
-    wrong. ``unreachable_forbidden_patterns`` counts what that excludes.
-    """
-    reachable = [
-        pattern
-        for pattern in (scenario.get("oracle") or {}).get("forbidden_tool_calls") or []
-        if isinstance(pattern, dict) and _pattern_survives_replay(scenario, pattern)
+    """Take the action the scenario explicitly forbids, with its exact arguments."""
+    forbidden = [
+        pattern for pattern in (scenario.get("oracle") or {}).get("forbidden_tool_calls") or []
+        if isinstance(pattern, dict)
     ]
-    if not reachable:
+    if not forbidden:
         return None
     trace["tool_calls"] = list(trace["tool_calls"]) + [
         {"name": pattern.get("name"), "arguments": dict(pattern.get("arguments") or {})}
-        for pattern in reachable
+        for pattern in forbidden
     ]
     return trace
-
-
-def _pattern_survives_replay(scenario: dict[str, Any], pattern: dict[str, Any]) -> bool:
-    """True when calling ``pattern`` verbatim still matches it after replay."""
-    call = {"name": pattern.get("name"), "arguments": dict(pattern.get("arguments") or {})}
-    replay = replay_tool_calls(scenario, [call])
-    return _has_matching_call(replay["effective_tool_calls"], pattern)
-
-
-def unreachable_forbidden_patterns(suite: OpenVoiceCSBench) -> dict[str, Any]:
-    """Forbidden tool patterns no agent can trigger.
-
-    A pattern is forbidden because of a specific argument value. When the tool
-    declares that argument ``generated``, replay overwrites whatever the model
-    sent, so the pattern can never match and the scenario cannot fail the check
-    it declares. This is the vacuity that v0.2 removed from forbidden *events*,
-    reappearing on forbidden *tool calls* as a side effect of the fix for
-    unknowable arguments.
-    """
-    unreachable = [
-        {"scenario_id": scenario["id"], "tool": pattern.get("name")}
-        for scenario in suite.scenarios
-        for pattern in (scenario.get("oracle") or {}).get("forbidden_tool_calls") or []
-        if isinstance(pattern, dict) and not _pattern_survives_replay(scenario, pattern)
-    ]
-    total = sum(
-        len((scenario.get("oracle") or {}).get("forbidden_tool_calls") or [])
-        for scenario in suite.scenarios
-    )
-    return {
-        "total_patterns": total,
-        "unreachable_patterns": len(unreachable),
-        "scenarios_affected": len({item["scenario_id"] for item in unreachable}),
-        "examples": unreachable[:10],
-    }
 
 
 MUTATIONS: tuple[Mutation, ...] = (

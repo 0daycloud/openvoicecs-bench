@@ -397,6 +397,7 @@ class OpenVoiceCSBench:
             effective_tool_calls,
             expected=oracle.get("expected_tool_calls", []),
             forbidden=oracle.get("forbidden_tool_calls", []),
+            submitted_calls=trace["tool_calls"],
         )
         tool_quality = diagnose_tool_call_quality(
             scenario,
@@ -2081,11 +2082,27 @@ def check_tool_calls(
     *,
     expected: list[dict[str, Any]],
     forbidden: list[dict[str, Any]],
+    submitted_calls: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Check required and forbidden tool-call patterns."""
+    """Check required and forbidden tool-call patterns.
+
+    The two halves read different views of the same calls, and they have to.
+    ``actual_calls`` has ``generated_arguments`` filled in, so a model is not
+    charged for a system-assigned value it could not know — 82.7% of those slots
+    are omitted outright in recorded runs and another 16.4% carry a guess.
+
+    Forbidden patterns are matched against ``submitted_calls``, what the model
+    actually sent. A pattern is forbidden *because* of a particular argument
+    value, so substituting the declared value first turns the forbidden call
+    into the legitimate one and the check can never fail: 153 of the corpus's 229
+    patterns were unmatchable. Falls back to ``actual_calls`` for callers that
+    have only the one view.
+    """
     missing = [pattern for pattern in expected if not _has_matching_call(actual_calls, pattern)]
     forbidden_matches = [
-        pattern for pattern in forbidden if _has_matching_call(actual_calls, pattern)
+        pattern for pattern in forbidden
+        if _has_matching_call(submitted_calls if submitted_calls is not None else actual_calls,
+                              pattern)
     ]
     expected_score = 1.0 if not expected else (len(expected) - len(missing)) / len(expected)
     score = expected_score if not forbidden_matches else 0.0

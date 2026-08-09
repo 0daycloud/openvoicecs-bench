@@ -273,23 +273,32 @@ applies to speaker gates, one of whose two instances keys on an event nothing
 emits. That the discrimination gap widens by a point while the no-op floor moves
 a hundredth is what separates this from a loosening.
 
-### 7b. Two thirds of forbidden tool patterns cannot be triggered
+### 7b. Two thirds of forbidden tool patterns could not be triggered — fixed
 
-A pattern is forbidden because of one argument value. Where the tool declares
-that argument `generated` — the v0.2 fix for unknowable arguments — replay
-substitutes the correct value before the check runs, so the pattern can never
-match. **153 of 229 patterns, across 153 scenarios**, cannot fail the check they
-declare.
+A pattern is forbidden because of one argument value. `generated_arguments`, the
+v0.2 fix for values an agent cannot know, was applied with `update()` before the
+forbidden check ran, so the declared value replaced whatever the model actually
+sent and the forbidden call became the legitimate one. **153 of 229 patterns,
+across 153 scenarios, could not be matched by any agent.**
 
-`test_every_scenario_can_actually_fail_its_forbidden_event_checks` does not catch
-it because it requires only that *some* forbidden event fires, and the
-`protected_tool_before_verification` trigger still works. This is not fixed here:
-the distinguishing argument is one no model controls, so making it matchable is a
-corpus change, not a grader change.
+The two halves of `check_tool_calls` now read different views of the same calls,
+because they have to. Expected patterns keep the substitution — 82.7% of
+generated-argument slots are omitted outright in recorded runs and another 16.4%
+carry a guess, and charging those again is exactly defect 3. Forbidden patterns
+are matched against what the model submitted.
 
-```bash
-python scripts/run_openvoicecs.py grader-eval    # last line reports the count
-```
+| | Before | After |
+| --- | ---: | ---: |
+| Forbidden patterns a violating trace can match | 76 of 229 | **229 of 229** |
+| Fabricated forbidden-action cases the harness can build | 66 | 219 |
+| Forbidden matches across 2063 recorded real trials | 0 | 0 |
+
+The last row is the check that this is a reachability fix and not a new penalty:
+no real model sent a forbidden argument value, before or after.
+`test_every_forbidden_tool_pattern_can_actually_be_matched` fails if any pattern
+becomes unmatchable again, and
+`test_expected_calls_still_forgive_a_system_assigned_value` fails if the lenient
+half stops being lenient.
 
 ### 7c. One scenario's reference response fails its own oracle
 
@@ -416,19 +425,16 @@ trustworthy is fine-grained ordering in the middle.
    required events no longer include ones nothing can emit (sections 7 and 7a),
    so the leaderboard numbers were produced by a scorer that no longer exists.
    On 14 re-scored runs, 11 changed rank.
-2. **Make forbidden tool patterns reachable** (section 7b). Two thirds of them
-   key on an argument the model does not control, so the failure mode "performed
-   the action the policy forbids" is unmeasurable in those scenarios.
-3. **Repeat the sweep and publish confidence intervals** (section 5). One run of
+2. **Repeat the sweep and publish confidence intervals** (section 5). One run of
    three trials cannot separate models a couple of points apart, and right now
    nothing in the artifact says so numerically.
-4. **Replace binary gating** with a continuous or threshold-based aggregate
+3. **Replace binary gating** with a continuous or threshold-based aggregate
    (section 8), so a near-miss stops scoring the same as a crash.
-5. **Re-author the corpus as multi-turn** (section 11). The harness supports it
+4. **Re-author the corpus as multi-turn** (section 11). The harness supports it
    and the pilot proves the shape; single-turn scenarios are the biggest gap
    between what this benchmark claims to measure and what a real support call
    looks like.
-6. **Document argument vocabularies as enums** so classification accuracy
+5. **Document argument vocabularies as enums** so classification accuracy
    becomes measurable again (section 3), and so tool-call rate stops depending
    on schema wording (section 6).
-7. **Sweep the remaining four tracks** (section 12).
+6. **Sweep the remaining four tracks** (section 12).
