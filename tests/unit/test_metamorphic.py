@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import json
+
 from src.evaluation.benchmark.openvoicecs import scoped_invented_amounts
 from tests.metamorphic_transforms import (
     EXPECTED_RELATION,
     TRANSFORMS,
     transform_collide_amount,
     transform_corrupt_state,
+    transform_leak_tool_call,
     transform_synonym_swap,
 )
 
@@ -57,3 +60,25 @@ def test_corrupt_state_falsifies_one_path_without_touching_text():
 
 def test_every_transform_declares_a_relation():
     assert set(TRANSFORMS) == set(EXPECTED_RELATION)
+
+
+def test_leak_tool_call_appends_claim_vocabulary_inside_a_tool_call_block():
+    scenario, out = transform_leak_tool_call(SCENARIO, TRACE, True, FINAL_STATE)
+    appended = out["messages"][-1]["text"]
+    block = json.loads(appended[appended.index('{"action"'):])
+    assert block["action"] == "call_tool"
+    # The vocabulary must ride in the tool name as well as the arguments: the
+    # corpus defect was a tool *name* satisfying a required claim.
+    assert "completed" in block["name"] and "logged" in block["arguments"]["note"]
+
+
+def test_leak_tool_call_skips_scenarios_with_no_literal_vocabulary():
+    bare = {"oracle": {"grounding": {"required_claims": [], "forbidden_claims": []}}}
+    skipped, reason = transform_leak_tool_call(bare, TRACE, True, FINAL_STATE)
+    assert skipped is None and "no literal claim vocabulary" in reason
+
+
+def test_leak_tool_call_skips_traces_ending_inside_an_unterminated_block():
+    truncated = {"messages": [{"role": "agent", "text": '{"action":"call_tool","name":"x'}]}
+    skipped, reason = transform_leak_tool_call(SCENARIO, truncated, True, FINAL_STATE)
+    assert skipped is None and "unterminated block" in reason

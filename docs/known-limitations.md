@@ -232,6 +232,29 @@ violation across a turn boundary. Everything is deterministic and offline; an
 opt-in judge hook exists for the one genuinely ambiguous cell (literal missed,
 state passed — 1.9% of recorded trials) but adds no network calls by default.
 
+**Leaked machinery is not communication.** Some models emit the harness's own
+action protocol as message text (`{"action":"call_tool","name":...}`), so no
+tool runs — while claim regexes match *inside* the leaked block, letting a
+`create_clinician_task` tool name satisfy a `no_dosing_advice` claim. In
+state-linked mode those blocks are removed before any matching. Only blocks
+that parse as a tool call, or a truncated tail carrying the call signature that
+never closes, are stripped; anything ambiguous is left in place, because
+over-stripping would delete real speech. `{"action":"final","message":...}`
+blocks are deliberately kept — their `message` is the customer reply, and it
+carries 139 of the corpus's `completed_update` matches. Blast radius on the
+recorded sweep: 6 of 8,877 trials lose false credit, none gain any.
+
+**The same failure mode has a residue.** Tool *results*
+(`{"type":"tool_result","name":...,"result":{...}}`) are echoed into agent text
+by some models too. That shape is not a tool call and is not stripped; it is
+the sole remaining source of credit for 3 recorded trials. Left as documented
+rather than fixed, to keep the guard a tool-call rule instead of a general JSON
+detector. Note also that leaking JSON and being *scored on* leaked JSON are
+different populations: of 30 leak-carrying trials that score 1.0 on grounding
+while their state check fails, 21 earn that credit from genuine prose in
+another turn — the mismatch there is that no tool ran, which `task_success`
+already reports.
+
 **Known gaps, quantified.** `security_hold` and `port_out_authorised` read as
 completion assertions but are not state-gated (10 of 8,877 recorded trials
 keep credit on a failed state); gating them requires `state_independent:

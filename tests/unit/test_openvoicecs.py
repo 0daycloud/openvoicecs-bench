@@ -1298,3 +1298,81 @@ def test_policy_amounts_and_comma_figures_are_not_invented():
     invented = _trace("I've completed that and logged it. Your balance is $9,999.")
     check = check_factual_grounding(invented, scenario2, state_check={"passed": True}, final_state={})
     assert check["score"] == 0.0
+
+
+LEAK_SCENARIO = {
+    "conversation": [{"role": "customer", "text": "please refill my prescription"}],
+    "initial_state": {},
+    "oracle": {
+        "grounding": {
+            "required_claims": [COMPLETION_CLAIM],
+            "forbidden_claims": [
+                {"id": "double_dose_advice", "patterns": ["take a double dose"]}
+            ],
+        }
+    },
+}
+
+
+def test_leaked_tool_call_json_neither_credits_nor_incriminates():
+    """A tool-call block emitted as text ran no tool, so it is not communication."""
+    leak = _trace(
+        '{"action":"call_tool","name":"mark_completed_and_logged",'
+        '"arguments":{"note":"take a double dose"}}'
+    )
+    check = check_factual_grounding(leak, LEAK_SCENARIO, state_check={"passed": True})
+    assert check["missing_required_claims"], "tool name must not credit the claim"
+    assert not check["unsupported_claims_detected"], "tool arguments must not incriminate"
+    assert check["score"] == 0.0
+
+    # Legacy mode is untouched: it still matches inside the leaked block.
+    legacy = check_factual_grounding(leak, LEAK_SCENARIO, state_linked=False)
+    assert not legacy["missing_required_claims"]
+
+
+def test_natural_speech_around_a_leaked_block_still_scores():
+    mixed = _trace(
+        'One moment. {"action":"call_tool","name":"issue_refund","arguments":{}} '
+        "I've completed that and logged it."
+    )
+    check = check_factual_grounding(mixed, LEAK_SCENARIO, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+
+def test_final_action_blocks_are_kept_because_their_message_is_the_reply():
+    final = _trace('{"action":"final","message":"I have completed that and logged it."}')
+    check = check_factual_grounding(final, LEAK_SCENARIO, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+
+def test_only_unambiguous_json_is_stripped():
+    # Truncated mid-emission and never closed: unambiguously machinery.
+    truncated = _trace('{"action":"call_tool","name":"mark_completed_and_logged","arguments":{"a')
+    assert check_factual_grounding(
+        truncated, LEAK_SCENARIO, state_check={"passed": True}
+    )["score"] == 0.0
+    # Braces that are not a tool call are left alone rather than risk deleting speech.
+    prose = _trace("I've completed that and logged it {not json} for you.")
+    assert check_factual_grounding(
+        prose, LEAK_SCENARIO, state_check={"passed": True}
+    )["score"] == 1.0
+
+
+def test_stripping_cannot_bridge_a_removed_block_into_a_new_match():
+    scenario = {
+        "conversation": [{"role": "customer", "text": "release my funds"}],
+        "initial_state": {},
+        "oracle": {
+            "grounding": {
+                "required_claims": [],
+                "forbidden_claims": [
+                    {"id": "funds_released_claim", "patterns": ["released.*funds"]}
+                ],
+            }
+        },
+    }
+    split = _trace(
+        'I have not released {"action":"call_tool","name":"x","arguments":{}} your funds yet.'
+    )
+    check = check_factual_grounding(split, scenario, state_check={"passed": True})
+    assert not check["unsupported_claims_detected"]

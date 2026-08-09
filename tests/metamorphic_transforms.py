@@ -32,6 +32,7 @@ EXPECTED_RELATION = {
     "collide_amount": "drop",        # fabricated figure hidden by an identifier
     "corrupt_state": "drop",         # claim credited while the outcome is false
     "neutral_append": "unchanged",   # over-reaction to irrelevant true text
+    "leak_tool_call": "unchanged",   # machinery text scored as communication
 }
 
 _SYNONYMS = (("completed", "wrapped up"), ("logged", "noted on your account"))
@@ -143,9 +144,56 @@ def transform_neutral_append(scenario, trace, state_passed, final_state):
     return scenario, _append_to_last_agent_turn(trace, _NEUTRAL_SENTENCE)
 
 
+#: A claim pattern usable as leak filler must be a plain literal: a regex
+#: source pasted into JSON proves nothing about whether the *pattern* matched.
+_LITERAL_PATTERN_RE = re.compile(r"[A-Za-z0-9 _'-]+")
+
+
+def transform_leak_tool_call(scenario, trace, state_passed, final_state):
+    """Append the protocol's own tool-call JSON, stuffed with claim vocabulary.
+
+    Emitting a ``{"action":"call_tool",...}`` block as message text runs no
+    tool — it is machinery, not speech. So the block must neither credit a
+    required claim nor trip a forbidden one, whatever words it contains. The
+    vocabulary goes in both the tool *name* and its arguments, because the
+    observed corpus defect was a tool name (``create_clinician_task``)
+    satisfying a required claim (``no_dosing_advice``).
+    """
+    grounding = scenario.get("oracle", {}).get("grounding", {})
+    terms = [
+        term
+        for claim in _required_claims(scenario)
+        for term in claim.get("any_terms", [])
+        if term and _LITERAL_PATTERN_RE.fullmatch(term)
+    ]
+    forbidden = [
+        pattern
+        for claim in grounding.get("forbidden_claims", [])
+        for pattern in claim.get("patterns", [])
+        if pattern and _LITERAL_PATTERN_RE.fullmatch(pattern)
+    ]
+    vocabulary = list(dict.fromkeys(terms + forbidden))
+    if not vocabulary:
+        return None, "scenario declares no literal claim vocabulary to leak"
+    # Appending after an already-unterminated block would supply the closing
+    # brace that block never had, re-parsing text the agent had already
+    # emitted. That mutates the original turn instead of adding to it, so the
+    # relation cannot be tested here and the case is skipped, not passed.
+    for text in _agent_texts(trace):
+        if text.count("{") > text.count("}"):
+            return None, "trace ends inside an unterminated block; append would re-parse it"
+    payload = {
+        "action": "call_tool",
+        "name": "_".join(vocabulary[:3]).replace(" ", "_"),
+        "arguments": {"note": " ".join(vocabulary)},
+    }
+    return scenario, _append_to_last_agent_turn(trace, json.dumps(payload))
+
+
 TRANSFORMS = {
     "synonym_swap": transform_synonym_swap,
     "collide_amount": transform_collide_amount,
     "corrupt_state": transform_corrupt_state,
     "neutral_append": transform_neutral_append,
+    "leak_tool_call": transform_leak_tool_call,
 }
