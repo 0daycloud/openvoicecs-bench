@@ -282,6 +282,19 @@ objection handling.
 re-authored, multi-turn behaviour is measured on the pilot set only, and
 `end_to_end_voice` remains a transport test rather than a duplex one.
 
+**Partly fixed.** Reports now carry a cluster bootstrap 95% interval on
+`overall_score` under `confidence_intervals.overall_score`, resampling
+scenarios because trials are nested within them. Across the 58 stored v0.2
+reports, **55 of 57 adjacent ranks (96%) have overlapping intervals** at a
+median width of 5.05 points, which is the numeric statement this document
+previously lacked. Reproduce with `python scripts/report_score_intervals.py`.
+
+**Still open.** This quantifies within-sweep scenario variance only. Run-to-run
+variance still needs an independent repeat sweep, which no stored artifact
+provides — `text_action_v02_merged` is a merge of the other runs, and the
+`actionloop` and `jsontrace` directories differ by harness mode rather than
+being replicates.
+
 ### 12. Coverage of the ranked leaderboard is narrow
 
 One track (`text_to_action`, 64 of 204 scenarios), one sweep, three trials, ten
@@ -333,9 +346,10 @@ trustworthy is fine-grained ordering in the middle.
    carries weight 0.20, it conflates synonymy with omission, and removing it
    reshuffles 36 of 44 models — it is the largest single source of mid-table
    noise.
-2. **Repeat the sweep and publish confidence intervals** (section 5). One run of
-   three trials cannot separate models a couple of points apart, and right now
-   nothing in the artifact says so numerically.
+2. **Repeat the sweep** (section 5). Intervals on `overall_score` are now
+   published and show 96% of adjacent ranks overlapping, so the remaining work
+   is an independent repeat sweep to separate run-to-run from scenario
+   variance.
 3. **Replace binary gating** with a continuous or threshold-based aggregate
    (section 8), so a near-miss stops scoring the same as a crash.
 4. **Re-author the corpus as multi-turn** (section 11). The harness supports it
