@@ -2716,6 +2716,20 @@ _REFUSAL_TERM_RE = re.compile(r"\b(cannot|can't|won't|unable|refuse[sd]?)\b", re
 #: requirement do not assert that anything happened, so the trial state cannot
 #: contradict them. Deriving the default from the claim's own terms keeps the
 #: rule data-driven without a schema migration across every scenario file.
+#:
+#: This default is itself a keyword heuristic — a phrase matcher deciding how
+#: to fix a phrase matcher. The mitigation is that the corpus claim space is
+#: tiny and closed: all 34 distinct ``(id, any_terms)`` templates were
+#: classified by hand against this rule, and a wrong classification is
+#: correctable per claim in scenario data via ``state_independent`` without
+#: touching code. Known gaps, left as-is deliberately: ``security_hold``
+#: ("security hold"/"security review") and ``port_out_authorised``
+#: ("authorisation" — noun form, not matched) read as completion assertions
+#: but fall through to "not gated"; together they leave 10 of 8,877 scored
+#: trials (0.11%) in the v02 run credited on a failed state check. Gating
+#: them needs ``state_independent: false`` on those two claims, which edits
+#: the hash-pinned scenario corpus — deferred to the next corpus reissue
+#: rather than regenerating release artifacts for a 0.11% effect.
 _COMPLETION_TERM_RE = re.compile(
     r"\b(completed|logged|confirmed|rebook(ed)?|refund(ed)?|waived|waiver"
     r"|froze|frozen|freeze|dispute[sd]?|issued|processed|reissued|reported"
