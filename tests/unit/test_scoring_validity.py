@@ -439,3 +439,115 @@ def test_argument_enums_field_is_scored_like_a_normal_required_argument():
     wrong = check_tool_calls([create_case_call("goodwill_credit")], expected=expected, forbidden=[])
     assert wrong["expected_passed"] is False
     assert wrong["missing_expected"] == expected
+
+
+# (tool name, argument name) pairs migrated from generated_arguments to
+# argument_enums across the real corpus. Kept in sync with the migration by
+# the last assertion in test_enum_classified_arguments_reject_a_wrong_sibling_value.
+ENUM_MIGRATED_TOOL_ARGUMENTS = {
+    ("create_case", "reason"),
+    ("issue_refund", "reason"),
+    ("create_security_alert", "reason"),
+}
+
+# Scenarios whose oracle expected_tool_calls include at least one call on one
+# of the pairs above. A regression in migration coverage (partial rollout for
+# a tool name, or a reverted pair) changes this number.
+SCENARIOS_WITH_ENUM_CLASSIFIED_CALLS = 160
+
+
+def _enum_vocabulary(bench: OpenVoiceCSBench) -> dict[tuple[str, str], set[str]]:
+    """Collect the declared argument_enums vocabulary for the migrated pairs."""
+    vocab: dict[tuple[str, str], set[str]] = {pair: set() for pair in ENUM_MIGRATED_TOOL_ARGUMENTS}
+    for scenario in bench.scenarios:
+        for tool in scenario.get("tools") or []:
+            for argument_name, members in (tool.get("argument_enums") or {}).items():
+                pair = (tool.get("name"), argument_name)
+                if pair in vocab:
+                    vocab[pair].update(members)
+    return vocab
+
+
+def _misclassify_enum_arguments(
+    trace: dict, scenario: dict, vocab: dict[tuple[str, str], set[str]]
+) -> tuple[dict, bool]:
+    """Swap every enum-classified argument in trace's tool calls for a wrong sibling.
+
+    The replacement is always a real value from the same corpus vocabulary
+    (never gibberish), because the point is to prove a genuine misclassification
+    is caught -- not that unknown tokens are rejected, which would be a much
+    weaker claim.
+    """
+    tools_by_name = {tool["name"]: tool for tool in scenario.get("tools") or []}
+    swapped = False
+    calls = []
+    for call in trace.get("tool_calls") or []:
+        tool_def = tools_by_name.get(call.get("name")) or {}
+        enums = tool_def.get("argument_enums") or {}
+        arguments = dict(call.get("arguments") or {})
+        for argument_name, golden in list(arguments.items()):
+            pair = (call.get("name"), argument_name)
+            if pair not in ENUM_MIGRATED_TOOL_ARGUMENTS or argument_name not in enums:
+                continue
+            siblings = sorted(value for value in vocab[pair] if value != golden)
+            if not siblings:
+                continue
+            arguments[argument_name] = siblings[0]
+            swapped = True
+        calls.append({"name": call.get("name"), "arguments": arguments})
+    return {**trace, "tool_calls": calls}, swapped
+
+
+def test_enum_classified_arguments_reject_a_wrong_sibling_value():
+    """The regression this whole fix exists to close, checked suite-wide.
+
+    Before argument_enums, a classification field like `reason` on
+    create_case was declared generated_arguments, so _effective_tool_arguments
+    silently substituted the oracle's golden value over whatever the agent
+    actually sent -- an agent that swapped in a real but *wrong* classification
+    from the same corpus vocabulary scored exactly like the oracle. This test
+    proves that hole is closed generically, across every migrated scenario in
+    the suite rather than one hand-picked example: swapping in a genuine
+    sibling label (a real value the corpus uses elsewhere for the same tool
+    argument, never gibberish) must now score `tool_correctness` and
+    `task_success` strictly below the oracle.
+    """
+    bench = OpenVoiceCSBench.load()
+    vocab = _enum_vocabulary(bench)
+    assert all(len(members) >= 2 for members in vocab.values()), (
+        "every migrated tool argument needs a real sibling value to swap to, "
+        "or this test cannot prove anything for that pair"
+    )
+
+    swapped_ids: list[str] = []
+
+    def misclassifying_agent(scenario: dict, trial_index: int = 0) -> dict:
+        trace = oracle_agent(scenario, trial_index)
+        trace, swapped = _misclassify_enum_arguments(trace, scenario, vocab)
+        if swapped:
+            swapped_ids.append(scenario["id"])
+        return trace
+
+    oracle_report = bench.score_agent(oracle_agent, trials=1)
+    misclassified_report = bench.score_agent(misclassifying_agent, trials=1)
+
+    assert len(swapped_ids) == SCENARIOS_WITH_ENUM_CLASSIFIED_CALLS
+
+    oracle_by_id = {result["id"]: result for result in oracle_report["results"]}
+    misclassified_by_id = {result["id"]: result for result in misclassified_report["results"]}
+
+    for scenario_id in swapped_ids:
+        oracle_scores = oracle_by_id[scenario_id]["avg_scores"]
+        bad_scores = misclassified_by_id[scenario_id]["avg_scores"]
+        assert bad_scores["tool_correctness"] < oracle_scores["tool_correctness"], scenario_id
+        assert bad_scores["task_success"] < oracle_scores["task_success"], scenario_id
+
+    # Every migrated pair is actually exercised somewhere in the suite, and
+    # nothing beyond the three pairs this fix migrated has crept in.
+    exercised_pairs = {
+        (tool.get("name"), argument_name)
+        for scenario in bench.scenarios
+        for tool in scenario.get("tools") or []
+        for argument_name in (tool.get("argument_enums") or {})
+    }
+    assert exercised_pairs == ENUM_MIGRATED_TOOL_ARGUMENTS
