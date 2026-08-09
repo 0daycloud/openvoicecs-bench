@@ -275,10 +275,15 @@ than a measured ceiling.
 adds an LLM-judge fallback on regex misses (false-negative side only,
 monotone-increasing). PR #4's evidence grounding pairs a communicated-claim
 check with state support and *does* revoke credit for communicated-but-false
-action claims; it currently leads on the labeled criterion (held-out kappa
-0.824 vs 0.644 here, N=36, single annotator, intra-rater test-retest 0.764 —
-a soft upper bound, see the labeling note below) on the strength of broader
-paraphrase coverage. PR #10's
+action claims; it led on the labeled criterion the last time that comparison
+was run (kappa 0.824 vs 0.644 here, N=36, single annotator, intra-rater
+test-retest 0.764 — a soft upper bound, see the labeling note below) on the
+strength of broader paraphrase coverage. **That comparison is stale and is no
+longer a held-out result.** Those rows were subsequently used to diagnose and
+fix twelve false negatives in this grader, which fits the set to it and leaves
+the published figure describing a version that no longer exists. It has not
+been re-measured against data this grader has not seen, so it should be read
+as neither a current win for PR #4 nor a current loss for this one. PR #10's
 state-attribution rescue is strong on omissions but never gates
 literal-matched claims, so it retains the false-credit class. The
 communicated-claim direction of PR #4 and the gate here sit on disjoint
