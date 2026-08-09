@@ -1083,3 +1083,91 @@ def test_state_linked_grounding_still_reports_regex_misses_as_missing():
     assert check["score"] == 0.0
     assert check["missing_required_claims"] == [COMPLETION_CLAIM]
     assert check["state_gated_claims"] == []
+
+
+def test_forbidden_claims_match_per_turn_not_across_turn_boundaries(monkeypatch):
+    scenario = {"oracle": {"grounding": {
+        "required_claims": [],
+        "forbidden_claims": [{"id": "funds_released", "patterns": ["released .*today"]}],
+    }}}
+    trace = {"messages": [
+        {"role": "agent", "text": "The hold was released after review."},
+        {"role": "agent", "text": "Thanks for your patience today."},
+    ]}
+
+    check = check_factual_grounding(trace, scenario, state_check={"passed": True})
+    assert check["score"] == 1.0
+    assert check["unsupported_claims_detected"] == []
+
+    single_turn = {"messages": [{"role": "agent", "text": "Funds were released to you today."}]}
+    check = check_factual_grounding(single_turn, scenario, state_check={"passed": True})
+    assert check["score"] == 0.0
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(trace, scenario, state_check={"passed": True})
+    assert legacy["score"] == 0.0  # historical concatenated matching, bit for bit
+
+
+def test_invented_amount_flagged_only_in_state_linked_mode(monkeypatch):
+    scenario = {
+        "initial_state": {"orders": {"ord_7001": {"amount_cents": 5299}}},
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    final_state = {"cases": {"case_9001": {"status": "open"}}}
+    trace = _trace("I've completed that and logged it. The total comes to $9001.")
+
+    check = check_factual_grounding(
+        trace, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert check["score"] == 0.0
+    assert any(c["id"] == "invented_amount" for c in check["unsupported_claims_detected"])
+
+    honest = _trace("I've completed that and logged it. The total comes to $52.99.")
+    check = check_factual_grounding(
+        honest, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert check["score"] == 1.0
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(
+        trace, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert legacy["score"] == 1.0
+
+
+def test_paraphrase_judge_consulted_only_for_missed_claims_on_passed_state():
+    calls = []
+
+    def judge(agent_text, missed):
+        calls.append([c["id"] for c in missed])
+        return {"completed_update"}
+
+    check = check_factual_grounding(
+        _trace("All wrapped up and noted on your account."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True},
+        paraphrase_judge=judge,
+    )
+    assert check["score"] == 1.0
+    assert calls == [["completed_update"]]
+    assert [c["id"] for c in check["judge_resolved_claims"]] == ["completed_update"]
+
+    calls.clear()
+    check = check_factual_grounding(
+        _trace("All wrapped up and noted on your account."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False},
+        paraphrase_judge=judge,
+    )
+    assert check["score"] == 0.0
+    assert calls == []  # failed state resolves deterministically; judge never fires
+
+    calls.clear()
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True},
+        paraphrase_judge=judge,
+    )
+    assert check["score"] == 1.0
+    assert calls == []  # regex match needs no judge
