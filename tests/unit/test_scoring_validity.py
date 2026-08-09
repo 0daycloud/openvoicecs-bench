@@ -1,6 +1,6 @@
-"""Regression tests for the two scoring-validity bugs that the suite could not see.
+"""Regression tests for the scoring-validity bugs that the suite could not see.
 
-Both bugs produced a benchmark that reported numbers without measuring anything:
+These bugs produced a benchmark that reported numbers without measuring anything:
 
 1. Every declared forbidden event was derived from a vocabulary that shared no
    name with any forbidden assertion, so the safety, privacy, and auth checks
@@ -8,6 +8,13 @@ Both bugs produced a benchmark that reported numbers without measuring anything:
 2. Provider-side failures (HTTP 402 "Insufficient credits", rate limits,
    dropped sockets) were folded in as model scores of 0.0, so an unpaid invoice
    looked exactly like a bad model.
+3. Classification arguments (``reason`` on ``create_case``, say) were marked
+   ``generated_arguments`` so the agent would not be scored on guessing an
+   unguessable ID format — but that also made them unfalsifiable: the scorer
+   overwrote whatever the agent actually sent with the oracle's golden value
+   before comparing, so an agent that picked a real but *wrong* classification
+   from the same vocabulary scored exactly like the oracle. ``argument_enums``
+   documents the vocabulary and returns the field to normal scoring.
 
 The tests below assert the observable contracts that make those states
 impossible to reintroduce.
@@ -352,3 +359,83 @@ def test_argument_labels_normalize_but_different_values_still_fail():
     )
     assert mismatched["expected_passed"] is False
     assert mismatched["missing_expected"] == expected
+
+
+def test_generated_arguments_silently_overwrites_a_wrong_classification():
+    """Pin the exact bug ``argument_enums`` exists to close.
+
+    While ``reason`` is declared ``generated_arguments``, ``_effective_tool_arguments``
+    substitutes the oracle's golden value over whatever the agent actually sent,
+    unconditionally, before the replay check ever runs — so an agent that chose a
+    real but wrong classification from the same vocabulary is indistinguishable
+    from the oracle. The next test proves ``argument_enums`` closes this.
+    """
+    scenario = {
+        "initial_state": {"cases": {"case_1": {"status": "open"}}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "generated_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+            }
+        ],
+    }
+
+    misclassified = replay_tool_calls(
+        scenario,
+        [{"name": "create_case", "arguments": {"reason": "goodwill_credit"}}],
+    )
+
+    assert misclassified["errors"] == []
+    assert misclassified["effective_tool_calls"][0]["arguments"]["reason"] == "damaged_item"
+    assert misclassified["final_state"]["cases"]["case_1"]["status"] == "created"
+
+
+def test_argument_enums_field_is_scored_like_a_normal_required_argument():
+    """Once out of ``generated_arguments``, an enum field is falsifiable again.
+
+    The scorer needs no special-case code for this: ``_model_required_arguments``
+    and ``_effective_tool_arguments`` only ever look at ``generated_arguments``
+    and ``argument_bindings``, so a field that carries ``argument_enums`` and is
+    absent from ``generated_arguments`` falls straight through to the existing
+    required-argument path, including its normalization contract.
+    """
+    scenario = {
+        "initial_state": {"cases": {"case_1": {"status": "open"}}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "generated_arguments": {"case_id": "case_1"},
+                "argument_enums": {"reason": ["damaged_item", "goodwill_credit", "billing_error"]},
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+            }
+        ],
+    }
+
+    def create_case_call(reason: str) -> dict:
+        return {"name": "create_case", "arguments": {"reason": reason}}
+
+    correct = replay_tool_calls(scenario, [create_case_call("damaged_item")])
+    assert correct["errors"] == []
+    assert correct["final_state"]["cases"]["case_1"]["status"] == "created"
+
+    normalized = replay_tool_calls(scenario, [create_case_call("Damaged Item")])
+    assert normalized["errors"] == []
+    assert normalized["final_state"]["cases"]["case_1"]["status"] == "created"
+
+    misclassified = replay_tool_calls(scenario, [create_case_call("goodwill_credit")])
+    assert misclassified["errors"][0]["error"] == "argument_mismatch"
+    assert misclassified["final_state"]["cases"]["case_1"]["status"] == "open"
+    # The bug in the previous test cannot reoccur: the agent's own (wrong)
+    # value survives into effective_tool_calls instead of being overwritten.
+    assert misclassified["effective_tool_calls"][0]["arguments"]["reason"] == "goodwill_credit"
+
+    expected = [{"name": "create_case", "arguments": {"reason": "damaged_item"}}]
+    matched = check_tool_calls([create_case_call("damaged_item")], expected=expected, forbidden=[])
+    assert matched["expected_passed"] is True
+
+    wrong = check_tool_calls([create_case_call("goodwill_credit")], expected=expected, forbidden=[])
+    assert wrong["expected_passed"] is False
+    assert wrong["missing_expected"] == expected

@@ -2175,8 +2175,12 @@ def diagnose_scenario_solvability(scenario: dict[str, Any]) -> dict[str, Any]:
         tool_def = tools_by_name.get(call.get("name")) or {}
         generated_args = set((tool_def.get("generated_arguments") or {}).keys())
         bound_args = set((tool_def.get("argument_bindings") or {}).keys())
+        # An argument_enums value need not appear verbatim in the prompt either:
+        # the closed vocabulary itself is disclosed via the tool schema, so the
+        # agent has what it needs even though grep-style grounding would miss it.
+        enum_args = set((tool_def.get("argument_enums") or {}).keys())
         for argument, value in (call.get("arguments") or {}).items():
-            if argument in generated_args or argument in bound_args:
+            if argument in generated_args or argument in bound_args or argument in enum_args:
                 continue
             if _value_is_prompt_derivable(value, prompt_blob):
                 continue

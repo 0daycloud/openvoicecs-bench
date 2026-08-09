@@ -13,6 +13,7 @@ from src.evaluation.benchmark.openvoicecs import (
     check_privacy,
     check_tool_calls,
     derive_trace_events,
+    diagnose_scenario_solvability,
     load_audio_manifest,
     load_reports,
     no_op_agent,
@@ -627,6 +628,46 @@ def test_scenario_solvability_marks_hidden_generated_ids():
 
     assert diagnostics["required_tool_count"] == len(scenario["oracle"]["expected_tool_calls"])
     assert diagnostics["required_auth_gate_count"] >= 1
+    assert diagnostics["all_needed_facts_available"] is True
+    assert diagnostics["missing_prompt_or_state_facts"] == []
+
+
+def test_scenario_solvability_treats_argument_enum_fields_as_available():
+    """A documented classification vocabulary is not a hidden fact.
+
+    ``diagnose_scenario_solvability`` already excludes ``generated_arguments``
+    and ``argument_bindings`` keys from "does the agent have what it needs"
+    because those values are supplied for the agent. An ``argument_enums``
+    field is the same kind of case even though its golden value is not
+    verbatim in the prompt: the closed vocabulary itself is disclosed via the
+    tool schema, so the field must not count as a missing fact either.
+    """
+    scenario = {
+        "customer_goal": "Customer wants a case opened for a damaged item.",
+        "conversation": [],
+        "customer_profile": {},
+        "initial_state": {},
+        "policy": {},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                "generated_arguments": {"case_id": "case_1"},
+                "argument_enums": {"reason": ["damaged_item", "goodwill_credit"]},
+            }
+        ],
+        "oracle": {
+            "expected_tool_calls": [
+                {
+                    "name": "create_case",
+                    "arguments": {"case_id": "case_1", "reason": "damaged_item"},
+                }
+            ]
+        },
+    }
+
+    diagnostics = diagnose_scenario_solvability(scenario)
+
     assert diagnostics["all_needed_facts_available"] is True
     assert diagnostics["missing_prompt_or_state_facts"] == []
 
