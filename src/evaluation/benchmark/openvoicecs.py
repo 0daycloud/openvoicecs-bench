@@ -2796,8 +2796,11 @@ def _forbidden_claim_near_miss(agent_text: str, patterns: list[str]) -> bool:
     processed" and the forbidden "instant refund" contain "refund"). Requiring
     every keyword lowers that false-positive rate; word-boundary matching
     keeps a negation like "left your plan unchanged" from being read as
-    containing "changed". This still is not full paraphrase detection --
-    that is exactly what the semantic judge it escalates to is for.
+    containing "changed". This still is not full paraphrase detection -- it
+    only flags a candidate for semantic escalation. The judge it escalates to
+    is not a reliable fix for forbidden-claim paraphrases either; that
+    remains an open, measured limitation (docs/known-limitations.md
+    section 7).
     """
     lowered = agent_text.lower()
     for pattern in patterns:

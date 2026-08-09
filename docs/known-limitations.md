@@ -247,16 +247,27 @@ it stays fully deterministic and offline (regression-tested in
 `mode="legacy"` to `check_factual_grounding`) to disable the fallback and
 reproduce the pure phrase-matcher scores this section originally described.
 
-**Not yet fixed.** The semantic judge is itself a phrase-matcher-adjacent
-model call with its own failure modes (miscalibration, prompt sensitivity),
-it has not been evaluated against a labeled ground-truth set of grounding
-verdicts, and the forbidden-claim near-miss pre-filter is a keyword heuristic,
-not full paraphrase detection — a forbidden claim reworded with entirely
-different vocabulary can still slip past both the regex and the pre-filter.
-Scores span 0.047–0.323 across the ranked cohort at weight 0.20 under the old
-pure-regex scorer, enough to reorder the top of the leaderboard; the hybrid
-scorer has not yet been run across the full sweep, so an updated spread is not
-published here.
+**Measured, and only partly fixed.** The hybrid path was run once against a
+locked 40-case targeted synthetic challenge set through the real production
+`check_factual_grounding(mode="hybrid")` path (108 live judge calls, 0
+infrastructure/parse errors) and compared against the same set scored with
+`mode="legacy"`. This is a targeted challenge set, not a benchmark-wide
+accuracy measurement, and it is not a general-purpose labeled ground-truth
+corpus. Required claims: 26/30 correct → 30/30, false negatives 4 → 0, zero
+regressions — the semantic fallback measurably fixes the synonymy-miss case
+above. Forbidden claims: 5/10 correct → 5/10, false negatives 5 → 5 — **no
+measured improvement**; near-miss paraphrase detection for forbidden claims
+remains an open, unresolved limitation, not something this fallback fixes.
+Repeating the run on the 36 fallback-triggered cases (3 runs, live judge
+calls each time) found the semantic judge is not bit-for-bit deterministic:
+35/36 cases were stable across all 3 runs, one case's verdict changed
+between runs. The forbidden-claim near-miss pre-filter itself is still a
+keyword heuristic, not full paraphrase detection — a forbidden claim
+reworded with entirely different vocabulary can still slip past both the
+regex and the pre-filter. Scores span 0.047–0.323 across the ranked cohort
+at weight 0.20 under the old pure-regex scorer, enough to reorder the top of
+the leaderboard; the hybrid scorer has not yet been run across the full
+sweep, so an updated spread is not published here.
 
 ### 8. Binary trial gating compresses `passed`
 

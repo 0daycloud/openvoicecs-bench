@@ -447,7 +447,7 @@
       "id": "openvoicecs-v0.1.0-grounding-phrase-matcher-erratum",
       "status": "open",
       "severity": "high",
-      "summary": "Phrase-only factual grounding can miss semantically equivalent wording. The semantic fallback reduces this error, but its verdict accuracy has not yet been independently measured against labeled grounding ground truth, fallback-touched trials are not bit-for-bit reproducible, and forbidden-claim paraphrase detection remains heuristic.",
+      "summary": "Phrase-only factual grounding can miss semantically equivalent wording. Measured once against a locked 40-case targeted synthetic challenge set through the production hybrid path: the semantic fallback fixed required-claim synonymy misses (26/30 to 30/30, false negatives 4 to 0, zero regressions) but did not improve forbidden-claim near-miss detection (5/10 to 5/10, false negatives 5 to 5, unchanged from the legacy phrase matcher). Fallback-touched trials are not bit-for-bit reproducible (35/36 stable across repeated runs; one verdict changed), and forbidden-claim paraphrase detection remains an open, unresolved limitation.",
       "scenario_ids": [],
       "audio_variant_ids": []
     }

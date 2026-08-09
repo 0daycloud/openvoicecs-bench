@@ -32,8 +32,8 @@
     },
     "changelog_file": {
       "path": "data/openvoicecs/changelog_v0.1.json",
-      "sha256": "e6298f8d52c0b8fc8603a609983a60abab55342c5e4ce21cdb69f7aeceddd4ef",
-      "bytes": 20354
+      "sha256": "ef6c72f16b125394bf34aa26a832ecc168f9ab5c420eb5eca4d17410dd1bdc52",
+      "bytes": 20649
     },
     "baseline_manifest_file": {
       "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
