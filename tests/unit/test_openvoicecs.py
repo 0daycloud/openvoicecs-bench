@@ -10,6 +10,7 @@ from src.evaluation.benchmark.openvoicecs import (
     build_audio_variant_scenarios,
     build_leaderboard,
     build_release_audit,
+    check_factual_grounding,
     check_privacy,
     check_tool_calls,
     derive_trace_events,
@@ -978,3 +979,107 @@ def test_leaderboard_orders_by_reliability_then_score():
     ])
 
     assert leaderboard["ranking"] == ["reliable", "lucky"]
+
+
+def _grounding_scenario(claims):
+    return {"oracle": {"grounding": {"required_claims": claims}}}
+
+
+def _trace(text):
+    return {"messages": [{"role": "agent", "text": text}]}
+
+
+COMPLETION_CLAIM = {"id": "completed_update", "any_terms": ["completed", "logged"]}
+REFUSAL_CLAIM = {"id": "refusal_explained", "any_terms": ["cannot", "policy", "verification"]}
+
+
+def test_state_linked_grounding_gates_matched_completion_claim_on_failed_state():
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": [{"path": "orders.o1.refund_status"}]},
+    )
+
+    assert check["score"] == 0.0
+    assert check["required_passed"] is False
+    assert check["state_gated_claims"] == [
+        {"id": "completed_update", "any_terms": ["completed", "logged"]}
+    ]
+    assert check["missing_required_claims"] == []
+
+
+def test_state_linked_grounding_credits_completion_claim_when_state_passed():
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_without_state_check_keeps_legacy_behavior():
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_exempts_refusal_claims():
+    check = check_factual_grounding(
+        _trace("I cannot do that under our policy without verification."),
+        _grounding_scenario([REFUSAL_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": [{"path": "security_reviews.s1.status"}]},
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_respects_explicit_state_independent_flag():
+    exempted = dict(COMPLETION_CLAIM, state_independent=True)
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([exempted]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 1.0
+
+    forced = dict(REFUSAL_CLAIM, state_independent=False)
+    check = check_factual_grounding(
+        _trace("I cannot do that under our policy without verification."),
+        _grounding_scenario([forced]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 0.0
+
+
+def test_state_linked_grounding_env_override_restores_old_scores(monkeypatch):
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_still_reports_regex_misses_as_missing():
+    check = check_factual_grounding(
+        _trace("All done, everything is wrapped up."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 0.0
+    assert check["missing_required_claims"] == [COMPLETION_CLAIM]
+    assert check["state_gated_claims"] == []
