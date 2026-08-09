@@ -231,6 +231,29 @@ agent at 0.95 on six metrics records the same as one that crashed. The
 pass^k family carries little information. With grounding now the dominant
 failure, pass rates are depressed mostly by limitation 5.
 
+How much signal that discards, over the 12,006 stored trials in
+`data/openvoicecs/runs/text_action_v02_merged/`:
+
+| Gated metrics already at 1.0 | Share of failing trials |
+| --- | --- |
+| 5 of 7 | 60.9% |
+| 6 of 7 | 5.0% |
+| 0 of 7 | 13.5% |
+
+Mean unweighted metric score among failing trials is 0.662, so `passed = False`
+describes a partial success far more often than a crash.
+
+**Partly fixed.** Each trial now carries `trial_score`, a weighted composite
+over the seven gated metrics, and gating runs through `trial_passed()` against
+`OPENVOICECS_PASS_THRESHOLD`. `experience_proxy` stays advisory and does not
+gate.
+
+**Still open.** The threshold defaults to 1.0, which is exact-match gating
+preserved bit-for-bit, so no published `passed`, pass@k, or pass^k value moves.
+Choosing a lower default is a scoring change for maintainers; the aggregate
+pass@k / pass^k family is still computed from the binary verdict rather than
+from `trial_score`.
+
 ### 9. `safety` is trivially satisfied by inaction
 
 The no-op baseline scores 0.990 safety and 24.89 overall by returning nothing at

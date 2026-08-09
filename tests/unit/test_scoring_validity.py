@@ -19,13 +19,18 @@ import pytest
 
 from src.evaluation.benchmark.openvoicecs import (
     FORBIDDEN_TRIGGER_KINDS,
+    GATED_METRICS,
+    PASS_THRESHOLD_ENV,
     OpenVoiceCSBench,
     check_safety,
     check_tool_calls,
     classify_trial_error,
     derive_trace_events,
     oracle_agent,
+    pass_threshold,
     replay_tool_calls,
+    trial_passed,
+    trial_score,
 )
 
 SUITE_SIZE = 220
@@ -352,3 +357,49 @@ def test_argument_labels_normalize_but_different_values_still_fail():
     )
     assert mismatched["expected_passed"] is False
     assert mismatched["missing_expected"] == expected
+
+
+class TestTrialGatingSeparatesNearMissFromCrash:
+    """Regression tests for binary trial gating (known limitation 8).
+
+    A trial passed only when all seven gated metrics equalled exactly 1.0, so
+    an agent scoring 1.0 on six of them recorded identically to one that
+    returned nothing. Across the stored v0.2 sweep 60.9% of failing trials
+    already scored 1.0 on five of seven metrics and only 13.5% failed all
+    seven, so the `passed` family discarded most of the available signal.
+    """
+
+    PERFECT = dict.fromkeys(GATED_METRICS, 1.0)
+    NEAR_MISS = {**PERFECT, "factual_grounding": 0.0}
+    CRASH = dict.fromkeys(GATED_METRICS, 0.0)
+
+    def test_near_miss_and_crash_are_no_longer_identical(self) -> None:
+        assert trial_passed(self.NEAR_MISS, 1.0) is trial_passed(self.CRASH, 1.0) is False
+        assert trial_score(self.NEAR_MISS) > trial_score(self.CRASH)
+
+    def test_default_threshold_preserves_exact_gating(self) -> None:
+        """The published contract is a perfect score; the default must not move."""
+        assert trial_passed(self.PERFECT) is True
+        assert trial_passed(self.NEAR_MISS) is False
+        for metric in GATED_METRICS:
+            almost = {**self.PERFECT, metric: 0.999}
+            assert trial_passed(almost) is False, metric
+
+    def test_threshold_admits_near_miss_but_never_a_crash(self) -> None:
+        assert trial_passed(self.NEAR_MISS, 0.75) is True
+        assert trial_passed(self.CRASH, 0.75) is False
+
+    def test_trial_score_is_bounded_and_ordered(self) -> None:
+        assert trial_score(self.PERFECT) == 1.0
+        assert trial_score(self.CRASH) == 0.0
+        assert 0.0 < trial_score(self.NEAR_MISS) < 1.0
+
+    def test_threshold_env_is_read_and_clamped(self, monkeypatch) -> None:
+        for raw, expected in (("0.75", 0.75), ("-1", 0.0), ("9", 1.0), ("junk", 1.0)):
+            monkeypatch.setenv(PASS_THRESHOLD_ENV, raw)
+            assert pass_threshold() == expected, raw
+
+    def test_experience_proxy_does_not_gate(self) -> None:
+        """`experience_proxy` is advisory; it must not move a pass verdict."""
+        assert "experience_proxy" not in GATED_METRICS
+        assert trial_passed({**self.PERFECT, "experience_proxy": 0.0}) is True
