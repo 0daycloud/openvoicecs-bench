@@ -1018,6 +1018,17 @@ def test_validate_scenarios_reports_argument_enum_issues():
     strings, and a field cannot simultaneously be unscored (``generated_arguments``)
     and scored against a closed vocabulary (``argument_enums``) — that
     combination says both "don't check this" and "check this" at once.
+
+    Also covers two narrower malformed shapes that are still a list of
+    strings and so would otherwise slip past the type check: an empty
+    vocabulary (which can never contain the oracle's golden value, but
+    deserves its own direct message rather than being caught only
+    incidentally by the membership check) and a vocabulary whose members
+    collapse into fewer distinct choices than declared once normalized the
+    same way scoring normalizes them (e.g. ``"Damaged Item"`` and
+    ``"damaged_item"`` are, to the scorer, the same label wearing two
+    outfits) — a documented "closed vocabulary" that quietly contains a
+    duplicate is describing a choice that does not really exist.
     """
     issues = validate_scenarios([
         {
@@ -1047,6 +1058,18 @@ def test_validate_scenarios_reports_argument_enum_issues():
                     "argument_enums": {"reason": "sim_swap_pressure"},
                     "state_updates": [],
                 },
+                {
+                    "name": "escalate_to_human",
+                    "required_arguments": {"escalation_id": "esc_1", "reason": "damaged_item"},
+                    "argument_enums": {"reason": []},
+                    "state_updates": [],
+                },
+                {
+                    "name": "apply_account_credit",
+                    "required_arguments": {"credit_id": "credit_1", "reason": "damaged_item"},
+                    "argument_enums": {"reason": ["damaged_item", "Damaged Item"]},
+                    "state_updates": [],
+                },
             ],
             "oracle": {"expected_tool_calls": []},
         }
@@ -1062,6 +1085,11 @@ def test_validate_scenarios_reports_argument_enum_issues():
         "argument cannot be both enumerated and generated",
     ) in messages
     assert ("tools[2].argument_enums.reason", "must be a list of strings") in messages
+    assert ("tools[3].argument_enums.reason", "must not be empty") in messages
+    assert (
+        "tools[4].argument_enums.reason",
+        "contains duplicate values after normalization (e.g. same label in different casing/spacing)",
+    ) in messages
 
 
 def test_leaderboard_orders_by_reliability_then_score():

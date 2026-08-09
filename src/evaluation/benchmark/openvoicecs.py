@@ -1296,11 +1296,17 @@ def _validate_tool_argument_enums(
     ``create_case``, say) stay scored instead of falling into
     ``generated_arguments`` and becoming unfalsifiable: the model is told the
     closed set of valid labels, and the scorer checks its choice against the
-    oracle's. Both halves of that contract are checked here — the oracle's own
+    oracle's. Several independent things are checked here — the oracle's own
     golden value must actually belong to the vocabulary it declares (otherwise
-    the oracle itself could never pass), and a field cannot also be marked
+    the oracle itself could never pass), a field cannot also be marked
     ``generated_arguments``, which would mean "unscored" and "scored against
-    this vocabulary" at once.
+    this vocabulary" at once, the vocabulary must not be empty (a choice with
+    no options isn't a documented vocabulary), and it must not contain two
+    members that collapse to the same value once normalized the way scoring
+    normalizes them — e.g. ``"Damaged Item"`` and ``"damaged_item"`` are, to
+    ``_normalize_argument_token``, the same label wearing two outfits, so a
+    vocabulary listing both is documenting a choice that doesn't really
+    exist.
     """
     path = f"tools[{tool_index}].argument_enums"
     enums = tool.get("argument_enums")
@@ -1315,13 +1321,25 @@ def _validate_tool_argument_enums(
         if not isinstance(members, list) or not all(isinstance(member, str) for member in members):
             issues.append(ValidationIssue(scenario_id, member_path, "must be a list of strings"))
             continue
+        if not members:
+            issues.append(ValidationIssue(scenario_id, member_path, "must not be empty"))
+            continue
         if name in generated:
             issues.append(
                 ValidationIssue(scenario_id, member_path, "argument cannot be both enumerated and generated")
             )
+        normalized_members = [_normalize_argument_token(member) for member in members]
+        if len(set(normalized_members)) != len(normalized_members):
+            issues.append(
+                ValidationIssue(
+                    scenario_id,
+                    member_path,
+                    "contains duplicate values after normalization "
+                    "(e.g. same label in different casing/spacing)",
+                )
+            )
         golden = required.get(name)
-        normalized_members = {_normalize_argument_token(member) for member in members}
-        if not isinstance(golden, str) or _normalize_argument_token(golden) not in normalized_members:
+        if not isinstance(golden, str) or _normalize_argument_token(golden) not in set(normalized_members):
             issues.append(
                 ValidationIssue(scenario_id, member_path, "required_arguments value is not a member of its own enum")
             )
