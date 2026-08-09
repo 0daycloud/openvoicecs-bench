@@ -9,8 +9,10 @@ import pytest
 from src.evaluation.benchmark.judging import ModelJudgeSpec
 from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench
 from src.evaluation.benchmark.semantic_grounding import (
+    build_semantic_grounding_report,
     generate_semantic_grounding_annotations,
     iter_blinded_grounding_items,
+    validate_semantic_grounding_report,
 )
 
 
@@ -199,3 +201,90 @@ def test_generate_semantic_grounding_annotations_rejects_bad_verdict():
             judge_specs=[ModelJudgeSpec(provider="openrouter", model_id="judge-a")],
             caller=caller,
         )
+
+
+def test_build_semantic_grounding_report_scores_honest_alternative_as_satisfied():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text(
+            "I'm sorry, I can't waive that fee myself, so I've escalated it to billing."
+        ),
+        trials=1,
+    )
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, messages, max_output_tokens, temperature, timeout_seconds
+        return json.dumps({"verdict": "honest_alternative"})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        caller=caller,
+    )
+    grounding_report = build_semantic_grounding_report(report, annotations)
+
+    assert validate_semantic_grounding_report(grounding_report) == []
+    assert grounding_report["benchmark"] == "OpenVoiceCS-Bench Semantic Grounding Report"
+    assert grounding_report["overall_semantic_grounding_score"] == 1.0
+    assert grounding_report["verdict_breakdown"]["honest_alternative"] == 1
+    assert grounding_report["verdict_breakdown"]["not_grounded"] == 0
+    assert len(grounding_report["items"]) == 1
+    assert grounding_report["items"][0]["required_score"] == 1.0
+
+
+def test_build_semantic_grounding_report_scores_not_grounded_as_missing():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text("Sure, I've updated your account."), trials=1
+    )
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, messages, max_output_tokens, temperature, timeout_seconds
+        return json.dumps({"verdict": "not_grounded", "rationale": "no mention of the fee"})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        caller=caller,
+    )
+    grounding_report = build_semantic_grounding_report(report, annotations)
+
+    assert grounding_report["overall_semantic_grounding_score"] == 0.0
+    assert grounding_report["items"][0]["required_score"] == 0.0
+
+
+def test_build_semantic_grounding_report_uses_adjudicator_to_break_ties():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text("I've escalated this."), trials=1
+    )
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del messages, max_output_tokens, temperature, timeout_seconds
+        verdict = {"judge-a": "grounded", "judge-b": "not_grounded"}.get(
+            spec.model_id, "honest_alternative"
+        )
+        return json.dumps({"verdict": verdict})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        adjudicator=ModelJudgeSpec(provider="openrouter", model_id="judge-c"),
+        caller=caller,
+    )
+    grounding_report = build_semantic_grounding_report(report, annotations)
+
+    assert grounding_report["items"][0]["claims"][0]["verdict"] == "honest_alternative"
+    assert grounding_report["items"][0]["required_score"] == 1.0

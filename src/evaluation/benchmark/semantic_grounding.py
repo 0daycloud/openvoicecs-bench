@@ -14,9 +14,12 @@ from __future__ import annotations
 
 import json
 import re
+import statistics
+import time
 from typing import Any
 
 from src.evaluation.benchmark.judging import (
+    JudgeIssue,
     ModelJudgeCaller,
     ModelJudgeSpec,
     _extract_json_object,
@@ -279,3 +282,187 @@ def _grounding_rater_id(
     value = f"{prefix}-{spec.provider}-{spec.model_id}"
     value = re.sub(r"[^a-zA-Z0-9_.-]+", "-", value).strip("-").lower()
     return value or prefix
+
+
+def validate_grounding_annotations(annotations: list[dict[str, Any]]) -> list[JudgeIssue]:
+    """Return structural issues in a list of semantic-grounding annotations."""
+    issues: list[JudgeIssue] = []
+    if not isinstance(annotations, list):
+        return [JudgeIssue("<annotations>", "<root>", "must be a list")]
+    for index, annotation in enumerate(annotations):
+        path = f"annotations[{index}]"
+        if not isinstance(annotation, dict):
+            issues.append(JudgeIssue("<annotations>", path, "must be an object"))
+            continue
+        item_id = str(annotation.get("item_id") or f"<item-{index}>")
+        for field in ("item_id", "scenario_id", "trial_index", "claim_id", "rater_id", "verdict"):
+            if field not in annotation:
+                issues.append(JudgeIssue(item_id, f"{path}.{field}", "missing required field"))
+        if "verdict" in annotation and annotation["verdict"] not in GROUNDING_VERDICTS:
+            issues.append(
+                JudgeIssue(item_id, f"{path}.verdict", f"must be one of {GROUNDING_VERDICTS}")
+            )
+        trial_index = annotation.get("trial_index")
+        if "trial_index" in annotation and (
+            isinstance(trial_index, bool) or not isinstance(trial_index, int)
+        ):
+            issues.append(JudgeIssue(item_id, f"{path}.trial_index", "must be an integer"))
+    return issues
+
+
+def build_semantic_grounding_report(
+    report: dict[str, Any],
+    annotations: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Aggregate semantic-grounding annotations into a report-shaped summary."""
+    issues = validate_grounding_annotations(annotations)
+    if issues:
+        formatted = "\n".join(
+            f"- {issue.item_id}::{issue.path}: {issue.message}" for issue in issues
+        )
+        raise ValueError(
+            f"OpenVoiceCS semantic grounding annotation validation failed:\n{formatted}"
+        )
+
+    by_claim: dict[tuple[str, int, str], list[dict[str, Any]]] = {}
+    for annotation in annotations:
+        key = (annotation["scenario_id"], annotation["trial_index"], annotation["claim_id"])
+        by_claim.setdefault(key, []).append(annotation)
+
+    claim_results = []
+    verdict_breakdown = {verdict: 0 for verdict in GROUNDING_VERDICTS}
+    for (scenario_id, trial_index, claim_id), claim_annotations in sorted(by_claim.items()):
+        verdict = _majority_verdict(claim_annotations)
+        verdict_breakdown[verdict] += 1
+        claim_results.append({
+            "scenario_id": scenario_id,
+            "trial_index": trial_index,
+            "claim_id": claim_id,
+            "verdict": verdict,
+            "num_raters": len({a["rater_id"] for a in claim_annotations}),
+        })
+
+    by_trial: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    for claim_result in claim_results:
+        key = (claim_result["scenario_id"], claim_result["trial_index"])
+        by_trial.setdefault(key, []).append(claim_result)
+
+    trial_items = []
+    for (scenario_id, trial_index), claims in sorted(by_trial.items()):
+        satisfied = sum(1 for claim in claims if claim["verdict"] in SATISFIED_VERDICTS)
+        trial_items.append({
+            "scenario_id": scenario_id,
+            "trial_index": trial_index,
+            "required_score": round(satisfied / len(claims), 6),
+            "claims": claims,
+        })
+
+    return {
+        "benchmark": "OpenVoiceCS-Bench Semantic Grounding Report",
+        "generated_at": time.strftime("%Y-%m-%d"),
+        "source_benchmark": report.get("benchmark"),
+        "source_benchmark_version": report.get("benchmark_version"),
+        "model_metadata": report.get("model_metadata", {}),
+        "num_annotations": len(annotations),
+        "num_items": len(claim_results),
+        "num_raters": len({a["rater_id"] for a in annotations}),
+        "overall_semantic_grounding_score": round(
+            statistics.mean([item["required_score"] for item in trial_items])
+            if trial_items else 0.0,
+            6,
+        ),
+        "verdict_breakdown": verdict_breakdown,
+        "agreement": _grounding_agreement(by_claim),
+        "items": trial_items,
+    }
+
+
+def _majority_verdict(annotations: list[dict[str, Any]]) -> str:
+    counts: dict[str, int] = {}
+    for annotation in annotations:
+        counts[annotation["verdict"]] = counts.get(annotation["verdict"], 0) + 1
+    adjudicator_verdict = next(
+        (a["verdict"] for a in annotations if a.get("judge", {}).get("adjudicator")),
+        None,
+    )
+    best_count = max(counts.values())
+    leaders = [verdict for verdict, count in counts.items() if count == best_count]
+    if len(leaders) == 1:
+        return leaders[0]
+    if adjudicator_verdict is not None:
+        return adjudicator_verdict
+    return "not_grounded"
+
+
+def _grounding_agreement(
+    by_claim: dict[tuple[str, int, str], list[dict[str, Any]]],
+) -> dict[str, Any]:
+    multi_rater = [
+        claims for claims in by_claim.values()
+        if len({a["rater_id"] for a in claims}) >= 2
+    ]
+    if not multi_rater:
+        return {"num_multi_rater_items": 0, "exact_agreement_rate": None}
+    agreeing = sum(
+        1 for claims in multi_rater
+        if len({
+            a["verdict"] for a in claims if not a.get("judge", {}).get("adjudicator")
+        }) <= 1
+    )
+    return {
+        "num_multi_rater_items": len(multi_rater),
+        "exact_agreement_rate": round(agreeing / len(multi_rater), 4),
+    }
+
+
+def validate_semantic_grounding_report(report: dict[str, Any]) -> list[JudgeIssue]:
+    """Validate an aggregated semantic-grounding report's structure and ranges."""
+    issues: list[JudgeIssue] = []
+    if not isinstance(report, dict):
+        return [JudgeIssue("<grounding-report>", "<root>", "must be an object")]
+
+    required = {
+        "benchmark", "generated_at", "num_annotations", "num_items", "num_raters",
+        "overall_semantic_grounding_score", "verdict_breakdown", "agreement", "items",
+    }
+    for field in sorted(required - set(report)):
+        issues.append(JudgeIssue("<grounding-report>", field, "missing required field"))
+    if issues:
+        return issues
+
+    if report.get("benchmark") != "OpenVoiceCS-Bench Semantic Grounding Report":
+        issues.append(
+            JudgeIssue(
+                "<grounding-report>",
+                "benchmark",
+                "must be OpenVoiceCS-Bench Semantic Grounding Report",
+            )
+        )
+
+    score = report.get("overall_semantic_grounding_score")
+    if isinstance(score, bool) or not isinstance(score, (int, float)) or not (0.0 <= float(score) <= 1.0):
+        issues.append(
+            JudgeIssue("<grounding-report>", "overall_semantic_grounding_score", "must be between 0 and 1")
+        )
+
+    items = report.get("items")
+    if not isinstance(items, list):
+        issues.append(JudgeIssue("<grounding-report>", "items", "must be a list"))
+        items = []
+    for index, item in enumerate(items):
+        path = f"items[{index}]"
+        if not isinstance(item, dict):
+            issues.append(JudgeIssue("<grounding-report>", path, "must be an object"))
+            continue
+        scenario_id = str(item.get("scenario_id") or f"<item-{index}>")
+        required_score = item.get("required_score")
+        if (
+            isinstance(required_score, bool)
+            or not isinstance(required_score, (int, float))
+            or not (0.0 <= float(required_score) <= 1.0)
+        ):
+            issues.append(JudgeIssue(scenario_id, f"{path}.required_score", "must be between 0 and 1"))
+        claims = item.get("claims")
+        if not isinstance(claims, list) or not claims:
+            issues.append(JudgeIssue(scenario_id, f"{path}.claims", "must be a non-empty list"))
+    return issues
