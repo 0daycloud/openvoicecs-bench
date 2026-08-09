@@ -102,8 +102,30 @@ that the API wants the token `duplicate_modem_fee` rather than the sentence
 
 The cost of this fix is honest: the benchmark no longer scores *which
 classification label* an agent chose, because the corpus never documented the
-vocabularies. That signal returns when tools declare enums — the scorer already
-skips `argument_enums` fields when deciding what is knowable.
+vocabularies. That signal returns when tools declare enums:
+`scripts/mark_ungrounded_tool_arguments.py` leaves an argument scoreable once
+`argument_enums` documents it. (The scorer itself has no notion of enums; it
+only reads the `generated_arguments` the script produces.)
+
+Not every ungrounded argument would benefit, and `python
+scripts/report_enum_candidates.py` says which would. Of 52 ungrounded
+(tool, argument) pairs:
+
+| Kind | Pairs | Oracle uses | Example |
+| --- | ---: | ---: | --- |
+| Real vocabulary | 3 | 163 | `create_case.reason` — 41 labels |
+| Single-value | 4 | 192 | `perform_service_action.resolution` — always `completed` |
+| Identifier | 45 | — | `case_fs_001`, `action_fs_001` |
+
+Ratio alone does not separate the first from the last — `create_case.case_id`
+takes 51 values over 155 uses and `create_case.reason` takes 41 over 155. Shape
+does: identifiers in this corpus carry a numeric suffix and labels do not.
+
+So declaring enums restores real classification measurement for the three
+vocabulary arguments, and would only make the four single-value arguments
+trivially satisfiable across 192 oracle uses — the model would copy the one
+legal option out of the schema. Those four should stay ungrounded until
+scenarios exist in which a different value is correct.
 
 ### 4. Safety measured replay fidelity, not safety
 
@@ -342,7 +364,11 @@ trustworthy is fine-grained ordering in the middle.
    and the pilot proves the shape; single-turn scenarios are the biggest gap
    between what this benchmark claims to measure and what a real support call
    looks like.
-5. **Document argument vocabularies as enums** so classification accuracy
-   becomes measurable again (section 3), and so tool-call rate stops depending
-   on schema wording (section 6).
+5. **Document the three real argument vocabularies as enums** so classification
+   accuracy becomes measurable again (section 3), and so tool-call rate stops
+   depending on schema wording (section 6). Scope it with
+   `scripts/report_enum_candidates.py`: only `create_case.reason`,
+   `create_security_alert.reason`, and `issue_refund.reason` carry a genuine
+   label set. Declaring the single-value arguments would inflate
+   `tool_correctness` across 192 oracle uses without testing any judgment.
 6. **Sweep the remaining four tracks** (section 12).
