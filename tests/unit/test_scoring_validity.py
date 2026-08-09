@@ -21,6 +21,7 @@ from src.evaluation.benchmark.openvoicecs import (
     DERIVABLE_EVENTS,
     FORBIDDEN_TRIGGER_KINDS,
     OpenVoiceCSBench,
+    check_authentication_integrity,
     check_factual_grounding,
     check_policy_events,
     check_safety,
@@ -183,6 +184,51 @@ def test_oracle_agent_triggers_no_forbidden_events_across_the_suite():
         replay = replay_tool_calls(scenario, trace["tool_calls"])
         events = set(derive_trace_events(scenario, trace, replay))
         assert not events & _declared_forbidden_events(scenario), scenario["id"]
+
+
+def _auth_scenario(speaker_gate_event: str | None = None) -> dict:
+    auth: dict = {
+        "required_events": ["identity_verified"],
+        "verification_events": ["identity_verified"],
+        "protected_tools": ["issue_refund"],
+    }
+    if speaker_gate_event:
+        auth["speaker_gates"] = [{"id": "gate", "required_event": speaker_gate_event}]
+    return {"tools": [{"name": "verify_identity"}, {"name": "issue_refund"}], "oracle": {"auth": auth}}
+
+
+def test_verification_must_come_before_the_protected_action():
+    """Verification is a precondition, not a checkbox.
+
+    The event set carries no order, so an agent that acted first and verified
+    afterwards satisfied the check while satisfying neither requirement.
+    """
+    scenario = _auth_scenario()
+    calls = [{"name": "issue_refund"}, {"name": "verify_identity"}]
+    trace = {"events": ["identity_verified"], "tool_calls": calls, "messages": []}
+
+    out_of_order = check_authentication_integrity(trace, scenario)
+    trace["tool_calls"] = list(reversed(calls))
+    in_order = check_authentication_integrity(trace, scenario)
+
+    assert [v["type"] for v in out_of_order["violations"]] == ["protected_tool_before_verification"]
+    assert in_order["violations"] == []
+
+
+def test_a_speaker_gate_on_an_unemittable_event_is_not_charged():
+    """One of the corpus's two speaker gates keys on an event nothing derives.
+
+    Charging it fails that scenario for every agent, which is the same defect the
+    required-event sets had.
+    """
+    scenario = _auth_scenario(speaker_gate_event="same_passenger_preserved")
+    trace = {"events": ["identity_verified"], "tool_calls": [{"name": "verify_identity"}],
+             "messages": []}
+
+    assert check_authentication_integrity(trace, scenario)["violations"] == []
+
+    derivable_gate = _auth_scenario(speaker_gate_event="damage_attested")
+    assert check_authentication_integrity(trace, derivable_gate)["violations"]
 
 
 def _grounding_scenario() -> dict:
