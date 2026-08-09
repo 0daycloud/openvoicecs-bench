@@ -88,6 +88,21 @@ jobs:
       - name: Install package
         run: python -m pip install -e ".[dev]"
 
+      # A false positive here means a check the oracle claims to enforce did not
+      # fire; the false-negative budget tracks the known self-reporting
+      # dependency. Neither is visible to the oracle/no-op baselines.
+      - name: Grader consistency gate
+        run: python scripts/run_openvoicecs.py grader-probe --strict --max-false-negatives 22
+
+      # Measured on the published leaderboard track. Today an agent that
+      # understands nothing scores 89.19 here, and 93.55 on the 64 of these
+      # scenarios the v0.2 sweep used -- both above the published #1 (88.87).
+      # Target is <88.87. Lower this as fixes land; never raise it.
+      - name: Grader floor gate
+        run: >-
+          python scripts/run_openvoicecs.py grader-floor
+          --track text_to_action --max-overall 89.5
+
       - name: Validate judge protocol
         run: python scripts/run_openvoicecs.py validate-judge-protocol --protocol data/openvoicecs/judging/judge_protocol_v0.1.json
 

@@ -1,5 +1,6 @@
 .PHONY: install dev test lint validate validate-reviews validate-submission-intake \
-	audit datasheet verify-release validate-release-bundle baselines \
+	audit datasheet verify-release validate-release-bundle baselines grader-probe \
+	grader-floor \
 	submit-example score-provider-help check \
 	check-tool-arguments check-forbidden-events validity-gates
 
@@ -49,13 +50,38 @@ score-provider-help:
 
 # Scenario validity gates. Both scripts exit non-zero when the corpus
 # reintroduces a scoring-validity bug, so they are cheap regression guards.
+# Grader-consistency gate. Mutates the oracle trace in ways whose correct
+# verdict is known, then checks the grader agrees: a violation that still scores
+# a pass is a false positive, a behaviour-preserving trace that fails is a false
+# negative. Neither is visible to the oracle/no-op baselines.
+#
+# False positives must stay at zero. The false-negative budget covers the 22
+# scenarios whose required events name outcomes the scorer cannot infer from
+# behaviour, so only a self-reporting agent can pass them; lower the number as
+# those scenarios gain event triggers.
+grader-probe:
+	$(PYTHON) scripts/run_openvoicecs.py grader-probe --strict --max-false-negatives 22
+
+# Score-floor gate, measured on the published leaderboard track so the number is
+# comparable to the ranking it threatens. Today an agent that understands nothing
+# The grader-side gameability is fixed: claims are now checked for polarity and
+# provenance and cross-checked against replayed state, duplicate destructive
+# calls fail, and a submission can no longer nominate its own trials as
+# unmeasurable. What remains is corpus-side -- no scenario offers a distractor
+# tool, so "call every tool the prompt lists" is the same move as "call the right
+# tools", and 152 scenarios accept the bare word "completed" as a required claim.
+# Until those are authored the floor stays near the top of the leaderboard.
+# Lower this number as distractor tools land; never raise it.
+grader-floor:
+	$(PYTHON) scripts/run_openvoicecs.py grader-floor --track text_to_action --max-overall 89.5
+
 check-tool-arguments:
 	$(PYTHON) scripts/mark_ungrounded_tool_arguments.py --check
 
 check-forbidden-events:
 	$(PYTHON) scripts/bind_forbidden_event_triggers.py --check
 
-validity-gates: check-tool-arguments check-forbidden-events
+validity-gates: check-tool-arguments check-forbidden-events grader-probe grader-floor
 
 # Full pre-release gate: everything CI runs, in one target.
 check: lint validity-gates validate validate-reviews validate-submission-intake verify-release validate-release-bundle test
