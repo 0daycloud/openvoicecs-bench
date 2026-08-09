@@ -583,6 +583,99 @@ def test_native_tool_execution_requires_bound_id_from_prior_result():
     assert missing_bound["binding_errors"][0]["argument"] == "case_id"
 
 
+def _enum_case_scenario() -> dict:
+    return {
+        "initial_state": {"cases": {}},
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {
+                    "case_id": "case_1",
+                    "account_id": "acct_1",
+                    "reason": "damaged_item",
+                },
+                "generated_arguments": {"case_id": "case_1"},
+                "argument_enums": {
+                    "reason": ["damaged_item", "damaged_gift_item", "warranty_exchange"]
+                },
+                "state_updates": [{"path": "cases.case_1.status", "value": "created"}],
+                "result": {"case_id": "case_1", "status": "created"},
+            }
+        ],
+    }
+
+
+def test_native_tool_execution_does_not_reject_a_wrong_but_valid_enum_classification():
+    """The live sandbox must not validate a classification choice.
+
+    ``argument_enums`` fields (``reason`` on ``create_case``, say) are a real
+    judgment call the model makes -- a live backend has no ground truth to
+    check it against and would accept whatever the caller sends. If
+    ``_execute_scenario_tool`` rejected a wrong-but-plausible choice with
+    ``argument_mismatch``, the ``invalid_arguments`` list in the tool-result
+    message handed back to the model would name the exact field that was
+    wrong, letting the model brute-force the vocabulary one guess per
+    conversation turn instead of actually classifying -- turning an
+    unfalsifiable field into a falsifiable-by-trial-and-error one, not a
+    genuinely measured one. The oracle's golden value is still checked, but
+    only once, silently, at final scoring time in openvoicecs.py, where the
+    agent never sees the verdict and cannot use it as an in-conversation
+    hint. This is the live-sandbox analogue of
+    test_enum_classified_arguments_reject_a_wrong_sibling_value in
+    test_scoring_validity.py, which covers the same field at final-scoring
+    time only.
+    """
+    scenario = _enum_case_scenario()
+    state = json.loads(json.dumps(scenario["initial_state"]))
+
+    result = _execute_scenario_tool(
+        scenario,
+        state,
+        "create_case",
+        {"account_id": "acct_1", "reason": "warranty_exchange"},
+    )
+
+    assert result["ok"] is True
+    assert result.get("error") is None
+    assert "invalid_arguments" not in result
+    assert state["cases"]["case_1"]["status"] == "created"
+
+
+def test_native_tool_execution_still_rejects_a_missing_enum_argument():
+    """Not validating *which* value was chosen is not the same as making the
+    argument optional. A real API still rejects a call missing a structurally
+    required field regardless of what that field means, so the sandbox must
+    keep doing that -- only the value-equality check against the oracle's
+    golden answer is what must not run pre-scoring."""
+    scenario = _enum_case_scenario()
+    state = json.loads(json.dumps(scenario["initial_state"]))
+
+    result = _execute_scenario_tool(scenario, state, "create_case", {"account_id": "acct_1"})
+
+    assert result["ok"] is False
+    assert result["error"] == "argument_mismatch"
+    assert result["invalid_arguments"] == ["reason"]
+
+
+def test_native_tool_execution_still_rejects_a_wrong_non_enum_required_argument():
+    """Regression guard: the enum carve-out must not widen into a general
+    exemption from argument validation. A plain required argument (neither
+    generated nor enumerated) must still be checked for an exact match."""
+    scenario = _enum_case_scenario()
+    state = json.loads(json.dumps(scenario["initial_state"]))
+
+    result = _execute_scenario_tool(
+        scenario,
+        state,
+        "create_case",
+        {"account_id": "wrong_account", "reason": "damaged_item"},
+    )
+
+    assert result["ok"] is False
+    assert result["error"] == "argument_mismatch"
+    assert result["invalid_arguments"] == ["account_id"]
+
+
 def test_derive_events_from_tools_and_final_response():
     scenario = OpenVoiceCSBench.load().scenarios[0]
     tool_calls = [

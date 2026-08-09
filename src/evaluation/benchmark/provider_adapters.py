@@ -822,11 +822,7 @@ def _execute_scenario_tool(
             "error": "argument_binding_mismatch",
             "binding_errors": binding_errors,
         }
-    invalid_arguments = [
-        key
-        for key, value in required.items()
-        if effective_arguments.get(key) != value
-    ]
+    invalid_arguments = _invalid_required_arguments(tool, required, effective_arguments)
     if invalid_arguments:
         return {
             "ok": False,
@@ -870,6 +866,47 @@ def _execute_scenario_tool(
     elif isinstance(tool.get("returns"), dict):
         result["result"] = deepcopy(tool["returns"])
     return result
+
+
+def _invalid_required_arguments(
+    tool: dict[str, Any],
+    required: dict[str, Any],
+    effective_arguments: dict[str, Any],
+) -> list[str]:
+    """Required arguments the live sandbox should reject a call for.
+
+    A documented classification vocabulary (``argument_enums``) is a real
+    judgment call the model makes, not something a live backend can validate
+    against a hidden ground truth — a real ``create_case`` API has no way to
+    know the "right" reason and would accept whatever the caller sends.
+    Checking a wrong-but-plausible choice against ``required_arguments`` here
+    (as the equality check below does for every other argument) would hand
+    the model an oracle it can use to brute-force the vocabulary one guess
+    per conversation turn — via the ``invalid_arguments`` name in the
+    tool-result message the next request sees — instead of actually
+    classifying. That is exactly the class of hole this repo's
+    ``argument_enums`` work exists to close (see ``_openai_tool_schemas`` and
+    ``_tool_argument_types``); leaving this second, separate copy of
+    "required argument checking" unaware of ``argument_enums`` would reopen
+    it for every provider that runs a live multi-round tool loop
+    (``_build_openai_compatible_agent``, ``_build_openai_native_tool_agent``)
+    even though the actual scoring in ``openvoicecs.py`` (which the agent
+    never observes mid-conversation) still checks it correctly.
+
+    The sandbox still enforces that an enumerated argument is *present* — a
+    real API rejects a call missing a required field regardless of what that
+    field means — it just stops checking *which* value was chosen.
+    """
+    enum_args = set((tool.get("argument_enums") or {}).keys())
+    invalid = []
+    for key, value in required.items():
+        if key in enum_args:
+            if key not in effective_arguments:
+                invalid.append(key)
+            continue
+        if effective_arguments.get(key) != value:
+            invalid.append(key)
+    return invalid
 
 
 def _model_required_arguments(tool: dict[str, Any]) -> dict[str, Any]:
