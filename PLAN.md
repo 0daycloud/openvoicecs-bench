@@ -119,17 +119,74 @@ All entries below are dated 2026-08-08 unless noted otherwise.
 - [DONE] Created `CLAUDE.md` with standing session rules (project context,
   locked design decisions, scope discipline, git workflow).
 - [DONE] Created this file (`PLAN.md`).
-- [PENDING] Live smoke test: run the semantic fallback against a handful
-  of real (non-oracle-style) responses with a real OpenAI call, confirm the
-  API call + JSON parsing actually works end-to-end (only tested via mocked
-  caller so far). Blocked 2026-08-09: the local `OPENAI_API_KEY` is
-  currently invalid (`401 invalid_api_key` from OpenAI itself — key format
-  is clean, no whitespace/quoting issue, `.env` loading path confirmed
-  working). Waiting on a replacement key.
-- [PENDING] Before/after comparison: re-score existing stored model runs
-  (`data/openvoicecs/runs`) with the new grader, quantify how many of the
-  36/44 previously-reshuffled rankings actually change and by how much.
-  Blocked on the same invalid API key as above.
+- [DONE] 2026-08-09: `.env`'s `OPENAI_API_KEY` was rotated to a valid key.
+  Ran the live smoke test: pulled 10 real trials from
+  `data/openvoicecs/runs/requested_v02/reports/openai_gpt_5_6_sol.json`
+  whose legacy grader already flagged a `missing_required_claims` or
+  `unsupported_claims_detected` gap, and re-scored them with
+  `mode="hybrid"` against a real `openai:gpt-4o-mini` judge call.
+  **First attempt found a real bug**: 4/10 calls raised
+  `RuntimeError: grounding judge call failed: Extra data: line 1 column
+  ...`. Root cause: `call_openai_compatible_model_judge`
+  (`src/evaluation/benchmark/judging.py`) never set
+  `response_format={"type":"json_object"}` on the OpenAI request, so
+  gpt-4o-mini would occasionally append stray content after a complete
+  JSON object (observed as what looks like a second, partial object),
+  which `json.loads` rejects as "Extra data" even though the actual
+  object was well-formed. This is a direct dependency of
+  `check_factual_grounding`'s semantic fallback (every real judge call
+  goes through it), so it was in scope to fix. **Fix**: force
+  `response_format={"type":"json_object"}` for `provider=="openai"` only
+  (other OpenAI-compatible providers left untouched — not verified to
+  support the flag, and the bug was only confirmed on `openai`).
+  Verified first that both existing prompts using this caller
+  (`_build_grounding_judge_messages` and `_build_model_judge_messages`)
+  already contain the literal word "JSON", which OpenAI's `json_object`
+  mode requires to be present somewhere in the messages. Re-ran
+  `pytest tests/unit` after the fix — same 250 passed / 1 skipped / 3
+  known-unrelated-fails as before, no new failures. Re-ran the smoke
+  test: **0/10 errors**, 7/10 scores changed from the legacy-only pass
+  (paraphrases like "at no charge" → `fee_waived`, "update is complete" →
+  `completed_update` correctly grounded; a genuine omission — agent never
+  stated a credit amount — correctly still scored not-grounded, so the
+  judge isn't just rubber-stamping everything).
+- [DONE] 2026-08-09: Before/after comparison. Re-scored all 8 models in
+  `data/openvoicecs/runs/requested_v02/reports/` (69 scenarios × 3 trials
+  = 207 trials/model, 1656 trials total) with the hybrid grader against a
+  real `openai:gpt-4o-mini` judge, keeping every other metric untouched
+  and recomputing `overall_score` with the repo's own `METRIC_WEIGHTS`
+  formula. Scope note: restricted to this one run set (the smallest
+  complete batch, 8 models) rather than all 5 run directories under
+  `data/openvoicecs/runs/` (150+ report files combined) — re-scoring the
+  full history would mean several thousand live judge calls for
+  overlapping/superseded data (`text_action_v02_merged` largely subsumes
+  the others); a full-sweep re-score is left as a follow-up if reviewers
+  want it before merge. 412 of 1656 trials needed a real judge call (the
+  rest resolved by the unchanged literal pass), **0 judge errors**.
+  Results (`factual_grounding` mean, `overall_score`):
+
+  | model | grounding before → after | overall before → after |
+  |---|---|---|
+  | moonshotai_kimi_k3 | 0.8696 → 0.9130 | 86.96 → 87.83 |
+  | openai_gpt_5_6_luna | 0.5990 → 0.6087 | 68.41 → 68.61 |
+  | openai_gpt_5_6_luna_pro | 0.8261 → 0.8406 | 86.15 → 86.44 |
+  | openai_gpt_5_6_sol | 0.8792 → 0.9469 | 78.89 → 80.24 |
+  | openai_gpt_5_6_sol_pro | 0.8792 → 0.9565 | 74.80 → 76.35 |
+  | openai_gpt_5_6_terra | 0.3720 → 0.7150 | 57.18 → 64.05 |
+  | openai_gpt_5_6_terra_pro | 0.3961 → 0.8986 | 63.89 → 73.94 |
+  | z_ai_glm_5_2 | 0.9227 → 0.9372 | 81.11 → 81.40 |
+
+  `factual_grounding` only ever increases (the semantic pass adds
+  grounded claims on top of the literal pass, never removes any), as
+  expected. **2 of 8 models changed rank**: `openai_gpt_5_6_luna` (6th →
+  7th) and `openai_gpt_5_6_terra_pro` (7th → 6th) swapped places — the
+  two "terra" variants had by far the worst literal-match grounding
+  scores (0.37, 0.40) and the largest gains (+6.87, +10.05 overall
+  points), consistent with them producing more heavily paraphrased
+  replies that the old literal matcher penalized. This is a real,
+  measured number for *this* change on *this* 8-model slice — not the
+  old "36 of 44 reshuffled" figure from removing the metric entirely,
+  which was a different comparison (metric removed vs. metric kept).
 - [DONE] 2026-08-09: Ran the full `make check` gate by hand (no `make` on
   this Windows shell, so its six steps were run individually with
   `.venv/Scripts/python.exe`): `ruff check .` clean; both validity gates
@@ -201,8 +258,9 @@ files touched, no unrelated fixes bundled in.
 
 - Semantic fallback is not bit-for-bit deterministic (temp=0 doesn't fully
   guarantee it for a live model call).
-- Adds latency/cost on the subset of claims that fail literal matching
-  (quantify if possible after the before/after comparison in section 5).
+- Adds latency/cost on the subset of claims that fail literal matching —
+  quantified on the `requested_v02` slice: 412 of 1656 trials (24.9%)
+  triggered a real judge call.
 - The `_forbidden_claim_near_miss` pre-filter is a keyword heuristic, not
   full paraphrase detection — a forbidden claim reworded with entirely
   different vocabulary can still slip past both the regex and the
@@ -210,9 +268,25 @@ files touched, no unrelated fixes bundled in.
 - The semantic judge itself has not been evaluated against a labeled
   ground-truth set of grounding verdicts — its accuracy is assumed, not
   measured.
-- The hybrid scorer has not yet been run across the full model sweep, so
-  an updated leaderboard-impact number (replacing the old 0.047–0.323 /
-  36-of-44-reshuffled figures) is not yet available.
+- The hybrid scorer has been run against one 8-model slice
+  (`requested_v02`), not the full ~150-report model sweep across all run
+  directories — see section 5's 2026-08-09 before/after entry for the
+  measured numbers and the reason the scope was limited. A full-sweep
+  before/after re-score (replacing the old 0.047–0.323 /
+  36-of-44-reshuffled "metric removed entirely" comparison with a real
+  "metric kept, hybrid vs. legacy" one across every stored run) is not
+  yet available.
+- `call_openai_compatible_model_judge` (`judging.py`) had a real bug
+  found during this work's own live smoke test — see section 5's
+  2026-08-09 entry — fixed by forcing `response_format={"type":
+  "json_object"}` for the `openai` provider. That fix has no dedicated
+  unit test yet: the repo's existing judge tests all go through the
+  injectable `ModelJudgeCaller` and mock it, so nothing currently asserts
+  on the raw request payload this function builds. Correctness was
+  verified live (0/10 then 0/412 real calls failing after the fix) and
+  by the full `pytest tests/unit` suite staying green, but a
+  request-payload-mocking regression test would be a reasonable
+  follow-up.
 
 ---
 Keep this file updated as work progresses: flip `[PENDING]` to `[DONE]`
