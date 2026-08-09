@@ -83,9 +83,24 @@ logic a second time).
 
 ### 1. Blinded items
 
+`report["results"][i]` (as produced by `_aggregate_scenario_trials`) does not
+carry `oracle.grounding.required_claims` — only `trial["grounding_check"]`'s
+`missing_required_claims` (the ones the literal matcher missed) is present,
+which isn't the full claim set an independent judge needs to re-evaluate.
+So this function takes the original scenario suite alongside the report:
+
 ```python
-def iter_blinded_grounding_items(report: dict[str, Any]) -> list[dict[str, Any]]:
-    """One item per (trial, required claim). Empty required_claims -> no items."""
+def iter_blinded_grounding_items(
+    report: dict[str, Any],
+    scenarios: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """One item per (trial, required claim). Empty required_claims -> no items.
+
+    `scenarios` is the same suite the report was produced from (e.g.
+    `OpenVoiceCSBench.load(path).scenarios`) -- matched to report results by
+    `id`, which is stable for audio variants too (`build_audio_variant_scenarios`
+    copies the base scenario's oracle under the variant's own id).
+    """
 ```
 
 Per item:
@@ -116,6 +131,7 @@ are silently skipped (nothing to judge).
 ```python
 def generate_semantic_grounding_annotations(
     report: dict[str, Any],
+    scenarios: list[dict[str, Any]],
     *,
     judge_specs: list[ModelJudgeSpec],
     adjudicator: ModelJudgeSpec | None = None,
@@ -238,6 +254,7 @@ the measurement.
 ```
 semantic-grounding <report> --judge provider:model [--judge provider:model ...]
                    [--adjudicator provider:model]
+                   [--scenarios data/openvoicecs/scenarios_v0.1.json]
                    --annotations-output PATH --grounding-report-output PATH
                    [--graded-report-output PATH]
                    [--max-output-tokens 200] [--temperature 0.0] [--timeout-seconds 60.0]
