@@ -88,6 +88,64 @@ def test_iter_blinded_grounding_items_skips_scenarios_without_required_claims():
     assert iter_blinded_grounding_items(report, [scenario]) == []
 
 
+def test_iter_blinded_grounding_items_includes_trials_with_empty_agent_text():
+    # An errored trial with no agent text must still surface an item per
+    # required claim -- skipping it would silently exclude the trial from
+    # the semantic score's mean instead of scoring it not_grounded.
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text(""), trials=1
+    )
+
+    items = iter_blinded_grounding_items(report, [scenario])
+
+    assert len(items) == 1
+    assert items[0]["agent_text"] == ""
+    assert items[0]["claim_id"] == "fee_waived"
+
+
+def test_generate_semantic_grounding_annotations_synthesizes_not_grounded_for_empty_text():
+    # Empty agent text can't ground anything -- the judge must never be
+    # called for it (no wasted API spend), and the synthesized verdict
+    # must still feed the score as a real 0.0, not be missing/None.
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text(""), trials=1
+    )
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, messages, max_output_tokens, temperature, timeout_seconds
+        raise AssertionError("caller must not be invoked for empty agent text")
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        adjudicator=ModelJudgeSpec(provider="openrouter", model_id="judge-c"),
+        caller=caller,
+    )
+
+    assert len(annotations) == 2
+    assert {a["verdict"] for a in annotations} == {"not_grounded"}
+    assert all(
+        a["rationale"] == "agent produced no text for this trial" for a in annotations
+    )
+    assert {a["rater_id"] for a in annotations} == {
+        "grounding-judge-openrouter-judge-a",
+        "grounding-judge-openrouter-judge-b",
+    }
+    for annotation in annotations:
+        assert annotation["judge"]["adjudicator"] is False
+
+    grounding_report = build_semantic_grounding_report(report, annotations)
+
+    assert grounding_report["items"][0]["required_score"] == 0.0
+    assert grounding_report["overall_semantic_grounding_score"] == 0.0
+
+
 def test_generate_semantic_grounding_annotations_blinds_payload_and_returns_verdict():
     scenario = _grounding_scenario()
     report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
@@ -363,3 +421,62 @@ def test_apply_semantic_grounding_report_leaves_unmatched_trials_alone():
     assert "semantic_grounding_check" not in graded["results"][1]["trials"][0]
     assert graded["semantic_grounding"]["coverage"] == 0.5
     assert graded["semantic_grounding"]["num_judged_trials"] == 1
+
+
+def test_validate_semantic_grounding_report_rejects_zero_items():
+    # A report with zero items is indistinguishable from a clean run unless
+    # validation flags it -- e.g. --scenarios pointed at the wrong suite and
+    # nothing matched, which should fail loudly rather than pass silently.
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text("Escalated."), trials=1
+    )
+    grounding_report = build_semantic_grounding_report(report, [])
+
+    assert grounding_report["num_items"] == 0
+
+    issues = validate_semantic_grounding_report(grounding_report)
+
+    assert issues
+    assert any(issue.path == "items" for issue in issues)
+
+
+def test_validate_semantic_grounding_report_checks_agreement_shape():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text(
+            "I'm sorry, I can't waive that fee myself, so I've escalated it to billing."
+        ),
+        trials=1,
+    )
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, messages, max_output_tokens, temperature, timeout_seconds
+        return json.dumps({"verdict": "honest_alternative"})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        caller=caller,
+    )
+    grounding_report = build_semantic_grounding_report(report, annotations)
+    assert validate_semantic_grounding_report(grounding_report) == []
+
+    bad_rate = deepcopy(grounding_report)
+    bad_rate["agreement"]["exact_agreement_rate"] = 1.5
+    issues = validate_semantic_grounding_report(bad_rate)
+    assert any(issue.path == "agreement.exact_agreement_rate" for issue in issues)
+
+    bad_count = deepcopy(grounding_report)
+    bad_count["agreement"]["num_multi_rater_items"] = "two"
+    issues = validate_semantic_grounding_report(bad_count)
+    assert any(issue.path == "agreement.num_multi_rater_items" for issue in issues)
+
+    not_object = deepcopy(grounding_report)
+    not_object["agreement"] = None
+    issues = validate_semantic_grounding_report(not_object)
+    assert any(issue.path == "agreement" for issue in issues)

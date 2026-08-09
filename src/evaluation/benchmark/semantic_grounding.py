@@ -63,6 +63,12 @@ def iter_blinded_grounding_items(
     Items carry no scenario identity beyond the id needed to key results
     back together, no model identity, no oracle pass/fail, no tool calls,
     and no scores -- only the claim text and the agent's own words.
+
+    A trial with no agent text (e.g. an errored trial with no messages)
+    still gets one item per required claim, with ``agent_text`` set to
+    ``""`` -- it is not skipped. Excluding it would silently drop the
+    trial from the semantic score's mean, biasing it upward relative to
+    the deterministic literal score, which scores the same trial 0.0.
     """
     scenarios_by_id = {
         str(scenario.get("id")): scenario
@@ -86,8 +92,6 @@ def iter_blinded_grounding_items(
                 continue
             trial_index = _trial_index_from_report(trial, fallback_index)
             agent_text = _blinded_agent_text(trial.get("messages"))
-            if not agent_text:
-                continue
             for claim in required_claims:
                 claim_id = str(claim.get("id") or "")
                 if not claim_id:
@@ -159,6 +163,17 @@ def generate_semantic_grounding_annotations(
 
     annotations: list[dict[str, Any]] = []
     for item in iter_blinded_grounding_items(report, scenarios):
+        if not item["agent_text"]:
+            # An empty reply (e.g. an errored trial with no messages) can't
+            # ground anything -- synthesize a deterministic not_grounded
+            # verdict per judge spec without spending an API call, and skip
+            # the adjudicator step: every synthesized verdict already
+            # agrees, so there is nothing to adjudicate.
+            annotations.extend(
+                _synthesize_empty_text_annotation(item, spec=spec, rater_id=rater_id)
+                for spec, rater_id in zip(judge_specs, rater_ids, strict=True)
+            )
+            continue
         item_annotations = []
         for spec, rater_id in zip(judge_specs, rater_ids, strict=True):
             item_annotations.append(
@@ -220,6 +235,34 @@ def _score_claim_with_judge(
             "provider": spec.provider,
             "model_id": spec.model_id,
             "adjudicator": adjudication,
+        },
+    }
+
+
+def _synthesize_empty_text_annotation(
+    item: dict[str, Any],
+    *,
+    spec: ModelJudgeSpec,
+    rater_id: str,
+) -> dict[str, Any]:
+    """Build a deterministic not_grounded annotation for empty agent text.
+
+    No judge call is made: an empty reply cannot ground any claim, so
+    there is nothing for a model judge to usefully evaluate.
+    """
+    return {
+        "item_id": item["item_id"],
+        "scenario_id": item["scenario_id"],
+        "trial_index": item["trial_index"],
+        "claim_id": item["claim_id"],
+        "rater_id": rater_id,
+        "verdict": "not_grounded",
+        "rationale": "agent produced no text for this trial",
+        "judge": {
+            "type": "audited_grounding_judge",
+            "provider": spec.provider,
+            "model_id": spec.model_id,
+            "adjudicator": False,
         },
     }
 
@@ -450,6 +493,16 @@ def validate_semantic_grounding_report(report: dict[str, Any]) -> list[JudgeIssu
     if not isinstance(items, list):
         issues.append(JudgeIssue("<grounding-report>", "items", "must be a list"))
         items = []
+    elif not items:
+        issues.append(
+            JudgeIssue(
+                "<grounding-report>",
+                "items",
+                "must be non-empty -- zero items usually means --scenarios did not "
+                "match the report (wrong suite version, or an audio-manifest report "
+                "with no matching scenario ids)",
+            )
+        )
     for index, item in enumerate(items):
         path = f"items[{index}]"
         if not isinstance(item, dict):
@@ -466,6 +519,46 @@ def validate_semantic_grounding_report(report: dict[str, Any]) -> list[JudgeIssu
         claims = item.get("claims")
         if not isinstance(claims, list) or not claims:
             issues.append(JudgeIssue(scenario_id, f"{path}.claims", "must be a non-empty list"))
+
+    agreement = report.get("agreement")
+    if not isinstance(agreement, dict):
+        issues.append(JudgeIssue("<grounding-report>", "agreement", "must be an object"))
+    else:
+        num_multi_rater_items = agreement.get("num_multi_rater_items")
+        if (
+            "num_multi_rater_items" not in agreement
+            or isinstance(num_multi_rater_items, bool)
+            or not isinstance(num_multi_rater_items, int)
+            or num_multi_rater_items < 0
+        ):
+            issues.append(
+                JudgeIssue(
+                    "<grounding-report>",
+                    "agreement.num_multi_rater_items",
+                    "must be a non-negative integer",
+                )
+            )
+        exact_agreement_rate = agreement.get("exact_agreement_rate")
+        if "exact_agreement_rate" not in agreement:
+            issues.append(
+                JudgeIssue(
+                    "<grounding-report>",
+                    "agreement.exact_agreement_rate",
+                    "missing required field",
+                )
+            )
+        elif exact_agreement_rate is not None and (
+            isinstance(exact_agreement_rate, bool)
+            or not isinstance(exact_agreement_rate, (int, float))
+            or not (0.0 <= float(exact_agreement_rate) <= 1.0)
+        ):
+            issues.append(
+                JudgeIssue(
+                    "<grounding-report>",
+                    "agreement.exact_agreement_rate",
+                    "must be null or a float between 0 and 1",
+                )
+            )
     return issues
 
 
