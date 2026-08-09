@@ -2,7 +2,7 @@
   "name": "OpenVoiceCS-Bench Reference Baselines",
   "version": "0.1.0",
   "benchmark_version": "0.1.0",
-  "generated_at": "2026-07-28",
+  "generated_at": "2026-08-09",
   "scenario_file": {
     "path": "data/openvoicecs/scenarios_v0.1.json",
     "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
@@ -22,8 +22,8 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/oracle_text.json",
-        "sha256": "cb82ac719bb37f4c450963633e32b9a336212d26ee3d8be62c830a4533098711",
-        "bytes": 4787710
+        "sha256": "33fc0e879ab24d6d93ca10d7f0dfcf7e1976e6e00ee67251d4bdc69175465ef2",
+        "bytes": 4814110
       },
       "expected": {
         "overall_score": 100.0,
@@ -44,8 +44,8 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/noop_text.json",
-        "sha256": "fe1f1f3e631b65165885871688bd2ca964059cbb6fc18b2f140f5615b40ff920",
-        "bytes": 4886067
+        "sha256": "be806b3bc1cba90b034f77992d392bb8e0a3db41d63a9becab90dc958bfb0d75",
+        "bytes": 4912467
       },
       "expected": {
         "overall_score": 24.89,
@@ -66,8 +66,8 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/oracle_audio_manifest.json",
-        "sha256": "b63f96dfddc03893574ecdd2f026318f60ee804fa748afce910c6f14c614903b",
-        "bytes": 2671873
+        "sha256": "1c59e879a5502cf16573b8a39f25ea8647f774238e404883c69aafbb9928e2ef",
+        "bytes": 2686273
       },
       "expected": {
         "overall_score": 100.0,
@@ -88,8 +88,8 @@
       "trials": 3,
       "report": {
         "path": "data/openvoicecs/baselines/noop_audio_manifest.json",
-        "sha256": "27d7da6f8004cb6b87e7761edd38155b3f334500a56a3f1552beeeafa5d84618",
-        "bytes": 2728910
+        "sha256": "3d0207d1bee491383bb1688b1094a73b9e4222b5caac9a0e3729b46747eef6d5",
+        "bytes": 2743310
       },
       "expected": {
         "overall_score": 25.98,
