@@ -32,10 +32,20 @@ def test_seed_changelog_covers_seed_release_items():
     assert stats["present"] is True
     assert stats["num_entries"] == len(changelog["entries"])
     assert stats["entry_types"]["release"] == 1
-    assert set(stats["entry_types"]) <= {"release", "scenario_added", "erratum"}
+    assert stats["entry_types"]["scoring_changed"] == 1
+    assert set(stats["entry_types"]) <= {"release", "scenario_added", "erratum", "scoring_changed"}
     assert stats["scenario_change_coverage"] == 1.0
     assert stats["audio_variant_change_coverage"] == 1.0
-    assert stats["num_open_errata"] == 0
+    assert stats["num_open_errata"] == 1
+
+    entries_by_id = {entry["id"]: entry for entry in changelog["entries"]}
+    grounding_entry = entries_by_id["openvoicecs-v0.1.0-grounding-semantic-fallback"]
+    assert grounding_entry["type"] == "scoring_changed"
+
+    errata_by_id = {erratum["id"]: erratum for erratum in changelog["errata"]}
+    grounding_erratum = errata_by_id["openvoicecs-v0.1.0-grounding-phrase-matcher-erratum"]
+    assert grounding_erratum["status"] == "open"
+    assert grounding_erratum["severity"] == "high"
 
 
 def test_changelog_rejects_unknown_ids_bad_types_and_duplicate_entries():
