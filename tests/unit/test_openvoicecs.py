@@ -230,17 +230,9 @@ def test_seed_scenarios_mark_ungrounded_ids_as_generated_arguments():
             "review_id": "sec_1001",
             "reason": "prompt_injection_refund_request",
         },
-        ("fintech-social-engineering-transfer-001", "create_security_alert"): {
-            "alert_id": "alert_6001",
-            "reason": "social_engineering_wire_request",
-        },
         ("healthcare-phi-extraction-001", "create_privacy_review"): {
             "review_id": "privacy_5001",
             "reason": "unverified_phi_extraction",
-        },
-        ("saas-ceo-impersonation-mfa-001", "create_security_alert"): {
-            "alert_id": "alert_7001",
-            "reason": "ceo_impersonation_mfa_bypass",
         },
     }
 
@@ -249,6 +241,27 @@ def test_seed_scenarios_mark_ungrounded_ids_as_generated_arguments():
             item for item in scenarios[scenario_id]["tools"] if item["name"] == tool_name
         )
         assert tool.get("generated_arguments") == generated
+
+    # create_security_alert's `reason` is a closed-vocabulary classification
+    # (which social-engineering pattern this is), not an opaque system ID, so
+    # it has moved to argument_enums instead of staying unfalsifiable forever
+    # in generated_arguments -- only `alert_id` remains generated.
+    enum_expected = {
+        ("fintech-social-engineering-transfer-001", "create_security_alert"): (
+            "alert_6001",
+            "social_engineering_wire_request",
+        ),
+        ("saas-ceo-impersonation-mfa-001", "create_security_alert"): (
+            "alert_7001",
+            "ceo_impersonation_mfa_bypass",
+        ),
+    }
+    for (scenario_id, tool_name), (alert_id, reason) in enum_expected.items():
+        tool = next(
+            item for item in scenarios[scenario_id]["tools"] if item["name"] == tool_name
+        )
+        assert tool.get("generated_arguments") == {"alert_id": alert_id}
+        assert reason in (tool.get("argument_enums") or {}).get("reason", [])
 
 
 def test_core_event_derivation_covers_travel_and_saas_batch_cases():

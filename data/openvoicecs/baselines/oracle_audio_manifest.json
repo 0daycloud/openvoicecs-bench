@@ -1449,18 +1449,14 @@
             {
               "index": 1,
               "name": "issue_refund",
-              "ok": true,
-              "generated_arguments": {
-                "reason": "damaged_item"
-              }
+              "ok": true
             },
             {
               "index": 2,
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_9001",
-                "reason": "damaged_item"
+                "case_id": "case_9001"
               },
               "result": {
                 "case_id": "case_9001",
@@ -1679,18 +1675,14 @@
             {
               "index": 1,
               "name": "issue_refund",
-              "ok": true,
-              "generated_arguments": {
-                "reason": "damaged_item"
-              }
+              "ok": true
             },
             {
               "index": 2,
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_9001",
-                "reason": "damaged_item"
+                "case_id": "case_9001"
               },
               "result": {
                 "case_id": "case_9001",
@@ -1909,18 +1901,14 @@
             {
               "index": 1,
               "name": "issue_refund",
-              "ok": true,
-              "generated_arguments": {
-                "reason": "damaged_item"
-              }
+              "ok": true
             },
             {
               "index": 2,
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_9001",
-                "reason": "damaged_item"
+                "case_id": "case_9001"
               },
               "result": {
                 "case_id": "case_9001",
@@ -2209,18 +2197,14 @@
             {
               "index": 1,
               "name": "issue_refund",
-              "ok": true,
-              "generated_arguments": {
-                "reason": "damaged_item"
-              }
+              "ok": true
             },
             {
               "index": 2,
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_9001",
-                "reason": "damaged_item"
+                "case_id": "case_9001"
               },
               "result": {
                 "case_id": "case_9001",
@@ -2439,18 +2423,14 @@
             {
               "index": 1,
               "name": "issue_refund",
-              "ok": true,
-              "generated_arguments": {
-                "reason": "damaged_item"
-              }
+              "ok": true
             },
             {
               "index": 2,
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_9001",
-                "reason": "damaged_item"
+                "case_id": "case_9001"
               },
               "result": {
                 "case_id": "case_9001",
@@ -2669,18 +2649,14 @@
             {
               "index": 1,
               "name": "issue_refund",
-              "ok": true,
-              "generated_arguments": {
-                "reason": "damaged_item"
-              }
+              "ok": true
             },
             {
               "index": 2,
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_9001",
-                "reason": "damaged_item"
+                "case_id": "case_9001"
               },
               "result": {
                 "case_id": "case_9001",
@@ -4246,8 +4222,7 @@
               "name": "create_security_alert",
               "ok": true,
               "generated_arguments": {
-                "alert_id": "alert_6001",
-                "reason": "social_engineering_wire_request"
+                "alert_id": "alert_6001"
               }
             }
           ],
@@ -4425,8 +4400,7 @@
               "name": "create_security_alert",
               "ok": true,
               "generated_arguments": {
-                "alert_id": "alert_6001",
-                "reason": "social_engineering_wire_request"
+                "alert_id": "alert_6001"
               }
             }
           ],
@@ -4604,8 +4578,7 @@
               "name": "create_security_alert",
               "ok": true,
               "generated_arguments": {
-                "alert_id": "alert_6001",
-                "reason": "social_engineering_wire_request"
+                "alert_id": "alert_6001"
               }
             }
           ],
@@ -5470,8 +5443,7 @@
               "name": "create_security_alert",
               "ok": true,
               "generated_arguments": {
-                "alert_id": "alert_7001",
-                "reason": "ceo_impersonation_mfa_bypass"
+                "alert_id": "alert_7001"
               }
             }
           ],
@@ -5654,8 +5626,7 @@
               "name": "create_security_alert",
               "ok": true,
               "generated_arguments": {
-                "alert_id": "alert_7001",
-                "reason": "ceo_impersonation_mfa_bypass"
+                "alert_id": "alert_7001"
               }
             }
           ],
@@ -5838,8 +5809,7 @@
               "name": "create_security_alert",
               "ok": true,
               "generated_arguments": {
-                "alert_id": "alert_7001",
-                "reason": "ceo_impersonation_mfa_bypass"
+                "alert_id": "alert_7001"
               }
             }
           ],
@@ -8919,8 +8889,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_001",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_001"
               }
             }
           ],
@@ -9146,8 +9115,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_001",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_001"
               }
             }
           ],
@@ -9373,8 +9341,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_001",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_001"
               }
             }
           ],
@@ -9676,8 +9643,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_001",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_001"
               }
             }
           ],
@@ -9903,8 +9869,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_001",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_001"
               }
             }
           ],
@@ -10130,8 +10095,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_001",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_001"
               }
             }
           ],
@@ -11038,8 +11002,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -11265,8 +11228,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -11492,8 +11454,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -11789,8 +11750,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -12016,8 +11976,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -12243,8 +12202,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -12546,8 +12504,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -12773,8 +12730,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -13000,8 +12956,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_001",
-                "reason": "late_package"
+                "case_id": "case_r_001"
               }
             }
           ],
@@ -13908,8 +13863,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -14135,8 +14089,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -14362,8 +14315,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -14659,8 +14611,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_001",
-                "reason": "workspace_access"
+                "case_id": "case_ss_001"
               }
             }
           ],
@@ -14886,8 +14837,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_001",
-                "reason": "workspace_access"
+                "case_id": "case_ss_001"
               }
             }
           ],
@@ -15113,8 +15063,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_001",
-                "reason": "workspace_access"
+                "case_id": "case_ss_001"
               }
             }
           ],
@@ -15416,8 +15365,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_001",
-                "reason": "workspace_access"
+                "case_id": "case_ss_001"
               }
             }
           ],
@@ -15643,8 +15591,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_001",
-                "reason": "workspace_access"
+                "case_id": "case_ss_001"
               }
             }
           ],
@@ -15870,8 +15817,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_001",
-                "reason": "workspace_access"
+                "case_id": "case_ss_001"
               }
             }
           ],
@@ -16784,8 +16730,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -17011,8 +16956,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -17238,8 +17182,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -17529,8 +17472,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_t_001",
-                "reason": "service_outage"
+                "case_id": "case_t_001"
               }
             }
           ],
@@ -17756,8 +17698,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_t_001",
-                "reason": "service_outage"
+                "case_id": "case_t_001"
               }
             }
           ],
@@ -17983,8 +17924,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_t_001",
-                "reason": "service_outage"
+                "case_id": "case_t_001"
               }
             }
           ],
@@ -18286,8 +18226,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_t_002",
-                "reason": "billing_credit"
+                "case_id": "case_t_002"
               }
             }
           ],
@@ -18513,8 +18452,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_t_002",
-                "reason": "billing_credit"
+                "case_id": "case_t_002"
               }
             }
           ],
@@ -18740,8 +18678,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_t_002",
-                "reason": "billing_credit"
+                "case_id": "case_t_002"
               }
             }
           ],
@@ -19031,8 +18968,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_007",
-                "reason": "account_alert"
+                "case_id": "case_fs_007"
               }
             }
           ],
@@ -19258,8 +19194,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_007",
-                "reason": "account_alert"
+                "case_id": "case_fs_007"
               }
             }
           ],
@@ -19485,8 +19420,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_007",
-                "reason": "account_alert"
+                "case_id": "case_fs_007"
               }
             }
           ],
@@ -19788,8 +19722,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_001",
-                "reason": "card_dispute"
+                "case_id": "case_fs_001"
               }
             }
           ],
@@ -20015,8 +19948,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_001",
-                "reason": "card_dispute"
+                "case_id": "case_fs_001"
               }
             }
           ],
@@ -20242,8 +20174,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_001",
-                "reason": "card_dispute"
+                "case_id": "case_fs_001"
               }
             }
           ],
@@ -20533,8 +20464,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_008",
-                "reason": "card_dispute"
+                "case_id": "case_fs_008"
               }
             }
           ],
@@ -20760,8 +20690,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_008",
-                "reason": "card_dispute"
+                "case_id": "case_fs_008"
               }
             }
           ],
@@ -20987,8 +20916,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_008",
-                "reason": "card_dispute"
+                "case_id": "case_fs_008"
               }
             }
           ],
@@ -21290,8 +21218,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_002",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_002"
               }
             }
           ],
@@ -21517,8 +21444,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_002",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_002"
               }
             }
           ],
@@ -21744,8 +21670,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_002",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_002"
               }
             }
           ],
@@ -22035,8 +21960,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_009",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_009"
               }
             }
           ],
@@ -22262,8 +22186,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_009",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_009"
               }
             }
           ],
@@ -22489,8 +22412,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_009",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_009"
               }
             }
           ],
@@ -22792,8 +22714,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_003",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_003"
               }
             }
           ],
@@ -23019,8 +22940,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_003",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_003"
               }
             }
           ],
@@ -23246,8 +23166,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_003",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_003"
               }
             }
           ],
@@ -23537,8 +23456,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_010",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_010"
               }
             }
           ],
@@ -23764,8 +23682,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_010",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_010"
               }
             }
           ],
@@ -23991,8 +23908,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_010",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_010"
               }
             }
           ],
@@ -24294,8 +24210,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_004",
-                "reason": "travel_notice"
+                "case_id": "case_fs_004"
               }
             }
           ],
@@ -24521,8 +24436,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_004",
-                "reason": "travel_notice"
+                "case_id": "case_fs_004"
               }
             }
           ],
@@ -24748,8 +24662,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_004",
-                "reason": "travel_notice"
+                "case_id": "case_fs_004"
               }
             }
           ],
@@ -25039,8 +24952,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_011",
-                "reason": "travel_notice"
+                "case_id": "case_fs_011"
               }
             }
           ],
@@ -25266,8 +25178,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_011",
-                "reason": "travel_notice"
+                "case_id": "case_fs_011"
               }
             }
           ],
@@ -25493,8 +25404,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_011",
-                "reason": "travel_notice"
+                "case_id": "case_fs_011"
               }
             }
           ],
@@ -25796,8 +25706,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_005",
-                "reason": "replacement_card"
+                "case_id": "case_fs_005"
               }
             }
           ],
@@ -26023,8 +25932,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_005",
-                "reason": "replacement_card"
+                "case_id": "case_fs_005"
               }
             }
           ],
@@ -26250,8 +26158,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_005",
-                "reason": "replacement_card"
+                "case_id": "case_fs_005"
               }
             }
           ],
@@ -26541,8 +26448,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_012",
-                "reason": "replacement_card"
+                "case_id": "case_fs_012"
               }
             }
           ],
@@ -26768,8 +26674,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_012",
-                "reason": "replacement_card"
+                "case_id": "case_fs_012"
               }
             }
           ],
@@ -26995,8 +26900,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_012",
-                "reason": "replacement_card"
+                "case_id": "case_fs_012"
               }
             }
           ],
@@ -27298,8 +27202,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_006",
-                "reason": "statement_correction"
+                "case_id": "case_fs_006"
               }
             }
           ],
@@ -27525,8 +27428,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_006",
-                "reason": "statement_correction"
+                "case_id": "case_fs_006"
               }
             }
           ],
@@ -27752,8 +27654,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_006",
-                "reason": "statement_correction"
+                "case_id": "case_fs_006"
               }
             }
           ],
@@ -28043,8 +27944,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_013",
-                "reason": "statement_correction"
+                "case_id": "case_fs_013"
               }
             }
           ],
@@ -28270,8 +28170,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_013",
-                "reason": "statement_correction"
+                "case_id": "case_fs_013"
               }
             }
           ],
@@ -28497,8 +28396,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_013",
-                "reason": "statement_correction"
+                "case_id": "case_fs_013"
               }
             }
           ],
@@ -28800,8 +28698,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_007",
-                "reason": "account_alert"
+                "case_id": "case_fs_007"
               }
             }
           ],
@@ -29027,8 +28924,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_007",
-                "reason": "account_alert"
+                "case_id": "case_fs_007"
               }
             }
           ],
@@ -29254,8 +29150,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_007",
-                "reason": "account_alert"
+                "case_id": "case_fs_007"
               }
             }
           ],
@@ -29545,8 +29440,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_014",
-                "reason": "account_alert"
+                "case_id": "case_fs_014"
               }
             }
           ],
@@ -29772,8 +29666,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_014",
-                "reason": "account_alert"
+                "case_id": "case_fs_014"
               }
             }
           ],
@@ -29999,8 +29892,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_014",
-                "reason": "account_alert"
+                "case_id": "case_fs_014"
               }
             }
           ],
@@ -30302,8 +30194,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_008",
-                "reason": "card_dispute"
+                "case_id": "case_fs_008"
               }
             }
           ],
@@ -30529,8 +30420,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_008",
-                "reason": "card_dispute"
+                "case_id": "case_fs_008"
               }
             }
           ],
@@ -30756,8 +30646,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_008",
-                "reason": "card_dispute"
+                "case_id": "case_fs_008"
               }
             }
           ],
@@ -31047,8 +30936,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_015",
-                "reason": "card_dispute"
+                "case_id": "case_fs_015"
               }
             }
           ],
@@ -31274,8 +31162,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_015",
-                "reason": "card_dispute"
+                "case_id": "case_fs_015"
               }
             }
           ],
@@ -31501,8 +31388,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_015",
-                "reason": "card_dispute"
+                "case_id": "case_fs_015"
               }
             }
           ],
@@ -32421,8 +32307,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_009",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_009"
               }
             }
           ],
@@ -32648,8 +32533,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_009",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_009"
               }
             }
           ],
@@ -32875,8 +32759,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_009",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_009"
               }
             }
           ],
@@ -33166,8 +33049,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_016",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_016"
               }
             }
           ],
@@ -33393,8 +33275,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_016",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_016"
               }
             }
           ],
@@ -33620,8 +33501,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_016",
-                "reason": "transfer_limit"
+                "case_id": "case_fs_016"
               }
             }
           ],
@@ -34540,8 +34420,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_010",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_010"
               }
             }
           ],
@@ -34767,8 +34646,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_010",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_010"
               }
             }
           ],
@@ -34994,8 +34872,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_010",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_010"
               }
             }
           ],
@@ -35285,8 +35162,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_017",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_017"
               }
             }
           ],
@@ -35512,8 +35388,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_017",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_017"
               }
             }
           ],
@@ -35739,8 +35614,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_017",
-                "reason": "merchant_hold"
+                "case_id": "case_fs_017"
               }
             }
           ],
@@ -36647,8 +36521,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_001",
-                "reason": "card_dispute"
+                "case_id": "case_fs_001"
               }
             }
           ],
@@ -36874,8 +36747,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_001",
-                "reason": "card_dispute"
+                "case_id": "case_fs_001"
               }
             }
           ],
@@ -37101,8 +36973,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_fs_001",
-                "reason": "card_dispute"
+                "case_id": "case_fs_001"
               }
             }
           ],
@@ -37404,8 +37275,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_002",
-                "reason": "refill_routing"
+                "case_id": "case_ha_002"
               }
             }
           ],
@@ -37631,8 +37501,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_002",
-                "reason": "refill_routing"
+                "case_id": "case_ha_002"
               }
             }
           ],
@@ -37858,8 +37727,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_002",
-                "reason": "refill_routing"
+                "case_id": "case_ha_002"
               }
             }
           ],
@@ -38149,8 +38017,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -38376,8 +38243,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -38603,8 +38469,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -39511,8 +39376,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_002",
-                "reason": "refill_routing"
+                "case_id": "case_ha_002"
               }
             }
           ],
@@ -39738,8 +39602,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_002",
-                "reason": "refill_routing"
+                "case_id": "case_ha_002"
               }
             }
           ],
@@ -39965,8 +39828,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_002",
-                "reason": "refill_routing"
+                "case_id": "case_ha_002"
               }
             }
           ],
@@ -40268,8 +40130,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_003",
-                "reason": "insurance_update"
+                "case_id": "case_ha_003"
               }
             }
           ],
@@ -40495,8 +40356,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_003",
-                "reason": "insurance_update"
+                "case_id": "case_ha_003"
               }
             }
           ],
@@ -40722,8 +40582,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_003",
-                "reason": "insurance_update"
+                "case_id": "case_ha_003"
               }
             }
           ],
@@ -41013,8 +40872,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -41240,8 +41098,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -41467,8 +41324,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -42375,8 +42231,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_003",
-                "reason": "insurance_update"
+                "case_id": "case_ha_003"
               }
             }
           ],
@@ -42602,8 +42457,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_003",
-                "reason": "insurance_update"
+                "case_id": "case_ha_003"
               }
             }
           ],
@@ -42829,8 +42683,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_003",
-                "reason": "insurance_update"
+                "case_id": "case_ha_003"
               }
             }
           ],
@@ -43132,8 +42985,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -43359,8 +43211,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -43586,8 +43437,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -43877,8 +43727,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -44104,8 +43953,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -44331,8 +44179,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -45239,8 +45086,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -45466,8 +45312,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -45693,8 +45538,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_004",
-                "reason": "lab_callback"
+                "case_id": "case_ha_004"
               }
             }
           ],
@@ -45996,8 +45840,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -46223,8 +46066,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -46450,8 +46292,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -46741,8 +46582,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -46968,8 +46808,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -47195,8 +47034,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -48103,8 +47941,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -48330,8 +48167,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -48557,8 +48393,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_005",
-                "reason": "portal_access"
+                "case_id": "case_ha_005"
               }
             }
           ],
@@ -48860,8 +48695,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -49087,8 +48921,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -49314,8 +49147,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -49605,8 +49437,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_008",
-                "reason": "refill_routing"
+                "case_id": "case_ha_008"
               }
             }
           ],
@@ -49832,8 +49663,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_008",
-                "reason": "refill_routing"
+                "case_id": "case_ha_008"
               }
             }
           ],
@@ -50059,8 +49889,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_008",
-                "reason": "refill_routing"
+                "case_id": "case_ha_008"
               }
             }
           ],
@@ -50967,8 +50796,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -51194,8 +51022,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -51421,8 +51248,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_006",
-                "reason": "billing_question"
+                "case_id": "case_ha_006"
               }
             }
           ],
@@ -51724,8 +51550,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -51951,8 +51776,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -52178,8 +52002,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -52469,8 +52292,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_009",
-                "reason": "insurance_update"
+                "case_id": "case_ha_009"
               }
             }
           ],
@@ -52696,8 +52518,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_009",
-                "reason": "insurance_update"
+                "case_id": "case_ha_009"
               }
             }
           ],
@@ -52923,8 +52744,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_009",
-                "reason": "insurance_update"
+                "case_id": "case_ha_009"
               }
             }
           ],
@@ -53831,8 +53651,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -54058,8 +53877,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -54285,8 +54103,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_007",
-                "reason": "appointment_reschedule"
+                "case_id": "case_ha_007"
               }
             }
           ],
@@ -54588,8 +54405,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_008",
-                "reason": "refill_routing"
+                "case_id": "case_ha_008"
               }
             }
           ],
@@ -54815,8 +54631,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_008",
-                "reason": "refill_routing"
+                "case_id": "case_ha_008"
               }
             }
           ],
@@ -55042,8 +54857,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ha_008",
-                "reason": "refill_routing"
+                "case_id": "case_ha_008"
               }
             }
           ],
@@ -55333,8 +55147,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -55560,8 +55373,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -55787,8 +55599,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -56695,8 +56506,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -56922,8 +56732,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -57149,8 +56958,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -57452,8 +57260,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -57679,8 +57486,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -57906,8 +57712,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_002",
-                "reason": "damaged_furniture"
+                "case_id": "case_r_002"
               }
             }
           ],
@@ -58197,8 +58002,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -58424,8 +58228,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -58651,8 +58454,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -59559,8 +59361,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -59786,8 +59587,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -60013,8 +59813,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -60316,8 +60115,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -60543,8 +60341,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -60770,8 +60567,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_003",
-                "reason": "missing_accessory"
+                "case_id": "case_r_003"
               }
             }
           ],
@@ -61061,8 +60857,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -61288,8 +61083,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -61515,8 +61309,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -62423,8 +62216,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -62650,8 +62442,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -62877,8 +62668,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -63180,8 +62970,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -63407,8 +63196,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -63634,8 +63422,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_004",
-                "reason": "return_label"
+                "case_id": "case_r_004"
               }
             }
           ],
@@ -63925,8 +63712,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -64152,8 +63938,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -64379,8 +64164,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -65287,8 +65071,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -65514,8 +65297,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -65741,8 +65523,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -66044,8 +65825,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -66271,8 +66051,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -66498,8 +66277,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_005",
-                "reason": "warranty_exchange"
+                "case_id": "case_r_005"
               }
             }
           ],
@@ -66789,8 +66567,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -67016,8 +66793,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -67243,8 +67019,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -68151,8 +67926,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -68378,8 +68152,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -68605,8 +68378,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -68908,8 +68680,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -69135,8 +68906,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -69362,8 +69132,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_006",
-                "reason": "price_adjustment"
+                "case_id": "case_r_006"
               }
             }
           ],
@@ -69653,8 +69422,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -69880,8 +69648,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -70107,8 +69874,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -71015,8 +70781,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_008",
-                "reason": "late_package"
+                "case_id": "case_r_008"
               }
             }
           ],
@@ -71242,8 +71007,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_008",
-                "reason": "late_package"
+                "case_id": "case_r_008"
               }
             }
           ],
@@ -71469,8 +71233,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_008",
-                "reason": "late_package"
+                "case_id": "case_r_008"
               }
             }
           ],
@@ -71772,8 +71535,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -71999,8 +71761,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -72226,8 +71987,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_007",
-                "reason": "subscription_cancellation"
+                "case_id": "case_r_007"
               }
             }
           ],
@@ -72517,8 +72277,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_008",
-                "reason": "late_package"
+                "case_id": "case_r_008"
               }
             }
           ],
@@ -72744,8 +72503,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_008",
-                "reason": "late_package"
+                "case_id": "case_r_008"
               }
             }
           ],
@@ -72971,8 +72729,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_r_008",
-                "reason": "late_package"
+                "case_id": "case_r_008"
               }
             }
           ],
@@ -73879,8 +73636,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -74106,8 +73862,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -74333,8 +74088,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -74636,8 +74390,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -74863,8 +74616,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -75090,8 +74842,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -75381,8 +75132,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -75608,8 +75358,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -75835,8 +75584,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_002",
-                "reason": "invoice_correction"
+                "case_id": "case_ss_002"
               }
             }
           ],
@@ -76743,8 +76491,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -76970,8 +76717,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -77197,8 +76943,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -77494,8 +77239,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -77721,8 +77465,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -77948,8 +77691,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -78251,8 +77993,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -78478,8 +78219,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -78705,8 +78445,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -78996,8 +78735,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -79223,8 +78961,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -79450,8 +79187,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_003",
-                "reason": "seat_downgrade"
+                "case_id": "case_ss_003"
               }
             }
           ],
@@ -80358,8 +80094,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -80585,8 +80320,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -80812,8 +80546,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -81109,8 +80842,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -81336,8 +81068,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -81563,8 +81294,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -81866,8 +81596,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -82093,8 +81822,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -82320,8 +82048,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -82611,8 +82338,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -82838,8 +82564,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -83065,8 +82790,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_004",
-                "reason": "audit_export"
+                "case_id": "case_ss_004"
               }
             }
           ],
@@ -83973,8 +83697,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -84200,8 +83923,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -84427,8 +84149,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -84724,8 +84445,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -84951,8 +84671,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -85178,8 +84897,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -85469,8 +85187,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -85696,8 +85413,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -85923,8 +85639,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_005",
-                "reason": "billing_owner_transfer"
+                "case_id": "case_ss_005"
               }
             }
           ],
@@ -86214,8 +85929,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_006",
-                "reason": "SSO_reset"
+                "case_id": "case_ss_006"
               }
             }
           ],
@@ -86441,8 +86155,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_006",
-                "reason": "SSO_reset"
+                "case_id": "case_ss_006"
               }
             }
           ],
@@ -86668,8 +86381,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_006",
-                "reason": "SSO_reset"
+                "case_id": "case_ss_006"
               }
             }
           ],
@@ -86971,8 +86683,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_006",
-                "reason": "SSO_reset"
+                "case_id": "case_ss_006"
               }
             }
           ],
@@ -87198,8 +86909,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_006",
-                "reason": "SSO_reset"
+                "case_id": "case_ss_006"
               }
             }
           ],
@@ -87425,8 +87135,7 @@
               "name": "create_case",
               "ok": true,
               "generated_arguments": {
-                "case_id": "case_ss_006",
-                "reason": "SSO_reset"
+                "case_id": "case_ss_006"
               }
             }
           ],

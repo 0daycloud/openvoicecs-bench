@@ -40,7 +40,7 @@
     },
     "leaderboard_claims": {
       "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-      "sha256": "bf5c14979e37b5fdf1ad1261a8e897015297f5da981eaa9dc1598c60f11b1ea4",
+      "sha256": "b34701337fc7b530e9ad73f8565fb8b92601482bcc462e7708030496797bad0b",
       "bytes": 2730
     }
   },

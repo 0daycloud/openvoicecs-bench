@@ -80,10 +80,14 @@ def test_openai_tool_schemas_are_generic_typed_without_constants():
         for name, schema in create_case_params["properties"].items()
         if "Assigned by the system" in (schema.get("description") or "")
     }
-    assert generated, "generated arguments must still be advertised to the model"
-    assert create_case_params["required"] == ["account_id"]
+    assert generated == {"case_id"}, "generated arguments must still be advertised to the model"
+    # `reason` is a documented classification vocabulary (argument_enums), not
+    # an opaque system ID, so unlike `case_id` it is a real, required,
+    # enum-constrained argument.
+    assert create_case_params["required"] == ["account_id", "reason"]
     assert generated.isdisjoint(create_case_params["required"])
-    assert set(create_case_params["properties"]) == {"account_id"} | generated
+    assert set(create_case_params["properties"]) == {"account_id", "reason"} | generated
+    assert "damaged_item" in create_case_params["properties"]["reason"]["enum"]
 
 
 def test_openai_tool_schemas_emit_enum_and_require_documented_classification_fields():
