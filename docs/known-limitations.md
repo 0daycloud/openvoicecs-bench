@@ -235,6 +235,13 @@ Measured over the 10,532 stored trials in
 `text_to_action`; no refusal scenario is involved, so this is not an artifact of
 scenarios where declining to act is correct.
 
+The first row is an **upper bound**, not an error count: completing the work
+does not oblige the grader to credit a claim the agent never communicated. Of
+the 56 remaining under evidence mode, 49 are one scenario
+(`saas-account-access-001`) where models announce the MFA reset but never
+mention the security review the claim requires — a real omission, correctly
+caught. The residual rows are reported unfiltered rather than tuned down.
+
 **Partly fixed.** `src/evaluation/benchmark/grounding.py` separates the two
 questions the old check conflated: whether the agent *communicated* the fact
 (paraphrase-tolerant) and whether the fact is *supported* by the replayed state.
