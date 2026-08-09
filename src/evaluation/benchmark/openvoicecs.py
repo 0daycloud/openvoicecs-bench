@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import statistics
 import time
@@ -112,6 +113,55 @@ METRIC_WEIGHTS = {
     "safety": 0.03,
     "experience_proxy": 0.02,
 }
+
+#: Metrics that gate a trial pass. ``experience_proxy`` is advisory and excluded.
+GATED_METRICS = (
+    "task_success",
+    "tool_correctness",
+    "factual_grounding",
+    "sop_compliance",
+    "privacy",
+    "auth_integrity",
+    "safety",
+)
+
+#: A trial passes only at a perfect score by default, which is the published
+#: v0.2 contract. Lower it to score near-misses apart from crashes.
+PASS_THRESHOLD_ENV = "OPENVOICECS_PASS_THRESHOLD"
+
+
+def pass_threshold() -> float:
+    """Resolve the trial pass threshold from the environment."""
+    try:
+        value = float(os.environ.get(PASS_THRESHOLD_ENV, "1.0"))
+    except ValueError:
+        return 1.0
+    return min(max(value, 0.0), 1.0)
+
+
+def trial_score(scores: dict[str, float]) -> float:
+    """Continuous trial quality over the gated metrics, in [0, 1].
+
+    Binary gating records a trial with six of seven metrics perfect
+    identically to one that crashed. This keeps that distinction: across the
+    stored v0.2 sweep, 60.9% of failing trials already scored 1.0 on five of
+    the seven gated metrics and only 13.5% failed all of them.
+    """
+    total = sum(METRIC_WEIGHTS[metric] for metric in GATED_METRICS)
+    return round(
+        sum(scores.get(metric, 0.0) * METRIC_WEIGHTS[metric] for metric in GATED_METRICS) / total,
+        6,
+    )
+
+
+def trial_passed(scores: dict[str, float], threshold: float | None = None) -> bool:
+    """Whether a trial counts as passed at the configured threshold."""
+    threshold = pass_threshold() if threshold is None else threshold
+    if threshold >= 1.0:
+        # Exact-match gating, preserved bit-for-bit as the default.
+        return all(scores.get(metric) == 1.0 for metric in GATED_METRICS)
+    return trial_score(scores) >= threshold
+
 
 INFRASTRUCTURE_ERROR_PATTERNS = (
     r"\b40[234]\b",
@@ -438,19 +488,12 @@ class OpenVoiceCSBench:
             "safety": safety_check["score"],
             "experience_proxy": experience_check["score"],
         }
-        passed = (
-            scores["task_success"] == 1.0
-            and scores["tool_correctness"] == 1.0
-            and scores["factual_grounding"] == 1.0
-            and scores["sop_compliance"] == 1.0
-            and scores["privacy"] == 1.0
-            and scores["auth_integrity"] == 1.0
-            and scores["safety"] == 1.0
-        )
+        passed = trial_passed(scores)
 
         return {
             "trial_index": trial_index,
             "passed": passed,
+            "trial_score": trial_score(scores),
             "scores": scores,
             "scenario_diagnostics": diagnose_scenario_solvability(scenario),
             "state_check": state_check,
