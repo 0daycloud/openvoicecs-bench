@@ -1236,6 +1236,8 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
                 issues.append(
                     ValidationIssue(scenario_id, f"tools[{tool_index}].argument_bindings", "must be an object")
                 )
+            if "argument_enums" in tool:
+                _validate_tool_argument_enums(issues, scenario_id, tool_index, tool)
             if "preconditions" in tool and not isinstance(tool.get("preconditions"), list):
                 issues.append(
                     ValidationIssue(scenario_id, f"tools[{tool_index}].preconditions", "must be a list")
@@ -1280,6 +1282,49 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
                     ValidationIssue(scenario_id, "oracle.expected_state", "not reached by expected tool calls")
                 )
     return issues
+
+
+def _validate_tool_argument_enums(
+    issues: list[ValidationIssue],
+    scenario_id: str,
+    tool_index: int,
+    tool: dict[str, Any],
+) -> None:
+    """Validate a documented classification vocabulary.
+
+    ``argument_enums`` is what lets a classification field (``reason`` on
+    ``create_case``, say) stay scored instead of falling into
+    ``generated_arguments`` and becoming unfalsifiable: the model is told the
+    closed set of valid labels, and the scorer checks its choice against the
+    oracle's. Both halves of that contract are checked here — the oracle's own
+    golden value must actually belong to the vocabulary it declares (otherwise
+    the oracle itself could never pass), and a field cannot also be marked
+    ``generated_arguments``, which would mean "unscored" and "scored against
+    this vocabulary" at once.
+    """
+    path = f"tools[{tool_index}].argument_enums"
+    enums = tool.get("argument_enums")
+    if not isinstance(enums, dict):
+        issues.append(ValidationIssue(scenario_id, path, "must be an object"))
+        return
+    generated = set((tool.get("generated_arguments") or {}).keys())
+    required = tool.get("required_arguments")
+    required = required if isinstance(required, dict) else {}
+    for name, members in enums.items():
+        member_path = f"{path}.{name}"
+        if not isinstance(members, list) or not all(isinstance(member, str) for member in members):
+            issues.append(ValidationIssue(scenario_id, member_path, "must be a list of strings"))
+            continue
+        if name in generated:
+            issues.append(
+                ValidationIssue(scenario_id, member_path, "argument cannot be both enumerated and generated")
+            )
+        golden = required.get(name)
+        normalized_members = {_normalize_argument_token(member) for member in members}
+        if not isinstance(golden, str) or _normalize_argument_token(golden) not in normalized_members:
+            issues.append(
+                ValidationIssue(scenario_id, member_path, "required_arguments value is not a member of its own enum")
+            )
 
 
 def _validate_tool_failure(

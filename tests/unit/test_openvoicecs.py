@@ -957,6 +957,59 @@ def test_validate_scenarios_reports_all_issues():
     assert ("oracle.expected_tool_calls[0].name", "unknown tool") in messages
 
 
+def test_validate_scenarios_reports_argument_enum_issues():
+    """``argument_enums`` documents a classification vocabulary, so it must be
+    internally consistent: the oracle's own golden value has to be a member of
+    the vocabulary it declares, the vocabulary must actually be a list of
+    strings, and a field cannot simultaneously be unscored (``generated_arguments``)
+    and scored against a closed vocabulary (``argument_enums``) — that
+    combination says both "don't check this" and "check this" at once.
+    """
+    issues = validate_scenarios([
+        {
+            "id": "bad-enum-001",
+            "domain": "retail",
+            "track": "text_to_action",
+            "difficulty": "easy",
+            "customer_goal": "Broken enum scenario",
+            "initial_state": {},
+            "tools": [
+                {
+                    "name": "issue_refund",
+                    "required_arguments": {"order_id": "ord_1", "reason": "damaged_item"},
+                    "argument_enums": {"reason": ["late_delivery", "wrong_item"]},
+                    "state_updates": [],
+                },
+                {
+                    "name": "create_case",
+                    "required_arguments": {"case_id": "case_1", "reason": "card_dispute"},
+                    "generated_arguments": {"reason": "card_dispute"},
+                    "argument_enums": {"reason": ["card_dispute", "merchant_hold"]},
+                    "state_updates": [],
+                },
+                {
+                    "name": "create_security_alert",
+                    "required_arguments": {"alert_id": "alert_1", "reason": "sim_swap_pressure"},
+                    "argument_enums": {"reason": "sim_swap_pressure"},
+                    "state_updates": [],
+                },
+            ],
+            "oracle": {"expected_tool_calls": []},
+        }
+    ])
+
+    messages = {(issue.path, issue.message) for issue in issues}
+    assert (
+        "tools[0].argument_enums.reason",
+        "required_arguments value is not a member of its own enum",
+    ) in messages
+    assert (
+        "tools[1].argument_enums.reason",
+        "argument cannot be both enumerated and generated",
+    ) in messages
+    assert ("tools[2].argument_enums.reason", "must be a list of strings") in messages
+
+
 def test_leaderboard_orders_by_reliability_then_score():
     leaderboard = build_leaderboard([
         {
