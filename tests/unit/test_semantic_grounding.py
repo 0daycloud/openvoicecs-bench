@@ -2,13 +2,7 @@
 
 from __future__ import annotations
 
-import json
-from copy import deepcopy
-
-import pytest
-
-from src.evaluation.benchmark.judging import ModelJudgeSpec
-from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, validate_report
+from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench
 from src.evaluation.benchmark.semantic_grounding import iter_blinded_grounding_items
 
 
