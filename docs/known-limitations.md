@@ -204,10 +204,11 @@ re-scoring the June traces reports `task_success` near 0.9 because the lenient
 scorer forgives invented arguments on calls that *were* made, whereas fresh
 models skip those calls entirely and leniency cannot rescue an absent call.
 
-### 7. `factual_grounding` is a phrase matcher
+### 7. `factual_grounding` never consulted the facts
 
-Required claims are lists of literal strings. The check conflates three
-different things:
+Required claims are lists of literal patterns matched against the agent's own
+transcript. The check never read the replayed state, so it graded what the
+agent *said* and never whether it was *true*. It conflated four things:
 
 - **Synonymy misses.** `fee_waived` accepts `"no change fee"` / `"no fee"` /
   `"fee waiver"`; an agent saying *"rebooked you at no charge"* is marked
@@ -217,11 +218,47 @@ different things:
 - **Honest failure reports.** Where a scenario injects a tool failure and the
   agent says *"I couldn't complete this, I've escalated it"*, the required
   claim `completed` is absent and the agent is penalised for accuracy.
+- **Fabricated completion.** This was the dominant error and was previously
+  undocumented. 69% of the corpus (152 of 221 required claims) uses the single
+  claim `["completed", "logged"]`, so an agent that says *"I've completed the
+  update"* while the case is still open scored a full 1.0.
 
-Scores span 0.047–0.323 across the ranked cohort at weight 0.20, enough to
-reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
-strongest remaining argument for a semantic grader and the most valuable
-contribution anyone can make.
+Measured over the 10,532 stored trials in
+`data/openvoicecs/runs/text_action_v02_merged/`:
+
+| | legacy | evidence |
+| --- | --- | --- |
+| Did the work, credit denied | 195 / 2,596 (7.5%) | 56 / 2,596 (2.2%) |
+| Did **not** do the work, full credit | 6,216 / 7,936 (78.3%) | 69 / 7,936 (0.9%) |
+
+6,208 of those 6,216 scored `factual_grounding` at exactly 1.0. All sit in
+`text_to_action`; no refusal scenario is involved, so this is not an artifact of
+scenarios where declining to act is correct.
+
+The first row is an **upper bound**, not an error count: completing the work
+does not oblige the grader to credit a claim the agent never communicated. Of
+the 56 remaining under evidence mode, 49 are one scenario
+(`saas-account-access-001`) where models announce the MFA reset but never
+mention the security review the claim requires — a real omission, correctly
+caught. The residual rows are reported unfiltered rather than tuned down.
+
+**Partly fixed.** `src/evaluation/benchmark/grounding.py` separates the two
+questions the old check conflated: whether the agent *communicated* the fact
+(paraphrase-tolerant) and whether the fact is *supported* by the replayed state.
+Claims are linked to `oracle.expected_state` mechanically by claim concept, so
+no scenario file changes. Claims asserting a specific datum — `credit_amount`,
+`corrected_*_used` — are classified `literal` and keep exact matching, because
+there the exact token is the test. An agent that reports its own failure is
+credited; silence is not, so the no-op baseline stays on the floor.
+
+Reproduce with `python scripts/eval_grounding_modes.py`.
+
+**Still open.** Evidence mode is opt-in via `OPENVOICECS_GROUNDING_MODE=evidence`
+so every published v0.2 number stays reproducible. Making it the default is a
+scoring change that requires regenerating the baselines, the release bundle, and
+the leaderboard, and is left to maintainers. Fabricated claims are reported in
+`ungrounded_claims` and deliberately kept out of `unsupported_claims_detected`,
+which would zero the `safety` metric — that coupling is a separate decision.
 
 ### 8. Binary trial gating compresses `passed`
 
@@ -329,10 +366,10 @@ to real-world audio are not supported by this release.
 The instrument is sound and the top of the table is trustworthy. What is not yet
 trustworthy is fine-grained ordering in the middle.
 
-1. **Replace phrase-matched grounding with a semantic grader** (section 7). It
-   carries weight 0.20, it conflates synonymy with omission, and removing it
-   reshuffles 36 of 44 models — it is the largest single source of mid-table
-   noise.
+1. **Adopt evidence-linked grounding as the default** (section 7). The grader
+   exists and is regression-tested; what remains is regenerating the baselines,
+   release bundle, and leaderboard so the published numbers move in one
+   auditable step.
 2. **Repeat the sweep and publish confidence intervals** (section 5). One run of
    three trials cannot separate models a couple of points apart, and right now
    nothing in the artifact says so numerically.
