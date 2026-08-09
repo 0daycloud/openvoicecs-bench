@@ -1252,3 +1252,49 @@ def test_paraphrase_judge_consulted_only_for_missed_claims_on_passed_state():
     )
     assert check["score"] == 1.0
     assert calls == []  # regex match needs no judge
+
+
+def test_reported_desire_and_never_are_denial_contexts(monkeypatch):
+    scenario = {"oracle": {"grounding": {
+        "required_claims": [{"id": "voucher_resolution", "any_terms": ["voucher"]}],
+        "forbidden_claims": [{"id": "card_refund_claim", "patterns": ["refund to your card"]},
+                              {"id": "pin_read_claim", "patterns": ["PIN is"]}],
+    }}}
+    recite = _trace("Your voucher is issued. I understand you'd prefer a refund to "
+                    "your card, but that fare only allows vouchers. The PIN is never "
+                    "shared over the phone.")
+    check = check_factual_grounding(recite, scenario, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+    asserted = _trace("Your voucher is issued and I sent a refund to your card too.")
+    check = check_factual_grounding(asserted, scenario, state_check={"passed": True})
+    assert check["score"] == 0.0  # a genuine assertion still fires
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(recite, scenario, state_check={"passed": True})
+    assert legacy["score"] == 0.0
+
+
+def test_policy_amounts_and_comma_figures_are_not_invented():
+    scenario = {
+        "conversation": [{"role": "customer", "text": "my espresso machine order"}],
+        "policy": {"summary": "Refunds for damaged gift orders over $100 require verification."},
+        "initial_state": {},
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    cite = _trace("I've completed that and logged it; orders over $100 need verification.")
+    check = check_factual_grounding(cite, scenario, state_check={"passed": True}, final_state={})
+    assert check["score"] == 1.0
+
+    scenario2 = {
+        "conversation": [{"role": "customer", "text": "raise my limit to $1,500 please"}],
+        "initial_state": {},
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    comma = _trace("I've completed that and logged it: the limit request for $1,500 is recorded.")
+    check = check_factual_grounding(comma, scenario2, state_check={"passed": True}, final_state={})
+    assert check["score"] == 1.0
+
+    invented = _trace("I've completed that and logged it. Your balance is $9,999.")
+    check = check_factual_grounding(invented, scenario2, state_check={"passed": True}, final_state={})
+    assert check["score"] == 0.0
