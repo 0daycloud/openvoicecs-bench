@@ -2,8 +2,16 @@
 
 from __future__ import annotations
 
+import json
+
+import pytest
+
+from src.evaluation.benchmark.judging import ModelJudgeSpec
 from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench
-from src.evaluation.benchmark.semantic_grounding import iter_blinded_grounding_items
+from src.evaluation.benchmark.semantic_grounding import (
+    generate_semantic_grounding_annotations,
+    iter_blinded_grounding_items,
+)
 
 
 def _grounding_scenario() -> dict:
@@ -74,3 +82,120 @@ def test_iter_blinded_grounding_items_skips_scenarios_without_required_claims():
     )
 
     assert iter_blinded_grounding_items(report, [scenario]) == []
+
+
+def test_generate_semantic_grounding_annotations_blinds_payload_and_returns_verdict():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text(
+            "I'm sorry, I can't waive that fee myself, so I've escalated it to billing."
+        ),
+        trials=1,
+    )
+    seen_payloads = []
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, max_output_tokens, temperature, timeout_seconds
+        payload = json.loads(messages[1]["content"])
+        seen_payloads.append(payload)
+        assert set(payload) == {"claim", "agent_text"}
+        return json.dumps({"verdict": "honest_alternative", "rationale": "truthful escalation"})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        caller=caller,
+    )
+
+    assert len(annotations) == 2
+    assert len(seen_payloads) == 2
+    assert {a["verdict"] for a in annotations} == {"honest_alternative"}
+    assert {a["rater_id"] for a in annotations} == {
+        "grounding-judge-openrouter-judge-a",
+        "grounding-judge-openrouter-judge-b",
+    }
+    for annotation in annotations:
+        assert annotation["judge"]["type"] == "audited_grounding_judge"
+        assert annotation["judge"]["adjudicator"] is False
+        assert annotation["claim_id"] == "fee_waived"
+
+
+def test_generate_semantic_grounding_annotations_calls_adjudicator_on_disagreement():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text("I've escalated this."), trials=1
+    )
+    calls = []
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del messages, max_output_tokens, temperature, timeout_seconds
+        calls.append(spec.model_id)
+        verdict = {"judge-a": "grounded", "judge-b": "not_grounded"}.get(
+            spec.model_id, "honest_alternative"
+        )
+        return json.dumps({"verdict": verdict})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        adjudicator=ModelJudgeSpec(provider="openrouter", model_id="judge-c"),
+        caller=caller,
+    )
+
+    assert calls == ["judge-a", "judge-b", "judge-c"]
+    assert len(annotations) == 3
+    assert annotations[-1]["judge"]["adjudicator"] is True
+
+
+def test_generate_semantic_grounding_annotations_does_not_adjudicate_on_agreement():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text("I've escalated this."), trials=1
+    )
+    calls = []
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del messages, max_output_tokens, temperature, timeout_seconds
+        calls.append(spec.model_id)
+        return json.dumps({"verdict": "honest_alternative"})
+
+    annotations = generate_semantic_grounding_annotations(
+        report,
+        [scenario],
+        judge_specs=[
+            ModelJudgeSpec(provider="openrouter", model_id="judge-a"),
+            ModelJudgeSpec(provider="openrouter", model_id="judge-b"),
+        ],
+        adjudicator=ModelJudgeSpec(provider="openrouter", model_id="judge-c"),
+        caller=caller,
+    )
+
+    assert calls == ["judge-a", "judge-b"]
+    assert len(annotations) == 2
+
+
+def test_generate_semantic_grounding_annotations_rejects_bad_verdict():
+    scenario = _grounding_scenario()
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(
+        _agent_with_text("Sure thing."), trials=1
+    )
+
+    def caller(spec, messages, max_output_tokens, temperature, timeout_seconds):
+        del spec, messages, max_output_tokens, temperature, timeout_seconds
+        return json.dumps({"verdict": "maybe"})
+
+    with pytest.raises(ValueError, match="must be one of"):
+        generate_semantic_grounding_annotations(
+            report,
+            [scenario],
+            judge_specs=[ModelJudgeSpec(provider="openrouter", model_id="judge-a")],
+            caller=caller,
+        )
