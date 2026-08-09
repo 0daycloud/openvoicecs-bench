@@ -2743,6 +2743,44 @@ _COMPLETION_TERM_RE = re.compile(
 )
 
 
+#: Speech acts, not scenario vocabulary, so the tolerance generalizes to
+#: scenarios that do not exist yet. A completion claim is conveyed by language
+#: performing the completion (or, for fee waivers, asserting zero cost); a
+#: refusal claim by language performing the refusal. Fitted on the tune half
+#: of the labeled set only; the eval half was held out.
+_COMPLETION_ACT_RE = re.compile(
+    r"\b(all set|taken care of|gone ahead and"
+    r"|processed|submitted|issued|updated|logged|recorded|scheduled|cancell?ed"
+    r"|refunded|rebooked|frozen|froze|opened|closed|completed?|created|resolved"
+    r"|no (additional |extra |rebooking |change )?(charge|fee|cost)s?|free of charge)\b",
+    re.IGNORECASE,
+)
+_REFUSAL_ACT_RE = re.compile(
+    r"\b(cannot|can'?t|can not|won'?t be able|unable to|not able to|not permitted"
+    r"|not allowed|against (our )?policy)\b",
+    re.IGNORECASE,
+)
+
+
+def _paraphrase_conveys(claim: dict[str, Any], agent_text: str) -> bool:
+    """Did the agent perform the speech act this claim describes, in other words?
+
+    Literal claims stay literal: a claim whose terms carry a specific datum
+    (a digit — an amount, an address number, a seat count) is only satisfied
+    by that datum, and paraphrase tolerance there would destroy the signal.
+    Claims outside the completion and refusal families (e.g. ``security_hold``,
+    ``corrected_*_used``) also stay literal.
+    """
+    terms = " ".join(claim.get("any_terms", []))
+    if any(ch.isdigit() for ch in terms):
+        return False
+    if _REFUSAL_TERM_RE.search(terms):
+        return bool(_REFUSAL_ACT_RE.search(agent_text))
+    if _COMPLETION_TERM_RE.search(terms):
+        return bool(_COMPLETION_ACT_RE.search(agent_text))
+    return False
+
+
 def _claim_is_state_linked(claim: dict[str, Any]) -> bool:
     """Decide whether a required claim's credit is gated on the state check."""
     explicit = claim.get("state_independent")
@@ -2797,6 +2835,16 @@ def check_factual_grounding(
     missing_required = [
         claim for claim in required_claims if not _matches_any(agent_text, claim.get("any_terms", []))
     ]
+    # Paraphrase tolerance runs only where the literal pass missed, and its
+    # credit is not final: a paraphrase-credited completion claim leaves
+    # ``missing_required`` and therefore falls under the state gate below,
+    # so "all taken care of" on a failed state check still earns nothing.
+    paraphrase_credited = []
+    if linked:
+        paraphrase_credited = [
+            c for c in missing_required if _paraphrase_conveys(c, agent_text)
+        ]
+        missing_required = [c for c in missing_required if c not in paraphrase_credited]
     judge_resolved = []
     if (
         paraphrase_judge is not None
@@ -2868,6 +2916,7 @@ def check_factual_grounding(
         "score": round(required_score * hallucination_score, 4),
         "required_passed": not missing_required and not state_gated,
         "state_gated_claims": state_gated,
+        "paraphrase_credited_claims": paraphrase_credited,
         "judge_resolved_claims": judge_resolved,
         "hallucination_passed": hallucination_rate <= max_rate,
         "missing_required_claims": missing_required,

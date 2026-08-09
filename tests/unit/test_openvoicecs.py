@@ -1135,6 +1135,47 @@ def test_invented_amount_flagged_only_in_state_linked_mode(monkeypatch):
     assert legacy["score"] == 1.0
 
 
+def test_paraphrased_completion_claim_credited_only_when_state_passed():
+    trace = _trace("All taken care of — I've rebooked you at no charge.")
+
+    check = check_factual_grounding(
+        trace, _grounding_scenario([COMPLETION_CLAIM]), state_check={"passed": True}
+    )
+    assert check["score"] == 1.0
+    assert [c["id"] for c in check["paraphrase_credited_claims"]] == ["completed_update"]
+
+    # the mandatory case: paraphrased claim + failed state = no credit
+    check = check_factual_grounding(
+        trace, _grounding_scenario([COMPLETION_CLAIM]), state_check={"passed": False}
+    )
+    assert check["score"] == 0.0
+    assert [c["id"] for c in check["state_gated_claims"]] == ["completed_update"]
+
+
+def test_paraphrase_layer_respects_family_boundaries(monkeypatch):
+    refusal_text = _trace("I'm afraid I can't process that request right now.")
+    check = check_factual_grounding(
+        refusal_text, _grounding_scenario([REFUSAL_CLAIM]), state_check={"passed": False}
+    )
+    assert check["score"] == 1.0  # refusal act conveys the refusal claim; exempt from gate
+
+    literal = {"id": "credit_amount", "any_terms": ["12 dollar", "\\$12", "1200"]}
+    check = check_factual_grounding(
+        _trace("I've processed the credit, all set."),
+        _grounding_scenario([literal]),
+        state_check={"passed": True},
+    )
+    assert check["score"] == 0.0  # digit-bearing claims stay literal
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(
+        _trace("All taken care of."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True},
+    )
+    assert legacy["score"] == 0.0  # legacy mode: no paraphrase layer, bit for bit
+
+
 def test_paraphrase_judge_consulted_only_for_missed_claims_on_passed_state():
     calls = []
 
