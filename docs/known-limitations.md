@@ -215,9 +215,20 @@ the other way: on **64.3%** of trials the state check failed and the phrase
 matcher still granted full credit, and that false-credit rate is
 model-dependent (22.3%–81.1% across the cohort), which scrambles rankings
 rather than shifting them uniformly. The old score correlated *negatively*
-with `task_success` per model (r = −0.087) and explained 0.1% of state-check
-variance — a fifth of the total score was paid to a signal statistically
-unrelated to whether anything happened. Against 72 human-labeled trials the
+with `task_success` **within** each model (Pearson r computed across that
+model's own trials, then averaged over the 47 models with a defined r:
+mean −0.087, median −0.096, range −0.428..+0.267), and pooled across all
+8,877 trials it explained 0.1% of state-check variance (pooled r = −0.028,
+R² = 0.0008) — a fifth of the total score was paid to a signal statistically
+unrelated to whether anything happened. Neither figure is a *between*-model
+correlation: both operate at trial granularity and ask whether the score
+tracks the outcome of the individual trial. The
+*between*-model correlation, which asks the different question of whether
+better models also score higher, was positive even before the fix (r = +0.40
+on trial-weighted means, +0.62 on the published per-scenario aggregates); it
+is not evidence the metric worked, since it is carried by model quality rather
+than by per-trial correctness. Under the same within-model definition the
+state-linked score moves to **+0.962**. Against 72 human-labeled trials the
 old grader's kappa was −0.44.
 
 **Fixed by state-linked grounding (default on; `state_linked=False` or
