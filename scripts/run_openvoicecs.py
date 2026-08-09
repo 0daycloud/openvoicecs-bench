@@ -142,6 +142,12 @@ from src.evaluation.benchmark.sealed import (
     validate_sealed_ops_manifest_file,
     validate_sealed_queue_manifest_file,
 )
+from src.evaluation.benchmark.semantic_grounding import (
+    apply_semantic_grounding_report,
+    build_semantic_grounding_report,
+    generate_semantic_grounding_annotations,
+    validate_semantic_grounding_report,
+)
 from src.evaluation.benchmark.splits import (
     DEFAULT_SPLIT_COMMITMENT_PATH,
     DEFAULT_SPLIT_MANIFEST_PATH,
@@ -854,6 +860,98 @@ def cmd_model_judge(args: argparse.Namespace) -> None:
         judged_report=judged_report,
         judged_report_output=judged_report_output,
     )
+
+
+def cmd_semantic_grounding(args: argparse.Namespace) -> None:
+    load_workspace_env(args.env)
+    with open(args.report, encoding="utf-8") as f:
+        source_report = json.load(f)
+    scenarios = OpenVoiceCSBench.load(args.scenarios).scenarios
+    judge_specs = [parse_model_judge_spec(value) for value in args.judge]
+    if len(judge_specs) < 2:
+        print(
+            "semantic-grounding requires at least two --judge specs for audited judging",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
+    adjudicator = parse_model_judge_spec(args.adjudicator) if args.adjudicator else None
+
+    annotations = generate_semantic_grounding_annotations(
+        source_report,
+        scenarios,
+        judge_specs=judge_specs,
+        adjudicator=adjudicator,
+        max_output_tokens=args.max_output_tokens,
+        temperature=args.temperature,
+        timeout_seconds=args.timeout_seconds,
+    )
+    annotations_output = Path(args.annotations_output)
+    write_judge_annotations_jsonl(annotations, annotations_output)
+
+    grounding_report = build_semantic_grounding_report(source_report, annotations)
+    issues = validate_semantic_grounding_report(grounding_report)
+    if issues:
+        print("Semantic grounding report validation failed:")
+        for issue in issues:
+            print(f"  {issue.item_id}::{issue.path}: {issue.message}")
+        raise SystemExit(1)
+    grounding_report_output = Path(args.grounding_report_output)
+    grounding_report_output.parent.mkdir(parents=True, exist_ok=True)
+    with open(grounding_report_output, "w", encoding="utf-8") as f:
+        json.dump(grounding_report, f, indent=2)
+
+    graded_report = None
+    graded_report_output = Path(args.graded_report_output) if args.graded_report_output else None
+    if graded_report_output:
+        graded_report = apply_semantic_grounding_report(source_report, grounding_report)
+        issues = validate_report(graded_report)
+        if issues:
+            print("Graded report validation failed:")
+            for issue in issues:
+                print(f"  {issue.scenario_id}::{issue.path}: {issue.message}")
+            raise SystemExit(1)
+        graded_report_output.parent.mkdir(parents=True, exist_ok=True)
+        with open(graded_report_output, "w", encoding="utf-8") as f:
+            json.dump(graded_report, f, indent=2)
+
+    _print_semantic_grounding_result(
+        annotations=annotations,
+        annotations_output=annotations_output,
+        grounding_report=grounding_report,
+        grounding_report_output=grounding_report_output,
+        graded_report_output=graded_report_output,
+    )
+
+
+def cmd_apply_semantic_grounding_report(args: argparse.Namespace) -> None:
+    with open(args.report, encoding="utf-8") as f:
+        source_report = json.load(f)
+    with open(args.grounding_report, encoding="utf-8") as f:
+        grounding_report = json.load(f)
+    issues = validate_semantic_grounding_report(grounding_report)
+    if issues:
+        print("Semantic grounding report validation failed:")
+        for issue in issues:
+            print(f"  {issue.item_id}::{issue.path}: {issue.message}")
+        raise SystemExit(1)
+
+    graded_report = apply_semantic_grounding_report(source_report, grounding_report)
+    issues = validate_report(graded_report)
+    if issues:
+        print("Graded report validation failed:")
+        for issue in issues:
+            print(f"  {issue.scenario_id}::{issue.path}: {issue.message}")
+        raise SystemExit(1)
+
+    semantic = graded_report["semantic_grounding"]
+    print(f"Semantic grounding score: {semantic['score']}")
+    print(f"Coverage: {semantic['coverage']:.1%}")
+    if args.output:
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with open(output, "w", encoding="utf-8") as f:
+            json.dump(graded_report, f, indent=2)
+        print(f"\nSaved graded report to {output}")
 
 
 def cmd_compare(args: argparse.Namespace) -> None:
@@ -1881,6 +1979,33 @@ def _print_model_judge_result(
         print(f"Judged report output:  {judged_report_output}")
 
 
+def _print_semantic_grounding_result(
+    *,
+    annotations: list[dict[str, Any]],
+    annotations_output: Path,
+    grounding_report: dict[str, Any],
+    grounding_report_output: Path,
+    graded_report_output: Path | None,
+) -> None:
+    print("\nOPENVOICECS-BENCH SEMANTIC GROUNDING")
+    print("=" * 88)
+    print(f"Annotations:            {len(annotations)}")
+    print(f"Items (trial x claim):  {grounding_report.get('num_items', 0)}")
+    print(f"Raters:                 {grounding_report.get('num_raters', 0)}")
+    print(f"Semantic score:         {grounding_report.get('overall_semantic_grounding_score', 0):.1%}")
+    breakdown = grounding_report.get("verdict_breakdown", {})
+    print(
+        "Verdicts:               "
+        f"grounded={breakdown.get('grounded', 0)} "
+        f"honest_alternative={breakdown.get('honest_alternative', 0)} "
+        f"not_grounded={breakdown.get('not_grounded', 0)}"
+    )
+    print(f"Annotations saved to:   {annotations_output}")
+    print(f"Grounding report saved to: {grounding_report_output}")
+    if graded_report_output:
+        print(f"Graded report saved to:    {graded_report_output}")
+
+
 def _print_submission_card(card: dict[str, Any]) -> None:
     print("\nOPENVOICECS-BENCH SUBMISSION CARD")
     print("=" * 88)
@@ -2449,6 +2574,47 @@ def build_parser() -> argparse.ArgumentParser:
     apply_judge.add_argument("judge_report", help="Aggregated judge report JSON")
     apply_judge.add_argument("--output", default=None)
     apply_judge.set_defaults(func=cmd_apply_judge_report)
+
+    semantic_grounding = subparsers.add_parser(
+        "semantic-grounding",
+        help="Call audited grounding judges to re-score required-claim grounding semantically",
+    )
+    semantic_grounding.add_argument("report", help="Source OpenVoiceCS report JSON")
+    semantic_grounding.add_argument(
+        "--judge",
+        action="append",
+        required=True,
+        help="Judge spec as provider:model_id, repeat for two or more judges",
+    )
+    semantic_grounding.add_argument(
+        "--adjudicator",
+        default=None,
+        help="Optional tie-breaker judge spec as provider:model_id",
+    )
+    semantic_grounding.add_argument("--scenarios", default=str(DEFAULT_SCENARIO_PATH))
+    semantic_grounding.add_argument("--annotations-output", required=True)
+    semantic_grounding.add_argument("--grounding-report-output", required=True)
+    semantic_grounding.add_argument("--graded-report-output", default=None)
+    semantic_grounding.add_argument("--max-output-tokens", type=int, default=200)
+    semantic_grounding.add_argument("--temperature", type=float, default=0.0)
+    semantic_grounding.add_argument("--timeout-seconds", type=float, default=60.0)
+    semantic_grounding.add_argument(
+        "--env",
+        default=".env",
+        help="Environment file with provider API keys",
+    )
+    semantic_grounding.set_defaults(func=cmd_semantic_grounding)
+
+    apply_semantic_grounding = subparsers.add_parser(
+        "apply-semantic-grounding-report",
+        help="Attach an aggregated semantic grounding report to a benchmark report",
+    )
+    apply_semantic_grounding.add_argument("report", help="Source OpenVoiceCS report JSON")
+    apply_semantic_grounding.add_argument(
+        "grounding_report", help="Aggregated semantic grounding report JSON"
+    )
+    apply_semantic_grounding.add_argument("--output", default=None)
+    apply_semantic_grounding.set_defaults(func=cmd_apply_semantic_grounding_report)
 
     compare = subparsers.add_parser(
         "compare",
