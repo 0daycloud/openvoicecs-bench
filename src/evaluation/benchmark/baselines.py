@@ -209,12 +209,14 @@ def _run_baseline_report(
             manifest_path=audio_manifest_path,
             trials=trials,
             model_metadata=metadata,
+            grounding_mode="legacy",
         )
     else:
         report = bench.score_agent(
             agent_fn,
             trials=trials,
             model_metadata=metadata,
+            grounding_mode="legacy",
         )
     report["elapsed_seconds"] = 0.0
     report["baseline_id"] = spec["id"]

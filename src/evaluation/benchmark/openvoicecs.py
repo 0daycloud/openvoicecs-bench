@@ -260,6 +260,7 @@ class OpenVoiceCSBench:
         trials: int = 1,
         track: str | None = None,
         model_metadata: dict[str, Any] | None = None,
+        grounding_mode: str | None = None,
     ) -> dict[str, Any]:
         """Score an agent function over the benchmark.
 
@@ -272,6 +273,9 @@ class OpenVoiceCSBench:
                 pass^k reliability metrics.
             track: Optional track filter, e.g. ``text_to_action``.
             model_metadata: Arbitrary metadata to attach to the report.
+            grounding_mode: Forwarded to ``check_factual_grounding``. ``None``
+                keeps the default hybrid behavior; pass ``"legacy"`` for a
+                deterministic, judge-free run (e.g. reference baselines).
         """
         if trials < 1:
             raise ValueError("trials must be >= 1")
@@ -292,6 +296,7 @@ class OpenVoiceCSBench:
                         scenario=deepcopy(scenario),
                         agent_fn=agent_fn,
                         trial_index=trial_index,
+                        grounding_mode=grounding_mode,
                     )
                 )
             results.append(self._aggregate_scenario_trials(scenario, trial_results))
@@ -312,6 +317,7 @@ class OpenVoiceCSBench:
         trials: int = 1,
         track: str | None = None,
         model_metadata: dict[str, Any] | None = None,
+        grounding_mode: str | None = None,
     ) -> dict[str, Any]:
         """Score an agent over audio/robustness variants from a manifest.
 
@@ -341,6 +347,7 @@ class OpenVoiceCSBench:
             agent_fn,
             trials=trials,
             model_metadata=model_metadata,
+            grounding_mode=grounding_mode,
         )
         report["evaluation_mode"] = "audio_manifest"
         report["audio_manifest_path"] = str(manifest_path)
@@ -353,6 +360,7 @@ class OpenVoiceCSBench:
         agent_fn: AgentFn,
         trial_index: int,
         collected_trace: dict[str, Any] | None = None,
+        grounding_mode: str | None = None,
     ) -> dict[str, Any]:
         """Score one trial, collecting the trace unless one is already supplied.
 
@@ -424,7 +432,7 @@ class OpenVoiceCSBench:
             forbidden=oracle.get("forbidden_events", []),
         )
         try:
-            grounding_check = check_factual_grounding(trace, scenario)
+            grounding_check = check_factual_grounding(trace, scenario, mode=grounding_mode)
         except Exception as exc:
             message = redact_error_message(str(exc))
             return {

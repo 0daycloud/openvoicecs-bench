@@ -364,8 +364,8 @@ def test_grounding_judge_failure_excludes_the_trial_instead_of_scoring_it_zero(m
     bench = OpenVoiceCSBench.load()
     single = OpenVoiceCSBench(scenarios=[bench.scenarios[0]])
 
-    def always_broken(trace, scenario):
-        del trace, scenario
+    def always_broken(trace, scenario, *, mode=None):
+        del trace, scenario, mode
         raise RuntimeError("grounding judge call failed: connection reset by peer")
 
     monkeypatch.setattr(
