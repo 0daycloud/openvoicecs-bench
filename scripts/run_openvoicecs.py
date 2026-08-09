@@ -917,9 +917,11 @@ def cmd_grader_eval(args: argparse.Namespace) -> None:
         f"across {reachability['scenarios_affected']} scenarios"
     )
     if args.output:
-        with open(args.output, "w", encoding="utf-8") as f:
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with open(output, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
-        print(f"Wrote {args.output}")
+        print(f"Wrote {output}")
 
 
 def cmd_score(args: argparse.Namespace) -> None:
