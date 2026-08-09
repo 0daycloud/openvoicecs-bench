@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import pytest
 
+from src.evaluation.benchmark.grounding import EVIDENCE, LEGACY, score_required_claims
 from src.evaluation.benchmark.openvoicecs import (
     FORBIDDEN_TRIGGER_KINDS,
     OpenVoiceCSBench,
@@ -24,6 +25,7 @@ from src.evaluation.benchmark.openvoicecs import (
     check_tool_calls,
     classify_trial_error,
     derive_trace_events,
+    no_op_agent,
     oracle_agent,
     replay_tool_calls,
 )
@@ -352,3 +354,77 @@ def test_argument_labels_normalize_but_different_values_still_fail():
     )
     assert mismatched["expected_passed"] is False
     assert mismatched["missing_expected"] == expected
+
+
+class TestGroundingIsLinkedToEvidence:
+    """Regression tests for the third scoring-validity bug: `factual_grounding`
+    graded the agent's transcript against literal patterns and never consulted
+    the replayed state.
+
+    Measured over the 10,532 stored trials in
+    `data/openvoicecs/runs/text_action_v02_merged/`, the legacy check credited
+    78.3% of trials in which the agent never completed the work, and penalised
+    7.5% of trials in which it did. Reproduce with
+    `python scripts/eval_grounding_modes.py`.
+    """
+
+    CLAIM = [{"id": "completed_update", "any_terms": ["completed", "logged"]}]
+
+    def _score(self, text: str, *, did_work: bool | None, mode: str) -> float:
+        return score_required_claims(
+            agent_text=text,
+            required_claims=self.CLAIM,
+            state_satisfied=did_work,
+            mode=mode,
+        )["score"]
+
+    def test_claiming_unfinished_work_is_not_credited(self) -> None:
+        text = "I've completed the update; it's marked resolved."
+        assert self._score(text, did_work=False, mode=LEGACY) == 1.0
+        assert self._score(text, did_work=False, mode=EVIDENCE) == 0.0
+
+    def test_paraphrased_completion_is_credited(self) -> None:
+        text = "All set — I've updated your address and made a note on the account."
+        assert self._score(text, did_work=True, mode=LEGACY) == 0.0
+        assert self._score(text, did_work=True, mode=EVIDENCE) == 1.0
+
+    def test_honest_failure_report_is_credited(self) -> None:
+        text = "I wasn't able to complete that — I've escalated it to our team."
+        assert self._score(text, did_work=False, mode=EVIDENCE) == 1.0
+
+    def test_silence_earns_nothing(self) -> None:
+        """The no-op baseline must not gain from the honest-failure rule."""
+        assert self._score("", did_work=False, mode=EVIDENCE) == 0.0
+
+    def test_unrelated_keyword_collision_is_not_credited(self) -> None:
+        text = "Your warranty expired and the claim was logged as void in 2019."
+        assert self._score(text, did_work=False, mode=LEGACY) == 1.0
+        assert self._score(text, did_work=False, mode=EVIDENCE) == 0.0
+
+    def test_literal_claims_keep_exact_matching(self) -> None:
+        """`corrected_*_used` asserts a specific datum; paraphrase must not apply."""
+        claim = [{"id": "corrected_address_used", "any_terms": ["88 Fairmount Road"]}]
+        generic = "I've completed the update to your address."
+        assert score_required_claims(
+            agent_text=generic, required_claims=claim, state_satisfied=True, mode=EVIDENCE
+        )["score"] == 0.0
+        exact = "I've updated it to 88 Fairmount Road."
+        assert score_required_claims(
+            agent_text=exact, required_claims=claim, state_satisfied=True, mode=EVIDENCE
+        )["score"] == 1.0
+
+    @pytest.mark.parametrize("mode", [LEGACY, EVIDENCE])
+    def test_neither_anchor_of_the_scale_moves(self, monkeypatch, mode: str) -> None:
+        """The oracle must stay at the ceiling and the no-op at the floor.
+
+        The honest-failure rule credits an agent that reports it could not
+        finish. This asserts silence does not qualify, so the no-op cannot
+        climb off the floor that makes the scale readable.
+        """
+        monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", mode)
+        suite = OpenVoiceCSBench.load()
+        oracle = suite.score_agent(oracle_agent, trials=1)
+        noop = suite.score_agent(no_op_agent, trials=1)
+        assert oracle["metric_scores"]["factual_grounding"] == pytest.approx(1.0, abs=1e-6)
+        assert noop["metric_scores"]["factual_grounding"] == pytest.approx(0.0, abs=1e-6)
+        assert oracle["overall_score"] == pytest.approx(100.0, abs=1e-6)
