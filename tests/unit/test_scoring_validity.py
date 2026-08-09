@@ -18,15 +18,82 @@ from __future__ import annotations
 import pytest
 
 from src.evaluation.benchmark.openvoicecs import (
+    _UNOBSERVABLE_REQUIRED_EVENTS,
     FORBIDDEN_TRIGGER_KINDS,
     OpenVoiceCSBench,
+    check_policy_events,
     check_safety,
     check_tool_calls,
     classify_trial_error,
     derive_trace_events,
+    no_op_agent,
     oracle_agent,
     replay_tool_calls,
 )
+
+
+def _event_stuffer(scenario, trial_index=0):
+    """Agent that takes no action but declares every event the oracle requires."""
+    oracle = scenario["oracle"]
+    events = list(oracle.get("required_events", []))
+    for section in ("auth", "privacy"):
+        events += list(oracle.get(section, {}).get("required_events", []))
+    return {
+        "messages": [{"role": "agent", "text": "All set."}],
+        "tool_calls": [],
+        "events": sorted(set(events)),
+        "latency_ms": 700,
+    }
+
+
+def test_declared_events_do_not_earn_soft_metrics_without_evidence():
+    """Self-declared events must not buy sop_compliance/auth_integrity.
+
+    Scoring events from an agent-supplied ``events`` list let an agent that
+    called no tool and changed no state score those metrics at 1.0 just by
+    naming the required events. Events are now derived from evidence, so the
+    stuffer cannot out-earn the do-nothing baseline on any soft metric.
+    """
+    bench = OpenVoiceCSBench.load()
+    stuffer = bench.score_agent(_event_stuffer)
+    noop = bench.score_agent(no_op_agent)
+
+    for metric in ("sop_compliance", "auth_integrity", "privacy"):
+        assert stuffer["metric_scores"][metric] <= noop["metric_scores"][metric] + 1e-9, metric
+    assert stuffer["overall_score"] <= noop["overall_score"] + 0.1
+
+
+def test_required_event_is_grounded_from_the_tool_call_that_shows_it():
+    """A required event is credited from the tool that demonstrates it, and only
+    when the agent actually acted — never from words alone with no action."""
+    scenario = next(
+        s for s in OpenVoiceCSBench.load().scenarios
+        if s["id"] == "travel-multiturn-date-repair-902"
+    )
+    calls = scenario["oracle"]["expected_tool_calls"]
+    grounded = derive_trace_events(
+        scenario,
+        {"tool_calls": calls, "messages": [{"role": "agent", "text": ""}], "events": []},
+        replay_tool_calls(scenario, calls),
+    )
+    assert "seat_assigned" in grounded
+
+    text_only = derive_trace_events(
+        scenario,
+        {"tool_calls": [], "messages": [{"role": "agent", "text": "seat assigned"}], "events": []},
+        replay_tool_calls(scenario, []),
+    )
+    assert "seat_assigned" not in text_only
+
+
+def test_unobservable_required_events_are_excluded_not_credited():
+    """Purely spoken/inferred events no evidence can show are excluded from
+    scoring, so they neither penalize a correct agent nor reward a declaration."""
+    check = check_policy_events(
+        [], required=list(_UNOBSERVABLE_REQUIRED_EVENTS), forbidden=[]
+    )
+    assert check["score"] == 1.0
+    assert check["missing_required"] == []
 
 SUITE_SIZE = 220
 
