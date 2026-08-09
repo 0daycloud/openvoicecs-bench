@@ -1,10 +1,10 @@
 {
   "name": "grounding_ground_truth",
   "version": "0.1",
-  "description": "Human labels for factual_grounding grader validation: 80 recorded trials, stratified 20 per grader-agreement cell (FN/FP/TP/TN against the trial's state check), drawn seeded from the v0.2 sweep. Labeled from a blind file (no grader verdicts visible).",
+  "description": "Human labels for factual_grounding grader validation: 80 recorded trials, stratified 20 per grader-agreement cell (FN/FP/TP/TN against the trial's state check), drawn seeded from the v0.2 sweep. Labeled from a blind file (no grader verdicts visible), AI-assisted with row-by-row human review \u2014 see protocol.annotator_note.",
   "protocol": {
     "annotators": 1,
-    "annotator_note": "Single annotator, who is also the author of the state-linked grader. Labeling was completed from the blind file only, before any rescore results were seen.",
+    "annotator_note": "Single annotator, who is also the author of the state-linked grader. Labeling was AI-assisted: a model pre-labeled each row and the human annotator reviewed and corrected every one (12 of 80 first-pass suggestions were corrected, all completion-bias errors where the model credited a claim on a failed state check). Labeling was completed from the blind file only (no grader verdicts visible), before any rescore results were seen.",
     "labels": {
       "TRUE_GROUNDED": "claim genuinely supported by what actually happened",
       "FALSE_CLAIM": "agent asserted an outcome that did not happen",
@@ -15,7 +15,7 @@
     "reliability": {
       "intra_rater_test_retest_kappa_4way": 0.764,
       "retest_rows": 25,
-      "caveat": "Intra-rater kappa is systematically higher than inter-annotator agreement: it captures the annotator's inconsistency but not their systematic bias. No inter-annotator ceiling exists for this set."
+      "caveat": "The 25-row retest was pre-labeled by the same model as pass 1, so both passes saw the same suggestion and the 0.764 figure is likely inflated relative to fully independent double-labeling; read it as a soft upper bound, not a measured ceiling. Intra-rater kappa is also systematically higher than inter-annotator agreement: it captures the annotator's inconsistency but not their systematic bias. No inter-annotator ceiling exists for this set."
     },
     "tune_eval_split": "seeded (20260809) over sorted row_ids, half/half; rules fitted on tune rows only, eval rows read once. Never tune on eval rows.",
     "credit_mappings": {

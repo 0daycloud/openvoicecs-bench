@@ -240,13 +240,22 @@ to the next corpus reissue. Refusal-family claims are exempt by design — the
 `adversarial_compliance` track has no recorded trials, so gating them would
 change nothing observable today.
 
+**Labeling was AI-assisted.** A model pre-labeled each row and the human
+annotator reviewed and corrected every one (12 of 80 first-pass suggestions
+were corrected, all completion-bias errors where the model credited a claim
+on a failed state check). The 25-row retest was pre-labeled by the same
+model, so the 0.764 intra-rater figure is likely inflated relative to fully
+independent double-labeling and should be read as a soft upper bound rather
+than a measured ceiling.
+
 **Related work in open PRs, measured against the same human labels.** PR #1
 adds an LLM-judge fallback on regex misses (false-negative side only,
 monotone-increasing). PR #4's evidence grounding pairs a communicated-claim
 check with state support and *does* revoke credit for communicated-but-false
 action claims; it currently leads on the labeled criterion (held-out kappa
-0.824 vs 0.644 here, N=36, single annotator, intra-rater test-retest ceiling
-0.764) on the strength of broader paraphrase coverage. PR #10's
+0.824 vs 0.644 here, N=36, single annotator, intra-rater test-retest 0.764 —
+a soft upper bound, see the labeling note below) on the strength of broader
+paraphrase coverage. PR #10's
 state-attribution rescue is strong on omissions but never gates
 literal-matched claims, so it retains the false-credit class. The
 communicated-claim direction of PR #4 and the gate here sit on disjoint
