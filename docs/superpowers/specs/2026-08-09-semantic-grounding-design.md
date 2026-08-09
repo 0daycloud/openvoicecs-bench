@@ -135,7 +135,6 @@ def generate_semantic_grounding_annotations(
     *,
     judge_specs: list[ModelJudgeSpec],
     adjudicator: ModelJudgeSpec | None = None,
-    disagreement_threshold: float = 0.0,  # any disagreement on verdict triggers adjudication
     caller: ModelJudgeCaller | None = None,
     max_output_tokens: int = 200,
     temperature: float = 0.0,
@@ -178,10 +177,10 @@ triggered — same pattern as `_score_blinded_item_with_model_judge`):
 }
 ```
 
-Adjudication trigger: any disagreement between the first two raters'
-verdicts (categorical, so `disagreement_threshold` is really a boolean gate
-— default any mismatch adjudicates; kept as a parameter for symmetry with
-model-judge and to allow a future non-strict mode).
+Adjudication trigger: verdicts are categorical (not a 1-5 scale like
+model-judge's rubric dimensions), so there's no numeric disagreement
+threshold to parameterize — any mismatch between the first two raters'
+verdicts triggers the adjudicator, straightforwardly.
 
 ### 3. Aggregation
 
