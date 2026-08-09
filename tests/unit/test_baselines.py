@@ -108,7 +108,10 @@ def test_build_reference_baselines_measures_noop_without_a_judge_key(monkeypatch
     assert infrastructure_trials == []
 
 
-def test_build_reference_baselines_trials_are_tagged_legacy_grounding_mode(monkeypatch, tmp_path: Path):
+def test_build_reference_baselines_legacy_trials_omit_grounding_mode_metadata(monkeypatch, tmp_path: Path):
+    # grounding_mode is only attached for non-legacy modes (see
+    # check_factual_grounding), so a byte-for-byte reproducible legacy baseline
+    # report doesn't carry metadata absent from the pre-hybrid report format.
     _without_judge_keys(monkeypatch)
     output_dir = tmp_path / "baselines"
     manifest_path = output_dir / "reference_baselines.json"
@@ -128,7 +131,7 @@ def test_build_reference_baselines_trials_are_tagged_legacy_grounding_mode(monke
         for trial in scenario_result["trials"]
     ]
     assert grounding_checks
-    assert all(check["grounding_mode"] == "legacy" for check in grounding_checks)
+    assert all("grounding_mode" not in check for check in grounding_checks)
     assert all("semantic_fallback" not in check for check in grounding_checks)
 
 

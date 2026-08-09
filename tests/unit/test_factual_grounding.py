@@ -186,6 +186,7 @@ def test_semantic_fallback_recognizes_synonymy_the_literal_matcher_misses():
     hybrid = check_factual_grounding(trace, scenario, caller=caller)
     assert hybrid["required_passed"] is True
     assert hybrid["score"] == 1.0
+    assert hybrid["grounding_mode"] == "hybrid"
     assert hybrid["semantic_fallback"]["required"]["fee_waived"]["grounded"] is True
 
 
@@ -290,7 +291,7 @@ def test_legacy_mode_disables_the_fallback_via_param_and_env_var(monkeypatch):
 
     via_param = check_factual_grounding(trace, scenario, mode="legacy", caller=failing_if_called)
     assert via_param["required_passed"] is False
-    assert via_param["grounding_mode"] == "legacy"
+    assert "grounding_mode" not in via_param
     assert "semantic_fallback" not in via_param
 
     monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")

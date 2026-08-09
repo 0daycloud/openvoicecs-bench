@@ -1380,8 +1380,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -1611,8 +1610,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -1842,8 +1840,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -2143,8 +2140,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -2374,8 +2370,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -2605,8 +2600,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -2910,8 +2904,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -3111,8 +3104,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -3312,8 +3304,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -3582,8 +3573,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -3764,8 +3754,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -3946,8 +3935,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -4202,8 +4190,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -4382,8 +4369,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -4562,8 +4548,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -4816,8 +4801,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -4995,8 +4979,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -5174,8 +5157,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -5427,8 +5409,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -5612,8 +5593,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -5797,8 +5777,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -6046,8 +6025,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -6274,8 +6252,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -6502,8 +6479,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -6817,8 +6793,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -7037,8 +7012,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -7257,8 +7231,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -7535,8 +7508,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -7752,8 +7724,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -7969,8 +7940,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -8260,8 +8230,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -8442,8 +8411,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -8624,8 +8592,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -8870,8 +8837,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -9098,8 +9064,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -9326,8 +9291,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -9630,8 +9594,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -9858,8 +9821,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -10086,8 +10048,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -10388,8 +10349,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -10570,8 +10530,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -10752,8 +10711,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -10998,8 +10956,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -11226,8 +11183,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -11454,8 +11410,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -11752,8 +11707,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -11980,8 +11934,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -12208,8 +12161,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -12512,8 +12464,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -12740,8 +12691,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -12968,8 +12918,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -13270,8 +13219,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -13452,8 +13400,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -13634,8 +13581,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -13880,8 +13826,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -14108,8 +14053,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -14336,8 +14280,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -14634,8 +14577,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -14862,8 +14804,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -15090,8 +15031,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -15394,8 +15334,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -15622,8 +15561,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -15850,8 +15788,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -16152,8 +16089,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -16334,8 +16270,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -16516,8 +16451,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -16768,8 +16702,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -16996,8 +16929,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -17224,8 +17156,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -17516,8 +17447,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -17744,8 +17674,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -17972,8 +17901,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -18276,8 +18204,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -18504,8 +18431,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -18732,8 +18658,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -19024,8 +18949,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -19252,8 +19176,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -19480,8 +19403,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -19784,8 +19706,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -20012,8 +19933,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -20240,8 +20160,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -20532,8 +20451,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -20760,8 +20678,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -20988,8 +20905,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -21292,8 +21208,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -21520,8 +21435,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -21748,8 +21662,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -22040,8 +21953,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -22268,8 +22180,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -22496,8 +22407,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -22800,8 +22710,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -23028,8 +22937,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -23256,8 +23164,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -23548,8 +23455,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -23776,8 +23682,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -24004,8 +23909,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -24308,8 +24212,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -24536,8 +24439,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -24764,8 +24666,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -25056,8 +24957,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -25284,8 +25184,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -25512,8 +25411,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -25816,8 +25714,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -26044,8 +25941,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -26272,8 +26168,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -26564,8 +26459,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -26792,8 +26686,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -27020,8 +26913,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -27324,8 +27216,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -27552,8 +27443,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -27780,8 +27670,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -28072,8 +27961,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -28300,8 +28188,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -28528,8 +28415,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -28832,8 +28718,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -29060,8 +28945,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -29288,8 +29172,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -29580,8 +29463,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -29808,8 +29690,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -30036,8 +29917,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -30340,8 +30220,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -30568,8 +30447,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -30796,8 +30674,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -31088,8 +30965,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -31316,8 +31192,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -31544,8 +31419,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -31846,8 +31720,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -32028,8 +31901,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -32210,8 +32082,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -32468,8 +32339,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -32696,8 +32566,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -32924,8 +32793,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -33216,8 +33084,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -33444,8 +33311,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -33672,8 +33538,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -33974,8 +33839,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -34156,8 +34020,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -34338,8 +34201,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -34596,8 +34458,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -34824,8 +34685,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -35052,8 +34912,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -35344,8 +35203,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -35572,8 +35430,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -35800,8 +35657,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -36102,8 +35958,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -36284,8 +36139,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -36466,8 +36320,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -36712,8 +36565,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -36940,8 +36792,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -37168,8 +37019,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -37472,8 +37322,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -37700,8 +37549,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -37928,8 +37776,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -38220,8 +38067,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -38448,8 +38294,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -38676,8 +38521,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -38978,8 +38822,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -39160,8 +39003,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -39342,8 +39184,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -39588,8 +39429,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -39816,8 +39656,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -40044,8 +39883,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -40348,8 +40186,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -40576,8 +40413,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -40804,8 +40640,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -41096,8 +40931,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -41324,8 +41158,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -41552,8 +41385,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -41854,8 +41686,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -42036,8 +41867,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -42218,8 +42048,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -42464,8 +42293,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -42692,8 +42520,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -42920,8 +42747,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -43224,8 +43050,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -43452,8 +43277,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -43680,8 +43504,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -43972,8 +43795,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -44200,8 +44022,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -44428,8 +44249,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -44730,8 +44550,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -44912,8 +44731,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -45094,8 +44912,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -45340,8 +45157,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -45568,8 +45384,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -45796,8 +45611,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -46100,8 +45914,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -46328,8 +46141,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -46556,8 +46368,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -46848,8 +46659,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -47076,8 +46886,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -47304,8 +47113,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -47606,8 +47414,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -47788,8 +47595,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -47970,8 +47776,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -48216,8 +48021,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -48444,8 +48248,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -48672,8 +48475,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -48976,8 +48778,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -49204,8 +49005,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -49432,8 +49232,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -49724,8 +49523,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -49952,8 +49750,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -50180,8 +49977,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -50482,8 +50278,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -50664,8 +50459,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -50846,8 +50640,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -51092,8 +50885,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -51320,8 +51112,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -51548,8 +51339,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -51852,8 +51642,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -52080,8 +51869,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -52308,8 +52096,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -52600,8 +52387,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -52828,8 +52614,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -53056,8 +52841,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -53358,8 +53142,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -53540,8 +53323,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -53722,8 +53504,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -53968,8 +53749,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -54196,8 +53976,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -54424,8 +54203,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -54728,8 +54506,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -54956,8 +54733,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -55184,8 +54960,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -55476,8 +55251,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -55704,8 +55478,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -55932,8 +55705,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -56234,8 +56006,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -56416,8 +56187,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -56598,8 +56368,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -56844,8 +56613,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -57072,8 +56840,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -57300,8 +57067,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -57604,8 +57370,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -57832,8 +57597,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -58060,8 +57824,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -58352,8 +58115,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -58580,8 +58342,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -58808,8 +58569,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -59110,8 +58870,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -59292,8 +59051,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -59474,8 +59232,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -59720,8 +59477,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -59948,8 +59704,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -60176,8 +59931,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -60480,8 +60234,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -60708,8 +60461,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -60936,8 +60688,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -61228,8 +60979,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -61456,8 +61206,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -61684,8 +61433,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -61986,8 +61734,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -62168,8 +61915,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -62350,8 +62096,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -62596,8 +62341,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -62824,8 +62568,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -63052,8 +62795,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -63356,8 +63098,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -63584,8 +63325,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -63812,8 +63552,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -64104,8 +63843,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -64332,8 +64070,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -64560,8 +64297,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -64862,8 +64598,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -65044,8 +64779,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -65226,8 +64960,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -65472,8 +65205,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -65700,8 +65432,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -65928,8 +65659,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -66232,8 +65962,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -66460,8 +66189,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -66688,8 +66416,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -66980,8 +66707,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -67208,8 +66934,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -67436,8 +67161,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -67738,8 +67462,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -67920,8 +67643,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -68102,8 +67824,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -68348,8 +68069,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -68576,8 +68296,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -68804,8 +68523,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -69108,8 +68826,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -69336,8 +69053,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -69564,8 +69280,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -69856,8 +69571,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -70084,8 +69798,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -70312,8 +70025,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -70614,8 +70326,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -70796,8 +70507,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -70978,8 +70688,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -71224,8 +70933,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -71452,8 +71160,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -71680,8 +71387,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -71984,8 +71690,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -72212,8 +71917,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -72440,8 +72144,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -72732,8 +72435,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -72960,8 +72662,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -73188,8 +72889,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -73490,8 +73190,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -73672,8 +73371,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -73854,8 +73552,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -74100,8 +73797,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -74328,8 +74024,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -74556,8 +74251,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -74860,8 +74554,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -75088,8 +74781,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -75316,8 +75008,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -75608,8 +75299,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -75836,8 +75526,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -76064,8 +75753,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -76366,8 +76054,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -76548,8 +76235,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -76730,8 +76416,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -76976,8 +76661,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -77204,8 +76888,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -77432,8 +77115,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -77730,8 +77412,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -77958,8 +77639,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -78186,8 +77866,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -78490,8 +78169,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -78718,8 +78396,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -78946,8 +78623,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -79238,8 +78914,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -79466,8 +79141,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -79694,8 +79368,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -79996,8 +79669,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -80178,8 +79850,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -80360,8 +80031,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -80606,8 +80276,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -80834,8 +80503,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -81062,8 +80730,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -81360,8 +81027,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -81588,8 +81254,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -81816,8 +81481,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -82120,8 +81784,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -82348,8 +82011,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -82576,8 +82238,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -82868,8 +82529,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -83096,8 +82756,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -83324,8 +82983,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -83626,8 +83284,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -83808,8 +83465,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -83990,8 +83646,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -84236,8 +83891,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -84464,8 +84118,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -84692,8 +84345,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -84990,8 +84642,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -85218,8 +84869,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -85446,8 +85096,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -85738,8 +85387,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -85966,8 +85614,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -86194,8 +85841,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -86486,8 +86132,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -86714,8 +86359,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -86942,8 +86586,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -87246,8 +86889,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -87474,8 +87116,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,
@@ -87702,8 +87343,7 @@
             "missing_required_claims": [],
             "unsupported_claims_detected": [],
             "hallucination_rate_per_turn": 0.0,
-            "max_hallucinations_per_turn": 0,
-            "grounding_mode": "legacy"
+            "max_hallucinations_per_turn": 0
           },
           "privacy_check": {
             "score": 1.0,

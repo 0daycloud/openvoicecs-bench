@@ -3025,8 +3025,9 @@ def check_factual_grounding(
         "unsupported_claims_detected": unsupported_claims,
         "hallucination_rate_per_turn": round(hallucination_rate, 4),
         "max_hallucinations_per_turn": max_rate,
-        "grounding_mode": resolved_mode,
     }
+    if resolved_mode != "legacy":
+        result["grounding_mode"] = resolved_mode
     if semantic_fallback is not None:
         result["semantic_fallback"] = semantic_fallback
     return result
