@@ -13,7 +13,9 @@ and is **withdrawn** — see [known-limitations](known-limitations.md) section 1
 ## How to read this
 
 - **The podium is trustworthy. Fine-grained mid-table ordering is not.**
-  `factual_grounding` is still a literal phrase matcher; removing it leaves the
+  `factual_grounding` was a literal phrase matcher when this sweep was scored;
+  it has since been replaced (known-limitations section 7) and re-scoring moves
+  11 of 14 runs, so these positions are pre-fix. Removing it leaves the
   leaders intact but reshuffles most of the middle. Gaps under a few points are
   not results.
 - **One sweep, three trials, no confidence intervals.** Nothing here separates
@@ -100,7 +102,8 @@ evaluated and failed.
 | 51 | `xiaomi/mimo-v2.5-pro` | **32.44** | 0.048 | 0.309 | 0.439 | 0.420 | 0.444 | 0.377 | 33,156 | 18.4 |
 | 52 | `xiaomi/mimo-v2.5` | **25.38** | 0.048 | 0.238 | 0.349 | 0.324 | 0.357 | 0.275 | 25,891 | 19.5 |
 
-\* `factual_grounding` is **provisional** — a literal phrase matcher. See
+\* `factual_grounding` was a literal phrase matcher when this sweep ran and has
+since been replaced; these numbers are pre-fix. See
 [known-limitations](known-limitations.md) section 7.
 
 ## Reference anchors

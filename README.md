@@ -20,8 +20,10 @@ without breaking policy** — and makes you prove it with a replayable trace.
 > The v0.2 leaderboard covers **46 models on the `text_to_action` track** and
 > spans 25.4 to 89.1, with `task_success` from 0.01 to 0.75 — it separates
 > systems. Two honest caveats. The **podium is stable but the mid-table is
-> noisy**: `factual_grounding` is still a literal phrase matcher, and dropping it
-> reshuffles 36 of 44 scored models while leaving the top three unchanged. And
+> noisy**: `factual_grounding` was a literal phrase matcher when this sweep ran,
+> and dropping it reshuffles 36 of 44 scored models while leaving the top three
+> unchanged. It has since been replaced, and re-scoring moves 11 of 14 runs, so
+> the published positions are pre-fix. And
 > there is **one sweep of three trials with no confidence intervals**, so a
 > two-point gap is not a result.
 >
@@ -244,8 +246,9 @@ done for one track.
 
 **Now — make the ranking cover more than one track**
 
-1. Replace phrase-matched `factual_grounding` with a semantic grader. It is the
-   last metric that distorts the order.
+1. Re-score the published sweep. `factual_grounding` now verifies claims against
+   replayed state rather than matching phrases, and required events no longer
+   include ones nothing can emit, so the ranked numbers predate the scorer.
 2. Document argument vocabularies as enums so classification accuracy becomes
    measurable again.
 3. Replace binary all-or-nothing trial gating with a continuous aggregate.
@@ -260,12 +263,13 @@ intervals. The manifests and validators for this already exist and are tested.
 
 ## Contributing
 
-The single most valuable contribution is a **semantic grader to replace
-phrase-matched `factual_grounding`** — it is the last metric that distorts the
-leaderboard order, and the failure modes are documented with examples in
-[known-limitations](docs/known-limitations.md). Sweeping the four untested
-tracks is the next most useful. Scenario contributions are welcome too; the
-corpus is the most reusable part of this project.
+The single most valuable contribution is **making forbidden tool patterns
+reachable** — two thirds of them key on an argument no model controls, so the
+failure mode "performed the action the policy forbids" cannot be measured in
+those scenarios ([known-limitations](docs/known-limitations.md) section 7b).
+Re-scoring the published sweep against the current scorer is the next most
+useful, followed by sweeping the four untested tracks. Scenario contributions are
+welcome too; the corpus is the most reusable part of this project.
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) — local checks, scenario authoring rules,
   release-file requirements, PR checklist.

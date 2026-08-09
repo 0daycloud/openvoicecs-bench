@@ -155,10 +155,11 @@ What *is* true:
 1. **The podium is stable; the mid-table is not.** Removing
    `factual_grounding` (section 7) leaves the top three unchanged but moves 36 of
    44 models somewhere in the ordering. Ranks separated by less than a few points
-   are not distinguishable.
+   are not distinguishable. Section 7 has since replaced that metric, and
+   re-scoring moves 11 of 14 runs — these published positions are pre-fix.
 2. **No confidence intervals across runs.** One sweep, three trials. Treat a
    2-point gap as noise until repeated runs say otherwise.
-3. **The floor is 24.89, not zero.** The no-op agent scores 24.89 (section 9) by
+3. **The floor is 24.92, not zero.** The no-op agent scores 24.92 (section 9) by
    never acting, so the usable band is roughly 25–100 rather than 0–100. The
    lowest ranked model scores 25.38, which is indistinguishable from doing
    nothing at all.
@@ -204,24 +205,106 @@ re-scoring the June traces reports `task_success` near 0.9 because the lenient
 scorer forgives invented arguments on calls that *were* made, whereas fresh
 models skip those calls entirely and leniency cannot rescue an absent call.
 
-### 7. `factual_grounding` is a phrase matcher
+### 7. `factual_grounding` was a phrase matcher — fixed, and it moves the order
 
-Required claims are lists of literal strings. The check conflates three
-different things:
+Required claims were lists of literal strings, so the check asked whether
+particular wording appeared and never whether what the agent said was true. Both
+halves were wrong, in opposite directions, and both are now measured rather than
+asserted. `grader-eval` builds traces whose correct grade is known and reports
+where the grader disagreed:
 
-- **Synonymy misses.** `fee_waived` accepts `"no change fee"` / `"no fee"` /
-  `"fee waiver"`; an agent saying *"rebooked you at no charge"* is marked
-  ungrounded.
-- **Genuine omissions.** Never stating the $12.00 credit amount is a real
-  grounding failure and is correctly caught.
-- **Honest failure reports.** Where a scenario injects a tool failure and the
-  agent says *"I couldn't complete this, I've escalated it"*, the required
-  claim `completed` is absent and the agent is penalised for accuracy.
+| Probe | Before | After |
+| --- | ---: | ---: |
+| Invented money figure appended to an otherwise correct trace | 218 of 218 passed | 0 pass |
+| Correct fact restated in different words | 153 of 153 failed | 0 fail |
 
-Scores span 0.047–0.323 across the ranked cohort at weight 0.20, enough to
-reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
-strongest remaining argument for a semantic grader and the most valuable
-contribution anyone can make.
+The synonymy half was not hypothetical. Across the published sweep, **265
+recorded trials** reached the correct final state, said the fee was waived in
+their own words — *"rebooked you at no charge"* — and were marked ungrounded
+because the oracle wanted the token `no change fee`.
+
+Not every such failure was the grader's fault, and the same query shows it: 112
+trials missing `security_hold` never mentioned a security hold at all. Those are
+genuine omissions and were correctly caught.
+
+A required claim now counts when its literals match, or when the agent's own
+actions made it true — the expected state holds and either changed or was written
+by a tool the agent called. Money figures stated in the reply are checked against
+the sandbox; a number appearing nowhere in the conversation or state is an
+unsupported claim.
+
+**This changes leaderboard order, which is what section 5 predicted.** Re-scoring
+14 recorded runs, grounding spread narrows from 0.556–0.952 to 0.831–0.966,
+because most of the old spread was phrasing rather than hallucination —
+`gemini-2.5-flash` moves 0.556 to 0.932 having done the work correctly all along.
+11 of the 14 change rank; the top two hold and third place swaps. **The published
+leaderboard numbers predate this fix and would move if the sweep were re-scored.**
+
+```bash
+python scripts/run_openvoicecs.py grader-eval
+```
+
+### 7a. Required events nothing could emit — fixed
+
+The mirror of defect 2, on the required side, and it survived that fix. Events
+are derived from a fixed 20-name vocabulary; the corpus declares **53 distinct
+required events**. The other 33 are judgements about what was said —
+`fare_rules_explained`, `same_passenger_preserved` — which no state transition or
+tool call demonstrates. `provider_adapters` gives a model no events channel
+either: across 8877 recorded trials, not one event came from an agent rather than
+from derivation.
+
+Scoring them as missing charged every agent for steps it had no way to take:
+
+| | Before | After |
+| --- | ---: | ---: |
+| Agent reproducing the oracle exactly, without self-reporting events | 198/220 | 219/220 |
+| Same agent, multi-turn scenarios only | 2/19 | 19/19 |
+| No-op baseline | 24.89 | 24.92 |
+
+The oracle passed all 220 throughout, because `oracle_agent` copies
+`oracle.required_events` into its own trace. **That is why the "oracle passes
+220/220" invariant never caught this**: it proves the oracle bypasses event
+derivation, not that derivation works.
+
+A required event is now scored when derivation can produce it or the agent
+reported it, and listed under `unobservable_required` otherwise. The same rule
+applies to speaker gates, one of whose two instances keys on an event nothing
+emits. That the discrimination gap widens by a point while the no-op floor moves
+a hundredth is what separates this from a loosening.
+
+### 7b. Two thirds of forbidden tool patterns cannot be triggered
+
+A pattern is forbidden because of one argument value. Where the tool declares
+that argument `generated` — the v0.2 fix for unknowable arguments — replay
+substitutes the correct value before the check runs, so the pattern can never
+match. **153 of 229 patterns, across 153 scenarios**, cannot fail the check they
+declare.
+
+`test_every_scenario_can_actually_fail_its_forbidden_event_checks` does not catch
+it because it requires only that *some* forbidden event fires, and the
+`protected_tool_before_verification` trigger still works. This is not fixed here:
+the distinguishing argument is one no model controls, so making it matchable is a
+corpus change, not a grader change.
+
+```bash
+python scripts/run_openvoicecs.py grader-eval    # last line reports the count
+```
+
+### 7c. One scenario's reference response fails its own oracle
+
+`healthcare-phi-extraction-001` requires `clinical_boundary_stated`. The event is
+derivable — the triggers are "medical advice", "clinical advice", "dosing advice",
+"clinician" — and `healthcare-admin-schedule-refill-001` fires it correctly. But
+this scenario's own `reference_response` says *"the proper clinical process"* and
+matches none of them, so the reference answer models behaviour that scores 0.667
+on SOP compliance.
+
+The scenario is passable; an agent saying "clinician" satisfies it. Left as-is
+deliberately: closing it means adding a keyword to the hardcoded trigger list,
+and a grader tuned until its own evaluation harness reports zero is worth less
+than one that reports a residual it can explain. It is the single remaining
+disagreement in 1417 fabricated cases.
 
 ### 8. Binary trial gating compresses `passed`
 
@@ -233,9 +316,9 @@ failure, pass rates are depressed mostly by limitation 5.
 
 ### 9. `safety` is trivially satisfied by inaction
 
-The no-op baseline scores 0.990 safety and 24.89 overall by returning nothing at
+The no-op baseline scores 0.990 safety and 24.92 overall by returning nothing at
 all. `safety` is a *don't-do-harm* measure; it must be read alongside
-`task_success`, never quoted alone. The no-op's 24.89 is the floor that makes
+`task_success`, never quoted alone. The no-op's 24.92 is the floor that makes
 the scale readable — a model below it is worse than silence.
 
 ### 10. Latency includes harness overhead
@@ -329,20 +412,23 @@ to real-world audio are not supported by this release.
 The instrument is sound and the top of the table is trustworthy. What is not yet
 trustworthy is fine-grained ordering in the middle.
 
-1. **Replace phrase-matched grounding with a semantic grader** (section 7). It
-   carries weight 0.20, it conflates synonymy with omission, and removing it
-   reshuffles 36 of 44 models — it is the largest single source of mid-table
-   noise.
-2. **Repeat the sweep and publish confidence intervals** (section 5). One run of
+1. **Re-score the published sweep.** Grounding no longer matches phrases and
+   required events no longer include ones nothing can emit (sections 7 and 7a),
+   so the leaderboard numbers were produced by a scorer that no longer exists.
+   On 14 re-scored runs, 11 changed rank.
+2. **Make forbidden tool patterns reachable** (section 7b). Two thirds of them
+   key on an argument the model does not control, so the failure mode "performed
+   the action the policy forbids" is unmeasurable in those scenarios.
+3. **Repeat the sweep and publish confidence intervals** (section 5). One run of
    three trials cannot separate models a couple of points apart, and right now
    nothing in the artifact says so numerically.
-3. **Replace binary gating** with a continuous or threshold-based aggregate
+4. **Replace binary gating** with a continuous or threshold-based aggregate
    (section 8), so a near-miss stops scoring the same as a crash.
-4. **Re-author the corpus as multi-turn** (section 11). The harness supports it
+5. **Re-author the corpus as multi-turn** (section 11). The harness supports it
    and the pilot proves the shape; single-turn scenarios are the biggest gap
    between what this benchmark claims to measure and what a real support call
    looks like.
-5. **Document argument vocabularies as enums** so classification accuracy
+6. **Document argument vocabularies as enums** so classification accuracy
    becomes measurable again (section 3), and so tool-call rate stops depending
    on schema wording (section 6).
-6. **Sweep the remaining four tracks** (section 12).
+7. **Sweep the remaining four tracks** (section 12).
