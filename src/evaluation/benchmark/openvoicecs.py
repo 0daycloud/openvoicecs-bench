@@ -3661,7 +3661,7 @@ def _missing_sealed_queue_stats(manifest: dict[str, Any] | None) -> dict[str, An
 def _file_audit_entry(path: Path) -> dict[str, Any]:
     content = path.read_bytes()
     return {
-        "path": str(path),
+        "path": path.as_posix(),
         "sha256": hashlib.sha256(content).hexdigest(),
         "bytes": len(content),
     }

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 from src.evaluation.benchmark.openvoicecs import (
@@ -836,6 +838,24 @@ def test_release_audit_reports_validation_gates_hashes_and_coverage():
     assert len(audit["files"]["external_systems"]["sha256"]) == 64
     assert len(audit["files"]["leaderboard_claims"]["sha256"]) == 64
     assert len(audit["files"]["submission_intake"]["sha256"]) == 64
+
+    # _file_audit_entry() paths must be platform-independent (forward-slash),
+    # or the audit is a spurious cross-platform diff on Windows.
+    for entry in audit["files"].values():
+        assert "\\" not in entry["path"], entry["path"]
+
+
+def test_audit_cli_writes_lf_only_json(tmp_path: Path):
+    # cmd_audit's own writer (scripts/run_openvoicecs.py) previously omitted
+    # newline="\n", so Windows translated every "\n" to "\r\n" on write.
+    output = tmp_path / "release_audit.json"
+    subprocess.run(
+        [sys.executable, "scripts/run_openvoicecs.py", "audit", "--output", str(output)],
+        check=True,
+        capture_output=True,
+    )
+
+    assert b"\r\n" not in output.read_bytes()
 
 
 def test_audio_manifest_builds_variant_scenarios():

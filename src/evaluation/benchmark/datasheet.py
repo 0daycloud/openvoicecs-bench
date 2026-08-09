@@ -70,7 +70,7 @@ def build_benchmark_datasheet_file(
     if output_path is not None:
         output = Path(output_path)
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(datasheet, indent=2) + "\n", encoding="utf-8")
+        output.write_text(json.dumps(datasheet, indent=2) + "\n", encoding="utf-8", newline="\n")
     return datasheet
 
 
@@ -442,7 +442,7 @@ def _file_entry(path: str | Path) -> dict[str, Any]:
     path = Path(path)
     data = path.read_bytes()
     return {
-        "path": str(path),
+        "path": path.as_posix(),
         "sha256": hashlib.sha256(data).hexdigest(),
         "bytes": len(data),
     }
