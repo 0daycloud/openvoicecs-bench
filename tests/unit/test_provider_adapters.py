@@ -86,6 +86,95 @@ def test_openai_tool_schemas_are_generic_typed_without_constants():
     assert set(create_case_params["properties"]) == {"account_id"} | generated
 
 
+def test_openai_tool_schemas_emit_enum_and_require_documented_classification_fields():
+    """A field with a declared vocabulary is a real, answerable decision.
+
+    Unlike ``generated_arguments`` (system-assigned, excused from ``required``,
+    labeled "assigned by the system"), an ``argument_enums`` field is something
+    the model can and must choose correctly, so it belongs in ``required`` with
+    its valid choices spelled out — not hidden as optional.
+    """
+    scenario = {
+        "tools": [
+            {
+                "name": "issue_refund",
+                "required_arguments": {"order_id": "ord_1", "reason": "damaged_item"},
+                "generated_arguments": {},
+                "argument_enums": {"reason": ["damaged_gift_item", "damaged_item"]},
+            }
+        ]
+    }
+
+    schemas = _openai_tool_schemas(scenario)
+    params = schemas[0]["function"]["parameters"]
+
+    assert params["properties"]["reason"] == {
+        "type": "string",
+        "enum": ["damaged_gift_item", "damaged_item"],
+    }
+    assert "reason" in params["required"]
+    assert "order_id" in params["required"]
+
+
+def test_openai_tool_schemas_enum_field_is_never_treated_as_system_assigned():
+    """Guard the interaction between the two annotations on one tool."""
+    scenario = {
+        "tools": [
+            {
+                "name": "create_case",
+                "required_arguments": {
+                    "case_id": "case_1",
+                    "account_id": "acct_1",
+                    "reason": "card_dispute",
+                },
+                "generated_arguments": {"case_id": "case_1"},
+                "argument_enums": {"reason": ["card_dispute", "merchant_hold"]},
+            }
+        ]
+    }
+
+    schemas = _openai_tool_schemas(scenario)
+    params = schemas[0]["function"]["parameters"]
+
+    assert set(params["required"]) == {"account_id", "reason"}
+    assert params["properties"]["reason"]["enum"] == ["card_dispute", "merchant_hold"]
+    assert "description" not in params["properties"]["reason"]
+    assert params["properties"]["case_id"]["description"] == "Assigned by the system; may be omitted."
+    assert "enum" not in params["properties"]["case_id"]
+
+
+def test_json_action_prompt_surfaces_enum_choices_for_classification_arguments():
+    """The stepwise JSON-action path has no native ``tools`` schema, so the
+    closed vocabulary has to be spelled out in the argument type text instead
+    — otherwise chat-only models (the long tail this loop exists for) stay as
+    blind to the vocabulary as they were before this fix.
+    """
+    scenario = {
+        "id": "unit-test-enum-scenario",
+        "domain": "retail",
+        "customer_goal": "Refund a damaged item.",
+        "conversation": [{"role": "customer", "text": "My order arrived damaged."}],
+        "initial_state": {},
+        "policy": {},
+        "tools": [
+            {
+                "name": "issue_refund",
+                "required_arguments": {"order_id": "ord_1", "reason": "damaged_item"},
+                "argument_enums": {"reason": ["damaged_gift_item", "damaged_item"]},
+            }
+        ],
+    }
+
+    _system, user = build_json_action_prompt(scenario, trial_index=0)
+
+    scenario_view = json.loads(user.split("Customer session:\n", 1)[1])
+    reason_type = scenario_view["available_tools"][0]["parameters"]["reason"]
+    assert "damaged_gift_item" in reason_type
+    assert "damaged_item" in reason_type
+    order_id_type = scenario_view["available_tools"][0]["parameters"]["order_id"]
+    assert order_id_type == "string"
+
+
 def test_parse_provider_response_text_handles_markdown_json():
     payload = {
         "messages": [{"role": "agent", "text": "I issued the refund."}],

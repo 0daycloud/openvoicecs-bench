@@ -344,23 +344,33 @@ def _provider_policy_view(policy: Any) -> dict[str, Any]:
 
 
 def _tool_argument_types(tool: dict[str, Any]) -> dict[str, str]:
-    """Advertise every argument, marking the ones the system assigns.
+    """Advertise every argument, marking system-assigned and enumerated ones.
 
     ``generated_arguments`` governs *scoring*, not disclosure. Hiding those
     arguments entirely also hides what the tool is for — a ``create_case`` whose
     ``reason`` and ``case_id`` vanish looks like a no-op, and models stopped
     calling it. Naming the argument while excusing the agent from inventing its
     value keeps the semantic signal without scoring an unguessable string.
+
+    ``argument_enums`` is the opposite case: a real, model-answerable decision
+    with a closed vocabulary. This is the stepwise JSON-action path, which has
+    no native ``tools`` schema to attach an ``enum`` constraint to, so the
+    valid choices are spelled out in the type text instead — otherwise
+    chat-only models stay as blind to the vocabulary as native-tool models
+    would be without the ``enum`` field in ``_openai_tool_schemas``.
     """
     generated = set((tool.get("generated_arguments") or {}).keys())
+    enums = tool.get("argument_enums") or {}
     types = {}
     for name, value in (tool.get("required_arguments") or {}).items():
         declared = _json_schema_for_value(value)["type"]
-        types[str(name)] = (
-            f"{declared} (assigned by the system; omit or leave blank)"
-            if name in generated
-            else declared
-        )
+        if name in enums:
+            choices = ", ".join(str(member) for member in enums[name])
+            types[str(name)] = f"{declared} (one of: {choices})"
+        elif name in generated:
+            types[str(name)] = f"{declared} (assigned by the system; omit or leave blank)"
+        else:
+            types[str(name)] = declared
     return types
 
 
@@ -712,8 +722,17 @@ def _openai_tool_schemas(scenario: dict[str, Any]) -> list[dict[str, Any]]:
         properties = {}
         required = []
         generated = tool.get("generated_arguments") or {}
+        enums = tool.get("argument_enums") or {}
         for name, value in (tool.get("required_arguments") or {}).items():
             schema = _json_schema_for_value(value)
+            if name in enums:
+                # A real, model-answerable decision with a closed vocabulary:
+                # unlike generated_arguments it goes in `required` and is
+                # never excused as system-assigned.
+                schema = {**schema, "enum": list(enums[name])}
+                properties[name] = schema
+                required.append(name)
+                continue
             if name in generated:
                 # Declared but not required: the agent learns the tool records
                 # this field without being scored on guessing its exact value.
