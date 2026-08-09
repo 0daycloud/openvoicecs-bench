@@ -472,6 +472,12 @@
       "summary": "Repeating every oracle tool call twice passes in 204 of 220 scenarios and scores 99.78. Sandbox state updates are idempotent, so a second refund, wire, or port-out leaves no trace in the final state and no check notices. Not addressed here: treating a repeated mutating call as a violation means defining a new class of violation rather than fixing a check that cannot fail, and the fabricated-trace harness has no probe for it, so the claim would rest on nothing this branch measures. Recorded so the next contributor has the number.",
       "status": "open",
       "severity": "medium"
+    },
+    {
+      "id": "openvoicecs-erratum-provider-adapter-scorer-drift",
+      "summary": "provider_adapters.py imports nothing from the benchmark package and defines its own copy of 15 functions that also exist in openvoicecs.py; 13 of them differ in body. Its _derive_events writes into trace['events'] at four call sites before the trace reaches the scorer, so for score-provider, submit and submit-endpoint the adapter's copy of a rule is the one that decides. Two fixes in this release therefore do not reach that path: pii_minimization is still derived from the mere absence of a leak, and the disclosure negation guard still reads a fixed 80-character window. Nothing fails and no baseline is affected, because the oracle and no-op paths do not use this module. Repairing it means making the adapter import the scorer's helpers instead of restating them, a refactor across 13 functions that belongs in its own change. Recorded as known limitation 15.",
+      "status": "open",
+      "severity": "high"
     }
   ]
 }

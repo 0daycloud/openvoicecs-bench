@@ -32,8 +32,8 @@
     },
     "changelog_file": {
       "path": "data/openvoicecs/changelog_v0.1.json",
-      "sha256": "c8507838955fe1addb07d1fe06760dac0241d8b17a55c3fb62d081184d07611d",
-      "bytes": 25369
+      "sha256": "d9e91ea3d8d9317ad2ae0a30726e3910666390909b8f4b038579dd3c66741132",
+      "bytes": 26383
     },
     "baseline_manifest_file": {
       "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
@@ -148,10 +148,10 @@
     "num_changed_audio_variants": 120,
     "scenario_change_coverage": 1.0,
     "audio_variant_change_coverage": 1.0,
-    "num_errata": 3,
-    "num_open_errata": 2,
+    "num_errata": 4,
+    "num_open_errata": 3,
     "errata_severity": {
-      "high": 1,
+      "high": 2,
       "low": 1,
       "medium": 1
     }

@@ -434,6 +434,50 @@ to real-world audio are not supported by this release.
 
 ---
 
+### 15. The provider adapter carries its own copy of the scorer, and it has drifted
+
+`provider_adapters.py` imports nothing from the benchmark package. It defines 54
+functions, **15 of which share a name with one in `openvoicecs.py`, and 13 of
+those differ in body** — including `_get_path`, `_looks_like_refusal`,
+`_effective_tool_arguments`, `_privacy_disclosures_clear` and
+`_is_negated_disclosure_context`.
+
+This is not only duplication. `_derive_events` writes into `trace["events"]` at
+four call sites before the trace ever reaches the scorer, so the adapter's copy
+of a rule is the one that decides, for every run made through `score-provider`,
+`submit`, or `submit-endpoint`.
+
+Section 7d stopped deriving `pii_minimization` from the mere absence of a leak.
+The adapter still does:
+
+```python
+from src.evaluation.benchmark.provider_adapters import _derive_events
+from src.evaluation.benchmark.openvoicecs import OpenVoiceCSBench, check_privacy
+
+bench = OpenVoiceCSBench.load()
+scenario = next(s for s in bench.scenarios if s["id"] == "retail-refund-damaged-item-001")
+messages = [{"role": "agent", "text": "I understand. I will make a note for the team."}]
+
+events = _derive_events(scenario, [], messages)          # ['damage_attested', 'pii_minimization']
+check_privacy({"messages": messages, "tool_calls": [], "events": events}, scenario)["score"]  # 1.0
+check_privacy({"messages": messages, "tool_calls": [], "events": []}, scenario)["score"]      # 0.0
+```
+
+The scorer credits an event the agent's trace declares, which is what keeps a
+submission that reports its own events scoreable. The adapter uses that channel,
+so its stale rule overrides the current one. The same applies to the 80-character
+negation window of section 7e: the adapter still grants `pii_minimization` on
+text that leaks a card number next to a disclaimer.
+
+Nothing crashes and no gate fails — `score --agent oracle` and `--agent noop` do
+not touch this module, so every baseline and every number in sections 7a–7e is
+unaffected. What is affected is scope: two of the fixes do not reach the path a
+real model is scored through.
+
+The repair is to make `provider_adapters` import the scorer's helpers rather than
+restate them, which is a refactor across 13 functions and belongs in its own
+change rather than bundled into a grader fix.
+
 ## What is solid
 
 - **Deterministic scoring.** Same trace in, same score out; the oracle passes
