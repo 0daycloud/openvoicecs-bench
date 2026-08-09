@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from src.evaluation.benchmark.metamorphic import (
+from src.evaluation.benchmark.openvoicecs import scoped_invented_amounts
+from tests.metamorphic_transforms import (
     EXPECTED_RELATION,
     TRANSFORMS,
-    scoped_invented_amounts,
     transform_collide_amount,
     transform_corrupt_state,
     transform_synonym_swap,

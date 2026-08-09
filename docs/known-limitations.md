@@ -204,24 +204,53 @@ re-scoring the June traces reports `task_success` near 0.9 because the lenient
 scorer forgives invented arguments on calls that *were* made, whereas fresh
 models skip those calls entirely and leniency cannot rescue an absent call.
 
-### 7. `factual_grounding` is a phrase matcher
+### 7. `factual_grounding` measured vocabulary, not grounding (largely fixed)
 
-Required claims are lists of literal strings. The check conflates three
-different things:
+The original check ran literal regexes over the concatenated agent turns.
+That framing — a phrase matcher that is too strict — understated the defect.
+Measured on the 8,877 scored trials of the v0.2 sweep, misses were the small
+side: 4.5% of trials lost credit despite a correct outcome, and that bias is
+narrow across models (0–8%), so it barely moves ranks. The dominant error ran
+the other way: on **64.3%** of trials the state check failed and the phrase
+matcher still granted full credit, and that false-credit rate is
+model-dependent (22.3%–81.1% across the cohort), which scrambles rankings
+rather than shifting them uniformly. The old score correlated *negatively*
+with `task_success` per model (r = −0.087) and explained 0.1% of state-check
+variance — a fifth of the total score was paid to a signal statistically
+unrelated to whether anything happened. Against 72 human-labeled trials the
+old grader's kappa was −0.44.
 
-- **Synonymy misses.** `fee_waived` accepts `"no change fee"` / `"no fee"` /
-  `"fee waiver"`; an agent saying *"rebooked you at no charge"* is marked
-  ungrounded.
-- **Genuine omissions.** Never stating the $12.00 credit amount is a real
-  grounding failure and is correctly caught.
-- **Honest failure reports.** Where a scenario injects a tool failure and the
-  agent says *"I couldn't complete this, I've escalated it"*, the required
-  claim `completed` is absent and the agent is penalised for accuracy.
+**Fixed by state-linked grounding (default on; `state_linked=False` or
+`OPENVOICECS_STATE_LINKED_GROUNDING=0` reproduces published scores
+bit-for-bit).** A claim asserting a completed outcome is credited only when
+the replayed state check passed; a missed literal can be credited by a
+deterministic speech-act paraphrase layer (completion, zero-cost, refusal),
+and that credit passes through the same gate. Dollar figures matching no
+monetary-keyed sandbox value are flagged as invented, and forbidden-claim
+patterns match per agent turn so a benign later sentence cannot complete a
+violation across a turn boundary. Everything is deterministic and offline; an
+opt-in judge hook exists for the one genuinely ambiguous cell (literal missed,
+state passed — 1.9% of recorded trials) but adds no network calls by default.
 
-Scores span 0.047–0.323 across the ranked cohort at weight 0.20, enough to
-reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
-strongest remaining argument for a semantic grader and the most valuable
-contribution anyone can make.
+**Known gaps, quantified.** `security_hold` and `port_out_authorised` read as
+completion assertions but are not state-gated (10 of 8,877 recorded trials
+keep credit on a failed state); gating them requires `state_independent:
+false` on those two claims in the hash-pinned scenario corpus and is deferred
+to the next corpus reissue. Refusal-family claims are exempt by design — the
+`adversarial_compliance` track has no recorded trials, so gating them would
+change nothing observable today.
+
+**Related work in open PRs, measured against the same human labels.** PR #1
+adds an LLM-judge fallback on regex misses (false-negative side only,
+monotone-increasing). PR #4's evidence grounding pairs a communicated-claim
+check with state support and *does* revoke credit for communicated-but-false
+action claims; it currently leads on the labeled criterion (held-out kappa
+0.824 vs 0.644 here, N=36, single annotator, intra-rater test-retest ceiling
+0.764) on the strength of broader paraphrase coverage. PR #10's
+state-attribution rescue is strong on omissions but never gates
+literal-matched claims, so it retains the false-credit class. The
+communicated-claim direction of PR #4 and the gate here sit on disjoint
+branches of the same function and would compose.
 
 ### 8. Binary trial gating compresses `passed`
 

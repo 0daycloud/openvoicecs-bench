@@ -57,7 +57,6 @@ from src.evaluation.benchmark.judging import (
     validate_judge_protocol_file,
     validate_judge_study_manifest_file,
 )
-from src.evaluation.benchmark.metamorphic import scoped_invented_amounts
 from src.evaluation.benchmark.pricing import (
     DEFAULT_PRICING_MANIFEST_PATH,
     pricing_manifest_stats,
@@ -2741,6 +2740,63 @@ _COMPLETION_TERM_RE = re.compile(
     r"|created|opened|updated|resolved|escalated|credit|voucher)\b",
     re.IGNORECASE,
 )
+
+
+_MONEY_KEY_RE = re.compile(
+    r"(amount|cents|credit|fee|price|total|balance|charge|refund)", re.IGNORECASE
+)
+
+
+def monetary_values(scenario: dict[str, Any], final_state: dict[str, Any]) -> set[str]:
+    """Digit strings of numeric values stored under monetary-looking keys.
+
+    ``*_cents`` values also contribute their dollar forms (5299 -> "52.99",
+    "52"), so a reply quoting a stored amount in dollars is never flagged.
+    """
+    known: set[str] = set()
+
+    def walk(node: Any, key: str) -> None:
+        if isinstance(node, dict):
+            for k, v in node.items():
+                walk(v, str(k))
+        elif isinstance(node, list):
+            for v in node:
+                walk(v, key)
+        elif isinstance(node, (int, float)) and not isinstance(node, bool):
+            if _MONEY_KEY_RE.search(key):
+                raw = str(int(node))
+                known.add(raw)
+                if key.endswith("cents"):
+                    cents = int(node)
+                    known.add(f"{cents // 100}.{cents % 100:02d}")
+                    known.add(str(cents // 100))
+
+    for section in (scenario.get("conversation"), scenario.get("initial_state"), final_state):
+        walk(section, "")
+    return known
+
+
+def scoped_invented_amounts(
+    agent_text: str, scenario: dict[str, Any], final_state: dict[str, Any]
+) -> list[str]:
+    """Dollar figures in the reply that match no *monetary* value in the sandbox.
+
+    A known-set built by regexing every digit run out of the flattened sandbox
+    cannot tell a dollar amount from an identifier: every scenario carries
+    ``prefix_NNNN`` ids (``case_9001``, ``acct_1001``), so a fabricated
+    ``$9001`` hides behind ``case_9001`` while ``$8843`` is flagged. Scoping
+    the known set to monetary-keyed numeric fields closes that hole.
+    """
+    stated = re.findall(r"\$\s?(\d+(?:\.\d{2})?)", agent_text)
+    if not stated:
+        return []
+    known = monetary_values(scenario, final_state)
+    invented = []
+    for amount in stated:
+        whole = amount.split(".")[0]
+        if amount not in known and whole not in known and whole.lstrip("0") not in known:
+            invented.append(amount)
+    return invented
 
 
 #: Speech acts, not scenario vocabulary, so the tolerance generalizes to

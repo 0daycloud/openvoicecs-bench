@@ -1,4 +1,4 @@
-"""Metamorphic transforms for grader validation, plus a scoped money detector.
+"""Metamorphic transforms for grader validation — measurement tooling, not scorer.
 
 Known-answer probes (``grader_probe`` on PR #9, ``grader_eval`` on PR #10)
 hand-write individual mutations of the oracle trace. This module instead
@@ -12,8 +12,9 @@ be validated against state, but it can be validated against relations.
 Every transform reports ``(scenario, trace)`` on success or ``(None, reason)``
 when it cannot be grounded in the case — a transform that cannot prove it
 injected (or avoided injecting) a defect must be counted as skipped, never as
-a pass. Standard library only; no imports from the scoring engine, so the
-transforms can be applied identically to every grader variant under test.
+a pass. Lives under ``tests/`` because it measures the grader rather than
+being part of it; the scoped money detector it exercises is production code
+in ``openvoicecs.py``.
 """
 
 from __future__ import annotations
@@ -22,6 +23,8 @@ import json
 import re
 from copy import deepcopy
 from typing import Any
+
+from src.evaluation.benchmark.openvoicecs import monetary_values
 
 #: transform name -> how the grounding score must respond
 EXPECTED_RELATION = {
@@ -62,58 +65,6 @@ def _append_to_last_agent_turn(trace: dict[str, Any], sentence: str) -> dict[str
             message["text"] = (message.get("text", "") + " " + sentence).strip()
             return out
     return out
-
-
-def monetary_values(scenario: dict[str, Any], final_state: dict[str, Any]) -> set[str]:
-    """Digit strings of numeric values stored under monetary-looking keys.
-
-    ``*_cents`` values also contribute their dollar forms (5299 -> "52.99",
-    "52"), so a reply quoting a stored amount in dollars is never flagged.
-    """
-    known: set[str] = set()
-
-    def walk(node: Any, key: str) -> None:
-        if isinstance(node, dict):
-            for k, v in node.items():
-                walk(v, str(k))
-        elif isinstance(node, list):
-            for v in node:
-                walk(v, key)
-        elif isinstance(node, (int, float)) and not isinstance(node, bool):
-            if _MONEY_KEY_RE.search(key):
-                raw = str(int(node))
-                known.add(raw)
-                if key.endswith("cents"):
-                    cents = int(node)
-                    known.add(f"{cents // 100}.{cents % 100:02d}")
-                    known.add(str(cents // 100))
-
-    for section in (scenario.get("conversation"), scenario.get("initial_state"), final_state):
-        walk(section, "")
-    return known
-
-
-def scoped_invented_amounts(
-    agent_text: str, scenario: dict[str, Any], final_state: dict[str, Any]
-) -> list[str]:
-    """Dollar figures in the reply that match no *monetary* value in the sandbox.
-
-    A known-set built by regexing every digit run out of the flattened sandbox
-    cannot tell a dollar amount from an identifier: every scenario carries
-    ``prefix_NNNN`` ids (``case_9001``, ``acct_1001``), so a fabricated
-    ``$9001`` hides behind ``case_9001`` while ``$8843`` is flagged. Scoping
-    the known set to monetary-keyed numeric fields closes that hole.
-    """
-    stated = re.findall(r"\$\s?(\d+(?:\.\d{2})?)", agent_text)
-    if not stated:
-        return []
-    known = monetary_values(scenario, final_state)
-    invented = []
-    for amount in stated:
-        whole = amount.split(".")[0]
-        if amount not in known and whole not in known and whole.lstrip("0") not in known:
-            invented.append(amount)
-    return invented
 
 
 def transform_synonym_swap(scenario, trace, state_passed, final_state):

@@ -1128,6 +1128,12 @@ def test_invented_amount_flagged_only_in_state_linked_mode(monkeypatch):
     )
     assert check["score"] == 1.0
 
+    plain_invented = _trace("I've completed that and logged it. The total comes to $8843.")
+    check = check_factual_grounding(
+        plain_invented, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert check["score"] == 0.0  # non-colliding fabrication is still flagged
+
     monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
     legacy = check_factual_grounding(
         trace, scenario, state_check={"passed": True}, final_state=final_state
