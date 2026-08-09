@@ -431,7 +431,25 @@
         "travel-multiturn-verify-then-rebook-913",
         "travel-multiturn-voucher-objection-915"
       ]
+    },
+    {
+      "id": "openvoicecs-v0.1.0-grounding-semantic-fallback",
+      "type": "scoring_changed",
+      "date": "2026-08-09",
+      "summary": "factual_grounding scoring now uses the existing literal matcher first and a batched semantic-judge fallback for unresolved grounding claims. Legacy phrase-only scoring remains available explicitly, and deterministic reference baselines continue to use legacy grounding. No scenario or audio content changed.",
+      "compatibility": "scoring_affecting",
+      "scenario_ids": [],
+      "audio_variant_ids": []
     }
   ],
-  "errata": []
+  "errata": [
+    {
+      "id": "openvoicecs-v0.1.0-grounding-phrase-matcher-erratum",
+      "status": "open",
+      "severity": "high",
+      "summary": "Phrase-only factual grounding can miss semantically equivalent wording. The semantic fallback reduces this error, but its verdict accuracy has not yet been independently measured against labeled grounding ground truth, fallback-touched trials are not bit-for-bit reproducible, and forbidden-claim paraphrase detection remains heuristic.",
+      "scenario_ids": [],
+      "audio_variant_ids": []
+    }
+  ]
 }
