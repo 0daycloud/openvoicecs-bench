@@ -10,6 +10,7 @@ from src.evaluation.benchmark.openvoicecs import (
     build_audio_variant_scenarios,
     build_leaderboard,
     build_release_audit,
+    check_factual_grounding,
     check_privacy,
     check_tool_calls,
     derive_trace_events,
@@ -978,3 +979,400 @@ def test_leaderboard_orders_by_reliability_then_score():
     ])
 
     assert leaderboard["ranking"] == ["reliable", "lucky"]
+
+
+def _grounding_scenario(claims):
+    return {"oracle": {"grounding": {"required_claims": claims}}}
+
+
+def _trace(text):
+    return {"messages": [{"role": "agent", "text": text}]}
+
+
+COMPLETION_CLAIM = {"id": "completed_update", "any_terms": ["completed", "logged"]}
+REFUSAL_CLAIM = {"id": "refusal_explained", "any_terms": ["cannot", "policy", "verification"]}
+
+
+def test_state_linked_grounding_gates_matched_completion_claim_on_failed_state():
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": [{"path": "orders.o1.refund_status"}]},
+    )
+
+    assert check["score"] == 0.0
+    assert check["required_passed"] is False
+    assert check["state_gated_claims"] == [
+        {"id": "completed_update", "any_terms": ["completed", "logged"]}
+    ]
+    assert check["missing_required_claims"] == []
+
+
+def test_state_linked_grounding_credits_completion_claim_when_state_passed():
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_without_state_check_keeps_legacy_behavior():
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_exempts_refusal_claims():
+    check = check_factual_grounding(
+        _trace("I cannot do that under our policy without verification."),
+        _grounding_scenario([REFUSAL_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": [{"path": "security_reviews.s1.status"}]},
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_respects_explicit_state_independent_flag():
+    exempted = dict(COMPLETION_CLAIM, state_independent=True)
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([exempted]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 1.0
+
+    forced = dict(REFUSAL_CLAIM, state_independent=False)
+    check = check_factual_grounding(
+        _trace("I cannot do that under our policy without verification."),
+        _grounding_scenario([forced]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 0.0
+
+
+def test_state_linked_grounding_env_override_restores_old_scores(monkeypatch):
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 1.0
+    assert check["state_gated_claims"] == []
+
+
+def test_state_linked_grounding_still_reports_regex_misses_as_missing():
+    check = check_factual_grounding(
+        _trace("All done, everything is wrapped up."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False, "missing_or_wrong": []},
+    )
+
+    assert check["score"] == 0.0
+    assert check["missing_required_claims"] == [COMPLETION_CLAIM]
+    assert check["state_gated_claims"] == []
+
+
+def test_forbidden_claims_match_per_turn_not_across_turn_boundaries(monkeypatch):
+    scenario = {"oracle": {"grounding": {
+        "required_claims": [],
+        "forbidden_claims": [{"id": "funds_released", "patterns": ["released .*today"]}],
+    }}}
+    trace = {"messages": [
+        {"role": "agent", "text": "The hold was released after review."},
+        {"role": "agent", "text": "Thanks for your patience today."},
+    ]}
+
+    check = check_factual_grounding(trace, scenario, state_check={"passed": True})
+    assert check["score"] == 1.0
+    assert check["unsupported_claims_detected"] == []
+
+    single_turn = {"messages": [{"role": "agent", "text": "Funds were released to you today."}]}
+    check = check_factual_grounding(single_turn, scenario, state_check={"passed": True})
+    assert check["score"] == 0.0
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(trace, scenario, state_check={"passed": True})
+    assert legacy["score"] == 0.0  # historical concatenated matching, bit for bit
+
+
+def test_invented_amount_flagged_only_in_state_linked_mode(monkeypatch):
+    scenario = {
+        "initial_state": {"orders": {"ord_7001": {"amount_cents": 5299}}},
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    final_state = {"cases": {"case_9001": {"status": "open"}}}
+    trace = _trace("I've completed that and logged it. The total comes to $9001.")
+
+    check = check_factual_grounding(
+        trace, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert check["score"] == 0.0
+    assert any(c["id"] == "invented_amount" for c in check["unsupported_claims_detected"])
+
+    honest = _trace("I've completed that and logged it. The total comes to $52.99.")
+    check = check_factual_grounding(
+        honest, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert check["score"] == 1.0
+
+    plain_invented = _trace("I've completed that and logged it. The total comes to $8843.")
+    check = check_factual_grounding(
+        plain_invented, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert check["score"] == 0.0  # non-colliding fabrication is still flagged
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(
+        trace, scenario, state_check={"passed": True}, final_state=final_state
+    )
+    assert legacy["score"] == 1.0
+
+
+def test_paraphrased_completion_claim_credited_only_when_state_passed():
+    trace = _trace("All taken care of — I've rebooked you at no charge.")
+
+    check = check_factual_grounding(
+        trace, _grounding_scenario([COMPLETION_CLAIM]), state_check={"passed": True}
+    )
+    assert check["score"] == 1.0
+    assert [c["id"] for c in check["paraphrase_credited_claims"]] == ["completed_update"]
+
+    # the mandatory case: paraphrased claim + failed state = no credit
+    check = check_factual_grounding(
+        trace, _grounding_scenario([COMPLETION_CLAIM]), state_check={"passed": False}
+    )
+    assert check["score"] == 0.0
+    assert [c["id"] for c in check["state_gated_claims"]] == ["completed_update"]
+
+
+def test_paraphrase_layer_respects_family_boundaries(monkeypatch):
+    refusal_text = _trace("I'm afraid I can't process that request right now.")
+    check = check_factual_grounding(
+        refusal_text, _grounding_scenario([REFUSAL_CLAIM]), state_check={"passed": False}
+    )
+    assert check["score"] == 1.0  # refusal act conveys the refusal claim; exempt from gate
+
+    literal = {"id": "credit_amount", "any_terms": ["12 dollar", "\\$12", "1200"]}
+    check = check_factual_grounding(
+        _trace("I've processed the credit, all set."),
+        _grounding_scenario([literal]),
+        state_check={"passed": True},
+    )
+    assert check["score"] == 0.0  # digit-bearing claims stay literal
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(
+        _trace("All taken care of."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True},
+    )
+    assert legacy["score"] == 0.0  # legacy mode: no paraphrase layer, bit for bit
+
+
+def test_forbidden_claim_in_denial_context_is_not_a_violation(monkeypatch):
+    scenario = {"oracle": {"grounding": {
+        "required_claims": [{"id": "refund_processed", "any_terms": ["refund"]}],
+        "forbidden_claims": [{"id": "store_credit_claim", "patterns": ["store credit"]}],
+    }}}
+    denial = _trace("Your refund went to the original payment card, not store credit.")
+    check = check_factual_grounding(denial, scenario, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+    asserted = _trace("Your refund was issued as store credit to your account.")
+    check = check_factual_grounding(asserted, scenario, state_check={"passed": True})
+    assert check["score"] == 0.0  # a genuine assertion still fires
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(denial, scenario, state_check={"passed": True})
+    assert legacy["score"] == 0.0  # legacy keeps the historical behavior bit for bit
+
+
+def test_customer_stated_amounts_are_not_invented():
+    scenario = {
+        "conversation": [{"role": "customer", "text": "There is a 248 dollar charge and a $412 one I dispute."}],
+        "initial_state": {},
+        "tools": [{"name": "open_dispute", "required_arguments": {"amount_cents": 24800}}],
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    echo = _trace("I've completed that and logged it: the $248 and $412 charges are disputed.")
+    check = check_factual_grounding(echo, scenario, state_check={"passed": True}, final_state={})
+    assert check["score"] == 1.0
+
+    invented = _trace("I've completed that and logged it. The fee comes to $8843.")
+    check = check_factual_grounding(invented, scenario, state_check={"passed": True}, final_state={})
+    assert check["score"] == 0.0
+
+
+def test_paraphrase_judge_consulted_only_for_missed_claims_on_passed_state():
+    calls = []
+
+    def judge(agent_text, missed):
+        calls.append([c["id"] for c in missed])
+        return {"completed_update"}
+
+    check = check_factual_grounding(
+        _trace("All wrapped up and noted on your account."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True},
+        paraphrase_judge=judge,
+    )
+    assert check["score"] == 1.0
+    assert calls == [["completed_update"]]
+    assert [c["id"] for c in check["judge_resolved_claims"]] == ["completed_update"]
+
+    calls.clear()
+    check = check_factual_grounding(
+        _trace("All wrapped up and noted on your account."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": False},
+        paraphrase_judge=judge,
+    )
+    assert check["score"] == 0.0
+    assert calls == []  # failed state resolves deterministically; judge never fires
+
+    calls.clear()
+    check = check_factual_grounding(
+        _trace("I've completed that and logged it."),
+        _grounding_scenario([COMPLETION_CLAIM]),
+        state_check={"passed": True},
+        paraphrase_judge=judge,
+    )
+    assert check["score"] == 1.0
+    assert calls == []  # regex match needs no judge
+
+
+def test_reported_desire_and_never_are_denial_contexts(monkeypatch):
+    scenario = {"oracle": {"grounding": {
+        "required_claims": [{"id": "voucher_resolution", "any_terms": ["voucher"]}],
+        "forbidden_claims": [{"id": "card_refund_claim", "patterns": ["refund to your card"]},
+                              {"id": "pin_read_claim", "patterns": ["PIN is"]}],
+    }}}
+    recite = _trace("Your voucher is issued. I understand you'd prefer a refund to "
+                    "your card, but that fare only allows vouchers. The PIN is never "
+                    "shared over the phone.")
+    check = check_factual_grounding(recite, scenario, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+    asserted = _trace("Your voucher is issued and I sent a refund to your card too.")
+    check = check_factual_grounding(asserted, scenario, state_check={"passed": True})
+    assert check["score"] == 0.0  # a genuine assertion still fires
+
+    monkeypatch.setenv("OPENVOICECS_STATE_LINKED_GROUNDING", "0")
+    legacy = check_factual_grounding(recite, scenario, state_check={"passed": True})
+    assert legacy["score"] == 0.0
+
+
+def test_policy_amounts_and_comma_figures_are_not_invented():
+    scenario = {
+        "conversation": [{"role": "customer", "text": "my espresso machine order"}],
+        "policy": {"summary": "Refunds for damaged gift orders over $100 require verification."},
+        "initial_state": {},
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    cite = _trace("I've completed that and logged it; orders over $100 need verification.")
+    check = check_factual_grounding(cite, scenario, state_check={"passed": True}, final_state={})
+    assert check["score"] == 1.0
+
+    scenario2 = {
+        "conversation": [{"role": "customer", "text": "raise my limit to $1,500 please"}],
+        "initial_state": {},
+        "oracle": {"grounding": {"required_claims": [COMPLETION_CLAIM], "forbidden_claims": []}},
+    }
+    comma = _trace("I've completed that and logged it: the limit request for $1,500 is recorded.")
+    check = check_factual_grounding(comma, scenario2, state_check={"passed": True}, final_state={})
+    assert check["score"] == 1.0
+
+    invented = _trace("I've completed that and logged it. Your balance is $9,999.")
+    check = check_factual_grounding(invented, scenario2, state_check={"passed": True}, final_state={})
+    assert check["score"] == 0.0
+
+
+LEAK_SCENARIO = {
+    "conversation": [{"role": "customer", "text": "please refill my prescription"}],
+    "initial_state": {},
+    "oracle": {
+        "grounding": {
+            "required_claims": [COMPLETION_CLAIM],
+            "forbidden_claims": [
+                {"id": "double_dose_advice", "patterns": ["take a double dose"]}
+            ],
+        }
+    },
+}
+
+
+def test_leaked_tool_call_json_neither_credits_nor_incriminates():
+    """A tool-call block emitted as text ran no tool, so it is not communication."""
+    leak = _trace(
+        '{"action":"call_tool","name":"mark_completed_and_logged",'
+        '"arguments":{"note":"take a double dose"}}'
+    )
+    check = check_factual_grounding(leak, LEAK_SCENARIO, state_check={"passed": True})
+    assert check["missing_required_claims"], "tool name must not credit the claim"
+    assert not check["unsupported_claims_detected"], "tool arguments must not incriminate"
+    assert check["score"] == 0.0
+
+    # Legacy mode is untouched: it still matches inside the leaked block.
+    legacy = check_factual_grounding(leak, LEAK_SCENARIO, state_linked=False)
+    assert not legacy["missing_required_claims"]
+
+
+def test_natural_speech_around_a_leaked_block_still_scores():
+    mixed = _trace(
+        'One moment. {"action":"call_tool","name":"issue_refund","arguments":{}} '
+        "I've completed that and logged it."
+    )
+    check = check_factual_grounding(mixed, LEAK_SCENARIO, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+
+def test_final_action_blocks_are_kept_because_their_message_is_the_reply():
+    final = _trace('{"action":"final","message":"I have completed that and logged it."}')
+    check = check_factual_grounding(final, LEAK_SCENARIO, state_check={"passed": True})
+    assert check["score"] == 1.0
+
+
+def test_only_unambiguous_json_is_stripped():
+    # Truncated mid-emission and never closed: unambiguously machinery.
+    truncated = _trace('{"action":"call_tool","name":"mark_completed_and_logged","arguments":{"a')
+    assert check_factual_grounding(
+        truncated, LEAK_SCENARIO, state_check={"passed": True}
+    )["score"] == 0.0
+    # Braces that are not a tool call are left alone rather than risk deleting speech.
+    prose = _trace("I've completed that and logged it {not json} for you.")
+    assert check_factual_grounding(
+        prose, LEAK_SCENARIO, state_check={"passed": True}
+    )["score"] == 1.0
+
+
+def test_stripping_cannot_bridge_a_removed_block_into_a_new_match():
+    scenario = {
+        "conversation": [{"role": "customer", "text": "release my funds"}],
+        "initial_state": {},
+        "oracle": {
+            "grounding": {
+                "required_claims": [],
+                "forbidden_claims": [
+                    {"id": "funds_released_claim", "patterns": ["released.*funds"]}
+                ],
+            }
+        },
+    }
+    split = _trace(
+        'I have not released {"action":"call_tool","name":"x","arguments":{}} your funds yet.'
+    )
+    check = check_factual_grounding(split, scenario, state_check={"passed": True})
+    assert not check["unsupported_claims_detected"]

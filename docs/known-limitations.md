@@ -204,24 +204,101 @@ re-scoring the June traces reports `task_success` near 0.9 because the lenient
 scorer forgives invented arguments on calls that *were* made, whereas fresh
 models skip those calls entirely and leniency cannot rescue an absent call.
 
-### 7. `factual_grounding` is a phrase matcher
+### 7. `factual_grounding` measured vocabulary, not grounding (largely fixed)
 
-Required claims are lists of literal strings. The check conflates three
-different things:
+The original check ran literal regexes over the concatenated agent turns.
+That framing — a phrase matcher that is too strict — understated the defect.
+Measured on the 8,877 scored trials of the v0.2 sweep, misses were the small
+side: 4.5% of trials lost credit despite a correct outcome, and that bias is
+narrow across models (0–8%), so it barely moves ranks. The dominant error ran
+the other way: on **64.3%** of trials the state check failed and the phrase
+matcher still granted full credit, and that false-credit rate is
+model-dependent (22.3%–81.1% across the cohort), which scrambles rankings
+rather than shifting them uniformly. The old score correlated *negatively*
+with `task_success` **within** each model (Pearson r computed across that
+model's own trials, then averaged over the 47 models with a defined r:
+mean −0.087, median −0.096, range −0.428..+0.267), and pooled across all
+8,877 trials it explained 0.1% of state-check variance (pooled r = −0.028,
+R² = 0.0008) — a fifth of the total score was paid to a signal statistically
+unrelated to whether anything happened. Neither figure is a *between*-model
+correlation: both operate at trial granularity and ask whether the score
+tracks the outcome of the individual trial. The
+*between*-model correlation, which asks the different question of whether
+better models also score higher, was positive even before the fix (r = +0.40
+on trial-weighted means, +0.62 on the published per-scenario aggregates); it
+is not evidence the metric worked, since it is carried by model quality rather
+than by per-trial correctness. Under the same within-model definition the
+state-linked score moves to **+0.962**. Against 72 human-labeled trials the
+old grader's kappa was −0.44.
 
-- **Synonymy misses.** `fee_waived` accepts `"no change fee"` / `"no fee"` /
-  `"fee waiver"`; an agent saying *"rebooked you at no charge"* is marked
-  ungrounded.
-- **Genuine omissions.** Never stating the $12.00 credit amount is a real
-  grounding failure and is correctly caught.
-- **Honest failure reports.** Where a scenario injects a tool failure and the
-  agent says *"I couldn't complete this, I've escalated it"*, the required
-  claim `completed` is absent and the agent is penalised for accuracy.
+**Fixed by state-linked grounding (default on; `state_linked=False` or
+`OPENVOICECS_STATE_LINKED_GROUNDING=0` reproduces published scores
+bit-for-bit).** A claim asserting a completed outcome is credited only when
+the replayed state check passed; a missed literal can be credited by a
+deterministic speech-act paraphrase layer (completion, zero-cost, refusal),
+and that credit passes through the same gate. Dollar figures matching no
+monetary-keyed sandbox value are flagged as invented, and forbidden-claim
+patterns match per agent turn so a benign later sentence cannot complete a
+violation across a turn boundary. Everything is deterministic and offline; an
+opt-in judge hook exists for the one genuinely ambiguous cell (literal missed,
+state passed — 1.9% of recorded trials) but adds no network calls by default.
 
-Scores span 0.047–0.323 across the ranked cohort at weight 0.20, enough to
-reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
-strongest remaining argument for a semantic grader and the most valuable
-contribution anyone can make.
+**Leaked machinery is not communication.** Some models emit the harness's own
+action protocol as message text (`{"action":"call_tool","name":...}`), so no
+tool runs — while claim regexes match *inside* the leaked block, letting a
+`create_clinician_task` tool name satisfy a `no_dosing_advice` claim. In
+state-linked mode those blocks are removed before any matching. Only blocks
+that parse as a tool call, or a truncated tail carrying the call signature that
+never closes, are stripped; anything ambiguous is left in place, because
+over-stripping would delete real speech. `{"action":"final","message":...}`
+blocks are deliberately kept — their `message` is the customer reply, and it
+carries 139 of the corpus's `completed_update` matches. Blast radius on the
+recorded sweep: 6 of 8,877 trials lose false credit, none gain any.
+
+**The same failure mode has a residue.** Tool *results*
+(`{"type":"tool_result","name":...,"result":{...}}`) are echoed into agent text
+by some models too. That shape is not a tool call and is not stripped; it is
+the sole remaining source of credit for 3 recorded trials. Left as documented
+rather than fixed, to keep the guard a tool-call rule instead of a general JSON
+detector. Note also that leaking JSON and being *scored on* leaked JSON are
+different populations: of 30 leak-carrying trials that score 1.0 on grounding
+while their state check fails, 21 earn that credit from genuine prose in
+another turn — the mismatch there is that no tool ran, which `task_success`
+already reports.
+
+**Known gaps, quantified.** `security_hold` and `port_out_authorised` read as
+completion assertions but are not state-gated (10 of 8,877 recorded trials
+keep credit on a failed state); gating them requires `state_independent:
+false` on those two claims in the hash-pinned scenario corpus and is deferred
+to the next corpus reissue. Refusal-family claims are exempt by design — the
+`adversarial_compliance` track has no recorded trials, so gating them would
+change nothing observable today.
+
+**Labeling was AI-assisted.** A model pre-labeled each row and the human
+annotator reviewed and corrected every one (12 of 80 first-pass suggestions
+were corrected, all completion-bias errors where the model credited a claim
+on a failed state check). The 25-row retest was pre-labeled by the same
+model, so the 0.764 intra-rater figure is likely inflated relative to fully
+independent double-labeling and should be read as a soft upper bound rather
+than a measured ceiling.
+
+**Related work in open PRs, measured against the same human labels.** PR #1
+adds an LLM-judge fallback on regex misses (false-negative side only,
+monotone-increasing). PR #4's evidence grounding pairs a communicated-claim
+check with state support and *does* revoke credit for communicated-but-false
+action claims; it led on the labeled criterion the last time that comparison
+was run (kappa 0.824 vs 0.644 here, N=36, single annotator, intra-rater
+test-retest 0.764 — a soft upper bound, see the labeling note below) on the
+strength of broader paraphrase coverage. **That comparison is stale and is no
+longer a held-out result.** Those rows were subsequently used to diagnose and
+fix twelve false negatives in this grader, which fits the set to it and leaves
+the published figure describing a version that no longer exists. It has not
+been re-measured against data this grader has not seen, so it should be read
+as neither a current win for PR #4 nor a current loss for this one. PR #10's
+state-attribution rescue is strong on omissions but never gates
+literal-matched claims, so it retains the false-credit class. The
+communicated-claim direction of PR #4 and the gate here sit on disjoint
+branches of the same function and would compose.
 
 ### 8. Binary trial gating compresses `passed`
 
