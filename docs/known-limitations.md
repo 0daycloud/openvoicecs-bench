@@ -223,6 +223,26 @@ reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
 strongest remaining argument for a semantic grader and the most valuable
 contribution anyone can make.
 
+**Partly fixed.** `oracle.grounding.required_claims[].alias_group` (bound by
+`scripts/bind_grounding_aliases.py`, patterns in
+`data/openvoicecs/grounding_aliases_v0.1.json`) unions a claim's `any_terms`
+with a shared paraphrase list at score time, and `requires_tool_outcome`
+exempts a claim from a trial where the underlying tool call failed instead of
+succeeded, so an honest failure report is no longer charged against the
+outcome-conditional claim. Mined against the real 58-model
+`text_action_v02_merged` sweep: of 1,918 required-claim misses under the old
+literal matcher, 826 recover under the alias-bound claims (154 of 220
+scenarios carry one), 0 flagged on a negation re-scan after an initial 28
+false positives (a bare `complete` stem matching `"unable to complete the
+verification"`) were found and excluded — see
+`scripts/measure_grounding_alias_impact.py`. **Still open:** 1,092 misses
+remain unrecovered — every paraphrase not yet in the shared list still scores
+as ungrounded, and closing that gap by hand does not scale. The honest-failure
+case is fixed only where a scenario declares `requires_tool_outcome`; no
+scenario in the seed corpus does yet, so it is currently exercised only by
+`tests/unit/test_openvoicecs.py::test_grounding_requires_tool_outcome_covers_success_and_failure_from_one_claim_set`,
+not by the published corpus.
+
 ### 8. Binary trial gating compresses `passed`
 
 A trial counts as passed only when all seven metrics equal exactly 1.0, so an
@@ -230,6 +250,33 @@ agent at 0.95 on six metrics records the same as one that crashed. The
 `overall_score` and per-metric means are informative; the `passed` / pass@k /
 pass^k family carries little information. With grounding now the dominant
 failure, pass rates are depressed mostly by limitation 5.
+
+**Partly fixed.** Every trial now carries `trial_score` (the same
+`METRIC_WEIGHTS`-weighted composite `overall_score` aggregates to, computed
+per trial instead of only across the whole report) and
+`passed_at_thresholds`, a near-miss-tolerant gate parameterized by
+`RELIABILITY_THRESHOLDS = (0.5, 0.8, 0.95, 1.0)` -- same seven gating metrics
+as strict `passed`, but each must clear the threshold instead of equalling
+1.0 exactly, so one bad dimension still fails the trial at any threshold.
+Scenario and report results carry the aggregated curve as
+`reliability_at_thresholds`; its `"1.0"` point is provably identical to the
+pre-existing strict fields
+(`test_reliability_at_thresholds_1_0_matches_strict_passed`), and both new
+fields are additive -- a report without them still validates. Re-scored
+against the same 58-model sweep: of 10,532 trials, 10.4% pass strict, and the
+`trial_score` distribution among the 89.6% that don't is not a wall at zero --
+the largest single cluster (7,128 trials, mass around 0.7) sits well above
+hard failure. Two of the seven gating metrics, `task_success` and `safety`,
+are themselves binary (0.0 or 1.0, never fractional) by their own definition,
+so a trial failing on either cannot register as a near-miss at any
+threshold -- this is a property of those metrics, not of the threshold gate;
+the fractional room comes from `tool_correctness`, `sop_compliance`,
+`privacy`, and `auth_integrity`. Among trials where the agent did complete
+the task (`task_success == 1.0`) but strict gating still failed (1,498 of
+10,532), `sop_compliance` was below 1.0 in 96.1% of them -- the missed
+secondary bookkeeping call this section originally described. **Still open:**
+the four downstream `leaderboard`/`frontier` reports do not yet expose
+`reliability_at_thresholds`; only the scorer and raw reports carry it.
 
 ### 9. `safety` is trivially satisfied by inaction
 
@@ -329,15 +376,19 @@ to real-world audio are not supported by this release.
 The instrument is sound and the top of the table is trustworthy. What is not yet
 trustworthy is fine-grained ordering in the middle.
 
-1. **Replace phrase-matched grounding with a semantic grader** (section 7). It
-   carries weight 0.20, it conflates synonymy with omission, and removing it
-   reshuffles 36 of 44 models — it is the largest single source of mid-table
-   noise.
+1. **Replace phrase-matched grounding with a semantic grader** (section 7,
+   partly fixed). Alias-group expansion recovers 826 of 1,918 real misses at
+   0 measured false positives; 1,092 remain, all requiring a paraphrase
+   nobody has curated yet. A semantic grader (or a measured, opt-in ML tier
+   scored against the same recovered-vs-missed set for precision/recall) is
+   still the highest-leverage remaining work here.
 2. **Repeat the sweep and publish confidence intervals** (section 5). One run of
    three trials cannot separate models a couple of points apart, and right now
    nothing in the artifact says so numerically.
 3. **Replace binary gating** with a continuous or threshold-based aggregate
-   (section 8), so a near-miss stops scoring the same as a crash.
+   (section 8, partly fixed). `trial_score` and `reliability_at_thresholds`
+   exist on every trial/scenario/report now; what's left is exposing the
+   curve in `leaderboard`/`frontier` output instead of only raw reports.
 4. **Re-author the corpus as multi-turn** (section 11). The harness supports it
    and the pilot proves the shape; single-turn scenarios are the biggest gap
    between what this benchmark claims to measure and what a real support call

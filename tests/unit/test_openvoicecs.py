@@ -10,6 +10,7 @@ from src.evaluation.benchmark.openvoicecs import (
     build_audio_variant_scenarios,
     build_leaderboard,
     build_release_audit,
+    check_factual_grounding,
     check_privacy,
     check_tool_calls,
     derive_trace_events,
@@ -70,6 +71,49 @@ def test_replay_tool_calls_applies_matching_tool_effects():
     assert replay["errors"] == []
     assert replay["final_state"]["orders"]["ord_7001"]["refund_status"] == "issued"
     assert replay["final_state"]["accounts"]["acct_1001"]["identity_verified"] is True
+
+
+def test_check_tool_calls_is_order_agnostic_for_independent_calls():
+    """check_tool_calls is set-membership, not a position-indexed sequence.
+
+    retail-refund-damaged-item-001 expects verify_identity, issue_refund,
+    create_case in that order; issue_refund and create_case each only depend
+    on identity_verified, not on each other. A model that reasons in the
+    other valid order must not be penalized as though it skipped a step.
+    """
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+    calls = scenario["oracle"]["expected_tool_calls"]
+    verify, refund, case = calls[0], calls[1], calls[2]
+
+    in_order = check_tool_calls(
+        [verify, refund, case],
+        expected=scenario["oracle"]["expected_tool_calls"],
+        forbidden=scenario["oracle"]["forbidden_tool_calls"],
+    )
+    swapped = check_tool_calls(
+        [verify, case, refund],
+        expected=scenario["oracle"]["expected_tool_calls"],
+        forbidden=scenario["oracle"]["forbidden_tool_calls"],
+    )
+
+    assert in_order["score"] == swapped["score"] == 1.0
+    assert in_order["missing_expected"] == swapped["missing_expected"] == []
+
+
+def test_precondition_violation_is_caught_by_replay_not_call_position():
+    """A causally-invalid reorder (refund before verification) is rejected --
+    but through the tool's own precondition, not a sequence-position check.
+    Same call set as the order-agnostic test above; only the order changes.
+    """
+    scenario = OpenVoiceCSBench.load().scenarios[0]
+    calls = scenario["oracle"]["expected_tool_calls"]
+    verify, refund, case = calls[0], calls[1], calls[2]
+
+    replay = replay_tool_calls(scenario, [refund, verify, case])
+
+    assert replay["errors"][0]["error"] == "precondition_failed"
+    assert replay["errors"][0]["name"] == "issue_refund"
+    assert replay["final_state"]["orders"]["ord_7001"]["refund_status"] == "none"
 
 
 def test_replay_tool_calls_enforces_preconditions():
@@ -476,6 +520,174 @@ def test_external_failure_recovery_scenario_can_pass():
     assert trial["tool_results"][1]["error"] == "external_unavailable"
 
 
+def test_grounding_claim_alias_group_recovers_paraphrase():
+    """docs/known-limitations.md section 7's synonymy-miss example, fixed.
+
+    "no fee"/"fee waiver" in any_terms would not match "rebooked you at no
+    charge". Binding the claim to the fee_waived alias group (see
+    scripts/bind_grounding_aliases.py) recovers it.
+    """
+    scenario = {
+        "oracle": {
+            "grounding": {
+                "required_claims": [
+                    {
+                        "id": "fee_waived",
+                        "any_terms": ["no change fee", "no fee", "fee waiver"],
+                        "alias_group": "fee_waived",
+                    }
+                ]
+            }
+        }
+    }
+    trace = {
+        "messages": [
+            {"role": "agent", "text": "I've rebooked you on the next flight at no charge."}
+        ]
+    }
+
+    result = check_factual_grounding(trace, scenario)
+
+    assert result["required_passed"] is True
+    assert result["missing_required_claims"] == []
+
+
+def test_grounding_claim_without_alias_group_is_unaffected():
+    """alias_group is opt-in: an unbound claim scores exactly as before."""
+    scenario = {
+        "oracle": {
+            "grounding": {
+                "required_claims": [
+                    {"id": "fee_waived", "any_terms": ["no change fee", "no fee", "fee waiver"]}
+                ]
+            }
+        }
+    }
+    trace = {
+        "messages": [
+            {"role": "agent", "text": "I've rebooked you on the next flight at no charge."}
+        ]
+    }
+
+    result = check_factual_grounding(trace, scenario)
+
+    assert result["required_passed"] is False
+    assert len(result["missing_required_claims"]) == 1
+
+
+def test_grounding_requires_tool_outcome_covers_success_and_failure_from_one_claim_set():
+    """One oracle.grounding.required_claims list, gated by requires_tool_outcome,
+    scores both the happy path and an injected-failure path correctly -- the
+    generalization of the single-branch pattern in
+    test_external_failure_recovery_scenario_can_pass.
+    """
+
+    def build_scenario(*, inject_failure: bool) -> dict:
+        issue_refund_tool = {
+            "name": "issue_refund",
+            "required_arguments": {"order_id": "ord_1"},
+            "preconditions": [{"path": "accounts.acct_1.identity_verified", "value": True}],
+            "state_updates": [{"path": "orders.ord_1.refund_status", "value": "issued"}],
+        }
+        if inject_failure:
+            issue_refund_tool["failure"] = {"type": "external_unavailable", "code": "503"}
+
+        return {
+            "id": "test-requires-tool-outcome",
+            "domain": "retail",
+            "track": "text_to_action",
+            "difficulty": "medium",
+            "customer_goal": "Refund a damaged item.",
+            "conversation": [{"role": "customer", "text": "My order arrived damaged."}],
+            "initial_state": {
+                "accounts": {"acct_1": {"identity_verified": False}},
+                "orders": {"ord_1": {"refund_status": "none"}},
+            },
+            "tools": [
+                {
+                    "name": "verify_identity",
+                    "required_arguments": {"account_id": "acct_1"},
+                    "state_updates": [
+                        {"path": "accounts.acct_1.identity_verified", "value": True}
+                    ],
+                },
+                issue_refund_tool,
+            ],
+            "oracle": {
+                "expected_tool_calls": [
+                    {"name": "verify_identity", "arguments": {"account_id": "acct_1"}},
+                    {"name": "issue_refund", "arguments": {"order_id": "ord_1"}},
+                ],
+                "expected_state": {
+                    "accounts": {"acct_1": {"identity_verified": True}},
+                    "orders": {
+                        "ord_1": {"refund_status": "none" if inject_failure else "issued"}
+                    },
+                },
+                "grounding": {
+                    "required_claims": [
+                        {
+                            "id": "refund_confirmed",
+                            "any_terms": ["refund"],
+                            "requires_tool_outcome": {"tool": "issue_refund", "outcome": "success"},
+                        },
+                        {
+                            "id": "escalation_notice",
+                            "any_terms": ["manual review"],
+                            "alias_group": "escalation_pending",
+                            "requires_tool_outcome": {"tool": "issue_refund", "outcome": "failure"},
+                        },
+                    ]
+                },
+            },
+            "experience": {"max_agent_words": 80, "max_latency_ms": 2500},
+        }
+
+    def honest_agent(scenario: dict, trial_index: int) -> dict:
+        del trial_index
+        succeeded = scenario["oracle"]["expected_state"]["orders"]["ord_1"]["refund_status"] == "issued"
+        text = (
+            "I verified you and processed the refund."
+            if succeeded
+            else "I verified you, but the refund could not go through, so I've escalated this for manual review."
+        )
+        return {
+            "messages": [{"role": "agent", "text": text}],
+            "tool_calls": scenario["oracle"]["expected_tool_calls"],
+        }
+
+    happy_report = OpenVoiceCSBench(scenarios=[build_scenario(inject_failure=False)]).score_agent(
+        honest_agent
+    )
+    happy_grounding = happy_report["results"][0]["trials"][0]["grounding_check"]
+    assert happy_grounding["required_passed"] is True
+    assert [c["id"] for c in happy_grounding["skipped_required_claims"]] == ["escalation_notice"]
+
+    failure_report = OpenVoiceCSBench(scenarios=[build_scenario(inject_failure=True)]).score_agent(
+        honest_agent
+    )
+    failure_grounding = failure_report["results"][0]["trials"][0]["grounding_check"]
+    assert failure_grounding["required_passed"] is True
+    assert [c["id"] for c in failure_grounding["skipped_required_claims"]] == ["refund_confirmed"]
+
+    def dishonest_agent(scenario: dict, trial_index: int) -> dict:
+        del scenario, trial_index
+        return {
+            "messages": [{"role": "agent", "text": "I verified you and processed the refund."}],
+            "tool_calls": [
+                {"name": "verify_identity", "arguments": {"account_id": "acct_1"}},
+                {"name": "issue_refund", "arguments": {"order_id": "ord_1"}},
+            ],
+        }
+
+    dishonest_failure_report = OpenVoiceCSBench(
+        scenarios=[build_scenario(inject_failure=True)]
+    ).score_agent(dishonest_agent)
+    dishonest_grounding = dishonest_failure_report["results"][0]["trials"][0]["grounding_check"]
+    assert dishonest_grounding["required_passed"] is False
+    assert dishonest_grounding["missing_required_claims"][0]["id"] == "escalation_notice"
+
+
 def test_external_tool_failure_draft_validates_and_oracle_passes():
     path = Path("data/openvoicecs/drafts/external_tool_failure_scenarios_v0.1.json")
     draft = json.loads(path.read_text(encoding="utf-8"))
@@ -491,6 +703,81 @@ def test_external_tool_failure_draft_validates_and_oracle_passes():
     assert trial["tool_results"][1]["error"] == "external_unavailable"
     assert trial["final_state"]["orders"]["ord_9101"]["refund_status"] == "none"
     assert trial["final_state"]["cases"]["case_9101"]["status"] == "queued_manual_refund_review"
+
+
+def test_oracle_trial_score_and_passed_at_thresholds_are_all_perfect():
+    report = OpenVoiceCSBench.load().score_agent(oracle_agent, max_scenarios=3)
+    for result in report["results"]:
+        for trial in result["trials"]:
+            assert trial["trial_score"] == 1.0
+            assert all(trial["passed_at_thresholds"].values())
+
+
+def test_reliability_at_thresholds_1_0_matches_strict_passed():
+    """docs/known-limitations.md section 8: binary gating is threshold=1.0 of
+    a curve, not a separate concept. The 1.0 point of the new curve must be
+    provably identical to the pre-existing strict pass_at_k/pass_k/mean_pass_rate.
+    """
+    report = OpenVoiceCSBench.load().score_agent(oracle_agent, max_scenarios=5)
+    strict_point = report["reliability_at_thresholds"]["1.0"]
+
+    assert strict_point["pass_at_k"] == report["pass_at_k"]
+    assert strict_point["pass_k"] == report["pass_k"]
+    assert strict_point["mean_pass_rate"] == report["mean_pass_rate"]
+
+    for result in report["results"]:
+        scenario_strict_point = result["reliability_at_thresholds"]["1.0"]
+        assert scenario_strict_point["pass_at_k"] == result["pass_at_k"]
+        assert scenario_strict_point["pass_k"] == result["pass_k"]
+        assert scenario_strict_point["pass_rate"] == result["pass_rate"]
+
+
+def test_near_miss_trial_passes_at_lower_threshold_but_not_strict():
+    """docs/known-limitations.md section 8's example: an agent at 0.95 on six
+    metrics scores the same as a crash under strict gating. Build a trial
+    that misses one required_event (sop_compliance=0.5, everything else
+    perfect) and show it clears a 0.5 threshold but not 0.8 or strict.
+    """
+    scenario = {
+        "id": "test-near-miss-threshold",
+        "domain": "retail",
+        "track": "text_to_action",
+        "difficulty": "easy",
+        "customer_goal": "Look up an order.",
+        "conversation": [{"role": "customer", "text": "What's the status of my order?"}],
+        "initial_state": {"orders": {"ord_1": {"status": "shipped"}}},
+        "tools": [{"name": "lookup_order", "required_arguments": {"order_id": "ord_1"}, "state_updates": []}],
+        "oracle": {
+            "expected_tool_calls": [{"name": "lookup_order", "arguments": {"order_id": "ord_1"}}],
+            "expected_state": {"orders": {"ord_1": {"status": "shipped"}}},
+            "required_events": ["order_looked_up", "status_confirmed"],
+        },
+        "experience": {"max_agent_words": 80, "max_latency_ms": 2500},
+    }
+
+    def half_compliant_agent(scenario: dict, trial_index: int) -> dict:
+        del trial_index
+        return {
+            "messages": [{"role": "agent", "text": "Your order has shipped."}],
+            "tool_calls": scenario["oracle"]["expected_tool_calls"],
+            "events": ["order_looked_up"],
+        }
+
+    report = OpenVoiceCSBench(scenarios=[scenario]).score_agent(half_compliant_agent)
+    trial = report["results"][0]["trials"][0]
+
+    assert trial["scores"]["sop_compliance"] == 0.5
+    assert trial["scores"]["task_success"] == 1.0
+    assert trial["passed"] is False
+    assert trial["passed_at_thresholds"]["0.5"] is True
+    assert trial["passed_at_thresholds"]["0.8"] is False
+    assert trial["passed_at_thresholds"]["1.0"] is False
+    assert 0.0 < trial["trial_score"] < 1.0
+
+    scenario_result = report["results"][0]
+    assert scenario_result["reliability_at_thresholds"]["0.5"]["pass_k"] is True
+    assert scenario_result["reliability_at_thresholds"]["1.0"]["pass_k"] is False
+    assert scenario_result["pass_k"] is False
 
 
 def test_scenario_family_draft_validates_and_reports_variants():

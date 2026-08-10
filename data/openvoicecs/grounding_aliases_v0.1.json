@@ -1,0 +1,30 @@
+{
+  "version": "0.1",
+  "description": "Shared paraphrase groups for oracle.grounding.required_claims (docs/known-limitations.md section 7). A claim opts in with \"alias_group\": \"<key>\" (see scripts/bind_grounding_aliases.py); its any_terms are unioned with the group's patterns at score time. Every pattern below except the escalation_pending group was chosen by mining real recorded traces in data/openvoicecs/runs/text_action_v02_merged for required-claim misses the literal any_terms would not have recovered, then hand-checked for false positives. The completed_update 'complete' pattern excludes 'complete the <object>' specifically because that construction fired on 28 real traces where the agent said it was UNABLE to complete the action (e.g. 'unable to complete the verification') -- see scripts/bind_grounding_aliases.py's docstring and the PR description for the before/after counts. escalation_pending has no corpus claim bound to it yet; it exists for scenarios that pair a tool-injected failure with an honest-failure required claim via requires_tool_outcome, the pattern already exercised in tests/unit/test_openvoicecs.py::test_external_failure_recovery_scenario_can_pass.",
+  "aliases": {
+    "completed_update": [
+      "(?<!not )(?<!n't )(?<!unable to )\\bcomplete\\b(?!\\s+(the|this|that|your|a|an|it|his|her|their))",
+      "(?<!before )\\bcompleting\\b",
+      "resolved",
+      "all set",
+      "done"
+    ],
+    "refund_processed": [
+      "refund",
+      "refunded",
+      "reimburs"
+    ],
+    "fee_waived": [
+      "no charge",
+      "at no (extra )?charge",
+      "free of charge",
+      "without (a |any )?(fee|charge)"
+    ],
+    "escalation_pending": [
+      "manual review",
+      "escalat",
+      "not (yet )?complete",
+      "still (in progress|pending)"
+    ]
+  }
+}

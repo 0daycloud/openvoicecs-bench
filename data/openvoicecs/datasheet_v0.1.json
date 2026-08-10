@@ -1,14 +1,14 @@
 {
   "benchmark": "OpenVoiceCS-Bench Datasheet",
   "datasheet_version": "0.1.0",
-  "generated_at": "2026-07-28",
+  "generated_at": "2026-08-09",
   "release": {
     "benchmark_version": "0.1.0",
     "release_stage": "seed",
     "scenario_file": {
       "path": "data/openvoicecs/scenarios_v0.1.json",
-      "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
-      "bytes": 1467912
+      "sha256": "2449b5d55a195362f6d53796ab5e4aeb01104d76057e0e55209002b6d40c9b32",
+      "bytes": 1475452
     },
     "audio_manifest_file": {
       "path": "data/openvoicecs/audio_manifest_v0.1.json",
@@ -32,12 +32,12 @@
     },
     "changelog_file": {
       "path": "data/openvoicecs/changelog_v0.1.json",
-      "sha256": "945b502beccd936e28ff1570a0c48cab627b31078bd97476f8e104405430b71a",
-      "bytes": 19245
+      "sha256": "b3f6e8432c7602f3527bb4cf560961a4cfd5c2aa0f85d81e1e1822b68cfa541a",
+      "bytes": 27400
     },
     "baseline_manifest_file": {
       "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
-      "sha256": "984931f1f47f7865881c3a39f98d7e7a57f4201f5b4eab35c79208a887919257",
+      "sha256": "576c9823d574a915d0354302a3124bc10a5014ebd83fbe073a23fa12280c00e0",
       "bytes": 3152
     },
     "review_manifest_file": {
@@ -47,10 +47,10 @@
     },
     "split_commitment_file": {
       "path": "data/openvoicecs/split_commitments_v0.1.json",
-      "sha256": "99288c11297f09d95bbcd9c8631b09229f5ed3a173edc53617469e911aa80666",
+      "sha256": "db9333d5dfd932b98ef2dc9a1a5e7bc9e557af37106b2e3c608dda2a8278ab9a",
       "bytes": 48341
     },
-    "split_commitment_root_hash": "3a412ab8dc2a6515976a4305563113041ee4111255489f728b3fc1e71b38f66a"
+    "split_commitment_root_hash": "b3c7c7255354d0d9c0eb35d2715d7b7a8b2b3563f93e782d2c5724075cbd58b9"
   },
   "intended_use": [
     "Evaluate voice AI and customer-service agents on task completion, policy compliance, tool use, safety, privacy, authentication, latency, and cost.",
@@ -111,7 +111,7 @@
       }
     },
     "sealed_test_policy": "Sealed items must not be published with full transcripts, tool oracles, expected states, or audio assets before evaluation.",
-    "commitment_root_hash": "3a412ab8dc2a6515976a4305563113041ee4111255489f728b3fc1e71b38f66a",
+    "commitment_root_hash": "b3c7c7255354d0d9c0eb35d2715d7b7a8b2b3563f93e782d2c5724075cbd58b9",
     "sealed_ids_revealed": false
   },
   "provenance": {
@@ -133,14 +133,16 @@
     "present": true,
     "version": "0.1.0",
     "benchmark_version": "0.1.0",
-    "num_entries": 6,
+    "num_entries": 7,
     "entry_types": {
+      "erratum": 1,
       "release": 1,
       "scenario_added": 5
     },
     "compatibility": {
       "backward_compatible": 5,
-      "initial_release": 1
+      "initial_release": 1,
+      "scoring_affecting": 1
     },
     "num_changed_scenarios": 220,
     "num_changed_audio_variants": 120,
