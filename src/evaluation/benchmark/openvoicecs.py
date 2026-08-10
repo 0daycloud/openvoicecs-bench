@@ -1214,6 +1214,7 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
             issues.append(ValidationIssue(scenario_id, "tools", "must be a list"))
             tools = []
         tool_names = set()
+        tool_shape_issue_count = len(issues)
         for tool_index, tool in enumerate(tools):
             if not isinstance(tool, dict):
                 issues.append(ValidationIssue(scenario_id, f"tools[{tool_index}]", "must be an object"))
@@ -1268,7 +1269,18 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
             if event_field in oracle and not isinstance(oracle[event_field], list):
                 issues.append(ValidationIssue(scenario_id, f"oracle.{event_field}", "must be a list"))
 
-        if "expected_state" in oracle:
+        tools_well_formed = len(issues) == tool_shape_issue_count
+        if "expected_state" in oracle and tools_well_formed:
+            # replay_tool_calls (and the argument-binding/precondition helpers
+            # it calls) trust tool shape rather than re-checking it -- by
+            # design, per this module's own convention of validating at the
+            # boundary rather than defensively in the hot scoring path. That
+            # boundary is the tool-shape loop just above: a scenario whose
+            # tools already failed those checks (required_arguments not a
+            # dict, and so on) would crash replay_tool_calls with a raw
+            # AttributeError instead of reporting a clean ValidationIssue, so
+            # skip the reachability replay for it -- the shape issue already
+            # reported is the actionable one.
             replay = replay_tool_calls(scenario, oracle.get("expected_tool_calls", []))
             state_check = check_expected_state(replay["final_state"], oracle["expected_state"])
             if replay["errors"]:
