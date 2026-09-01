@@ -957,6 +957,45 @@ def test_validate_scenarios_reports_all_issues():
     assert ("oracle.expected_tool_calls[0].name", "unknown tool") in messages
 
 
+def test_validate_scenarios_reports_malformed_required_arguments_instead_of_crashing():
+    """A tool whose ``required_arguments`` isn't an object must produce a
+    clean ``ValidationIssue``, not an unhandled crash.
+
+    ``replay_tool_calls`` (and the helpers it calls, like
+    ``_model_required_arguments``) trust that tool shape was already checked
+    at the boundary -- they call ``.items()``/``.keys()`` on
+    ``required_arguments``/``generated_arguments``/``argument_bindings``
+    without re-validating. ``validate_scenarios`` itself flags a non-dict
+    ``required_arguments`` correctly, but used to keep going and call
+    ``replay_tool_calls`` anyway whenever the tool was referenced in
+    ``oracle.expected_tool_calls`` (needed for the reachability check a few
+    lines later) -- so a scenario-authoring typo like
+    ``"required_arguments": "damaged_item"`` instead of
+    ``{"reason": "damaged_item"}`` crashed the validator itself with a raw
+    ``AttributeError: 'str' object has no attribute 'items'`` instead of
+    reporting the same "must be an object" issue every other malformed field
+    on this scenario gets.
+    """
+    issues = validate_scenarios([
+        {
+            "id": "bad-required-arguments-001",
+            "domain": "retail",
+            "track": "text_to_action",
+            "difficulty": "easy",
+            "customer_goal": "x",
+            "initial_state": {},
+            "tools": [{"name": "issue_refund", "required_arguments": "damaged_item", "state_updates": []}],
+            "oracle": {
+                "expected_state": {},
+                "expected_tool_calls": [{"name": "issue_refund", "arguments": {}}],
+            },
+        }
+    ])
+
+    messages = {(issue.path, issue.message) for issue in issues}
+    assert ("tools[0].required_arguments", "must be an object") in messages
+
+
 def test_leaderboard_orders_by_reliability_then_score():
     leaderboard = build_leaderboard([
         {
