@@ -10,7 +10,7 @@
   },
   "split_commitments": {
     "path": "data/openvoicecs/split_commitments_v0.1.json",
-    "sha256": "99288c11297f09d95bbcd9c8631b09229f5ed3a173edc53617469e911aa80666",
+    "sha256": "db9333d5dfd932b98ef2dc9a1a5e7bc9e557af37106b2e3c608dda2a8278ab9a",
     "bytes": 48341
   },
   "queue_policy": {
@@ -34,7 +34,7 @@
       "submitted_at": "2026-06-11",
       "intake": {
         "path": "data/openvoicecs/submissions/reference_submission_intake_v0.1.json",
-        "sha256": "1760f9171ab0bda6f54f277ef9cc08813d1f1ba4a3b87337a411cee77378fea1",
+        "sha256": "978e8293c9355e107281da1c31e68eef0aae2a0846d0d265b78ec7487660c817",
         "bytes": 2479
       },
       "attempt_limit": 2,
@@ -80,7 +80,7 @@
             },
             "leaderboard_claims": {
               "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-              "sha256": "bf5c14979e37b5fdf1ad1261a8e897015297f5da981eaa9dc1598c60f11b1ea4",
+              "sha256": "84d538926a6caf4367a38b7bcbe941e0a467c4796e8904ef671dba06d3f7556c",
               "bytes": 2730
             }
           }

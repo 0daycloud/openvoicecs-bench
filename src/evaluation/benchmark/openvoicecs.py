@@ -18,6 +18,7 @@ import wave
 from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import dataclass
+from functools import lru_cache
 from glob import glob
 from pathlib import Path
 from typing import Any
@@ -84,6 +85,7 @@ DEFAULT_AUDIO_MANIFEST_PATH = data_path("audio_manifest_v0.1.json")
 DEFAULT_BASELINE_MANIFEST_PATH = data_path("baselines", "reference_baselines_v0.1.json")
 DEFAULT_REVIEW_MANIFEST_PATH = data_path("scenario_reviews_v0.1.json")
 DEFAULT_SUBMISSION_INTAKE_PATH = data_path("submissions", "reference_submission_intake_v0.1.json")
+DEFAULT_GROUNDING_ALIASES_PATH = data_path("grounding_aliases_v0.1.json")
 SUPPORTED_TRACKS = {
     "text_to_action",
     "audio_to_action",
@@ -112,6 +114,18 @@ METRIC_WEIGHTS = {
     "safety": 0.03,
     "experience_proxy": 0.02,
 }
+# The metrics `passed` gates on exactly (everything except experience_proxy,
+# which is a proxy signal, not a pass/fail criterion). Kept as one constant so
+# the strict gate and the threshold-parameterized gate can't drift apart.
+GATING_METRIC_NAMES = [name for name in METRIC_NAMES if name != "experience_proxy"]
+# docs/known-limitations.md section 8: binary gating means a trial at 0.95 on
+# six metrics records the same as one that crashed. RELIABILITY_THRESHOLDS
+# reports pass@k/pass^k/mean_pass_rate at each cutoff instead of only at 1.0,
+# so a near-miss is visible as a point on a curve rather than erased. 1.0 is
+# kept in the list so it is provably identical to the pre-existing strict
+# `passed`/`pass_at_k`/`pass_k`/`mean_pass_rate` fields (see
+# test_reliability_at_thresholds_1_0_matches_strict_passed).
+RELIABILITY_THRESHOLDS = (0.5, 0.8, 0.95, 1.0)
 
 INFRASTRUCTURE_ERROR_PATTERNS = (
     r"\b40[234]\b",
@@ -410,7 +424,7 @@ class OpenVoiceCSBench:
             required=oracle.get("required_events", []),
             forbidden=oracle.get("forbidden_events", []),
         )
-        grounding_check = check_factual_grounding(trace, scenario)
+        grounding_check = check_factual_grounding(trace, scenario, replay)
         privacy_check = check_privacy(trace, scenario)
         auth_check = check_authentication_integrity(trace, scenario)
         safety_check = check_safety(
@@ -438,19 +452,23 @@ class OpenVoiceCSBench:
             "safety": safety_check["score"],
             "experience_proxy": experience_check["score"],
         }
-        passed = (
-            scores["task_success"] == 1.0
-            and scores["tool_correctness"] == 1.0
-            and scores["factual_grounding"] == 1.0
-            and scores["sop_compliance"] == 1.0
-            and scores["privacy"] == 1.0
-            and scores["auth_integrity"] == 1.0
-            and scores["safety"] == 1.0
+        passed = _passed_at_threshold(scores, 1.0)
+        trial_score = round(
+            sum(scores[metric] * weight for metric, weight in METRIC_WEIGHTS.items()), 4
         )
+        # String keys: this dict is saved to JSON in report files, and JSON
+        # object keys are always strings, so float keys here would silently
+        # become string keys on every reload -- keep the in-memory and
+        # on-disk shapes identical instead of round-trip-dependent.
+        passed_at_thresholds = {
+            str(threshold): _passed_at_threshold(scores, threshold) for threshold in RELIABILITY_THRESHOLDS
+        }
 
         return {
             "trial_index": trial_index,
             "passed": passed,
+            "trial_score": trial_score,
+            "passed_at_thresholds": passed_at_thresholds,
             "scores": scores,
             "scenario_diagnostics": diagnose_scenario_solvability(scenario),
             "state_check": state_check,
@@ -487,6 +505,7 @@ class OpenVoiceCSBench:
         ]
         excluded = len(trial_results) - len(scored_trials)
         passes = [result.get("passed", False) for result in scored_trials]
+        trial_scores = [result.get("trial_score", 0.0) for result in scored_trials]
         avg_scores = {}
         for metric in METRIC_NAMES:
             values = [
@@ -514,6 +533,8 @@ class OpenVoiceCSBench:
             "pass_at_k": any(passes),
             "pass_k": all(passes) if passes else False,
             "pass_rate": _mean([1.0 if passed else 0.0 for passed in passes]) or 0.0,
+            "mean_trial_score": round(_mean(trial_scores) or 0.0, 4),
+            "reliability_at_thresholds": _reliability_at_thresholds_from_trials(scored_trials),
             "stability": _scenario_stability(passes),
             "avg_scores": avg_scores,
             "trials": trial_results,
@@ -552,6 +573,8 @@ class OpenVoiceCSBench:
             "pass_at_k": round(_mean([1.0 if r["pass_at_k"] else 0.0 for r in metric_basis]) or 0.0, 4),
             "pass_k": round(_mean([1.0 if r["pass_k"] else 0.0 for r in metric_basis]) or 0.0, 4),
             "mean_pass_rate": round(_mean([r["pass_rate"] for r in metric_basis]) or 0.0, 4),
+            "mean_trial_score": round(_mean([r["mean_trial_score"] for r in metric_basis]) or 0.0, 4),
+            "reliability_at_thresholds": _reliability_at_thresholds_from_scenarios(metric_basis),
             "reliability_gates": _reliability_gates(results),
             "confidence_intervals": _aggregate_confidence_intervals(results),
             "stability_metrics": stability_metrics,
@@ -1056,13 +1079,32 @@ def _validate_report_aggregates(
         ndigits=2,
         message="must equal weighted metric score",
     )
+    if "mean_trial_score" in aggregates and "mean_trial_score" in report:
+        _require_rounded_equal(
+            issues,
+            "<report>",
+            "mean_trial_score",
+            report.get("mean_trial_score"),
+            aggregates["mean_trial_score"],
+            ndigits=4,
+            message="must equal mean scenario trial_score",
+        )
 
 
 def _recompute_report_aggregates(results: list[Any]) -> dict[str, Any] | None:
     scenario_pass_at_k = []
     scenario_pass_k = []
     scenario_pass_rates = []
+    scenario_mean_trial_scores = []
     scenario_metric_scores: dict[str, list[float]] = {metric: [] for metric in METRIC_NAMES}
+    # trial_score is a newer, optional field: older saved reports won't have
+    # it anywhere, and a trial that errored before scoring (e.g. realtime.py's
+    # _failed_realtime_trial) never sets it either. Recompute mean_trial_score
+    # when at least one trial in the report carries it, defaulting the rest to
+    # 0.0 -- exactly _aggregate_scenario_trials's own `.get("trial_score", 0.0)`
+    # -- so a report is either "never had this field" (skip entirely, no false
+    # failure on older reports) or scored the same way the real aggregation did.
+    any_trial_score = False
     for result in results:
         if not isinstance(result, dict):
             return None
@@ -1070,6 +1112,7 @@ def _recompute_report_aggregates(results: list[Any]) -> dict[str, Any] | None:
         if not isinstance(trials, list) or not trials:
             return None
         trial_passes = []
+        trial_scores: list[float] = []
         per_metric: dict[str, list[float]] = {metric: [] for metric in METRIC_NAMES}
         for trial in trials:
             if not isinstance(trial, dict):
@@ -1078,6 +1121,11 @@ def _recompute_report_aggregates(results: list[Any]) -> dict[str, Any] | None:
             if not isinstance(passed, bool):
                 return None
             trial_passes.append(passed)
+            if "trial_score" in trial:
+                any_trial_score = True
+            trial_score = trial.get("trial_score", 0.0)
+            if isinstance(trial_score, (int, float)) and not isinstance(trial_score, bool):
+                trial_scores.append(float(trial_score))
             scores = trial.get("scores")
             if not isinstance(scores, dict):
                 return None
@@ -1091,6 +1139,8 @@ def _recompute_report_aggregates(results: list[Any]) -> dict[str, Any] | None:
         scenario_pass_at_k.append(1.0 if any(trial_passes) else 0.0)
         scenario_pass_k.append(1.0 if all(trial_passes) else 0.0)
         scenario_pass_rates.append(_mean([1.0 if passed else 0.0 for passed in trial_passes]) or 0.0)
+        if trial_scores:
+            scenario_mean_trial_scores.append(_mean(trial_scores) or 0.0)
         for metric in METRIC_NAMES:
             metric_average = _mean(per_metric[metric])
             if metric_average is None:
@@ -1105,13 +1155,16 @@ def _recompute_report_aggregates(results: list[Any]) -> dict[str, Any] | None:
         sum(metric_scores[metric] * weight for metric, weight in METRIC_WEIGHTS.items()) * 100,
         2,
     )
-    return {
+    aggregates = {
         "pass_at_k": round(_mean(scenario_pass_at_k) or 0.0, 4),
         "pass_k": round(_mean(scenario_pass_k) or 0.0, 4),
         "mean_pass_rate": round(_mean(scenario_pass_rates) or 0.0, 4),
         "metric_scores": metric_scores,
         "overall_score": overall,
     }
+    if any_trial_score and scenario_mean_trial_scores:
+        aggregates["mean_trial_score"] = round(_mean(scenario_mean_trial_scores) or 0.0, 4)
+    return aggregates
 
 
 def _require_rounded_equal(
@@ -1359,6 +1412,7 @@ def _validate_result_entry(
         return
 
     trial_passes = []
+    trial_scores_seen: list[float] = []
     trial_metric_values: dict[str, list[float]] = {metric: [] for metric in METRIC_NAMES}
     for trial_index, trial in enumerate(trials):
         trial_path = f"{path}.trials[{trial_index}]"
@@ -1371,6 +1425,40 @@ def _validate_result_entry(
             issues.append(ValidationIssue(scenario_id, f"{trial_path}.passed", "must be boolean"))
         else:
             trial_passes.append(trial["passed"])
+        if "trial_score" in trial:
+            _validate_range(issues, scenario_id, f"{trial_path}.trial_score", trial["trial_score"])
+        # Mirror _aggregate_scenario_trials's `.get("trial_score", 0.0)`: a
+        # trial that errored before scoring (no trial_score field, e.g.
+        # realtime.py's _failed_realtime_trial) still counts as 0.0 in the
+        # scenario mean, same as it already does for avg_scores.
+        trial_score_value = trial.get("trial_score", 0.0)
+        if isinstance(trial_score_value, (int, float)) and not isinstance(trial_score_value, bool):
+            trial_scores_seen.append(float(trial_score_value))
+        if "passed_at_thresholds" in trial:
+            passed_at_thresholds = trial["passed_at_thresholds"]
+            if not isinstance(passed_at_thresholds, dict):
+                issues.append(
+                    ValidationIssue(scenario_id, f"{trial_path}.passed_at_thresholds", "must be an object")
+                )
+            else:
+                for key, value in passed_at_thresholds.items():
+                    if not isinstance(value, bool):
+                        issues.append(
+                            ValidationIssue(
+                                scenario_id,
+                                f"{trial_path}.passed_at_thresholds.{key}",
+                                "must be boolean",
+                            )
+                        )
+                one_zero = passed_at_thresholds.get(str(RELIABILITY_THRESHOLDS[-1]))
+                if isinstance(one_zero, bool) and isinstance(trial.get("passed"), bool) and one_zero != trial["passed"]:
+                    issues.append(
+                        ValidationIssue(
+                            scenario_id,
+                            f"{trial_path}.passed_at_thresholds",
+                            f"threshold {RELIABILITY_THRESHOLDS[-1]} must equal passed",
+                        )
+                    )
         scores = trial.get("scores")
         if not isinstance(scores, dict):
             issues.append(ValidationIssue(scenario_id, f"{trial_path}.scores", "must be an object"))
@@ -1431,6 +1519,16 @@ def _validate_result_entry(
                     "must equal trial pass rate",
                 )
             )
+    if trial_scores_seen and "mean_trial_score" in result:
+        _require_rounded_equal(
+            issues,
+            scenario_id,
+            f"{path}.mean_trial_score",
+            result["mean_trial_score"],
+            _mean(trial_scores_seen) or 0.0,
+            ndigits=4,
+            message="must equal mean trial_score",
+        )
     if isinstance(avg_scores, dict):
         for metric, values in trial_metric_values.items():
             if not values or metric not in avg_scores:
@@ -2707,16 +2805,38 @@ def check_policy_events(
     }
 
 
-def check_factual_grounding(trace: dict[str, Any], scenario: dict[str, Any]) -> dict[str, Any]:
-    """Check deterministic fact probes and forbidden claim patterns."""
+def check_factual_grounding(
+    trace: dict[str, Any],
+    scenario: dict[str, Any],
+    replay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Check deterministic fact probes and forbidden claim patterns.
+
+    Two optional, backward-compatible fields on a required claim change what
+    counts as missing:
+
+    - ``alias_group``: unions the claim's ``any_terms`` with a shared
+      paraphrase list from ``grounding_aliases_v0.1.json`` instead of relying
+      on each scenario to hand-enumerate every phrasing.
+    - ``requires_tool_outcome: {"tool": str, "outcome": "success"|"failure"}``:
+      the claim only applies when the named tool's last replay result matches
+      that outcome, so a claim written for the happy path is not charged
+      against an agent that correctly reported an injected tool failure.
+    """
     grounding = scenario.get("oracle", {}).get("grounding", {})
     required_claims = grounding.get("required_claims", [])
     forbidden_claims = grounding.get("forbidden_claims", [])
     agent_text = _agent_text(trace)
     agent_turns = max(1, len(_agent_messages(trace)))
+    aliases = _load_grounding_aliases()
 
+    applicable_claims = [claim for claim in required_claims if _claim_applies(claim, replay)]
+    applicable_ids = {id(claim) for claim in applicable_claims}
+    skipped_claims = [claim for claim in required_claims if id(claim) not in applicable_ids]
     missing_required = [
-        claim for claim in required_claims if not _matches_any(agent_text, claim.get("any_terms", []))
+        claim
+        for claim in applicable_claims
+        if not _matches_any(agent_text, _expand_claim_terms(claim, aliases))
     ]
     unsupported_claims = []
     for claim in forbidden_claims:
@@ -2738,7 +2858,9 @@ def check_factual_grounding(trace: dict[str, Any], scenario: dict[str, Any]) -> 
             })
 
     required_score = (
-        1.0 if not required_claims else (len(required_claims) - len(missing_required)) / len(required_claims)
+        1.0
+        if not applicable_claims
+        else (len(applicable_claims) - len(missing_required)) / len(applicable_claims)
     )
     hallucination_rate = len(unsupported_claims) / agent_turns
     max_rate = grounding.get("max_hallucinations_per_turn", 0.0)
@@ -2748,6 +2870,7 @@ def check_factual_grounding(trace: dict[str, Any], scenario: dict[str, Any]) -> 
         "required_passed": not missing_required,
         "hallucination_passed": hallucination_rate <= max_rate,
         "missing_required_claims": missing_required,
+        "skipped_required_claims": skipped_claims,
         "unsupported_claims_detected": unsupported_claims,
         "hallucination_rate_per_turn": round(hallucination_rate, 4),
         "max_hallucinations_per_turn": max_rate,
@@ -3247,6 +3370,56 @@ def _agent_messages(trace: dict[str, Any]) -> list[dict[str, str]]:
 
 def _agent_text(trace: dict[str, Any]) -> str:
     return " ".join(message.get("text", "") for message in _agent_messages(trace)).strip()
+
+
+@lru_cache(maxsize=8)
+def _load_grounding_aliases(path: str | Path = DEFAULT_GROUNDING_ALIASES_PATH) -> dict[str, list[str]]:
+    """Load the shared claim-paraphrase groups, or {} if none are published.
+
+    Cached: this is read once per trial by ``check_factual_grounding`` and the
+    alias file never changes within a run. Callers treat the result as
+    read-only, so sharing one object across trials is safe.
+
+    Only a missing file degrades gracefully (an older data snapshot, or a
+    scenario file with no bound claims, should still score). A malformed
+    file is a real bug and is left to raise ``json.JSONDecodeError`` rather
+    than being swallowed into a silent scoring change.
+    """
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f).get("aliases", {})
+    except FileNotFoundError:
+        return {}
+
+
+def _expand_claim_terms(claim: dict[str, Any], aliases: dict[str, list[str]]) -> list[str]:
+    """Union a claim's own any_terms with its alias_group's shared patterns, if any."""
+    terms = list(claim.get("any_terms", []))
+    group_terms = aliases.get(claim.get("alias_group") or "", [])
+    return terms + [term for term in group_terms if term not in terms]
+
+
+def _claim_applies(claim: dict[str, Any], replay: dict[str, Any] | None) -> bool:
+    """A claim with no requires_tool_outcome always applies (legacy behavior).
+
+    Otherwise it applies only when the named tool's last replay result
+    matches the declared outcome, so a happy-path claim is not charged
+    against a trial where that tool genuinely failed (or vice versa).
+    """
+    condition = claim.get("requires_tool_outcome")
+    if not isinstance(condition, dict):
+        return True
+    tool_name = condition.get("tool")
+    wanted_outcome = condition.get("outcome")
+    if not tool_name or wanted_outcome not in ("success", "failure") or replay is None:
+        return True
+    matching_results = [
+        result for result in replay.get("tool_results", []) if result.get("name") == tool_name
+    ]
+    if not matching_results:
+        return False
+    actual_ok = bool(matching_results[-1].get("ok"))
+    return actual_ok if wanted_outcome == "success" else not actual_ok
 
 
 def _matches_any(text: str, patterns: list[str]) -> bool:
@@ -3865,6 +4038,48 @@ def _aggregate_experience_judgments(results: list[dict[str, Any]]) -> dict[str, 
     }
 
 
+def _reliability_at_thresholds_from_trials(
+    scored_trials: list[dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """Scenario-level pass@k/pass^k/pass_rate at each RELIABILITY_THRESHOLDS cutoff."""
+    result: dict[str, dict[str, Any]] = {}
+    for threshold in RELIABILITY_THRESHOLDS:
+        key = str(threshold)
+        trial_passes = [
+            trial.get("passed_at_thresholds", {}).get(key, False) for trial in scored_trials
+        ]
+        result[key] = {
+            "pass_at_k": any(trial_passes),
+            "pass_k": all(trial_passes) if trial_passes else False,
+            "pass_rate": _mean([1.0 if passed else 0.0 for passed in trial_passes]) or 0.0,
+        }
+    return result
+
+
+def _reliability_at_thresholds_from_scenarios(
+    metric_basis: list[dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """Report-level mean of the scenario-level curve in `metric_basis`.
+
+    Same shape and same aggregation (mean of scenario booleans/rates) as the
+    existing pass_at_k/pass_k/mean_pass_rate report fields -- this is that
+    same computation repeated at every threshold instead of only at 1.0.
+    """
+    result: dict[str, dict[str, Any]] = {}
+    for threshold in RELIABILITY_THRESHOLDS:
+        key = str(threshold)
+        entries = [
+            r.get("reliability_at_thresholds", {}).get(key, {"pass_at_k": False, "pass_k": False, "pass_rate": 0.0})
+            for r in metric_basis
+        ]
+        result[key] = {
+            "pass_at_k": round(_mean([1.0 if e["pass_at_k"] else 0.0 for e in entries]) or 0.0, 4),
+            "pass_k": round(_mean([1.0 if e["pass_k"] else 0.0 for e in entries]) or 0.0, 4),
+            "mean_pass_rate": round(_mean([e["pass_rate"] for e in entries]) or 0.0, 4),
+        }
+    return result
+
+
 def _reliability_gates(results: list[dict[str, Any]]) -> dict[str, Any]:
     pass_k = round(_mean([1.0 if result["pass_k"] else 0.0 for result in results]) or 0.0, 4)
     mean_pass_rate = round(_mean([result["pass_rate"] for result in results]) or 0.0, 4)
@@ -4104,6 +4319,17 @@ def _mean(values: list[float | int]) -> float | None:
     if not values:
         return None
     return sum(values) / len(values)
+
+
+def _passed_at_threshold(scores: dict[str, float], threshold: float) -> bool:
+    """Generalizes strict `passed` (threshold=1.0) to a near-miss-tolerant gate.
+
+    Every gating metric must clear the threshold, same as the strict gate
+    requires every gating metric to equal 1.0 -- a single bad dimension (a
+    privacy leak, say) still fails the trial at any threshold. Only how close
+    to perfect "close enough" means is parameterized.
+    """
+    return all(scores[metric] >= threshold for metric in GATING_METRIC_NAMES)
 
 
 def _wilson_interval(successes: int, total: int, z: float = 1.96) -> dict[str, float | int | None]:

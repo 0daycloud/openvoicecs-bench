@@ -1,13 +1,13 @@
 {
   "benchmark": "OpenVoiceCS-Bench",
   "version": "0.1.0",
-  "generated_at": "2026-07-28",
+  "generated_at": "2026-08-09",
   "release_stage": "seed",
   "files": {
     "scenario_suite": {
       "path": "data/openvoicecs/scenarios_v0.1.json",
-      "sha256": "0420feaeb08b581fab1539a544df19358880ea34f2c4938bde81844c80a3fafb",
-      "bytes": 1467912
+      "sha256": "2449b5d55a195362f6d53796ab5e4aeb01104d76057e0e55209002b6d40c9b32",
+      "bytes": 1475452
     },
     "audio_manifest": {
       "path": "data/openvoicecs/audio_manifest_v0.1.json",
@@ -26,7 +26,7 @@
     },
     "split_commitments": {
       "path": "data/openvoicecs/split_commitments_v0.1.json",
-      "sha256": "99288c11297f09d95bbcd9c8631b09229f5ed3a173edc53617469e911aa80666",
+      "sha256": "db9333d5dfd932b98ef2dc9a1a5e7bc9e557af37106b2e3c608dda2a8278ab9a",
       "bytes": 48341
     },
     "provenance_manifest": {
@@ -36,12 +36,12 @@
     },
     "changelog": {
       "path": "data/openvoicecs/changelog_v0.1.json",
-      "sha256": "945b502beccd936e28ff1570a0c48cab627b31078bd97476f8e104405430b71a",
-      "bytes": 19245
+      "sha256": "b3f6e8432c7602f3527bb4cf560961a4cfd5c2aa0f85d81e1e1822b68cfa541a",
+      "bytes": 27400
     },
     "baseline_manifest": {
       "path": "data/openvoicecs/baselines/reference_baselines_v0.1.json",
-      "sha256": "984931f1f47f7865881c3a39f98d7e7a57f4201f5b4eab35c79208a887919257",
+      "sha256": "576c9823d574a915d0354302a3124bc10a5014ebd83fbe073a23fa12280c00e0",
       "bytes": 3152
     },
     "review_manifest": {
@@ -71,7 +71,7 @@
     },
     "sealed_queue": {
       "path": "data/openvoicecs/sealed_evaluator_queue_v0.1.json",
-      "sha256": "88844ea7f2f43c1f2defa2759e8137de23400e6292bd44922d4f2a501d839ae6",
+      "sha256": "73707d018253f04f8870fdeca8e0238bf0b85c6f5b236f5a1dd0a38c8eb51414",
       "bytes": 3997
     },
     "external_endpoint_contract": {
@@ -86,12 +86,12 @@
     },
     "leaderboard_claims": {
       "path": "data/openvoicecs/claims/leaderboard_claims_v0.1.json",
-      "sha256": "bf5c14979e37b5fdf1ad1261a8e897015297f5da981eaa9dc1598c60f11b1ea4",
+      "sha256": "84d538926a6caf4367a38b7bcbe941e0a467c4796e8904ef671dba06d3f7556c",
       "bytes": 2730
     },
     "submission_intake": {
       "path": "data/openvoicecs/submissions/reference_submission_intake_v0.1.json",
-      "sha256": "1760f9171ab0bda6f54f277ef9cc08813d1f1ba4a3b87337a411cee77378fea1",
+      "sha256": "978e8293c9355e107281da1c31e68eef0aae2a0846d0d265b78ec7487660c817",
       "bytes": 2479
     }
   },
@@ -478,14 +478,16 @@
     "present": true,
     "version": "0.1.0",
     "benchmark_version": "0.1.0",
-    "num_entries": 6,
+    "num_entries": 7,
     "entry_types": {
+      "erratum": 1,
       "release": 1,
       "scenario_added": 5
     },
     "compatibility": {
       "backward_compatible": 5,
-      "initial_release": 1
+      "initial_release": 1,
+      "scoring_affecting": 1
     },
     "num_changed_scenarios": 220,
     "num_changed_audio_variants": 120,

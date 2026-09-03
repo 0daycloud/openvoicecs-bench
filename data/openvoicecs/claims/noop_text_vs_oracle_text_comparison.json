@@ -10,10 +10,13 @@
     "mcnemar": "two-sided exact binomial test over discordant pass^k pairs"
   },
   "matched_scenarios": {
-    "count": 204,
+    "count": 220,
     "ids": [
       "fintech-chargeback-limit-raise-social-engineering-900",
       "fintech-fraud-card-replacement-001",
+      "fintech-multiturn-dispute-amount-repair-903",
+      "fintech-multiturn-escalating-wire-pressure-908",
+      "fintech-multiturn-provisional-credit-objection-916",
       "fintech-sandbox-audio-action-001",
       "fintech-sandbox-policy-attack-001",
       "fintech-sandbox-policy-attack-002",
@@ -53,6 +56,8 @@
       "healthcare-admin-audio-action-005",
       "healthcare-admin-audio-action-006",
       "healthcare-admin-audio-action-007",
+      "healthcare-admin-multiturn-clinic-repair-905",
+      "healthcare-admin-multiturn-records-escalation-910",
       "healthcare-admin-policy-attack-001",
       "healthcare-admin-policy-attack-002",
       "healthcare-admin-policy-attack-003",
@@ -87,6 +92,9 @@
       "retail-audio-action-006",
       "retail-audio-action-007",
       "retail-audio-action-008",
+      "retail-multiturn-address-repair-901",
+      "retail-multiturn-escalating-refund-pressure-907",
+      "retail-multiturn-verify-then-refund-912",
       "retail-policy-attack-001",
       "retail-policy-attack-002",
       "retail-policy-attack-003",
@@ -122,6 +130,8 @@
       "saas-support-audio-action-004",
       "saas-support-audio-action-005",
       "saas-support-audio-action-006",
+      "saas-support-multiturn-owner-role-escalation-911",
+      "saas-support-multiturn-seat-count-repair-906",
       "saas-support-policy-attack-001",
       "saas-support-policy-attack-002",
       "saas-support-policy-attack-003",
@@ -154,6 +164,9 @@
       "telecom-audio-action-005",
       "telecom-audio-action-006",
       "telecom-billing-credit-001",
+      "telecom-multiturn-plan-repair-904",
+      "telecom-multiturn-sim-swap-escalation-909",
+      "telecom-multiturn-verify-then-portout-914",
       "telecom-noisy-address-correction-001",
       "telecom-policy-attack-001",
       "telecom-policy-attack-002",
@@ -186,6 +199,9 @@
       "travel-audio-action-004",
       "travel-audio-action-005",
       "travel-audio-action-006",
+      "travel-multiturn-date-repair-902",
+      "travel-multiturn-verify-then-rebook-913",
+      "travel-multiturn-voucher-objection-915",
       "travel-name-mismatch-standby-trap-900",
       "travel-policy-attack-001",
       "travel-policy-attack-002",
@@ -222,25 +238,25 @@
     "metadata_mismatches": []
   },
   "summary": {
-    "overall_score_delta": 74.32,
+    "overall_score_delta": 75.11,
     "mean_paired_scenario_score_delta": {
-      "mean": 74.316076,
-      "ci_low": 73.519478,
-      "ci_high": 75.07352,
-      "n": 204
+      "mean": 75.111269,
+      "ci_low": 74.275627,
+      "ci_high": 75.914332,
+      "n": 220
     },
     "mean_paired_pass_rate_delta": {
       "mean": 1.0,
       "ci_low": 1.0,
       "ci_high": 1.0,
-      "n": 204
+      "n": 220
     },
     "pass_k_delta": 1.0,
     "mcnemar_exact": {
-      "candidate_wins": 204,
+      "candidate_wins": 220,
       "baseline_wins": 0,
       "ties": 0,
-      "discordant_pairs": 204,
+      "discordant_pairs": 220,
       "p_value": 0.0
     },
     "interpretation": "candidate_higher_with_ci_excluding_zero"
@@ -250,66 +266,66 @@
       "mean": 1.0,
       "ci_low": 1.0,
       "ci_high": 1.0,
-      "n": 204
+      "n": 220
     },
     "factual_grounding": {
       "mean": 1.0,
       "ci_low": 1.0,
       "ci_high": 1.0,
-      "n": 204
+      "n": 220
     },
     "sop_compliance": {
-      "mean": 0.502854,
-      "ci_low": 0.484062,
-      "ci_high": 0.522872,
-      "n": 204
+      "mean": 0.53901,
+      "ci_low": 0.514767,
+      "ci_high": 0.564769,
+      "n": 220
     },
     "privacy": {
       "mean": 0.0,
       "ci_low": 0.0,
       "ci_high": 0.0,
-      "n": 204
+      "n": 220
     },
     "auth_integrity": {
-      "mean": 0.823529,
-      "ci_low": 0.769608,
-      "ci_high": 0.872549,
-      "n": 204
+      "mean": 0.836364,
+      "ci_low": 0.786364,
+      "ci_high": 0.881818,
+      "n": 220
     },
     "tool_correctness": {
       "mean": 1.0,
       "ci_low": 1.0,
       "ci_high": 1.0,
-      "n": 204
+      "n": 220
     },
     "safety": {
-      "mean": 0.009804,
+      "mean": 0.009091,
       "ci_low": 0.0,
-      "ci_high": 0.02451,
-      "n": 204
+      "ci_high": 0.022727,
+      "n": 220
     },
     "experience_proxy": {
-      "mean": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
-      "n": 204
+      "mean": 0.00909,
+      "ci_low": 0.00303,
+      "ci_high": 0.016665,
+      "n": 220
     }
   },
   "stratified_deltas": {
     "domain": {
       "scenario_score_delta": {
-        "mean": 74.316076,
-        "ci_low": 73.517025,
-        "ci_high": 75.088162,
-        "n": 204,
+        "mean": 75.111269,
+        "ci_low": 74.29225,
+        "ci_high": 75.912076,
+        "n": 220,
         "num_strata": 7,
         "strata": {
-          "fintech_sandbox": 34,
-          "healthcare_admin": 33,
-          "retail": 35,
-          "saas_support": 33,
-          "telecom": 33,
-          "travel": 35,
+          "fintech_sandbox": 37,
+          "healthcare_admin": 35,
+          "retail": 38,
+          "saas_support": 35,
+          "telecom": 36,
+          "travel": 38,
           "utility_support": 1
         }
       },
@@ -317,72 +333,72 @@
         "mean": 1.0,
         "ci_low": 1.0,
         "ci_high": 1.0,
-        "n": 204,
+        "n": 220,
         "num_strata": 7,
         "strata": {
-          "fintech_sandbox": 34,
-          "healthcare_admin": 33,
-          "retail": 35,
-          "saas_support": 33,
-          "telecom": 33,
-          "travel": 35,
+          "fintech_sandbox": 37,
+          "healthcare_admin": 35,
+          "retail": 38,
+          "saas_support": 35,
+          "telecom": 36,
+          "travel": 38,
           "utility_support": 1
         }
       }
     },
     "track": {
       "scenario_score_delta": {
-        "mean": 74.316076,
-        "ci_low": 73.896947,
-        "ci_high": 74.803839,
-        "n": 204,
+        "mean": 75.111269,
+        "ci_low": 74.50972,
+        "ci_high": 75.759783,
+        "n": 220,
         "num_strata": 5,
         "strata": {
-          "adversarial_compliance": 40,
+          "adversarial_compliance": 45,
           "audio_to_action": 35,
           "end_to_end_voice": 20,
-          "robustness": 45,
-          "text_to_action": 64
+          "robustness": 51,
+          "text_to_action": 69
         }
       },
       "pass_rate_delta": {
         "mean": 1.0,
         "ci_low": 1.0,
         "ci_high": 1.0,
-        "n": 204,
+        "n": 220,
         "num_strata": 5,
         "strata": {
-          "adversarial_compliance": 40,
+          "adversarial_compliance": 45,
           "audio_to_action": 35,
           "end_to_end_voice": 20,
-          "robustness": 45,
-          "text_to_action": 64
+          "robustness": 51,
+          "text_to_action": 69
         }
       }
     },
     "difficulty": {
       "scenario_score_delta": {
-        "mean": 74.316076,
-        "ci_low": 73.521926,
-        "ci_high": 75.078358,
-        "n": 204,
+        "mean": 75.111269,
+        "ci_low": 74.269513,
+        "ci_high": 75.915908,
+        "n": 220,
         "num_strata": 3,
         "strata": {
           "easy": 40,
-          "hard": 83,
-          "medium": 81
+          "hard": 94,
+          "medium": 86
         }
       },
       "pass_rate_delta": {
         "mean": 1.0,
         "ci_low": 1.0,
         "ci_high": 1.0,
-        "n": 204,
+        "n": 220,
         "num_strata": 3,
         "strata": {
           "easy": 40,
-          "hard": 83,
-          "medium": 81
+          "hard": 94,
+          "medium": 86
         }
       }
     }
@@ -390,121 +406,77 @@
   "slice_deltas": {
     "domain": {
       "fintech_sandbox": {
-        "count": 34,
+        "count": 37,
         "scenario_score_delta": {
-          "mean": 75.470553,
-          "ci_low": 73.882282,
-          "ci_high": 76.882371,
-          "n": 34
+          "mean": 76.261227,
+          "ci_low": 74.594497,
+          "ci_high": 77.801816,
+          "n": 37
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 34
+          "n": 37
         },
         "mcnemar_exact": {
-          "candidate_wins": 34,
+          "candidate_wins": 37,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 34,
+          "discordant_pairs": 37,
           "p_value": 0.0
         }
       },
       "healthcare_admin": {
-        "count": 33,
+        "count": 35,
         "scenario_score_delta": {
-          "mean": 73.651388,
-          "ci_low": 71.545236,
-          "ci_high": 75.499945,
-          "n": 33
+          "mean": 74.337971,
+          "ci_low": 72.204554,
+          "ci_high": 76.357086,
+          "n": 35
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 33
+          "n": 35
         },
         "mcnemar_exact": {
-          "candidate_wins": 33,
+          "candidate_wins": 35,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 33,
+          "discordant_pairs": 35,
           "p_value": 0.0
         }
       },
       "retail": {
-        "count": 35,
+        "count": 38,
         "scenario_score_delta": {
-          "mean": 73.371309,
-          "ci_low": 71.314096,
-          "ci_high": 75.228537,
-          "n": 35
+          "mean": 74.306905,
+          "ci_low": 72.184037,
+          "ci_high": 76.289411,
+          "n": 38
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 35
+          "n": 38
         },
         "mcnemar_exact": {
-          "candidate_wins": 35,
+          "candidate_wins": 38,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 35,
+          "discordant_pairs": 38,
           "p_value": 0.0
         }
       },
       "saas_support": {
-        "count": 33,
-        "scenario_score_delta": {
-          "mean": 73.878661,
-          "ci_low": 71.666467,
-          "ci_high": 75.878717,
-          "n": 33
-        },
-        "pass_rate_delta": {
-          "mean": 1.0,
-          "ci_low": 1.0,
-          "ci_high": 1.0,
-          "n": 33
-        },
-        "mcnemar_exact": {
-          "candidate_wins": 33,
-          "baseline_wins": 0,
-          "ties": 0,
-          "discordant_pairs": 33,
-          "p_value": 0.0
-        }
-      },
-      "telecom": {
-        "count": 33,
-        "scenario_score_delta": {
-          "mean": 74.181709,
-          "ci_low": 72.211921,
-          "ci_high": 76.031023,
-          "n": 33
-        },
-        "pass_rate_delta": {
-          "mean": 1.0,
-          "ci_low": 1.0,
-          "ci_high": 1.0,
-          "n": 33
-        },
-        "mcnemar_exact": {
-          "candidate_wins": 33,
-          "baseline_wins": 0,
-          "ties": 0,
-          "discordant_pairs": 33,
-          "p_value": 0.0
-        }
-      },
-      "travel": {
         "count": 35,
         "scenario_score_delta": {
-          "mean": 74.999914,
-          "ci_low": 73.028383,
-          "ci_high": 76.828554,
+          "mean": 74.533211,
+          "ci_low": 72.190286,
+          "ci_high": 76.685623,
           "n": 35
         },
         "pass_rate_delta": {
@@ -518,6 +490,50 @@
           "baseline_wins": 0,
           "ties": 0,
           "discordant_pairs": 35,
+          "p_value": 0.0
+        }
+      },
+      "telecom": {
+        "count": 36,
+        "scenario_score_delta": {
+          "mean": 75.10175,
+          "ci_low": 72.99985,
+          "ci_high": 77.102042,
+          "n": 36
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 36
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 36,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 36,
+          "p_value": 0.0
+        }
+      },
+      "travel": {
+        "count": 38,
+        "scenario_score_delta": {
+          "mean": 75.789395,
+          "ci_low": 73.841947,
+          "ci_high": 77.684836,
+          "n": 38
+        },
+        "pass_rate_delta": {
+          "mean": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n": 38
+        },
+        "mcnemar_exact": {
+          "candidate_wins": 38,
+          "baseline_wins": 0,
+          "ties": 0,
+          "discordant_pairs": 38,
           "p_value": 0.0
         }
       },
@@ -546,24 +562,24 @@
     },
     "track": {
       "adversarial_compliance": {
-        "count": 40,
+        "count": 45,
         "scenario_score_delta": {
-          "mean": 64.936975,
-          "ci_low": 63.39943,
-          "ci_high": 66.912035,
-          "n": 40
+          "mean": 67.240267,
+          "ci_low": 64.884636,
+          "ci_high": 69.784931,
+          "n": 45
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 40
+          "n": 45
         },
         "mcnemar_exact": {
-          "candidate_wins": 40,
+          "candidate_wins": 45,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 40,
+          "discordant_pairs": 45,
           "p_value": 0.0
         }
       },
@@ -612,46 +628,46 @@
         }
       },
       "robustness": {
-        "count": 45,
+        "count": 51,
         "scenario_score_delta": {
-          "mean": 76.2,
-          "ci_low": 76.0,
-          "ci_high": 76.6,
-          "n": 45
+          "mean": 77.248365,
+          "ci_low": 76.529412,
+          "ci_high": 78.143788,
+          "n": 51
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 45
+          "n": 51
         },
         "mcnemar_exact": {
-          "candidate_wins": 45,
+          "candidate_wins": 51,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 45,
+          "discordant_pairs": 51,
           "p_value": 0.0
         }
       },
       "text_to_action": {
-        "count": 64,
+        "count": 69,
         "scenario_score_delta": {
-          "mean": 77.125009,
-          "ci_low": 76.421884,
-          "ci_high": 77.96875,
-          "n": 64
+          "mean": 77.695661,
+          "ci_low": 76.869583,
+          "ci_high": 78.608696,
+          "n": 69
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 64
+          "n": 69
         },
         "mcnemar_exact": {
-          "candidate_wins": 64,
+          "candidate_wins": 69,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 64,
+          "discordant_pairs": 69,
           "p_value": 0.0
         }
       }
@@ -680,46 +696,46 @@
         }
       },
       "hard": {
-        "count": 83,
+        "count": 94,
         "scenario_score_delta": {
-          "mean": 73.89746,
-          "ci_low": 72.43354,
-          "ci_high": 75.325207,
-          "n": 83
+          "mean": 75.239243,
+          "ci_low": 73.719712,
+          "ci_high": 76.726866,
+          "n": 94
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 83
+          "n": 94
         },
         "mcnemar_exact": {
-          "candidate_wins": 83,
+          "candidate_wins": 94,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 83,
+          "discordant_pairs": 94,
           "p_value": 0.0
         }
       },
       "medium": {
-        "count": 81,
+        "count": 86,
         "scenario_score_delta": {
-          "mean": 74.888822,
-          "ci_low": 73.864094,
-          "ci_high": 75.81477,
-          "n": 81
+          "mean": 75.476681,
+          "ci_low": 74.406879,
+          "ci_high": 76.499965,
+          "n": 86
         },
         "pass_rate_delta": {
           "mean": 1.0,
           "ci_low": 1.0,
           "ci_high": 1.0,
-          "n": 81
+          "n": 86
         },
         "mcnemar_exact": {
-          "candidate_wins": 81,
+          "candidate_wins": 86,
           "baseline_wins": 0,
           "ties": 0,
-          "discordant_pairs": 81,
+          "discordant_pairs": 86,
           "p_value": 0.0
         }
       }
