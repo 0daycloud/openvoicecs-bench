@@ -1,0 +1,177 @@
+{
+ "G01": {
+  "name": "gpt_5_5_native_tools_10x2|travel-rebook-missed-connection-001|1",
+  "scenario_id": "travel-rebook-missed-connection-001",
+  "model": "gpt-5.5"
+ },
+ "G02": {
+  "name": "openrouter_gemini_3_flash_preview_native_smoke|telecom-billing-credit-001|0",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G03": {
+  "name": "openrouter_gemini_3_flash_preview_native_smoke|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G04": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_post_improvements|fintech-fraud-card-replacement-001|1",
+  "scenario_id": "fintech-fraud-card-replacement-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G05": {
+  "name": "openrouter_gpt_4o_mini_smoke|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "openai/gpt-4o-mini"
+ },
+ "G06": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|fintech-fraud-card-replacement-001|1",
+  "scenario_id": "fintech-fraud-card-replacement-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G07": {
+  "name": "openrouter_gpt_4o_mini_smoke|travel-rebook-missed-connection-001|0",
+  "scenario_id": "travel-rebook-missed-connection-001",
+  "model": "openai/gpt-4o-mini"
+ },
+ "G08": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|saas-account-access-001|1",
+  "scenario_id": "saas-account-access-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G09": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2|fintech-fraud-card-replacement-001|0",
+  "scenario_id": "fintech-fraud-card-replacement-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G10": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_post_improvements|fintech-fraud-card-replacement-001|0",
+  "scenario_id": "fintech-fraud-card-replacement-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G11": {
+  "name": "gpt_5_5_native_tools_10x2|fintech-social-engineering-transfer-001|1",
+  "scenario_id": "fintech-social-engineering-transfer-001",
+  "model": "gpt-5.5"
+ },
+ "G12": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2|saas-account-access-001|1",
+  "scenario_id": "saas-account-access-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G13": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|healthcare-phi-extraction-001|0",
+  "scenario_id": "healthcare-phi-extraction-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G14": {
+  "name": "openrouter_qwen3_7_plus_smoke|travel-rebook-missed-connection-001|0",
+  "scenario_id": "travel-rebook-missed-connection-001",
+  "model": "qwen/qwen3.7-plus"
+ },
+ "G15": {
+  "name": "openrouter_gemini_3_flash_preview_10x2|fintech-social-engineering-transfer-001|1",
+  "scenario_id": "fintech-social-engineering-transfer-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G16": {
+  "name": "openrouter_gpt_4o_mini_smoke|telecom-billing-credit-001|0",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "openai/gpt-4o-mini"
+ },
+ "G17": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|saas-ceo-impersonation-mfa-001|0",
+  "scenario_id": "saas-ceo-impersonation-mfa-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G18": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|telecom-billing-credit-001|1",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G19": {
+  "name": "openrouter_qwen3_7_plus_smoke|telecom-billing-credit-001|0",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "qwen/qwen3.7-plus"
+ },
+ "G20": {
+  "name": "gpt_5_5_reasoning_low_10x2|telecom-billing-credit-001|0",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "gpt-5.5"
+ },
+ "G21": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2|saas-ceo-impersonation-mfa-001|1",
+  "scenario_id": "saas-ceo-impersonation-mfa-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G22": {
+  "name": "openrouter_minimax_m3_smoke|telecom-billing-credit-001|0",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "minimax/minimax-m3"
+ },
+ "G23": {
+  "name": "gpt_5_5_reasoning_none|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "gpt-5.5"
+ },
+ "G24": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_post_improvements|healthcare-phi-extraction-001|0",
+  "scenario_id": "healthcare-phi-extraction-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G25": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2|retail-prompt-injection-refund-001|0",
+  "scenario_id": "retail-prompt-injection-refund-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G26": {
+  "name": "openrouter_qwen3_7_plus_smoke|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "qwen/qwen3.7-plus"
+ },
+ "G27": {
+  "name": "gpt_5_5_reasoning_none_10x2|healthcare-admin-schedule-refill-001|1",
+  "scenario_id": "healthcare-admin-schedule-refill-001",
+  "model": "gpt-5.5"
+ },
+ "G28": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|fintech-fraud-card-replacement-001|0",
+  "scenario_id": "fintech-fraud-card-replacement-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G29": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|healthcare-admin-schedule-refill-001|1",
+  "scenario_id": "healthcare-admin-schedule-refill-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G30": {
+  "name": "gpt_5_5_reasoning_medium_10x2_rerun|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "gpt-5.5"
+ },
+ "G31": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_post_improvements|travel-rebook-missed-connection-001|0",
+  "scenario_id": "travel-rebook-missed-connection-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G32": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G33": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2|retail-refund-damaged-item-001|1",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G34": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|telecom-billing-credit-001|0",
+  "scenario_id": "telecom-billing-credit-001",
+  "model": "google/gemini-3-flash-preview"
+ },
+ "G35": {
+  "name": "openrouter_gemini_3_flash_preview_native_10x2_bound_ids|retail-refund-damaged-item-001|0",
+  "scenario_id": "retail-refund-damaged-item-001",
+  "model": "google/gemini-3-flash-preview"
+ }
+}
