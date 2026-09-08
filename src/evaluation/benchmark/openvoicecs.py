@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import random
 import re
 import statistics
 import time
@@ -553,7 +554,10 @@ class OpenVoiceCSBench:
             "pass_k": round(_mean([1.0 if r["pass_k"] else 0.0 for r in metric_basis]) or 0.0, 4),
             "mean_pass_rate": round(_mean([r["pass_rate"] for r in metric_basis]) or 0.0, 4),
             "reliability_gates": _reliability_gates(results),
-            "confidence_intervals": _aggregate_confidence_intervals(results),
+            "confidence_intervals": {
+                **_aggregate_confidence_intervals(results),
+                "overall_score": _overall_score_interval(results),
+            },
             "stability_metrics": stability_metrics,
             "conversation_experience_score": experience_judgment["score"],
             "conversation_experience": experience_judgment,
@@ -4104,6 +4108,53 @@ def _mean(values: list[float | int]) -> float | None:
     if not values:
         return None
     return sum(values) / len(values)
+
+
+#: Bootstrap resamples for the ``overall_score`` interval. Fixed so repeated
+#: report generation stays byte-identical, which the release gate requires.
+OVERALL_SCORE_BOOTSTRAP_ITERATIONS = 1000
+OVERALL_SCORE_BOOTSTRAP_SEED = 0
+
+
+def _overall_score_interval(
+    results: list[dict[str, Any]],
+    *,
+    iterations: int = OVERALL_SCORE_BOOTSTRAP_ITERATIONS,
+    seed: int = OVERALL_SCORE_BOOTSTRAP_SEED,
+) -> dict[str, float | int | None]:
+    """Cluster bootstrap interval for ``overall_score``.
+
+    The leaderboard ranks on ``overall_score``, but the published intervals
+    cover only the binary pass proportions, so adjacent models carry no stated
+    uncertainty. Scenarios are the resampling unit because trials are nested
+    within them and are not independent.
+    """
+    measured = [r for r in results if r.get("measured", True)] or results
+    scored = [r["avg_scores"] for r in measured if r.get("avg_scores")]
+    if len(scored) < 2:
+        return {"estimate": None, "low": None, "high": None, "num_scenarios": len(scored)}
+
+    def overall(sample: list[dict[str, float]]) -> float:
+        return sum(
+            (_mean([row.get(metric, 0.0) for row in sample]) or 0.0) * weight
+            for metric, weight in METRIC_WEIGHTS.items()
+        ) * 100
+
+    rng = random.Random(seed)
+    size = len(scored)
+    draws = sorted(
+        overall([scored[rng.randrange(size)] for _ in range(size)]) for _ in range(iterations)
+    )
+    low = draws[int(0.025 * (iterations - 1))]
+    high = draws[int(0.975 * (iterations - 1))]
+    return {
+        "estimate": round(overall(scored), 2),
+        "low": round(low, 2),
+        "high": round(high, 2),
+        "num_scenarios": size,
+        "method": "cluster_bootstrap_percentile",
+        "iterations": iterations,
+    }
 
 
 def _wilson_interval(successes: int, total: int, z: float = 1.96) -> dict[str, float | int | None]:

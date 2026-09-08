@@ -19,11 +19,14 @@ import pytest
 
 from src.evaluation.benchmark.openvoicecs import (
     FORBIDDEN_TRIGGER_KINDS,
+    METRIC_WEIGHTS,
     OpenVoiceCSBench,
+    _overall_score_interval,
     check_safety,
     check_tool_calls,
     classify_trial_error,
     derive_trace_events,
+    no_op_agent,
     oracle_agent,
     replay_tool_calls,
 )
@@ -352,3 +355,47 @@ def test_argument_labels_normalize_but_different_values_still_fail():
     )
     assert mismatched["expected_passed"] is False
     assert mismatched["missing_expected"] == expected
+
+
+class TestOverallScoreCarriesUncertainty:
+    """Regression tests for missing interval coverage (known limitation 5).
+
+    The leaderboard ranks on `overall_score`, but published intervals covered
+    only `pass_at_k`, `pass_k`, and `trial_pass_rate`. Over the 58 stored v0.2
+    reports, 96% of adjacent ranks have overlapping 95% intervals at a median
+    width of 5.05 points. Reproduce with
+    `python scripts/report_score_intervals.py`.
+    """
+
+    def _results(self, scores: list[float]) -> list[dict]:
+        return [
+            {"measured": True, "avg_scores": dict.fromkeys(METRIC_WEIGHTS, value)}
+            for value in scores
+        ]
+
+    def test_interval_brackets_the_point_estimate(self) -> None:
+        interval = _overall_score_interval(self._results([0.2, 0.5, 0.9, 0.4, 0.7] * 8))
+        assert interval["low"] <= interval["estimate"] <= interval["high"]
+
+    def test_no_variance_gives_a_degenerate_interval(self) -> None:
+        interval = _overall_score_interval(self._results([1.0] * 30))
+        assert (interval["low"], interval["estimate"], interval["high"]) == (100.0, 100.0, 100.0)
+
+    def test_interval_is_deterministic(self) -> None:
+        """The release gate requires byte-identical regeneration."""
+        results = self._results([0.1, 0.6, 0.35, 0.85] * 10)
+        assert _overall_score_interval(results) == _overall_score_interval(results)
+
+    def test_more_scenarios_tighten_the_interval(self) -> None:
+        spread = [0.2, 0.8]
+        narrow = _overall_score_interval(self._results(spread * 100))
+        wide = _overall_score_interval(self._results(spread * 5))
+        assert (narrow["high"] - narrow["low"]) < (wide["high"] - wide["low"])
+
+    def test_too_few_scenarios_reports_no_interval(self) -> None:
+        assert _overall_score_interval(self._results([0.5]))["estimate"] is None
+
+    def test_report_exposes_the_interval(self) -> None:
+        report = OpenVoiceCSBench.load().score_agent(no_op_agent, trials=1)
+        interval = report["confidence_intervals"]["overall_score"]
+        assert interval["low"] <= report["overall_score"] <= interval["high"]
