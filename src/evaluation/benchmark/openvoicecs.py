@@ -33,6 +33,7 @@ from src.evaluation.benchmark.claims import (
     claims_stats,
     validate_claims_manifest_file,
 )
+from src.evaluation.benchmark.constraint_checker import check_trajectory, spec_from_dict
 from src.evaluation.benchmark.datapaths import data_path
 from src.evaluation.benchmark.external_endpoint import (
     DEFAULT_EXTERNAL_ENDPOINT_CONTRACT_PATH,
@@ -427,6 +428,15 @@ class OpenVoiceCSBench:
         )
         experience_check = check_experience(trace, scenario)
         experience_judgment = normalize_experience_judgment(trace.get("experience_judgment"))
+        grading_spec_data = oracle.get("grading_spec")
+        constraint_check = (
+            check_trajectory(
+                {"tool_calls": effective_tool_calls, "outcome": replay["final_state"]},
+                spec_from_dict(grading_spec_data),
+            )
+            if grading_spec_data
+            else None
+        )
 
         scores = {
             "task_success": 1.0 if state_check["passed"] and tool_check["expected_passed"] else 0.0,
@@ -463,6 +473,7 @@ class OpenVoiceCSBench:
             "safety_check": safety_check,
             "experience_check": experience_check,
             "experience_judgment": experience_judgment,
+            "constraint_check": constraint_check,
             "final_state": replay["final_state"],
             "tool_results": replay["tool_results"],
             "tool_calls": trace["tool_calls"],
@@ -1268,6 +1279,8 @@ def validate_scenarios(scenarios: list[dict[str, Any]]) -> list[ValidationIssue]
         for event_field in ("required_events", "forbidden_events"):
             if event_field in oracle and not isinstance(oracle[event_field], list):
                 issues.append(ValidationIssue(scenario_id, f"oracle.{event_field}", "must be a list"))
+        if "grading_spec" in oracle and not isinstance(oracle["grading_spec"], dict):
+            issues.append(ValidationIssue(scenario_id, "oracle.grading_spec", "must be an object"))
 
         tools_well_formed = len(issues) == tool_shape_issue_count
         if "expected_state" in oracle and tools_well_formed:

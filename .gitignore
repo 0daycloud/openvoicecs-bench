@@ -56,3 +56,6 @@ temp/
 /data/openvoicecs/frontier/
 /drafts/
 /submissions/
+
+# Local, non-reproducible verification against a live provider
+local_test_harness.py
