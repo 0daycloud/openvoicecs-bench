@@ -223,6 +223,20 @@ reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
 strongest remaining argument for a semantic grader and the most valuable
 contribution anyone can make.
 
+**Partly addressed.** An opt-in semantic grader is now available:
+`scripts/run_openvoicecs.py semantic-grounding` /
+`apply-semantic-grounding-report`, following the same blinded, audited
+pattern as the model-judge subjective-quality pipeline (section 13). It
+classifies each required claim as `grounded`, `honest_alternative` (the
+agent didn't make the claim but truthfully reported a different outcome —
+this is what fixes the honest-failure-report bullet above), or
+`not_grounded` via a narrow LLM-judge call, and merges into a report's
+`semantic_grounding` field (`src/evaluation/benchmark/semantic_grounding.py`)
+without altering `factual_grounding` or `overall_score` — the literal
+matcher above remains the default and only score that feeds the leaderboard.
+Judge-to-human agreement on this claim-level classification has not been
+measured yet; treat it as provisional, same caveat as section 13.
+
 ### 8. Binary trial gating compresses `passed`
 
 A trial counts as passed only when all seven metrics equal exactly 1.0, so an
