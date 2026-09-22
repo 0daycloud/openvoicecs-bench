@@ -19,6 +19,7 @@ import pytest
 
 from src.evaluation.benchmark.openvoicecs import (
     FORBIDDEN_TRIGGER_KINDS,
+    InfrastructureError,
     OpenVoiceCSBench,
     check_safety,
     check_tool_calls,
@@ -214,7 +215,10 @@ def test_infrastructure_trials_are_excluded_instead_of_averaged_as_zero():
 
     def broke_on_the_way_to_the_model(scenario: dict, trial_index: int) -> dict:
         if scenario["id"] == unreachable_id:
-            raise RuntimeError(
+            # A transport-layer failure type, as a provider SDK or the harness
+            # raises. Exclusion is granted on the exception type, not on words in
+            # the message -- see the abstention test below.
+            raise InfrastructureError(
                 "Error code: 402 - {'error': {'message': 'Insufficient credits...'}}"
             )
         return oracle_agent(scenario, trial_index)
@@ -352,3 +356,26 @@ def test_argument_labels_normalize_but_different_values_still_fail():
     )
     assert mismatched["expected_passed"] is False
     assert mismatched["missing_expected"] == expected
+
+
+def test_adapter_cannot_nominate_its_own_trials_as_unmeasurable():
+    """Excluding a trial must not be grantable by wording an error message.
+
+    Otherwise a submission raises an infrastructure-shaped error on exactly the
+    scenarios it expects to fail, and those trials are dropped from every mean
+    instead of scored -- self-selecting which scenarios count.
+    """
+    bench = OpenVoiceCSBench.load()
+    abstained_id = bench.scenarios[1]["id"]
+
+    def abstains_on_a_hard_scenario(scenario: dict, trial_index: int) -> dict:
+        if scenario["id"] == abstained_id:
+            raise RuntimeError("Error code: 503 - service unavailable, please retry")
+        return oracle_agent(scenario, trial_index)
+
+    report = bench.score_agent(abstains_on_a_hard_scenario, max_scenarios=2, trials=1)
+
+    # Scored as a model failure, not excluded.
+    assert report["measurement_coverage"]["infrastructure_error_trials"] == 0
+    assert report["num_measured_scenarios"] == report["num_scenarios"] == 2
+    assert report["overall_score"] < 100.0

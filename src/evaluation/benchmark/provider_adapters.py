@@ -19,6 +19,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.evaluation.benchmark.tool_matching import (
+    _argument_binding_errors,
+    _effective_tool_arguments,
+    _model_required_arguments,
+    _set_path,
+    _values_match,
+)
+
 PIPELINE_PROVIDERS = {
     "openai",
     "google",
@@ -806,7 +814,7 @@ def _execute_scenario_tool(
     invalid_arguments = [
         key
         for key, value in required.items()
-        if effective_arguments.get(key) != value
+        if not _values_match(value, effective_arguments.get(key))
     ]
     if invalid_arguments:
         return {
@@ -853,26 +861,6 @@ def _execute_scenario_tool(
     return result
 
 
-def _model_required_arguments(tool: dict[str, Any]) -> dict[str, Any]:
-    generated = set((tool.get("generated_arguments") or {}).keys())
-    return {
-        key: value
-        for key, value in (tool.get("required_arguments") or {}).items()
-        if key not in generated
-    }
-
-
-def _effective_tool_arguments(
-    tool: dict[str, Any],
-    arguments: dict[str, Any],
-    bindings: dict[str, Any] | None = None,
-) -> dict[str, Any]:
-    effective = dict(arguments or {})
-    effective.update(bindings or {})
-    effective.update(tool.get("generated_arguments") or {})
-    return effective
-
-
 def _resolve_argument_bindings(
     tool: dict[str, Any],
     tool_results: list[dict[str, Any]],
@@ -892,30 +880,6 @@ def _resolve_argument_bindings(
         if value is not None:
             resolved[argument] = value
     return resolved
-
-
-def _argument_binding_errors(
-    tool: dict[str, Any],
-    arguments: dict[str, Any],
-    bindings: dict[str, Any],
-) -> list[dict[str, Any]]:
-    errors = []
-    for argument, binding in (tool.get("argument_bindings") or {}).items():
-        if argument not in bindings:
-            errors.append({
-                "argument": argument,
-                "error": "binding_source_missing",
-            })
-            continue
-        actual = (arguments or {}).get(argument)
-        if actual != bindings[argument]:
-            errors.append({
-                "argument": argument,
-                "error": "bound_value_not_used",
-                "expected": bindings[argument],
-                "actual": actual,
-            })
-    return errors
 
 
 def _latest_successful_tool_result(
@@ -1175,14 +1139,6 @@ def _get_path(data: dict[str, Any], path: Any) -> Any:
             return None
         cursor = cursor[part]
     return cursor
-
-
-def _set_path(data: dict[str, Any], path: str, value: Any) -> None:
-    cursor: Any = data
-    parts = path.split(".")
-    for part in parts[:-1]:
-        cursor = cursor.setdefault(part, {})
-    cursor[parts[-1]] = value
 
 
 def _build_google_agent(spec: ProviderSpec) -> Callable[[dict[str, Any], int], dict[str, Any]]:

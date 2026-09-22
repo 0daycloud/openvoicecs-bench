@@ -17,6 +17,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.core.logging import setup_logging
+from src.evaluation.benchmark import grader_floor, grader_probe
 from src.evaluation.benchmark.baselines import (
     DEFAULT_BASELINE_DIR,
     DEFAULT_BASELINE_MANIFEST_PATH,
@@ -614,6 +615,100 @@ def cmd_validate_reviews(args: argparse.Namespace) -> None:
             print(f"  {issue.item_id}::{issue.path}: {issue.message}")
         raise SystemExit(1)
     print(f"Validated scenario reviews: {args.review_manifest}")
+
+
+def cmd_grader_probe(args: argparse.Namespace) -> None:
+    scenarios = grader_probe.load_scenarios(args.scenarios, scenario_ids=args.scenario)
+
+    if args.explain:
+        for scenario in scenarios:
+            report = grader_probe.explain_scenario(scenario, probe_name=args.probe)
+            print(json.dumps(report, indent=2, default=str))
+        return
+
+    probes = (
+        (grader_probe.PROBES_BY_NAME[args.probe],) if args.probe else grader_probe.PROBES
+    )
+    summary = grader_probe.probe_suite(scenarios, probes=probes)
+
+    if args.json:
+        print(json.dumps(summary, indent=2, default=str))
+    else:
+        print(f"Probed {summary['num_scenarios']} scenario(s) with {len(probes)} probe(s)")
+        if summary["baseline_failures"]:
+            print(f"  oracle baseline already failing: {', '.join(summary['baseline_failures'])}")
+        print(f"  {'probe':26} {'expect':7} {'ok':>5} {'FP':>5} {'FN':>5} {'skip':>5}")
+        for probe in probes:
+            counts = summary["per_probe"][probe.name]
+            print(
+                f"  {probe.name:26} {probe.expect:7}"
+                f" {counts['ok']:5} {counts['false_positive']:5}"
+                f" {counts['false_negative']:5} {counts['skipped']:5}"
+            )
+        print(
+            f"\nfalse positives (violation scored a pass): {summary['num_false_positives']}"
+        )
+        for item in summary["false_positives"]:
+            print(f"  {item['scenario_id']}  [{item['probe']}]")
+        print(f"false negatives (correct trace scored a fail): {summary['num_false_negatives']}")
+        for item in summary["false_negatives"]:
+            print(f"  {item['scenario_id']}  [{item['probe']}]")
+
+    if not args.strict:
+        return
+    # A false positive is never acceptable: it means a check the oracle claims to
+    # enforce did not fire. False negatives are budgeted so the known
+    # self-reporting dependency can be tracked down to zero rather than ignored.
+    failures = []
+    if summary["num_false_positives"]:
+        failures.append(f"{summary['num_false_positives']} false positive(s)")
+    if summary["num_false_negatives"] > args.max_false_negatives:
+        failures.append(
+            f"{summary['num_false_negatives']} false negative(s), "
+            f"budget is {args.max_false_negatives}"
+        )
+    if failures:
+        print(f"\nGrader consistency gate failed: {'; '.join(failures)}")
+        raise SystemExit(1)
+    print("\nGrader consistency gate passed")
+
+
+def cmd_grader_floor(args: argparse.Namespace) -> None:
+    summary = grader_floor.measure_grader_floor(
+        scenario_path=args.scenarios,
+        track=args.track,
+    )
+    if args.json:
+        print(json.dumps(summary, indent=2, default=str))
+    else:
+        scope = args.track or "all tracks"
+        print(f"Grader floor over {summary['num_scenarios']} scenario(s) ({scope})")
+        print(f"  {'degenerate agent':30} {'overall':>8} {'passed':>10}")
+        for name, entry in summary["agents"].items():
+            print(
+                f"  {name:30} {entry['overall_score']:8.2f}"
+                f" {entry['num_passed']:5}/{entry['num_scenarios']:<4}"
+            )
+        print(
+            f"\nfloor: {summary['floor_agent']} scores {summary['floor_overall_score']} "
+            f"and passes {summary['floor_num_passed']}/{summary['num_scenarios']} "
+            "while understanding nothing"
+        )
+        if summary["metrics_never_lost"]:
+            print(
+                "metrics no degenerate agent ever loses a point on: "
+                + ", ".join(summary["metrics_never_lost"])
+            )
+        print("\n  pass rate by track for the floor agent:")
+        for track, counts in summary["agents"][summary["floor_agent"]]["passed_by_track"].items():
+            print(f"    {track:24} {counts['passed']:3}/{counts['total']}")
+
+    if args.max_overall is not None and summary["floor_overall_score"] > args.max_overall:
+        print(
+            f"\nGrader floor gate failed: {summary['floor_agent']} scores "
+            f"{summary['floor_overall_score']}, budget is {args.max_overall}"
+        )
+        raise SystemExit(1)
 
 
 def cmd_pin_audio_assets(args: argparse.Namespace) -> None:
@@ -2323,6 +2418,69 @@ def build_parser() -> argparse.ArgumentParser:
         default=str(DEFAULT_REVIEW_MANIFEST_PATH),
     )
     validate_reviews.set_defaults(func=cmd_validate_reviews)
+
+    grader_probe_cmd = subparsers.add_parser(
+        "grader-probe",
+        help="Test the grader against known-answer mutations of the oracle trace",
+        description=(
+            "Mutates the oracle trace in ways whose correct verdict is known, then "
+            "checks the grader agrees. A perfect score on a probe carrying a real "
+            "violation is a false positive; a failure on a behaviour-preserving "
+            "probe is a false negative. Use --explain to read one case by hand."
+        ),
+    )
+    grader_probe_cmd.add_argument(
+        "--scenario",
+        action="append",
+        help="Scenario id to probe; repeatable. Defaults to the whole suite.",
+    )
+    grader_probe_cmd.add_argument(
+        "--probe",
+        choices=sorted(grader_probe.PROBES_BY_NAME),
+        help="Run only this probe.",
+    )
+    grader_probe_cmd.add_argument(
+        "--explain",
+        action="store_true",
+        help="Print the full per-metric diagnostics for each selected scenario.",
+    )
+    grader_probe_cmd.add_argument("--json", action="store_true", help="Emit the full result as JSON")
+    grader_probe_cmd.add_argument(
+        "--strict",
+        action="store_true",
+        help=(
+            "Exit non-zero on any false positive, or on more false negatives than "
+            "--max-false-negatives allows"
+        ),
+    )
+    grader_probe_cmd.add_argument(
+        "--max-false-negatives",
+        type=int,
+        default=0,
+        help=(
+            "Tolerated false negatives under --strict. Set to the current count to "
+            "hold the line, then lower it as scenarios are fixed."
+        ),
+    )
+    grader_probe_cmd.set_defaults(func=cmd_grader_probe)
+
+    grader_floor_cmd = subparsers.add_parser(
+        "grader-floor",
+        help="Measure what an agent that understands nothing already scores",
+        description=(
+            "Scores deliberately incapable agents that see only what a real model "
+            "sees. The gap between the best of them and a real submission is the "
+            "benchmark's actual discriminating power."
+        ),
+    )
+    grader_floor_cmd.add_argument("--track", help="Restrict to one track")
+    grader_floor_cmd.add_argument("--json", action="store_true", help="Emit the full result as JSON")
+    grader_floor_cmd.add_argument(
+        "--max-overall",
+        type=float,
+        help="Exit non-zero if any degenerate agent scores above this overall score",
+    )
+    grader_floor_cmd.set_defaults(func=cmd_grader_floor)
 
     pin_audio_assets = subparsers.add_parser(
         "pin-audio-assets",
