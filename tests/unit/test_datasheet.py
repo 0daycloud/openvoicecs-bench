@@ -52,6 +52,13 @@ def test_benchmark_datasheet_file_round_trips_and_validates(tmp_path: Path):
     assert loaded["release"]["review_manifest_file"]["sha256"]
     assert loaded["release"]["scenario_file"]["bytes"] > 0
 
+    # _file_entry() paths must be platform-independent (forward-slash), and the
+    # writer must use LF only -- both previously broke on Windows.
+    for key, entry in loaded["release"].items():
+        if key.endswith("_file") and isinstance(entry, dict):
+            assert "\\" not in entry["path"], entry["path"]
+    assert b"\r\n" not in output_path.read_bytes()
+
 
 def test_benchmark_datasheet_validation_rejects_tampering():
     datasheet = build_benchmark_datasheet()

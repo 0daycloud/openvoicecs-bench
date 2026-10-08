@@ -1059,7 +1059,7 @@ def cmd_audit(args: argparse.Namespace) -> None:
     if args.output:
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)
-        with open(output, "w", encoding="utf-8") as f:
+        with open(output, "w", encoding="utf-8", newline="\n") as f:
             json.dump(audit, f, indent=2)
         print(f"\nSaved audit report to {output}")
 

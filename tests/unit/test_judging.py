@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from copy import deepcopy
 
+import httpx
 import pytest
 
 from src.evaluation.benchmark.judging import (
@@ -13,6 +14,7 @@ from src.evaluation.benchmark.judging import (
     apply_judge_report_from_files,
     build_judge_report,
     build_judge_report_from_files,
+    call_openai_compatible_model_judge,
     generate_model_judge_annotations,
     iter_blinded_judge_items,
     judge_annotation_package_stats,
@@ -329,6 +331,44 @@ def test_parse_model_judge_spec_accepts_openrouter_model():
 
     assert spec.provider == "openrouter"
     assert spec.model_id == "anthropic/claude-sonnet-4.6"
+
+
+def test_openai_provider_request_forces_json_object_response_format(monkeypatch):
+    # gpt-4o-mini occasionally appends stray content after a complete JSON
+    # object, which json.loads rejects as "Extra data" even though the
+    # object itself is well-formed. response_format={"type": "json_object"}
+    # is the fix; this pins the exact request payload sent for provider
+    # "openai" so a regression can't silently drop it again.
+    captured_requests = []
+
+    class _FakeResponse:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"choices": [{"message": {"content": '{"verdict": "grounded"}'}}]}
+
+    def _fake_post(url, *, headers, json, timeout):
+        captured_requests.append({"url": url, "headers": headers, "json": json, "timeout": timeout})
+        return _FakeResponse()
+
+    monkeypatch.setattr(httpx, "post", _fake_post)
+
+    spec = ModelJudgeSpec(provider="openai", model_id="gpt-4o-mini", api_key="test-key")
+    result = call_openai_compatible_model_judge(
+        spec,
+        messages=[{"role": "user", "content": "Return JSON."}],
+        max_output_tokens=256,
+        temperature=0.0,
+        timeout_seconds=30.0,
+    )
+
+    assert result == '{"verdict": "grounded"}'
+    assert len(captured_requests) == 1
+    request = captured_requests[0]["json"]
+    assert request["response_format"] == {"type": "json_object"}
+    assert request["max_completion_tokens"] == 256
+    assert "max_tokens" not in request
 
 
 def test_model_judge_annotations_blind_items_and_aggregate():

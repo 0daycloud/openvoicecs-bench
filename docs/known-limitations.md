@@ -204,24 +204,70 @@ re-scoring the June traces reports `task_success` near 0.9 because the lenient
 scorer forgives invented arguments on calls that *were* made, whereas fresh
 models skip those calls entirely and leniency cannot rescue an absent call.
 
-### 7. `factual_grounding` is a phrase matcher
+### 7. `factual_grounding` was a pure phrase matcher (partially fixed)
 
-Required claims are lists of literal strings. The check conflates three
-different things:
+Required claims are lists of literal strings, checked with regex `re.search`.
+The check used to conflate three different things:
 
 - **Synonymy misses.** `fee_waived` accepts `"no change fee"` / `"no fee"` /
-  `"fee waiver"`; an agent saying *"rebooked you at no charge"* is marked
+  `"fee waiver"`; an agent saying *"rebooked you at no charge"* was marked
   ungrounded.
 - **Genuine omissions.** Never stating the $12.00 credit amount is a real
   grounding failure and is correctly caught.
 - **Honest failure reports.** Where a scenario injects a tool failure and the
   agent says *"I couldn't complete this, I've escalated it"*, the required
-  claim `completed` is absent and the agent is penalised for accuracy.
+  claim `completed` is absent and the agent was penalised for accuracy.
 
-Scores span 0.047–0.323 across the ranked cohort at weight 0.20, enough to
-reorder the top of the leaderboard. Treat ranks 1–2 as tied. This is the
-strongest remaining argument for a semantic grader and the most valuable
-contribution anyone can make.
+**Partly fixed.** `check_factual_grounding` (`openvoicecs.py`) now runs the
+literal/regex pass first, unchanged, and only falls back to a semantic judge
+call for what that pass leaves unresolved: required claims it could not
+confirm, and forbidden claims that share every content word with a pattern
+(word-boundary matched, digits always kept) without matching it exactly —
+see `_forbidden_claim_near_miss`. Every unresolved claim in a trace is batched
+into a single judge call, not one call per claim. This is the default
+(hybrid) mode and fixes the synonymy-miss case above while still failing the
+genuine-omission and honest-failure-report cases, because the judge is asked
+to confirm the claim's *meaning*, not just its wording, and is explicitly told
+that an honest failure report does not ground a completion claim. A judge-call
+failure (no key configured, network error, malformed judge response) is
+classified as `infrastructure` and excludes the trial rather than scoring
+grounding as 0.0 — see `classify_trial_error`.
+
+**Determinism caveat.** The literal pass is still exact and reproducible.
+Once the fallback triggers, the reply is judged by a live model call (pinned
+model, `temperature=0` for the most repeatable verdict a chat-completions
+endpoint can give) — a fallback-touched trial is *not* bit-for-bit
+reproducible the way a pure-regex trial is. `score --agent oracle` is
+unaffected: the oracle's literal text always satisfies `any_terms` and never
+shares enough vocabulary with a forbidden pattern to trigger the fallback, so
+it stays fully deterministic and offline (regression-tested in
+`tests/unit/test_factual_grounding.py`).
+
+**Comparison mode.** Set `OPENVOICECS_GROUNDING_MODE=legacy` (or pass
+`mode="legacy"` to `check_factual_grounding`) to disable the fallback and
+reproduce the pure phrase-matcher scores this section originally described.
+
+**Measured, and only partly fixed.** The hybrid path was run once against a
+locked 40-case targeted synthetic challenge set through the real production
+`check_factual_grounding(mode="hybrid")` path (108 live judge calls, 0
+infrastructure/parse errors) and compared against the same set scored with
+`mode="legacy"`. This is a targeted challenge set, not a benchmark-wide
+accuracy measurement, and it is not a general-purpose labeled ground-truth
+corpus. Required claims: 26/30 correct → 30/30, false negatives 4 → 0, zero
+regressions — the semantic fallback measurably fixes the synonymy-miss case
+above. Forbidden claims: 5/10 correct → 5/10, false negatives 5 → 5 — **no
+measured improvement**; near-miss paraphrase detection for forbidden claims
+remains an open, unresolved limitation, not something this fallback fixes.
+Repeating the run on the 36 fallback-triggered cases (3 runs, live judge
+calls each time) found the semantic judge is not bit-for-bit deterministic:
+35/36 cases were stable across all 3 runs, one case's verdict changed
+between runs. The forbidden-claim near-miss pre-filter itself is still a
+keyword heuristic, not full paraphrase detection — a forbidden claim
+reworded with entirely different vocabulary can still slip past both the
+regex and the pre-filter. Scores span 0.047–0.323 across the ranked cohort
+at weight 0.20 under the old pure-regex scorer, enough to reorder the top of
+the leaderboard; the hybrid scorer has not yet been run across the full
+sweep, so an updated spread is not published here.
 
 ### 8. Binary trial gating compresses `passed`
 

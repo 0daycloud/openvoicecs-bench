@@ -209,12 +209,14 @@ def _run_baseline_report(
             manifest_path=audio_manifest_path,
             trials=trials,
             model_metadata=metadata,
+            grounding_mode="legacy",
         )
     else:
         report = bench.score_agent(
             agent_fn,
             trials=trials,
             model_metadata=metadata,
+            grounding_mode="legacy",
         )
     report["elapsed_seconds"] = 0.0
     report["baseline_id"] = spec["id"]
@@ -413,7 +415,7 @@ def _file_entry(path: str | Path) -> dict[str, Any]:
     path = Path(path)
     data = path.read_bytes()
     return {
-        "path": str(path),
+        "path": path.as_posix(),
         "sha256": hashlib.sha256(data).hexdigest(),
         "bytes": len(data),
     }
@@ -422,7 +424,7 @@ def _file_entry(path: str | Path) -> dict[str, Any]:
 def _write_json(path: str | Path, data: dict[str, Any]) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def _agent_function(agent: str) -> Callable[[dict[str, Any], int], Any]:

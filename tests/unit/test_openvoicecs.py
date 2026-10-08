@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 from src.evaluation.benchmark.openvoicecs import (
@@ -46,7 +48,12 @@ def test_seed_scenarios_load_and_oracle_passes():
     assert report["track_breakdown"]["adversarial_compliance"]["count"] == 45
 
 
-def test_no_op_agent_fails_task_success_but_has_experience_response():
+def test_no_op_agent_fails_task_success_but_has_experience_response(monkeypatch):
+    # no_op_agent's canned text won't literally match this scenario's
+    # required_claims, which would otherwise route it through the semantic
+    # grounding fallback (openvoicecs.check_factual_grounding) and require a
+    # judge API key unrelated to what this test checks. Force legacy mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     report = bench.score_agent(no_op_agent, max_scenarios=1)
@@ -578,7 +585,12 @@ def test_forbidden_tool_call_zeroes_tool_score():
     assert result["score"] == 0.0
 
 
-def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent():
+def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent(monkeypatch):
+    # The no_op_agent trial's canned text won't literally match this
+    # scenario's required_claims, which would otherwise route it through the
+    # semantic grounding fallback and require a judge API key unrelated to
+    # what this test checks. Force legacy mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     def flaky_agent(scenario, trial_index):
@@ -596,7 +608,12 @@ def test_pass_at_k_and_pass_k_diverge_for_unreliable_agent():
     assert report["results"][0]["stability"]["flaky"] is True
 
 
-def test_tool_quality_diagnostics_classify_wrong_args_and_extra_calls():
+def test_tool_quality_diagnostics_classify_wrong_args_and_extra_calls(monkeypatch):
+    # messy_agent's text won't literally match this scenario's
+    # required_claims, which would otherwise route it through the semantic
+    # grounding fallback and require a judge API key unrelated to what this
+    # test checks. Force legacy mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     scenario = OpenVoiceCSBench.load().scenarios[0]
 
     def messy_agent(_scenario, _trial_index):
@@ -822,6 +839,24 @@ def test_release_audit_reports_validation_gates_hashes_and_coverage():
     assert len(audit["files"]["leaderboard_claims"]["sha256"]) == 64
     assert len(audit["files"]["submission_intake"]["sha256"]) == 64
 
+    # _file_audit_entry() paths must be platform-independent (forward-slash),
+    # or the audit is a spurious cross-platform diff on Windows.
+    for entry in audit["files"].values():
+        assert "\\" not in entry["path"], entry["path"]
+
+
+def test_audit_cli_writes_lf_only_json(tmp_path: Path):
+    # cmd_audit's own writer (scripts/run_openvoicecs.py) previously omitted
+    # newline="\n", so Windows translated every "\n" to "\r\n" on write.
+    output = tmp_path / "release_audit.json"
+    subprocess.run(
+        [sys.executable, "scripts/run_openvoicecs.py", "audit", "--output", str(output)],
+        check=True,
+        capture_output=True,
+    )
+
+    assert b"\r\n" not in output.read_bytes()
+
 
 def test_audio_manifest_builds_variant_scenarios():
     bench = OpenVoiceCSBench.load()
@@ -863,6 +898,18 @@ def test_score_audio_manifest_uses_variant_ids_and_tracks():
     assert report["results"][0]["base_scenario_id"]
 
 
+def test_score_audio_manifest_serializes_manifest_path_with_forward_slashes():
+    # Report artifacts must be canonical across platforms; Windows renders
+    # Path.__str__() with backslashes, which produced a spurious cross-platform
+    # diff in generated baseline reports.
+    bench = OpenVoiceCSBench.load()
+
+    report = bench.score_audio_manifest(oracle_agent, max_variants=1, trials=1)
+
+    assert report["audio_manifest_path"] == "data/openvoicecs/audio_manifest_v0.1.json"
+    assert "\\" not in report["audio_manifest_path"]
+
+
 def test_adversarial_track_oracle_passes_text_and_audio_variants():
     bench = OpenVoiceCSBench.load()
 
@@ -881,7 +928,13 @@ def test_adversarial_track_oracle_passes_text_and_audio_variants():
     assert audio_report["overall_score"] == 100.0
 
 
-def test_adversarial_track_catches_unsafe_compliance():
+def test_adversarial_track_catches_unsafe_compliance(monkeypatch):
+    # unsafe_agent's fixed text won't literally match every scenario's
+    # required_claims, which would otherwise route some trials through the
+    # semantic grounding fallback and require a judge API key unrelated to
+    # what this test checks (safety, not grounding wording). Force legacy
+    # mode.
+    monkeypatch.setenv("OPENVOICECS_GROUNDING_MODE", "legacy")
     bench = OpenVoiceCSBench.load()
 
     def unsafe_agent(scenario, trial_index):

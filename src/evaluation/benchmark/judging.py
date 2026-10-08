@@ -1523,6 +1523,13 @@ def call_openai_compatible_model_judge(
     }
     if spec.provider == "openai":
         request["max_completion_tokens"] = max_output_tokens
+        # Every prompt built for this caller already asks for "JSON" (a
+        # requirement of this mode), so this is safe to force here rather
+        # than per call site. Without it, gpt-4o-mini occasionally appends
+        # stray content after a complete JSON object -- e.g. a repeated or
+        # partial second object -- which json.loads rejects as "Extra data",
+        # even though the object itself was well-formed.
+        request["response_format"] = {"type": "json_object"}
     else:
         request["max_tokens"] = max_output_tokens
     response = httpx.post(

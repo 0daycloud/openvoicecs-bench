@@ -101,7 +101,7 @@ Everything below runs **fully offline with no API key**:
 # 1. Validate the benchmark package.
 python scripts/run_openvoicecs.py validate
 
-# 2. Score the oracle reference agent — should pass 204/204.
+# 2. Score the oracle reference agent — should pass all tracked scenarios.
 python scripts/run_openvoicecs.py score --agent oracle --trials 1
 
 # 3. Run the test suite.
@@ -122,6 +122,18 @@ python scripts/run_openvoicecs.py score-provider \
 Supported providers: OpenAI, Anthropic, Google, DeepSeek, MiniMax, Moonshot /
 Kimi, Alibaba / DashScope, xAI, and any OpenAI-compatible endpoint via
 OpenRouter.
+
+`factual_grounding` scoring defaults to `hybrid` mode: any claim the
+literal/regex matcher can't resolve falls back to a live semantic-judge call,
+which needs its own credential, separate from whatever key you used to score
+the agent under test. The default judge provider is OpenRouter and reads
+`OPENROUTER_API_KEY`; overriding the judge to OpenAI
+(`OPENVOICECS_GROUNDING_JUDGE=openai:<model>`) reads `OPENAI_API_KEY` instead.
+Without that credential, affected trials are excluded as `infrastructure`
+errors — not scored as a model failure or a zero — but `measurement_coverage`
+can drop. For the fully offline, phrase-only matcher instead, set
+`OPENVOICECS_GROUNDING_MODE=legacy` (see
+[`docs/known-limitations.md`](docs/known-limitations.md) section 7).
 
 ## Bring your own agent
 
